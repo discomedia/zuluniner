@@ -7,13 +7,13 @@ ZuluNiner (zuluniner.com) is an aircraft marketplace built with Next.js, React, 
 
 ## Core Project Data
 - **Project Name**: ZuluNiner
-- **Supabase project ID**: bjwlldxavgoxhyyufffy
+- **Supabase project ID**: bjwlldxavgoxhyyufffy. Use Docker for local development.
 - **GitHub Repository**: [discomedia/zuluniner](https://github.com/discomedia/zuluniner)
 - **Domain**: zuluniner.com
 
 ## Tech Stack
 - **Frontend**: Next.js 14+ (App Router), React, TypeScript, Tailwind CSS
-- **Backend**: Supabase (Database, Auth, Storage, Type-safe functions). Use local terminal `supabase` commands to build out the backend, including migrations, types, and policies.
+- **Backend**: Supabase (Database, Auth, Storage, Type-safe functions). Use Docker for local development with `npm run supabase:start/stop`. Create migrations in supabase/migrations/ and apply with `npm run db:reset`.
 - **Deployment**: Netlify or Railway (free tier with custom domain)
 - **Content Generation**: @discomedia/utils package for LLM integration
 - **Image Processing**: Next.js Image Optimization + Supabase Storage
@@ -41,67 +41,74 @@ ZuluNiner (zuluniner.com) is an aircraft marketplace built with Next.js, React, 
 - API rate limiting and quota management
 - Monitoring for performance bottlenecks
 
-## Stage 1: Project Setup & Foundation
+## Stage 1: Project Setup & Foundation ✅
 
 ### Core Setup
-- [ ] Initialize Next.js project with TypeScript and Tailwind CSS
-- [ ] Configure ESLint, Prettier, and TypeScript strict mode
-- [ ] Set up project structure with proper folder organization
-- [ ] Configure environment variables for development/production
-- [ ] Set up Git workflow with proper .gitignore. Publish to discomedia/zuluniner repository
-- [ ] Create package.json with all required dependencies
+- [x] Initialize Next.js project with TypeScript and Tailwind CSS
+- [x] Configure ESLint, Prettier, and TypeScript strict mode
+- [x] Set up project structure with proper folder organization
+- [x] Configure environment variables for development/production
+- [x] Set up Git workflow with proper .gitignore. Publish to discomedia/zuluniner repository
+- [x] Create package.json with all required dependencies
 
 ### Development Environment
-- [ ] Install and configure @discomedia/utils package
-- [ ] Set up VS Code workspace with recommended extensions
-- [ ] Configure TypeScript paths for clean imports
-- [ ] Set up development scripts (dev, build, lint, type-check)
+- [x] Install and configure @discomedia/utils package
+- [x] Set up VS Code workspace with recommended extensions
+- [x] Configure TypeScript paths for clean imports
+- [x] Set up development scripts (dev, build, lint, type-check)
 
 ---
 
-## Stage 2: Database Schema & Supabase Setup
+## Stage 2: Database Schema & Supabase Setup ✅
+
+**Local Development Commands:**
+- Start Supabase: `npm run supabase:start` (requires Docker Desktop)
+- Stop Supabase: `npm run supabase:stop`
+- Reset DB with migrations: `npm run db:reset`
+- Generate types: `npm run generate-schema`
 
 ### Supabase Configuration
 - [x] Create Supabase project
-- [ ] Configure environment variables. (Supabase project id: bjwlldxavgoxhyyufffy)
-- [ ] Set up authentication (email/password, social providers if needed)
-- [ ] Configure Row Level Security (RLS) policies
-- [ ] Set up Supabase Storage buckets for images
-- [ ] Generate TypeScript types from Supabase schema
+- [x] Install Docker and set it up
+- [x] Configure environment variables for local development (Docker-based Supabase)
+- [x] Set up authentication (ready for email/password, social providers if needed)
+- [x] Configure Row Level Security (RLS) policies
+- [x] Set up Supabase Storage buckets for images
+- [x] Generate TypeScript types from Supabase schema (`npm run generate-schema`)
 
 ### Database Schema Design
-- [ ] **Users table** (extends auth.users)
-  - [ ] Profile information (name, company, phone, location)
-  - [ ] User roles (admin, seller, buyer)
-  - [ ] Created/updated timestamps
+- [x] **Users table** (extends auth.users)
+  - [x] Profile information (name, company, phone, location)
+  - [x] User roles (admin, seller, buyer)
+  - [x] Created/updated timestamps
   
-- [ ] **Aircraft table**
-  - [ ] Basic info (title, description, price, year, make, model)
-  - [ ] Technical specs (hours, engine type, avionics, etc.)
-  - [ ] Location data (airport code, city, country, lat/lng)
-  - [ ] Status (active, sold, pending)
-  - [ ] SEO fields (slug, meta description)
-  - [ ] Created/updated timestamps, user_id foreign key
+- [x] **Aircraft table**
+  - [x] Basic info (title, description, price, year, make, model)
+  - [x] Technical specs (hours, engine type, avionics, etc.)
+  - [x] Location data (airport code, city, country, lat/lng)
+  - [x] Status (active, sold, pending)
+  - [x] SEO fields (slug, meta description)
+  - [x] Created/updated timestamps, user_id foreign key
   
-- [ ] **Photos table**
-  - [ ] aircraft_id foreign key
-  - [ ] Storage path, alt text, caption
-  - [ ] Display order, is_primary flag
-  - [ ] Optimized file sizes and formats
+- [x] **Photos table**
+  - [x] aircraft_id foreign key
+  - [x] Storage path, alt text, caption
+  - [x] Display order, is_primary flag
+  - [x] Optimized file sizes and formats
   
-- [ ] **Blog_posts table**
-  - [ ] Title, slug, blurb, content (markdown)
-  - [ ] Header photo, SEO fields
-  - [ ] Published status and timestamps
-  - [ ] Author (user_id foreign key)
+- [x] **Blog_posts table**
+  - [x] Title, slug, blurb, content (markdown)
+  - [x] Header photo, SEO fields
+  - [x] Published status and timestamps
+  - [x] Author (user_id foreign key)
   
 - [ ] **Categories/Tags tables** (if needed for filtering)
 
 ### Type Safety Setup
-- [ ] Configure Supabase CLI for local development
-- [ ] Set up automatic type generation workflow
-- [ ] Create type-safe database client wrapper
-- [ ] Set up migration scripts
+- [x] Configure Supabase CLI for local development (Docker-based)
+- [x] Set up automatic type generation workflow (`npm run generate-schema`)
+- [x] Create type-safe database client wrapper
+- [x] Set up migration scripts (`npm run db:reset` to apply migrations)
 
 ---
 

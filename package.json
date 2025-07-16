@@ -7,7 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate-schema": "npx supabase gen types typescript --project-id bjwlldxavgoxhyyufffy > src/api/schema.ts"
+    "generate-schema": "npx supabase gen types typescript --local > src/api/schema.ts",
+    "db:reset": "npx supabase db reset",
+    "db:migrate": "npx supabase db reset",
+    "supabase:start": "npx supabase start",
+    "supabase:stop": "npx supabase stop",
+    "supabase:status": "npx supabase status"
   },
   "dependencies": {
     "@discomedia/utils": "^1.0.16",

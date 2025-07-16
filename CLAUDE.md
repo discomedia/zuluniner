@@ -20,8 +20,11 @@ Follow all these rules strictly, every time.
 
 ## Supabase
 * Use supabase client (`npx supabase`) to execute commands (to build out or edit the schema)
-* Run `npm run generate-schema` to update the schema in src/api/schema.ts.
-* When updating the schema, create new convenience functions in src/api/db.ts to interact with the database.
+* For local development: Use `npm run supabase:start` to start Docker containers, `npm run supabase:stop` to stop them
+* Run `npm run generate-schema` to update the schema in src/api/schema.ts from local database
+* When updating the schema, create new convenience functions in src/api/db.ts to interact with the database
+* Database migrations: Create new .sql files in supabase/migrations/ and run `npm run db:reset` to apply them
+* Local development uses Docker containers - make sure Docker Desktop is running before starting Supabase
 
 ## Testing
 
@@ -29,5 +32,9 @@ For complex new features or revisions, write tests and execute them. Write test 
 
 ## Commands
 
+* Start Supabase locally: `npm run supabase:start` (requires Docker Desktop)
+* Stop Supabase locally: `npm run supabase:stop`
+* Reset database with migrations: `npm run db:reset`
+* Generate TypeScript types: `npm run generate-schema`
 * Build and test: `npm run build && node src/testing/[test-file].ts`
 * Type check: `npm run build` (includes type checking)
