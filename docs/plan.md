@@ -5,6 +5,12 @@ ZuluNiner (zuluniner.com) is an aircraft marketplace built with Next.js, React, 
 
 **Target Audience**: Aircraft community (primarily older men) - design must evoke trust and reliability.
 
+## Core Project Data
+- **Project Name**: ZuluNiner
+- **Supabase project ID**: bjwlldxavgoxhyyufffy
+- **GitHub Repository**: [discomedia/zuluniner](https://github.com/discomedia/zuluniner)
+- **Domain**: zuluniner.com
+
 ## Tech Stack
 - **Frontend**: Next.js 14+ (App Router), React, TypeScript, Tailwind CSS
 - **Backend**: Supabase (Database, Auth, Storage, Type-safe functions). Use local terminal `supabase` commands to build out the backend, including migrations, types, and policies.
@@ -42,7 +48,7 @@ ZuluNiner (zuluniner.com) is an aircraft marketplace built with Next.js, React, 
 - [ ] Configure ESLint, Prettier, and TypeScript strict mode
 - [ ] Set up project structure with proper folder organization
 - [ ] Configure environment variables for development/production
-- [ ] Set up Git workflow with proper .gitignore
+- [ ] Set up Git workflow with proper .gitignore. Publish to discomedia/zuluniner repository
 - [ ] Create package.json with all required dependencies
 
 ### Development Environment
