@@ -146,7 +146,7 @@ export default function Home() {
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {featuredAircraft.map((aircraft) => {
                 const primaryPhoto = aircraft.photos?.find(p => p.is_primary) || aircraft.photos?.[0];
-                const photoUrl = primaryPhoto?.storage_path ? `/api/photos/${primaryPhoto.storage_path}` : null;
+                const photoUrl = primaryPhoto?.storage_path ? db.photos.getPhotoUrl(primaryPhoto.storage_path) : null;
                 
                 return (
                   <Card key={aircraft.id} className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer" onClick={() => router.push(`/aircraft/${aircraft.slug}`)}>
