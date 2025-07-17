@@ -26,7 +26,7 @@ export const searchAircraft = async (filters: SearchFilters, page = 1, limit = 2
     .from('aircraft')
     .select(`
       *,
-      photos:aircraft_photos!inner(*)
+      photos:aircraft_photos(*)
     `, { count: 'exact' })
     .eq('status', 'active');
 

@@ -13,12 +13,13 @@ interface AircraftPhotosStepProps {
   setPhotos: (photos: File[]) => void;
   uploadedPhotos: AircraftPhoto[];
   setUploadedPhotos: (photos: AircraftPhoto[]) => void;
+  isUploading?: boolean;
 }
 
 export default function AircraftPhotosStep({
-  formData: _formData,
   photos,
   setPhotos,
+  isUploading = false,
 }: AircraftPhotosStepProps) {
   const [dragOver, setDragOver] = useState(false);
   const [processing, setProcessing] = useState(false);
@@ -119,9 +120,9 @@ export default function AircraftPhotosStep({
           variant="primary"
           onClick={() => fileInputRef.current?.click()}
           className="mt-4"
-          disabled={processing}
+          disabled={processing || isUploading}
         >
-          {processing ? 'Processing...' : 'Choose Photos'}
+          {processing ? 'Processing...' : isUploading ? 'Uploading...' : 'Choose Photos'}
         </Button>
       </div>
 
@@ -134,65 +135,87 @@ export default function AircraftPhotosStep({
               variant="secondary"
               size="sm"
               onClick={() => setPhotos([])}
+              disabled={isUploading}
             >
               Clear All
             </Button>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {photos.map((photo, index) => (
-              <div key={`${photo.name}-${index}`} className="relative group">
-                <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
-                  <img
-                    src={URL.createObjectURL(photo)}
-                    alt={`Photo ${index + 1}`}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                
-                {/* Primary Badge */}
-                {index === 0 && (
-                  <div className="absolute top-2 left-2 bg-primary-600 text-white text-xs px-2 py-1 rounded">
-                    Primary
-                  </div>
-                )}
-
-                {/* Controls */}
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all rounded-lg">
-                  <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                    {index > 0 && (
-                      <button
-                        onClick={() => movePhoto(index, index - 1)}
-                        className="w-6 h-6 bg-white rounded text-gray-700 hover:bg-gray-100 flex items-center justify-center"
-                        title="Move left"
-                      >
-                        ←
-                      </button>
+            {photos.map((photo, index) => {
+              const photoKey = `${photo.name}-${index}`;
+              
+              return (
+                <div key={photoKey} className="relative group">
+                  <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
+                    <img
+                      src={URL.createObjectURL(photo)}
+                      alt={`Photo ${index + 1}`}
+                      className={`w-full h-full object-cover transition-opacity ${
+                        isUploading ? 'opacity-60' : 'opacity-100'
+                      }`}
+                    />
+                    
+                    {/* Upload Progress Overlay */}
+                    {isUploading && (
+                      <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                        <div className="text-white text-center">
+                          <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+                          <div className="text-xs">
+                            Uploading...
+                          </div>
+                        </div>
+                      </div>
                     )}
-                    {index < photos.length - 1 && (
+                  </div>
+                  
+                  {/* Primary Badge */}
+                  {index === 0 && (
+                    <div className="absolute top-2 left-2 bg-primary-600 text-white text-xs px-2 py-1 rounded">
+                      Primary
+                    </div>
+                  )}
+
+                  {/* Controls */}
+                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all rounded-lg">
+                    <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                      {index > 0 && (
+                        <button
+                          onClick={() => movePhoto(index, index - 1)}
+                          className="w-6 h-6 bg-white rounded text-gray-700 hover:bg-gray-100 flex items-center justify-center"
+                          title="Move left"
+                          disabled={isUploading}
+                        >
+                          ←
+                        </button>
+                      )}
+                      {index < photos.length - 1 && (
+                        <button
+                          onClick={() => movePhoto(index, index + 1)}
+                          className="w-6 h-6 bg-white rounded text-gray-700 hover:bg-gray-100 flex items-center justify-center"
+                          title="Move right"
+                          disabled={isUploading}
+                        >
+                          →
+                        </button>
+                      )}
                       <button
-                        onClick={() => movePhoto(index, index + 1)}
-                        className="w-6 h-6 bg-white rounded text-gray-700 hover:bg-gray-100 flex items-center justify-center"
-                        title="Move right"
+                        onClick={() => removePhoto(index)}
+                        className="w-6 h-6 bg-red-500 text-white rounded hover:bg-red-600 flex items-center justify-center"
+                        title="Remove"
+                        disabled={isUploading}
                       >
-                        →
+                        ×
                       </button>
-                    )}
-                    <button
-                      onClick={() => removePhoto(index)}
-                      className="w-6 h-6 bg-red-500 text-white rounded hover:bg-red-600 flex items-center justify-center"
-                      title="Remove"
-                    >
-                      ×
-                    </button>
+                    </div>
+                  </div>
+
+                  <div className="mt-2 text-xs text-gray-600 truncate">
+                    {photo.name}
                   </div>
                 </div>
-
-                <div className="mt-2 text-xs text-gray-600 truncate">
-                  {photo.name}
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}
@@ -210,7 +233,22 @@ export default function AircraftPhotosStep({
         </ul>
       </div>
 
-      {photos.length === 0 && (
+      {/* Upload Status */}
+      {isUploading && photos.length > 0 && (
+        <div className="bg-blue-50 p-4 rounded-lg">
+          <div className="flex items-center gap-3">
+            <div className="w-5 h-5 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+            <div>
+              <h4 className="font-medium text-blue-900">Uploading Photos</h4>
+              <p className="text-sm text-blue-800">
+                Uploading {photos.length} photo{photos.length > 1 ? 's' : ''} to the server...
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {photos.length === 0 && !isUploading && (
         <div className="bg-yellow-50 p-4 rounded-lg">
           <h4 className="font-medium text-yellow-900 mb-2">⚠️ Photos Required</h4>
           <p className="text-sm text-yellow-800">

@@ -42,6 +42,7 @@ export default function AircraftWizard() {
   const router = useRouter();
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [uploadSuccess, setUploadSuccess] = useState(false);
   const [formData, setFormData] = useState<AircraftFormData>({
     title: '',
     description: '',
@@ -121,8 +122,12 @@ export default function AircraftWizard() {
 
       await response.json();
       
-      // Redirect to the aircraft management page or the new aircraft
-      router.push(`/admin/aircraft`);
+      // Show success message briefly before redirecting
+      setUploadSuccess(true);
+      setTimeout(() => {
+        // Redirect to the aircraft management page or the new aircraft
+        router.push(`/admin/aircraft`);
+      }, 2000);
     } catch (error) {
       console.error('Error creating aircraft:', error);
       alert(`Failed to create aircraft: ${error instanceof Error ? error.message : 'Unknown error'}`);
@@ -164,6 +169,21 @@ export default function AircraftWizard() {
         </div>
       </div>
 
+      {/* Success Message */}
+      {uploadSuccess && (
+        <div className="mb-6 bg-green-50 p-4 rounded-lg">
+          <div className="flex items-center gap-3">
+            <div className="w-5 h-5 text-green-600">✓</div>
+            <div>
+              <h4 className="font-medium text-green-900">Upload Successful!</h4>
+              <p className="text-sm text-green-800">
+                Your aircraft listing has been created successfully. Redirecting to the aircraft management page...
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Step Content */}
       <Card>
         <CardHeader>
@@ -179,6 +199,7 @@ export default function AircraftWizard() {
             setPhotos={setPhotos}
             uploadedPhotos={uploadedPhotos}
             setUploadedPhotos={setUploadedPhotos}
+            isUploading={isSubmitting}
           />
         </CardContent>
       </Card>
@@ -201,14 +222,28 @@ export default function AircraftWizard() {
                 onClick={() => handleSubmit(false)}
                 disabled={isSubmitting}
               >
-                {isSubmitting ? 'Saving...' : 'Save as Draft'}
+                {isSubmitting ? (
+                  <span className="flex items-center gap-2">
+                    <div className="w-4 h-4 border-2 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
+                    Saving...
+                  </span>
+                ) : (
+                  'Save as Draft'
+                )}
               </Button>
               <Button
                 variant="primary"
                 onClick={() => handleSubmit(true)}
                 disabled={isSubmitting}
               >
-                {isSubmitting ? 'Publishing...' : 'Publish Now'}
+                {isSubmitting ? (
+                  <span className="flex items-center gap-2">
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    {photos.length > 0 ? `Uploading ${photos.length} photos...` : 'Publishing...'}
+                  </span>
+                ) : (
+                  'Publish Now'
+                )}
               </Button>
             </>
           ) : (
