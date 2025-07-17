@@ -394,17 +394,49 @@ ZuluNiner (zuluniner.com) is an aircraft marketplace built with Next.js, React, 
 ## Stage 12: Deployment & Production
 
 ### Deployment Setup
-- [ ] **Platform evaluation** (Netlify vs Railway)
-  - [ ] Compare pricing and features
-  - [ ] Test deployment process
+- [ ] **Vercel Deployment** (via GitHub)
+  - [ ] Connect GitHub repository to Vercel
+  - [ ] Configure automatic deployments on commits
   - [ ] Configure custom domain (zuluniner.com)
-  - [ ] Set up SSL certificates
+  - [ ] Set up SSL certificates (automatic with Vercel)
   
 - [ ] **Production configuration**
   - [ ] Environment variables setup
-  - [ ] Database migration to production
+  - [ ] Database migration to production - **Note: Transition from Docker to hosted Supabase**
   - [ ] CDN configuration for assets
   - [ ] Monitoring and error tracking
+
+### Supabase Deployment Notes
+**Important**: This project uses Supabase with Docker for local development. For production deployment:
+
+- [ ] **Supabase Cloud Setup**
+  - [ ] Create production Supabase project at [supabase.com](https://supabase.com)
+  - [ ] Copy database schema from local Docker setup to cloud
+  - [ ] Run migrations: `npx supabase db push` (pushes local schema to cloud)
+  - [ ] Update environment variables to point to cloud instance
+  - [ ] Set up production Row Level Security (RLS) policies
+  - [ ] Configure production storage buckets for images
+
+- [ ] **Migration Process**
+  - [ ] Export local data: `npx supabase db dump --data-only > data.sql`
+  - [ ] Import to cloud: Use Supabase dashboard or CLI to import data
+  - [ ] Test all functionality with cloud database
+  - [ ] Update authentication providers if using social login
+  - [ ] Verify all RLS policies work correctly in production
+
+- [ ] **Environment Variables**
+  ```
+  NEXT_PUBLIC_SUPABASE_URL=your-project-url.supabase.co
+  NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+  SUPABASE_SERVICE_ROLE_KEY=your-service-role-key (server-side only)
+  ```
+
+- [ ] **Vercel Configuration**
+  - [ ] Add environment variables in Vercel dashboard
+  - [ ] Configure build settings (Next.js preset should auto-detect)
+  - [ ] Set up preview deployments for pull requests
+  - [ ] Configure production branch (typically `main` or `master`)
+  - [ ] Test deployment with staging environment first
 
 ### Launch Preparation
 - [ ] **Content creation**
