@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerSupabaseClient, requireAdmin } from '@/lib/auth-server';
-import { createAircraft, uploadMultipleAircraftPhotos, db } from '@/api/db';
+import { db } from '@/api/db';
 
 export async function POST(request: NextRequest) {
   try {
@@ -87,7 +87,7 @@ export async function POST(request: NextRequest) {
 
     // Create the aircraft using authenticated client
     const supabase = await createServerSupabaseClient();
-    const newAircraft = await createAircraft(aircraftToCreate, supabase);
+    const newAircraft = await db.aircraft.create(aircraftToCreate, supabase);
 
     // Handle photo uploads if provided
     let uploadedPhotos: unknown[] = [];
@@ -99,7 +99,7 @@ export async function POST(request: NextRequest) {
           caption: ''
         }));
         
-        uploadedPhotos = await uploadMultipleAircraftPhotos(
+        uploadedPhotos = await db.photos.uploadMultipleAircraftPhotos(
           newAircraft.id,
           photos,
           supabase

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdmin } from '@/lib/auth-server';
-import { updateAircraft } from '@/api/db';
+import { db } from '@/api/db';
 
 interface RouteParams {
   params: Promise<{
@@ -19,7 +19,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
     // Update the aircraft using authenticated client
     const { createServerSupabaseClient } = await import('@/lib/auth-server');
     const supabase = await createServerSupabaseClient();
-    const updatedAircraft = await updateAircraft(id, body, supabase);
+    const updatedAircraft = await db.aircraft.update(id, body, supabase);
 
     return NextResponse.json({
       success: true,
@@ -51,7 +51,7 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
     // For now, we'll implement soft delete by setting status to 'deleted'
     const { createServerSupabaseClient } = await import('@/lib/auth-server');
     const supabase = await createServerSupabaseClient();
-    const updatedAircraft = await updateAircraft(id, { status: 'deleted' }, supabase);
+    const updatedAircraft = await db.aircraft.update(id, { status: 'deleted' }, supabase);
 
     return NextResponse.json({
       success: true,

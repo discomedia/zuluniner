@@ -551,15 +551,3 @@ export const db = {
   },
 };
 
-// Legacy exports for backward compatibility (will be removed)
-export const getAircraft = getAircraftById;
-export { searchAircraft };
-export { createAircraft };
-export { updateAircraft };
-export { getAircraftPhotos };
-export { uploadAircraftPhoto };
-export { uploadMultipleAircraftPhotos };
-export { getBlogPosts };
-export { getBlogPost };
-export { getUserProfile };
-export { updateUserProfile };

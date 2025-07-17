@@ -8,7 +8,7 @@ import ContainerLayout from '../components/layouts/ContainerLayout';
 import Button from '../components/ui/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../components/ui/Card';
 import SearchBar from '../components/ui/SearchBar';
-import { searchAircraft } from '../api/db';
+import { db } from '../api/db';
 import type { Aircraft, AircraftPhoto } from '../types';
 
 interface AircraftWithPhotos extends Aircraft {
@@ -49,7 +49,7 @@ export default function Home() {
       console.log('🔄 Starting to fetch featured aircraft...');
       try {
         console.log('📞 Calling searchAircraft with params:', {}, 1, 3);
-        const result = await searchAircraft({}, 1, 3);
+        const result = await db.aircraft.search({}, 1, 3);
         console.log('✅ searchAircraft result:', result);
         console.log('📊 Aircraft count:', result.aircraft?.length);
         setFeaturedAircraft(result.aircraft);
