@@ -74,26 +74,26 @@ export function AircraftStructuredData({ aircraft, primaryPhotoUrl }: AircraftSt
         name: 'Avionics',
         value: aircraft.avionics,
       }] : []),
-      ...(aircraft.location?.airport_code ? [{
+      ...(aircraft.airport_code ? [{
         '@type': 'PropertyValue',
         name: 'Airport Code',
-        value: aircraft.location.airport_code,
+        value: aircraft.airport_code,
       }] : []),
     ],
-    ...(aircraft.location && {
+    ...(aircraft.city && aircraft.country && {
       location: {
         '@type': 'Place',
-        name: `${aircraft.location.city}, ${aircraft.location.country}`,
+        name: `${aircraft.city}, ${aircraft.country}`,
         address: {
           '@type': 'PostalAddress',
-          addressLocality: aircraft.location.city,
-          addressCountry: aircraft.location.country,
+          addressLocality: aircraft.city,
+          addressCountry: aircraft.country,
         },
-        ...(aircraft.location.latitude && aircraft.location.longitude && {
+        ...(aircraft.latitude && aircraft.longitude && {
           geo: {
             '@type': 'GeoCoordinates',
-            latitude: aircraft.location.latitude,
-            longitude: aircraft.location.longitude,
+            latitude: aircraft.latitude,
+            longitude: aircraft.longitude,
           },
         }),
       },

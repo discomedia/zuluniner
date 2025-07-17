@@ -144,7 +144,7 @@ export default function AircraftBasicInfoStep({
               variant="secondary"
               onClick={handleAutoPopulate}
               disabled={!formData.title.trim() || isAutoPopulating}
-              className="whitespace-nowrap"
+              className="whitespace-nowrap bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600 border-none"
             >
               ✨ Auto-populate
             </Button>
@@ -205,9 +205,9 @@ export default function AircraftBasicInfoStep({
         helpText="This appears in search engine results. Will be auto-generated if left blank."
       />
 
-      <div className="bg-gray-50 p-4 rounded-lg">
-        <h4 className="font-medium text-gray-900 mb-2">Preview URL</h4>
-        <p className="text-sm text-gray-600">
+      <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg">
+        <h4 className="font-medium text-blue-900 mb-2">Preview URL</h4>
+        <p className="text-sm text-blue-700 font-mono">
           zuluniner.com/aircraft/{formData.title && formData.year && formData.make && formData.model 
             ? generateSlug(formData.title, formData.year, formData.make, formData.model)
             : 'your-aircraft-slug'

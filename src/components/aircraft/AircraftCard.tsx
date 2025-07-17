@@ -75,10 +75,10 @@ export default function AircraftCard({ aircraft, primaryPhoto }: AircraftCardPro
             <div className="flex items-center gap-1 text-gray-600 col-span-2">
               <MapPin className="h-4 w-4 flex-shrink-0" />
               <span className="truncate">
-                {aircraft.location?.city}, {aircraft.location?.country}
-                {aircraft.location?.airport_code && (
+                {aircraft.city}, {aircraft.country}
+                {aircraft.airport_code && (
                   <span className="ml-1 font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">
-                    {aircraft.location.airport_code}
+                    {aircraft.airport_code}
                   </span>
                 )}
               </span>

@@ -154,7 +154,7 @@ export default function AircraftWizard() {
               >
                 {step.id}
               </div>
-              <div className="ml-2 text-sm font-medium text-gray-900">
+              <div className="ml-2 text-sm font-medium text-gray-800">
                 {step.title}
               </div>
               {index < STEPS.length - 1 && (
@@ -187,7 +187,7 @@ export default function AircraftWizard() {
       {/* Step Content */}
       <Card>
         <CardHeader>
-          <h2 className="text-xl font-semibold">
+          <h2 className="text-xl font-semibold text-gray-900">
             Step {currentStep}: {STEPS[currentStep - 1].title}
           </h2>
         </CardHeader>
@@ -206,13 +206,22 @@ export default function AircraftWizard() {
 
       {/* Navigation */}
       <div className="flex justify-between mt-8">
-        <Button
-          variant="secondary"
-          onClick={prevStep}
-          disabled={currentStep === 1}
-        >
-          Previous
-        </Button>
+        <div className="flex gap-2">
+          <Button
+            variant="ghost"
+            onClick={() => router.push('/admin/aircraft')}
+            className="text-gray-600 hover:text-gray-800"
+          >
+            ← Cancel
+          </Button>
+          <Button
+            variant="secondary"
+            onClick={prevStep}
+            disabled={currentStep === 1}
+          >
+            Previous
+          </Button>
+        </div>
 
         <div className="flex gap-2">
           {currentStep === STEPS.length ? (

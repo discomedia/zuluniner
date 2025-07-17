@@ -11,7 +11,11 @@ export interface Aircraft {
   hours: number;
   engine_type: string;
   avionics: string;
-  location: AircraftLocation;
+  airport_code: string;
+  city: string;
+  country: string;
+  latitude?: number;
+  longitude?: number;
   status: AircraftStatus;
   slug: string;
   meta_description?: string;

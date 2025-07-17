@@ -177,7 +177,7 @@ export default function Home() {
                     <CardContent>
                       <div className="flex justify-between items-center">
                         <div className="text-sm text-neutral-500">
-                          📍 {aircraft.location?.city || 'Location TBD'}
+                          📍 {aircraft.city || 'Location TBD'}
                         </div>
                         <Button variant="ghost" size="sm" onClick={(e) => {
                           e.stopPropagation();

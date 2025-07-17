@@ -102,17 +102,17 @@ export default function AircraftListItem({ aircraft, primaryPhoto, seller }: Air
                   <div>
                     <p className="text-xs text-gray-500">Location</p>
                     <p className="font-medium truncate">
-                      {aircraft.location?.city}, {aircraft.location?.country}
+                      {aircraft.city}, {aircraft.country}
                     </p>
                   </div>
                 </div>
 
-                {aircraft.location?.airport_code && (
+                {aircraft.airport_code && (
                   <div className="flex items-center gap-2 text-gray-600">
                     <Plane className="h-4 w-4 flex-shrink-0" />
                     <div>
                       <p className="text-xs text-gray-500">Airport</p>
-                      <p className="font-medium font-mono">{aircraft.location.airport_code}</p>
+                      <p className="font-medium font-mono">{aircraft.airport_code}</p>
                     </div>
                   </div>
                 )}
