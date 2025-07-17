@@ -192,87 +192,217 @@ ZuluNiner (zuluniner.com) is an aircraft marketplace built with Next.js, React, 
 
 ---
 
-## Stage 5: Aircraft Listings - Frontend
+## Stage 5: Aircraft Listings - Frontend ✅
 
 ### Listing Display
-- [ ] **Aircraft detail page**
-  - [ ] Hero section with primary photo
-  - [ ] Specification tables (organized by category)
-  - [ ] Photo gallery with lightbox
-  - [ ] Contact seller section
-  - [ ] Share functionality
+- [x] **Aircraft detail page** (`/src/app/aircraft/[slug]/page.tsx`)
+  - [x] Hero section with primary photo
+  - [x] Specification tables (organized by category with icons)
+  - [x] Photo gallery with lightbox and keyboard navigation (`PhotoGallery.tsx`)
+  - [x] Contact seller section with multiple methods (`ContactSeller.tsx`)
+  - [x] Share functionality with social media integration (`ShareButtons.tsx`)
   
-- [ ] **Listing cards** for browse/search results
-  - [ ] Primary photo, title, price, location
-  - [ ] Key specs preview
-  - [ ] Seller contact button
-  - [ ] Responsive grid layouts
+- [x] **Listing cards** for browse/search results
+  - [x] Grid view card component (`AircraftCard.tsx`)
+  - [x] List view component (`AircraftListItem.tsx`) 
+  - [x] Primary photo, title, price, location display
+  - [x] Key specs preview (year, hours, engine, avionics)
+  - [x] Seller contact buttons (call, email)
+  - [x] Responsive grid and list layouts
 
 ### Browse & Discovery
-- [ ] Aircraft listings overview page
-- [ ] Grid and list view options
-- [ ] Sort options (latest, oldest, price up/down)
-- [ ] Pagination with performance optimization
-- [ ] "Recently viewed" functionality
+- [x] Aircraft listings overview page (`/src/app/aircraft/page.tsx`)
+- [x] Grid and list view toggle with smooth transitions
+- [x] Sort options (newest, oldest, price low/high)
+- [x] Advanced filtering system (`AircraftFilters.tsx`)
+  - [x] Price range filters
+  - [x] Year range filters  
+  - [x] Make and model filters
+  - [x] Engine type filters
+- [x] Pagination with performance optimization
+- [x] Real-time search with debouncing
+- [ ] "Recently viewed" functionality (deferred to later stage)
 
 ### SEO Optimization
-- [ ] Dynamic meta tags for aircraft pages
-- [ ] Structured data (JSON-LD) for search engines
-- [ ] Optimized URLs with aircraft details
-- [ ] Open Graph tags for social sharing
+- [x] Dynamic meta tags for aircraft pages
+- [x] Structured data (JSON-LD) for search engines (`StructuredData.tsx`)
+- [x] Optimized URLs with aircraft slug details
+- [x] Open Graph tags for social sharing
+- [x] Twitter Card optimization
+- [x] Breadcrumb structured data
+
+### Implementation Notes
+- **Database Integration**: Uses existing `searchAircraft()` and `getAircraftBySlug()` functions from `/src/api/db.ts`
+- **Type Safety**: All components use TypeScript types from `/src/types/index.ts`
+- **Image Handling**: Integrates with Supabase Storage for aircraft photos
+- **Component Architecture**: Modular components in `/src/components/aircraft/`
+- **Search & Filters**: Client-side state management with URL param synchronization
+- **Performance**: Uses Next.js Image optimization and server-side rendering
 
 ---
 
-## Stage 6: Aircraft Listings - Backend/CMS
+## Stage 6: Aircraft Listings - Backend/CMS ✅
 
 ### CMS Interface
-- [ ] **Admin dashboard** for managing listings
-  - [ ] Create/edit aircraft listings form
-  - [ ] Draft and published status management
-  - [ ] Bulk operations (delete, status change)
+- [x] **Admin dashboard** for managing listings (`/src/app/admin/aircraft/`)
+  - [x] Aircraft management dashboard with status overview
+  - [x] Table view showing all listings with status, price, photos, created date
+  - [x] Quick action buttons (Edit, View) for each listing
+  - [x] Status counts (Active, Draft, Pending, Sold)
+  - [x] Admin-only access protection with `requireAdmin()`
   
-- [ ] **Listing creation form**
-  - [ ] Step-by-step wizard interface
-  - [ ] Auto-save functionality
-  - [ ] Validation and error handling
-  - [ ] Preview mode before publishing
+- [x] **Listing creation form** (multi-step wizard)
+  - [x] **Step 1: Basic Info** - Title, year, make, model, price, description
+  - [x] **Step 2: Specifications** - Hours, engine type, avionics with dropdowns
+  - [x] **Step 3: Location** - Airport code with auto-lookup, city, country, coordinates
+  - [x] **Step 4: Photos** - Drag-and-drop interface, photo reordering, primary photo selection
+  - [x] **Step 5: Preview** - Full listing preview with validation checklist and SEO preview
+  - [x] Auto-generation of SEO-friendly slugs
+  - [x] Save as draft or publish immediately
+  - [x] Form validation and error handling
 
 ### Data Management
-- [ ] CRUD operations for aircraft listings
-- [ ] Soft delete functionality
-- [ ] Listing history and version control
-- [ ] Bulk import/export capabilities
-- [ ] Data validation and sanitization
+- [x] **CRUD operations** for aircraft listings
+  - [x] Create aircraft via API endpoint `/api/admin/aircraft`
+  - [x] Update aircraft via API endpoint `/api/admin/aircraft/[id]`
+  - [x] Delete aircraft (soft delete) with status: 'deleted'
+  - [x] Admin-only access to all CRUD operations
+  
+- [x] **Status management** 
+  - [x] Extended `AircraftStatus` type: 'active' | 'sold' | 'pending' | 'draft' | 'deleted'
+  - [x] Draft functionality for saving work-in-progress
+  - [x] Status change capability in edit form
+  
+- [x] **Aircraft editing**
+  - [x] Edit form at `/admin/aircraft/[id]/edit`
+  - [x] All fields editable including status
+  - [x] Form pre-populated with existing data
+
+### Photo Management System  
+- [x] **Photo upload interface**
+  - [x] Drag-and-drop file selection
+  - [x] Multiple file upload support
+  - [x] File type and size validation (10MB max)
+  - [x] Photo preview with thumbnails
+  - [x] Primary photo designation (first photo)
+  - [x] Photo reordering with move left/right controls
+  - [x] Individual photo removal
+  
+- [ ] **Photo processing** (Deferred to Stage 8)
+  - [ ] Actual file upload to Supabase Storage
+  - [ ] Image optimization and resizing
+  - [ ] Multiple format generation (WebP, fallbacks)
+
+### Implementation Notes
+- **Architecture**: Created modular wizard components in `/src/components/admin/aircraft/`
+- **Type Safety**: Used `TablesInsert<'aircraft'>` from schema for database operations
+- **Database Schema**: Used flat schema structure (not nested location object)
+- **Authentication**: Full admin protection on all routes and API endpoints
+- **UI Integration**: Leveraged existing UI components (Button, Input, Card, etc.)
+- **Error Handling**: Comprehensive form validation and API error handling
+
+### Deferred Items (Moved to Later Stages)
+- **Auto-save functionality** - Can be added as enhancement in Stage 8
+- **Bulk operations** - Moved to Stage 8 (import/export, bulk status changes)
+- **Listing history/versioning** - Moved to Stage 8
+- **Advanced photo processing** - Core of Stage 8
+- **Data validation schemas** - Can be added as enhancement
 
 ---
 
-## Stage 7: Search & Filtering
+## Stage 7: Search & Filtering Enhancement
 
-### Search Functionality
-- [ ] **Full-text search** across aircraft listings
-  - [ ] Search in title, description, specifications
-  - [ ] Search suggestions and autocomplete
-  - [ ] Search result highlighting
-  - [ ] Search analytics and popular terms
+**✅ COMPLETED IN STAGE 5:**
+- [x] Basic full-text search across aircraft listings (title, description)
+- [x] Price range filtering with min/max inputs
+- [x] Year range filtering with min/max inputs
+- [x] Make and model dropdown filtering
+- [x] Engine type filtering
+- [x] Debounced search inputs (performance optimized)
+- [x] Pagination for large result sets
+- [x] Sort options (newest, oldest, price low/high)
+- [x] Grid and list view toggle
+- [x] Real-time search with URL parameter synchronization
 
-### Advanced Filtering
+**🎯 STAGE 7 ENHANCEMENTS:**
+
+### Advanced Search Functionality
+- [ ] **Enhanced full-text search**
+  - [ ] Search suggestions and autocomplete dropdown
+  - [ ] Search result highlighting of matched terms
+  - [ ] Search analytics tracking (popular search terms)
+  - [ ] Fuzzy search and typo tolerance
+  - [ ] Search within specific fields (title only, description only)
+  - [ ] Recent searches localStorage persistence
+
+### Advanced Filtering  
 - [ ] **Location-based filtering**
-  - [ ] Search within radius of location
-  - [ ] Airport code lookup
-  - [ ] Map-based location selection
+  - [ ] Search within radius of location (e.g., "within 100 miles of Denver")
+  - [ ] Airport code autocomplete with ICAO/IATA lookup
+  - [ ] State/region filtering for US listings
+  - [ ] Distance calculation and "nearest first" sorting
+  - [ ] Interactive map for location selection
   
-- [ ] **Specification filters**
-  - [ ] Price range slider
-  - [ ] Year range, hours flown
-  - [ ] Make and model dropdowns
-  - [ ] Engine type, avionics packages
-  - [ ] Custom specification filters
+- [ ] **Enhanced specification filters**
+  - [ ] Hours flown range slider (instead of text input)
+  - [ ] Avionics packages filter with multi-select
+  - [ ] Certification type filter (IFR, VFR, etc.)
+  - [ ] Condition rating filter (Excellent, Good, Fair)
+  - [ ] Last annual inspection date filter
+  - [ ] Engine time since overhaul filter
 
-### Performance Optimization
-- [ ] Database indexing for search performance
-- [ ] Debounced search inputs
-- [ ] Cached filter options
-- [ ] Pagination for large result sets
+### Advanced User Features
+- [ ] **Saved searches and alerts**
+  - [ ] Save search criteria for logged-in users
+  - [ ] Email alerts when new aircraft match saved searches
+  - [ ] Quick access to saved searches in user dashboard
+  - [ ] Search history for anonymous users (localStorage)
+  
+- [ ] **Comparison features**
+  - [ ] "Compare" checkbox on aircraft cards
+  - [ ] Side-by-side comparison page for selected aircraft
+  - [ ] Comparison table with specs, photos, and pricing
+  - [ ] Export comparison as PDF
+
+### Performance and UX Improvements
+- [ ] **Database optimization**
+  - [ ] Add database indexes on frequently searched fields
+  - [ ] Implement full-text search indexes for better performance
+  - [ ] Cache popular filter options (makes, models, engine types)
+  - [ ] Optimize queries for large datasets
+  
+- [ ] **Search experience enhancements**
+  - [ ] Loading states for search results
+  - [ ] Empty state improvements with search suggestions
+  - [ ] Filter count badges showing number of matches
+  - [ ] "Clear all filters" quick action
+  - [ ] Mobile-optimized filter drawer
+
+### Implementation Priority
+**Phase 1 (High Priority):**
+- Enhanced location filtering (radius search)
+- Hours flown range slider
+- Saved searches for users
+- Database indexing optimization
+
+**Phase 2 (Medium Priority):**
+- Search autocomplete and suggestions
+- Avionics and certification filters
+- Aircraft comparison feature
+- Search analytics
+
+**Phase 3 (Lower Priority):**
+- Interactive map selection
+- Advanced search operators
+- Export and sharing features
+- Machine learning search improvements
+
+### Technical Notes
+- **Build on existing**: Extend `/src/components/aircraft/AircraftFilters.tsx`
+- **Database**: Enhance `searchAircraft()` function in `/src/api/db.ts`
+- **Types**: Expand `SearchFilters` interface in `/src/types/index.ts`
+- **Storage**: Use Supabase for saved searches, localStorage for anonymous users
+- **Performance**: Consider Redis caching for production deployment
 
 ---
 

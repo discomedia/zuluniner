@@ -1,6 +1,8 @@
 // Database convenience functions for ZuluNiner
 import { supabase } from './supabase';
 import type { Aircraft, AircraftPhoto, UserProfile, SearchFilters } from '@/types';
+import type { TablesInsert, TablesUpdate } from './schema';
+import type { SupabaseClient } from '@supabase/supabase-js';
 
 // Aircraft functions
 export const getAircraft = async (id: string) => {
@@ -73,8 +75,9 @@ export const searchAircraft = async (filters: SearchFilters, page = 1, limit = 2
   };
 };
 
-export const createAircraft = async (aircraft: Omit<Aircraft, 'id' | 'created_at' | 'updated_at'>) => {
-  const { data, error } = await supabase
+export const createAircraft = async (aircraft: TablesInsert<'aircraft'>, client?: SupabaseClient) => {
+  const supabaseClient = client || supabase;
+  const { data, error } = await supabaseClient
     .from('aircraft')
     .insert(aircraft)
     .select()
@@ -84,8 +87,9 @@ export const createAircraft = async (aircraft: Omit<Aircraft, 'id' | 'created_at
   return data;
 };
 
-export const updateAircraft = async (id: string, updates: Partial<Aircraft>) => {
-  const { data, error } = await supabase
+export const updateAircraft = async (id: string, updates: TablesUpdate<'aircraft'>, client?: SupabaseClient) => {
+  const supabaseClient = client || supabase;
+  const { data, error } = await supabaseClient
     .from('aircraft')
     .update(updates)
     .eq('id', id)

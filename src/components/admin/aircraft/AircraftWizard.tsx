@@ -1,0 +1,207 @@
+'use client';
+
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Card, CardHeader, CardContent } from '@/components/ui/Card';
+import Button from '@/components/ui/Button';
+import AircraftBasicInfoStep from './AircraftBasicInfoStep';
+import AircraftSpecsStep from './AircraftSpecsStep';
+import AircraftLocationStep from './AircraftLocationStep';
+import AircraftPhotosStep from './AircraftPhotosStep';
+import AircraftPreviewStep from './AircraftPreviewStep';
+import type { Aircraft, AircraftPhoto } from '@/types';
+
+export interface AircraftFormData {
+  title: string;
+  description: string;
+  price: number;
+  year: number;
+  make: string;
+  model: string;
+  hours: number;
+  engine_type: string;
+  avionics: string;
+  airport_code: string;
+  city: string;
+  country: string;
+  latitude?: number;
+  longitude?: number;
+  meta_description?: string;
+  status: 'draft' | 'active';
+}
+
+const STEPS = [
+  { id: 1, title: 'Basic Info', component: AircraftBasicInfoStep },
+  { id: 2, title: 'Specifications', component: AircraftSpecsStep },
+  { id: 3, title: 'Location', component: AircraftLocationStep },
+  { id: 4, title: 'Photos', component: AircraftPhotosStep },
+  { id: 5, title: 'Preview', component: AircraftPreviewStep },
+];
+
+export default function AircraftWizard() {
+  const router = useRouter();
+  const [currentStep, setCurrentStep] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState<AircraftFormData>({
+    title: '',
+    description: '',
+    price: 0,
+    year: new Date().getFullYear(),
+    make: '',
+    model: '',
+    hours: 0,
+    engine_type: '',
+    avionics: '',
+    airport_code: '',
+    city: '',
+    country: '',
+    status: 'draft',
+  });
+  const [photos, setPhotos] = useState<File[]>([]);
+  const [uploadedPhotos, setUploadedPhotos] = useState<AircraftPhoto[]>([]);
+
+  const updateFormData = (updates: Partial<AircraftFormData>) => {
+    setFormData(prev => ({ ...prev, ...updates }));
+  };
+
+  const nextStep = () => {
+    if (currentStep < STEPS.length) {
+      setCurrentStep(currentStep + 1);
+    }
+  };
+
+  const prevStep = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1);
+    }
+  };
+
+  const handleSubmit = async (publishNow = false) => {
+    setIsSubmitting(true);
+    
+    try {
+      const finalData = {
+        ...formData,
+        status: publishNow ? 'active' as const : 'draft' as const,
+      };
+
+      const response = await fetch('/api/admin/aircraft', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          aircraft: finalData,
+          photos: photos,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to create aircraft');
+      }
+
+      const result = await response.json();
+      
+      // Redirect to the aircraft management page or the new aircraft
+      router.push(`/admin/aircraft`);
+    } catch (error) {
+      console.error('Error creating aircraft:', error);
+      alert('Failed to create aircraft. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const CurrentStepComponent = STEPS[currentStep - 1].component;
+
+  return (
+    <div className="max-w-4xl mx-auto">
+      {/* Progress Steps */}
+      <div className="mb-8">
+        <div className="flex items-center justify-between">
+          {STEPS.map((step, index) => (
+            <div key={step.id} className="flex items-center">
+              <div
+                className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
+                  step.id <= currentStep
+                    ? 'bg-primary-600 text-white'
+                    : 'bg-gray-200 text-gray-600'
+                }`}
+              >
+                {step.id}
+              </div>
+              <div className="ml-2 text-sm font-medium text-gray-900">
+                {step.title}
+              </div>
+              {index < STEPS.length - 1 && (
+                <div
+                  className={`w-12 h-0.5 mx-4 ${
+                    step.id < currentStep ? 'bg-primary-600' : 'bg-gray-200'
+                  }`}
+                />
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Step Content */}
+      <Card>
+        <CardHeader>
+          <h2 className="text-xl font-semibold">
+            Step {currentStep}: {STEPS[currentStep - 1].title}
+          </h2>
+        </CardHeader>
+        <CardContent>
+          <CurrentStepComponent
+            formData={formData}
+            updateFormData={updateFormData}
+            photos={photos}
+            setPhotos={setPhotos}
+            uploadedPhotos={uploadedPhotos}
+            setUploadedPhotos={setUploadedPhotos}
+          />
+        </CardContent>
+      </Card>
+
+      {/* Navigation */}
+      <div className="flex justify-between mt-8">
+        <Button
+          variant="secondary"
+          onClick={prevStep}
+          disabled={currentStep === 1}
+        >
+          Previous
+        </Button>
+
+        <div className="flex gap-2">
+          {currentStep === STEPS.length ? (
+            <>
+              <Button
+                variant="secondary"
+                onClick={() => handleSubmit(false)}
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Saving...' : 'Save as Draft'}
+              </Button>
+              <Button
+                variant="primary"
+                onClick={() => handleSubmit(true)}
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Publishing...' : 'Publish Now'}
+              </Button>
+            </>
+          ) : (
+            <Button
+              variant="primary"
+              onClick={nextStep}
+            >
+              Next
+            </Button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}

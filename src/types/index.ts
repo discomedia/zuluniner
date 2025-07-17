@@ -28,7 +28,7 @@ export interface AircraftLocation {
   longitude?: number;
 }
 
-export type AircraftStatus = 'active' | 'sold' | 'pending' | 'draft';
+export type AircraftStatus = 'active' | 'sold' | 'pending' | 'draft' | 'deleted';
 
 export interface AircraftPhoto {
   id: string;
