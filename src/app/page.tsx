@@ -1,103 +1,176 @@
-import Image from "next/image";
+'use client';
+
+import MainLayout from '../components/layouts/MainLayout';
+import ContainerLayout from '../components/layouts/ContainerLayout';
+import Button from '../components/ui/Button';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../components/ui/Card';
+import SearchBar from '../components/ui/SearchBar';
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const handleSearch = (query: string) => {
+    console.log('Search query:', query);
+  };
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+  const featuredAircraft = [
+    {
+      id: 1,
+      title: "Cessna 172 Skyhawk",
+      price: "$95,000",
+      year: "2018",
+      hours: "450 TT",
+      location: "Dallas, TX",
+      image: "/placeholder-aircraft.jpg"
+    },
+    {
+      id: 2,
+      title: "Piper Cherokee PA-28",
+      price: "$68,000",
+      year: "2015",
+      hours: "920 TT",
+      location: "Miami, FL",
+      image: "/placeholder-aircraft.jpg"
+    },
+    {
+      id: 3,
+      title: "Cirrus SR22",
+      price: "$475,000",
+      year: "2020",
+      hours: "180 TT",
+      location: "Los Angeles, CA",
+      image: "/placeholder-aircraft.jpg"
+    }
+  ];
+
+  return (
+    <MainLayout>
+      {/* Hero Section */}
+      <section className="bg-gradient-to-r from-primary-600 to-primary-700 text-white">
+        <ContainerLayout className="py-20 lg:py-28">
+          <div className="text-center">
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+              Find Your Perfect Aircraft
+            </h1>
+            <p className="mt-6 text-xl text-primary-100 max-w-3xl mx-auto">
+              The premier marketplace connecting pilots, dealers, and aviation enthusiasts worldwide. 
+              Discover your next aircraft with confidence and trust.
+            </p>
+            <div className="mt-10 max-w-2xl mx-auto">
+              <SearchBar
+                placeholder="Search aircraft by make, model, or location..."
+                onSearch={handleSearch}
+                size="lg"
+                className="mb-6"
+              />
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button size="lg" variant="secondary" className="bg-white text-primary-700 hover:bg-neutral-100">
+                  Browse Aircraft
+                </Button>
+                <Button size="lg" variant="ghost" className="text-white border-white hover:bg-primary-500">
+                  Sell Your Aircraft
+                </Button>
+              </div>
+            </div>
+          </div>
+        </ContainerLayout>
+      </section>
+
+      {/* Stats Section */}
+      <section className="bg-white border-b border-neutral-200">
+        <ContainerLayout className="py-16">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
+            <div className="text-center">
+              <div className="text-4xl font-bold text-primary-600">500+</div>
+              <div className="mt-2 text-lg text-neutral-600">Aircraft Listed</div>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl font-bold text-primary-600">1,200+</div>
+              <div className="mt-2 text-lg text-neutral-600">Happy Customers</div>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl font-bold text-primary-600">$45M+</div>
+              <div className="mt-2 text-lg text-neutral-600">In Transactions</div>
+            </div>
+          </div>
+        </ContainerLayout>
+      </section>
+
+      {/* Featured Aircraft */}
+      <section className="bg-neutral-50">
+        <ContainerLayout className="py-20">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-neutral-900 sm:text-4xl">
+              Featured Aircraft
+            </h2>
+            <p className="mt-4 text-lg text-neutral-600">
+              Discover our handpicked selection of premium aircraft
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {featuredAircraft.map((aircraft) => (
+              <Card key={aircraft.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                <div className="aspect-[4/3] bg-neutral-200 flex items-center justify-center">
+                  <div className="text-neutral-500 text-center">
+                    <svg className="w-16 h-16 mx-auto mb-2" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+                    </svg>
+                    <p className="text-sm">Aircraft Photo</p>
+                  </div>
+                </div>
+                <CardHeader>
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <CardTitle className="text-lg">{aircraft.title}</CardTitle>
+                      <CardDescription>{aircraft.year} • {aircraft.hours}</CardDescription>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-2xl font-bold text-primary-600">{aircraft.price}</div>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex justify-between items-center">
+                    <div className="text-sm text-neutral-500">
+                      📍 {aircraft.location}
+                    </div>
+                    <Button variant="ghost" size="sm">
+                      View Details
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          
+          <div className="mt-12 text-center">
+            <Button size="lg">
+              View All Aircraft
+            </Button>
+          </div>
+        </ContainerLayout>
+      </section>
+
+      {/* CTA Section */}
+      <section className="bg-primary-600">
+        <ContainerLayout className="py-20">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
+              Ready to List Your Aircraft?
+            </h2>
+            <p className="mt-4 text-xl text-primary-100">
+              Join thousands of sellers who trust ZuluNiner to connect them with qualified buyers.
+            </p>
+            <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+              <Button size="lg" variant="secondary" className="bg-white text-primary-700 hover:bg-neutral-100">
+                List Your Aircraft
+              </Button>
+              <Button size="lg" variant="ghost" className="text-white border-white hover:bg-primary-500">
+                Learn More
+              </Button>
+            </div>
+          </div>
+        </ContainerLayout>
+      </section>
+    </MainLayout>
   );
 }
