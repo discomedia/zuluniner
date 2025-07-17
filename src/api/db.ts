@@ -147,6 +147,13 @@ async function searchAircraft(filters: SearchFilters, page = 1, limit = 20): Pro
     query = query.range(offset, offset + limit - 1);
 
     console.log('🗄️ About to execute aircraft query...');
+    console.log('🔧 Environment check:', {
+      supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL,
+      hasAnonKey: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+      anonKeyLength: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.length,
+      isClientSide: typeof window !== 'undefined'
+    });
+    
     const { data: aircraftData, error: aircraftError, count } = await query;
     
     if (aircraftError) {
