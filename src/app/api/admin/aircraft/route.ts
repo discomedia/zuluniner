@@ -1,15 +1,50 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerSupabaseClient, requireAdmin } from '@/lib/auth-server';
-import { createAircraft, uploadAircraftPhoto } from '@/api/db';
-import type { Database } from '@/api/schema';
+import { createAircraft, uploadMultipleAircraftPhotos } from '@/api/db';
 
 export async function POST(request: NextRequest) {
   try {
     // Check admin authorization
     const { user } = await requireAdmin();
 
-    const body = await request.json();
-    const { aircraft: aircraftData, photos } = body;
+    // Handle both JSON and FormData
+    const contentType = request.headers.get('content-type') || '';
+    let aircraftData: {
+      title: string;
+      year: number;
+      make: string;
+      model: string;
+      description?: string;
+      price?: number;
+      hours?: number;
+      engine_type?: string;
+      avionics?: string;
+      airport_code?: string;
+      city?: string;
+      country?: string;
+      latitude?: number;
+      longitude?: number;
+      meta_description?: string;
+      status?: string;
+    };
+    let photoFiles: File[] = [];
+
+    if (contentType.includes('multipart/form-data')) {
+      // Handle FormData (with file uploads)
+      const formData = await request.formData();
+      
+      // Parse aircraft data from form
+      const aircraftJson = formData.get('aircraft') as string;
+      aircraftData = JSON.parse(aircraftJson);
+      
+      // Extract photo files
+      const files = formData.getAll('photos') as File[];
+      photoFiles = files.filter(file => file.size > 0);
+    } else {
+      // Handle JSON (without files)
+      const body = await request.json();
+      aircraftData = body.aircraft || body;
+    }
 
     // Generate slug from aircraft data
     const generateSlug = (title: string, year: number, make: string, model: string) => {
@@ -31,21 +66,21 @@ export async function POST(request: NextRequest) {
     // Prepare aircraft data for database (matching flat schema)
     const aircraftToCreate = {
       title: aircraftData.title,
-      description: aircraftData.description,
-      price: aircraftData.price,
+      description: aircraftData.description || '',
+      price: aircraftData.price || 0,
       year: aircraftData.year,
       make: aircraftData.make,
       model: aircraftData.model,
-      hours: aircraftData.hours,
-      engine_type: aircraftData.engine_type,
-      avionics: aircraftData.avionics,
-      airport_code: aircraftData.airport_code,
-      city: aircraftData.city,
-      country: aircraftData.country,
-      latitude: aircraftData.latitude,
-      longitude: aircraftData.longitude,
-      meta_description: aircraftData.meta_description,
-      status: aircraftData.status,
+      hours: aircraftData.hours || 0,
+      engine_type: aircraftData.engine_type || '',
+      avionics: aircraftData.avionics || '',
+      airport_code: aircraftData.airport_code || '',
+      city: aircraftData.city || '',
+      country: aircraftData.country || '',
+      latitude: aircraftData.latitude || null,
+      longitude: aircraftData.longitude || null,
+      meta_description: aircraftData.meta_description || '',
+      status: aircraftData.status || 'draft',
       slug,
       user_id: user.id,
     };
@@ -55,13 +90,34 @@ export async function POST(request: NextRequest) {
     const newAircraft = await createAircraft(aircraftToCreate, supabase);
 
     // Handle photo uploads if provided
-    // Note: For now, we'll just return success. In a real implementation,
-    // you'd handle the actual file uploads here using FormData
+    let uploadedPhotos: unknown[] = [];
+    if (photoFiles.length > 0) {
+      try {
+        const photos = photoFiles.map(file => ({
+          file,
+          altText: `${aircraftData.year} ${aircraftData.make} ${aircraftData.model}`,
+          caption: ''
+        }));
+        
+        uploadedPhotos = await uploadMultipleAircraftPhotos(
+          newAircraft.id,
+          photos,
+          supabase
+        );
+      } catch (photoError) {
+        console.error('Photo upload failed:', photoError);
+        // Don't fail the entire request if photos fail
+        // Aircraft is already created, just log the error
+      }
+    }
     
     return NextResponse.json({
       success: true,
-      data: newAircraft,
-      message: 'Aircraft created successfully',
+      data: {
+        ...newAircraft,
+        photos: uploadedPhotos
+      },
+      message: `Aircraft created successfully${uploadedPhotos.length > 0 ? ` with ${uploadedPhotos.length} photos` : ''}`,
     });
 
   } catch (error) {
@@ -78,7 +134,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     // Check admin authorization
     await requireAdmin();

@@ -1,19 +1,77 @@
-import { requireAuth } from '@/lib/auth-server';
+import { requireAuth, createServerSupabaseClient } from '@/lib/auth-server';
 import ContainerLayout from '@/components/layouts/ContainerLayout';
 import PageHeader from '@/components/layouts/PageHeader';
 import { Card, CardHeader, CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Link from 'next/link';
 
+// Get user dashboard data
+async function getUserDashboardData(userId: string) {
+  const supabase = await createServerSupabaseClient();
+  
+  // Get user's aircraft
+  const { data: aircraft, count } = await supabase
+    .from('aircraft')
+    .select('*', { count: 'exact' })
+    .eq('user_id', userId)
+    .order('created_at', { ascending: false });
+    
+  const stats = {
+    totalListings: count || 0,
+    activeListings: aircraft?.filter(a => a.status === 'active').length || 0,
+    draftListings: aircraft?.filter(a => a.status === 'draft').length || 0,
+    soldListings: aircraft?.filter(a => a.status === 'sold').length || 0,
+  };
+  
+  return { aircraft: aircraft || [], stats };
+}
+
 export default async function DashboardPage() {
   const user = await requireAuth();
+  const { aircraft: _aircraft, stats } = await getUserDashboardData(user.id);
+  
+  // Get user profile separately
+  const supabase = await createServerSupabaseClient();
+  const { data: profile } = await supabase
+    .from('users')
+    .select('*')
+    .eq('id', user.id)
+    .single();
 
   return (
     <ContainerLayout>
       <PageHeader
-        title="Dashboard"
+        title={`Welcome back, ${profile?.name || 'User'}`}
         description="Manage your aircraft listings and account"
       />
+      
+      {/* User Stats */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+        <Card>
+          <CardContent className="p-4 text-center">
+            <div className="text-2xl font-bold text-primary-600">{stats.totalListings}</div>
+            <div className="text-sm text-gray-600">Total Listings</div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-4 text-center">
+            <div className="text-2xl font-bold text-green-600">{stats.activeListings}</div>
+            <div className="text-sm text-gray-600">Active</div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-4 text-center">
+            <div className="text-2xl font-bold text-yellow-600">{stats.draftListings}</div>
+            <div className="text-sm text-gray-600">Drafts</div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-4 text-center">
+            <div className="text-2xl font-bold text-gray-600">{stats.soldListings}</div>
+            <div className="text-sm text-gray-600">Sold</div>
+          </CardContent>
+        </Card>
+      </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <Card>

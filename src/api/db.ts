@@ -1,7 +1,7 @@
 // Database convenience functions for ZuluNiner
 import { supabase } from './supabase';
-import type { Aircraft, AircraftPhoto, UserProfile, SearchFilters } from '@/types';
-import type { TablesInsert, TablesUpdate } from './schema';
+import type { AircraftPhoto, UserProfile, SearchFilters } from '@/types';
+import type { TablesInsert, TablesUpdate, Database } from './schema';
 import type { SupabaseClient } from '@supabase/supabase-js';
 
 // Aircraft functions
@@ -116,21 +116,29 @@ export const uploadAircraftPhoto = async (
   aircraftId: string,
   file: File,
   altText: string,
-  isPrimary = false
+  isPrimary = false,
+  supabaseClient?: SupabaseClient<Database>
 ): Promise<AircraftPhoto> => {
-  // Generate a unique filename
-  const fileExt = file.name.split('.').pop();
-  const fileName = `${aircraftId}/${Date.now()}.${fileExt}`;
+  const client = supabaseClient || supabase;
+  
+  // Generate SEO-friendly filename
+  const fileExt = file.name.split('.').pop()?.toLowerCase();
+  const timestamp = Date.now();
+  const safeName = file.name.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
+  const fileName = `aircraft-${aircraftId}/${timestamp}-${safeName}.${fileExt}`;
 
   // Upload to Supabase Storage
-  const { error: uploadError } = await supabase.storage
+  const { error: uploadError } = await client.storage
     .from('aircraft-photos')
-    .upload(fileName, file);
+    .upload(fileName, file, {
+      cacheControl: '3600',
+      upsert: false
+    });
 
   if (uploadError) throw uploadError;
 
   // Get the next display order
-  const { count } = await supabase
+  const { count } = await client
     .from('aircraft_photos')
     .select('*', { count: 'exact', head: true })
     .eq('aircraft_id', aircraftId);
@@ -139,14 +147,14 @@ export const uploadAircraftPhoto = async (
 
   // If this is primary, unset other primary photos
   if (isPrimary) {
-    await supabase
+    await client
       .from('aircraft_photos')
       .update({ is_primary: false })
       .eq('aircraft_id', aircraftId);
   }
 
   // Create photo record
-  const { data, error } = await supabase
+  const { data, error } = await client
     .from('aircraft_photos')
     .insert({
       aircraft_id: aircraftId,
@@ -160,6 +168,93 @@ export const uploadAircraftPhoto = async (
 
   if (error) throw error;
   return data;
+};
+
+export const uploadMultipleAircraftPhotos = async (
+  aircraftId: string,
+  photos: Array<{ file: File; altText?: string; caption?: string }>,
+  supabaseClient?: SupabaseClient<Database>
+): Promise<AircraftPhoto[]> => {
+  const client = supabaseClient || supabase;
+  const uploadedPhotos: AircraftPhoto[] = [];
+
+  try {
+    // Upload photos sequentially to maintain order
+    for (let i = 0; i < photos.length; i++) {
+      const { file, altText = '', caption } = photos[i];
+      const isPrimary = i === 0; // First photo is primary
+
+      // Generate SEO-friendly filename
+      const fileExt = file.name.split('.').pop()?.toLowerCase();
+      const timestamp = Date.now() + i; // Add index to ensure unique timestamps
+      const safeName = file.name.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
+      const fileName = `aircraft-${aircraftId}/${timestamp}-${safeName}.${fileExt}`;
+
+      // Upload to Supabase Storage
+      const { error: uploadError } = await client.storage
+        .from('aircraft-photos')
+        .upload(fileName, file, {
+          cacheControl: '3600',
+          upsert: false
+        });
+
+      if (uploadError) {
+        console.error(`Failed to upload photo ${i + 1}:`, uploadError);
+        continue; // Skip this photo but continue with others
+      }
+
+      // If this is primary, unset other primary photos
+      if (isPrimary) {
+        await client
+          .from('aircraft_photos')
+          .update({ is_primary: false })
+          .eq('aircraft_id', aircraftId);
+      }
+
+      // Create photo record
+      const { data, error } = await client
+        .from('aircraft_photos')
+        .insert({
+          aircraft_id: aircraftId,
+          storage_path: fileName,
+          alt_text: altText,
+          caption: caption || '',
+          display_order: i + 1,
+          is_primary: isPrimary
+        })
+        .select()
+        .single();
+
+      if (error) {
+        console.error(`Failed to create photo record ${i + 1}:`, error);
+        // Try to clean up uploaded file
+        await client.storage
+          .from('aircraft-photos')
+          .remove([fileName]);
+        continue;
+      }
+
+      uploadedPhotos.push(data);
+    }
+
+    return uploadedPhotos;
+  } catch (error) {
+    // Cleanup: remove any successfully uploaded photos
+    for (const photo of uploadedPhotos) {
+      try {
+        await client.storage
+          .from('aircraft-photos')
+          .remove([photo.storage_path]);
+        await client
+          .from('aircraft_photos')
+          .delete()
+          .eq('id', photo.id);
+      } catch (cleanupError) {
+        console.error('Cleanup failed for photo:', photo.id, cleanupError);
+      }
+    }
+    throw error;
+  }
 };
 
 // Blog functions

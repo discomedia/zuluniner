@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import ContainerLayout from '@/components/layouts/ContainerLayout';
 import PageHeader from '@/components/layouts/PageHeader';
 import AircraftWizard from '@/components/admin/aircraft/AircraftWizard';

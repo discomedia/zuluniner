@@ -9,7 +9,7 @@ import AircraftSpecsStep from './AircraftSpecsStep';
 import AircraftLocationStep from './AircraftLocationStep';
 import AircraftPhotosStep from './AircraftPhotosStep';
 import AircraftPreviewStep from './AircraftPreviewStep';
-import type { Aircraft, AircraftPhoto } from '@/types';
+import type { AircraftPhoto } from '@/types';
 
 export interface AircraftFormData {
   title: string;
@@ -85,28 +85,47 @@ export default function AircraftWizard() {
         status: publishNow ? 'active' as const : 'draft' as const,
       };
 
-      const response = await fetch('/api/admin/aircraft', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          aircraft: finalData,
-          photos: photos,
-        }),
-      });
+      let response: Response;
 
-      if (!response.ok) {
-        throw new Error('Failed to create aircraft');
+      if (photos.length > 0) {
+        // Use FormData for file uploads
+        const formData = new FormData();
+        formData.append('aircraft', JSON.stringify(finalData));
+        
+        // Add each photo file
+        photos.forEach((photo) => {
+          formData.append('photos', photo);
+        });
+
+        response = await fetch('/api/admin/aircraft', {
+          method: 'POST',
+          body: formData, // No Content-Type header - browser will set multipart/form-data
+        });
+      } else {
+        // Use JSON for aircraft without photos
+        response = await fetch('/api/admin/aircraft', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            aircraft: finalData,
+          }),
+        });
       }
 
-      const result = await response.json();
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to create aircraft');
+      }
+
+      await response.json();
       
       // Redirect to the aircraft management page or the new aircraft
       router.push(`/admin/aircraft`);
     } catch (error) {
       console.error('Error creating aircraft:', error);
-      alert('Failed to create aircraft. Please try again.');
+      alert(`Failed to create aircraft: ${error instanceof Error ? error.message : 'Unknown error'}`);
     } finally {
       setIsSubmitting(false);
     }

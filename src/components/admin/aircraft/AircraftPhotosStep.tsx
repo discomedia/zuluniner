@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react';
 import Button from '@/components/ui/Button';
+import { validateImageFile, optimizeImage } from '@/lib/image-utils';
 import type { AircraftPhoto } from '@/types';
 import type { AircraftFormData } from './AircraftWizard';
 
@@ -15,32 +16,42 @@ interface AircraftPhotosStepProps {
 }
 
 export default function AircraftPhotosStep({
+  formData: _formData,
   photos,
   setPhotos,
 }: AircraftPhotosStepProps) {
   const [dragOver, setDragOver] = useState(false);
+  const [processing, setProcessing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleFileSelect = (files: FileList | null) => {
+  const handleFileSelect = async (files: FileList | null) => {
     if (!files) return;
 
-    const validFiles = Array.from(files).filter(file => {
-      // Check file type
-      if (!file.type.startsWith('image/')) {
-        alert(`${file.name} is not an image file`);
-        return false;
+    setProcessing(true);
+    const validFiles: File[] = [];
+
+    for (const file of Array.from(files)) {
+      const validation = validateImageFile(file);
+      
+      if (!validation.valid) {
+        alert(`${file.name}: ${validation.error}`);
+        continue;
       }
 
-      // Check file size (max 10MB)
-      if (file.size > 10 * 1024 * 1024) {
-        alert(`${file.name} is too large. Maximum size is 10MB`);
-        return false;
+      // Optimize image before adding
+      try {
+        const optimized = await optimizeImage(file);
+        validFiles.push(optimized.optimized);
+      } catch (error) {
+        console.error('Image optimization failed:', error);
+        // Use original file if optimization fails
+        validFiles.push(file);
       }
+    }
 
-      return true;
-    });
-
+    // Add optimized photos
     setPhotos([...photos, ...validFiles]);
+    setProcessing(false);
   };
 
   const handleDrop = (e: React.DragEvent) => {
@@ -108,8 +119,9 @@ export default function AircraftPhotosStep({
           variant="primary"
           onClick={() => fileInputRef.current?.click()}
           className="mt-4"
+          disabled={processing}
         >
-          Choose Photos
+          {processing ? 'Processing...' : 'Choose Photos'}
         </Button>
       </div>
 
@@ -129,7 +141,7 @@ export default function AircraftPhotosStep({
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {photos.map((photo, index) => (
-              <div key={index} className="relative group">
+              <div key={`${photo.name}-${index}`} className="relative group">
                 <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
                   <img
                     src={URL.createObjectURL(photo)}

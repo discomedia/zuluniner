@@ -12,7 +12,7 @@ interface EditAircraftPageProps {
 }
 
 export default async function EditAircraftPage({ params }: EditAircraftPageProps) {
-  const { user, profile } = await requireAdmin();
+  const { user: _user, profile } = await requireAdmin();
   const { id } = await params;
 
   try {
@@ -26,7 +26,7 @@ export default async function EditAircraftPage({ params }: EditAircraftPageProps
       <ContainerLayout>
         <PageHeader
           title={`Edit: ${aircraft.title}`}
-          description={`${aircraft.year} ${aircraft.make} ${aircraft.model}`}
+          description={`${aircraft.year} ${aircraft.make} ${aircraft.model} • Admin: ${profile.name}`}
         />
         
         <AircraftEditForm aircraft={aircraft} />

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Input from '@/components/ui/Input';
 import type { AircraftFormData } from './AircraftWizard';
 

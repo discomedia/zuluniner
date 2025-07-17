@@ -1,12 +1,45 @@
-import { requireAdmin } from '@/lib/auth-server';
+import { requireAdmin, createServerSupabaseClient } from '@/lib/auth-server';
 import ContainerLayout from '@/components/layouts/ContainerLayout';
 import PageHeader from '@/components/layouts/PageHeader';
 import { Card, CardHeader, CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Link from 'next/link';
 
+// Get dashboard statistics
+async function getDashboardStats() {
+  const supabase = await createServerSupabaseClient();
+  
+  // Get user count
+  const { count: userCount } = await supabase
+    .from('users')
+    .select('*', { count: 'exact', head: true });
+  
+  // Get aircraft counts by status
+  const { data: aircraftData } = await supabase
+    .from('aircraft')
+    .select('status');
+  
+  const aircraftStats = {
+    total: aircraftData?.length || 0,
+    active: aircraftData?.filter(a => a.status === 'active').length || 0,
+    draft: aircraftData?.filter(a => a.status === 'draft').length || 0,
+    pending: aircraftData?.filter(a => a.status === 'pending').length || 0,
+  };
+  
+  // Get blog post count (placeholder since blog system isn't implemented yet)
+  const blogCount = 0;
+  
+  return {
+    userCount: userCount || 0,
+    aircraftStats,
+    blogCount,
+    pendingReviews: aircraftStats.pending,
+  };
+}
+
 export default async function AdminDashboard() {
-  const { user, profile } = await requireAdmin();
+  const { user: _user, profile } = await requireAdmin();
+  const stats = await getDashboardStats();
 
   return (
     <ContainerLayout>
@@ -121,19 +154,19 @@ export default async function AdminDashboard() {
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
               <div>
-                <div className="text-2xl font-bold text-primary-600">0</div>
+                <div className="text-2xl font-bold text-primary-600">{stats.userCount}</div>
                 <div className="text-sm text-gray-600">Total Users</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-primary-600">0</div>
+                <div className="text-2xl font-bold text-green-600">{stats.aircraftStats.active}</div>
                 <div className="text-sm text-gray-600">Active Listings</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-primary-600">0</div>
+                <div className="text-2xl font-bold text-blue-600">{stats.blogCount}</div>
                 <div className="text-sm text-gray-600">Blog Posts</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-primary-600">0</div>
+                <div className="text-2xl font-bold text-yellow-600">{stats.pendingReviews}</div>
                 <div className="text-sm text-gray-600">Pending Reviews</div>
               </div>
             </div>
