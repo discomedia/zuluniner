@@ -1,45 +1,64 @@
 'use client';
 
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import MainLayout from '../components/layouts/MainLayout';
 import ContainerLayout from '../components/layouts/ContainerLayout';
 import Button from '../components/ui/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../components/ui/Card';
 import SearchBar from '../components/ui/SearchBar';
+import { searchAircraft } from '../api/db';
+import type { Aircraft, AircraftPhoto } from '../types';
+
+interface AircraftWithPhotos extends Aircraft {
+  photos?: AircraftPhoto[];
+}
 
 export default function Home() {
+  const router = useRouter();
+  const [featuredAircraft, setFeaturedAircraft] = useState<AircraftWithPhotos[]>([]);
+  const [loading, setLoading] = useState(true);
+
   const handleSearch = (query: string) => {
-    console.log('Search query:', query);
+    if (query.trim()) {
+      router.push(`/aircraft?q=${encodeURIComponent(query.trim())}`);
+    } else {
+      router.push('/aircraft');
+    }
   };
 
-  const featuredAircraft = [
-    {
-      id: 1,
-      title: "Cessna 172 Skyhawk",
-      price: "$95,000",
-      year: "2018",
-      hours: "450 TT",
-      location: "Dallas, TX",
-      image: "/placeholder-aircraft.jpg"
-    },
-    {
-      id: 2,
-      title: "Piper Cherokee PA-28",
-      price: "$68,000",
-      year: "2015",
-      hours: "920 TT",
-      location: "Miami, FL",
-      image: "/placeholder-aircraft.jpg"
-    },
-    {
-      id: 3,
-      title: "Cirrus SR22",
-      price: "$475,000",
-      year: "2020",
-      hours: "180 TT",
-      location: "Los Angeles, CA",
-      image: "/placeholder-aircraft.jpg"
-    }
-  ];
+  const handleBrowseAircraft = () => {
+    router.push('/aircraft');
+  };
+
+  const handleViewAllAircraft = () => {
+    router.push('/aircraft');
+  };
+
+  const handleSellAircraft = () => {
+    router.push('/sell');
+  };
+
+  const handleListAircraft = () => {
+    router.push('/sell');
+  };
+
+  useEffect(() => {
+    const fetchFeaturedAircraft = async () => {
+      try {
+        const result = await searchAircraft({}, 1, 3);
+        setFeaturedAircraft(result.aircraft);
+      } catch (error) {
+        console.error('Error fetching featured aircraft:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFeaturedAircraft();
+  }, []);
+
 
   return (
     <MainLayout>
@@ -62,10 +81,10 @@ export default function Home() {
                 className="mb-6"
               />
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" variant="secondary" className="bg-white text-primary-700 hover:bg-neutral-100">
+                <Button size="lg" variant="secondary" className="bg-white text-primary-700 hover:bg-neutral-100" onClick={handleBrowseAircraft}>
                   Browse Aircraft
                 </Button>
-                <Button size="lg" variant="ghost" className="text-white border-white hover:bg-primary-500">
+                <Button size="lg" variant="ghost" className="text-white border-white hover:bg-primary-500" onClick={handleSellAircraft}>
                   Sell Your Aircraft
                 </Button>
               </div>
@@ -106,44 +125,76 @@ export default function Home() {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {featuredAircraft.map((aircraft) => (
-              <Card key={aircraft.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-                <div className="aspect-[4/3] bg-neutral-200 flex items-center justify-center">
-                  <div className="text-neutral-500 text-center">
-                    <svg className="w-16 h-16 mx-auto mb-2" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
-                    </svg>
-                    <p className="text-sm">Aircraft Photo</p>
-                  </div>
-                </div>
-                <CardHeader>
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <CardTitle className="text-lg">{aircraft.title}</CardTitle>
-                      <CardDescription>{aircraft.year} • {aircraft.hours}</CardDescription>
+          {loading ? (
+            <div className="text-center py-12">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
+              <p className="text-neutral-600">Loading featured aircraft...</p>
+            </div>
+          ) : featuredAircraft.length === 0 ? (
+            <div className="text-center py-12">
+              <div className="text-6xl mb-4">😞</div>
+              <p className="text-xl text-neutral-600">No planes available right now :(</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+              {featuredAircraft.map((aircraft) => {
+                const primaryPhoto = aircraft.photos?.find(p => p.is_primary) || aircraft.photos?.[0];
+                const photoUrl = primaryPhoto?.storage_path ? `/api/photos/${primaryPhoto.storage_path}` : null;
+                
+                return (
+                  <Card key={aircraft.id} className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer" onClick={() => router.push(`/aircraft/${aircraft.slug}`)}>
+                    <div className="aspect-[4/3] bg-neutral-200 flex items-center justify-center relative">
+                      {photoUrl ? (
+                        <Image 
+                          src={photoUrl} 
+                          alt={primaryPhoto?.alt_text || `${aircraft.make} ${aircraft.model}`}
+                          className="w-full h-full object-cover"
+                          fill
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        />
+                      ) : (
+                        <div className="text-neutral-500 text-center">
+                          <svg className="w-16 h-16 mx-auto mb-2" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+                          </svg>
+                          <p className="text-sm">Aircraft Photo</p>
+                        </div>
+                      )}
                     </div>
-                    <div className="text-right">
-                      <div className="text-2xl font-bold text-primary-600">{aircraft.price}</div>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex justify-between items-center">
-                    <div className="text-sm text-neutral-500">
-                      📍 {aircraft.location}
-                    </div>
-                    <Button variant="ghost" size="sm">
-                      View Details
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                    <CardHeader>
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <CardTitle className="text-lg">{aircraft.make} {aircraft.model}</CardTitle>
+                          <CardDescription>{aircraft.year} • {aircraft.hours || 'TBD'} TT</CardDescription>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-2xl font-bold text-primary-600">
+                            ${aircraft.price?.toLocaleString() || 'POA'}
+                          </div>
+                        </div>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex justify-between items-center">
+                        <div className="text-sm text-neutral-500">
+                          📍 {aircraft.location?.city || 'Location TBD'}
+                        </div>
+                        <Button variant="ghost" size="sm" onClick={(e) => {
+                          e.stopPropagation();
+                          router.push(`/aircraft/${aircraft.slug}`);
+                        }}>
+                          View Details
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+          )}
           
           <div className="mt-12 text-center">
-            <Button size="lg">
+            <Button size="lg" onClick={handleViewAllAircraft}>
               View All Aircraft
             </Button>
           </div>
@@ -161,7 +212,7 @@ export default function Home() {
               Join thousands of sellers who trust ZuluNiner to connect them with qualified buyers.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="secondary" className="bg-white text-primary-700 hover:bg-neutral-100">
+              <Button size="lg" variant="secondary" className="bg-white text-primary-700 hover:bg-neutral-100" onClick={handleListAircraft}>
                 List Your Aircraft
               </Button>
               <Button size="lg" variant="ghost" className="text-white border-white hover:bg-primary-500">
