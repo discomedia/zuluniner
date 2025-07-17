@@ -2,9 +2,12 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useAuth } from '@/components/auth/AuthProvider';
+import Button from '@/components/ui/Button';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { user, profile, loading, signOut } = useAuth();
 
   const navigation = [
     { name: 'Browse Aircraft', href: '/aircraft' },
@@ -13,6 +16,11 @@ export default function Header() {
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' },
   ];
+
+  const handleSignOut = async () => {
+    await signOut();
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <header className="bg-white shadow-sm border-b border-neutral-200">
@@ -40,18 +48,51 @@ export default function Header() {
 
           {/* Auth Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link
-              href="/login"
-              className="text-neutral-600 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors"
-            >
-              Sign In
-            </Link>
-            <Link
-              href="/register"
-              className="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
-            >
-              Get Started
-            </Link>
+            {loading ? (
+              <div className="w-8 h-8 animate-spin rounded-full border-2 border-primary-600 border-t-transparent"></div>
+            ) : user ? (
+              <>
+                <span className="text-sm text-neutral-600">
+                  Welcome, {profile?.name || 'User'}
+                </span>
+                {profile?.role === 'admin' && (
+                  <Link
+                    href="/admin"
+                    className="text-neutral-600 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors"
+                  >
+                    Admin
+                  </Link>
+                )}
+                <Link
+                  href="/dashboard"
+                  className="text-neutral-600 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors"
+                >
+                  Dashboard
+                </Link>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleSignOut}
+                >
+                  Sign Out
+                </Button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/auth/login"
+                  className="text-neutral-600 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors"
+                >
+                  Sign In
+                </Link>
+                <Link
+                  href="/auth/register"
+                  className="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+                >
+                  Get Started
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -91,20 +132,56 @@ export default function Header() {
                 </Link>
               ))}
               <div className="border-t border-neutral-200 pt-4 pb-3">
-                <Link
-                  href="/login"
-                  className="text-neutral-600 hover:text-primary-600 block px-3 py-2 text-base font-medium transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Sign In
-                </Link>
-                <Link
-                  href="/register"
-                  className="bg-primary-600 hover:bg-primary-700 text-white block mx-3 mt-2 px-4 py-2 rounded-lg text-base font-medium transition-colors text-center"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Get Started
-                </Link>
+                {loading ? (
+                  <div className="flex justify-center py-4">
+                    <div className="w-6 h-6 animate-spin rounded-full border-2 border-primary-600 border-t-transparent"></div>
+                  </div>
+                ) : user ? (
+                  <>
+                    <div className="px-3 py-2 text-base font-medium text-neutral-600">
+                      Welcome, {profile?.name || 'User'}
+                    </div>
+                    {profile?.role === 'admin' && (
+                      <Link
+                        href="/admin"
+                        className="text-neutral-600 hover:text-primary-600 block px-3 py-2 text-base font-medium transition-colors"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        Admin
+                      </Link>
+                    )}
+                    <Link
+                      href="/dashboard"
+                      className="text-neutral-600 hover:text-primary-600 block px-3 py-2 text-base font-medium transition-colors"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Dashboard
+                    </Link>
+                    <button
+                      onClick={handleSignOut}
+                      className="text-neutral-600 hover:text-primary-600 block w-full text-left px-3 py-2 text-base font-medium transition-colors"
+                    >
+                      Sign Out
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      href="/auth/login"
+                      className="text-neutral-600 hover:text-primary-600 block px-3 py-2 text-base font-medium transition-colors"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Sign In
+                    </Link>
+                    <Link
+                      href="/auth/register"
+                      className="bg-primary-600 hover:bg-primary-700 text-white block mx-3 mt-2 px-4 py-2 rounded-lg text-base font-medium transition-colors text-center"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Get Started
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           </div>
