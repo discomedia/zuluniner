@@ -8,8 +8,8 @@ export default function AboutPage() {
         
         <div className="prose prose-lg max-w-none space-y-6">
           <p>
-            ZuluNiner is a place to list your aircraft and to buy ads. Like planes? So do we. 
-            ZuluNiner is built by pilots (well, a pilot and a copilot) for pilots and plane owners. 
+            ZuluNiner is a place to list your aircraft and to browse ads. Like planes? So do we. 
+            ZuluNiner is built by pilots (well, a pilot and some other guy) for pilots and plane owners. 
             So many other places online to buy and sell planes look like they were built in the 1990s. 
             And they were! We weren&apos;t. We like things to bloody well look good and work.
           </p>
@@ -30,13 +30,13 @@ export default function AboutPage() {
             ZuluNiner was built by Dana Hooshmand and Matt Turzo. Turzo&apos;s a pilot and was the one 
             who came up with the idea (&apos;This will goddamn print money,&apos; he spuriously claimed on a 
             number of occasions), but &apos;founder&apos; is lame, so let&apos;s just call him what he is: Pilot. 
-            Dana&apos;s the Co-Pilot. Now, this may seem unfair as Dana built the whole bloody thing. 
-            But he&apos;s not a pilot, so that&apos;s how the cookie crumbles.
+            Dana&apos;s the Co-Pilot. Now, this may seem unfair as Dana built the whole bloody thing and basically 
+            invented the Internet. But he&apos;s not a pilot, so that&apos;s how the cookie crumbles.
           </p>
           
           <p>
             Turzo and Dana have both worked at second- and third-best organisations in various fields, 
-            and have degrees from universities that were bloody hard to get through and were prestiguous 
+            and have degrees from universities that were bloody hard to get through and were prestigious 
             in their own rights, even if you&apos;ve never heard of them. Turzo has an MBA and Dana has an LLB, 
             but don&apos;t ask either of them to business or law for you, unless you have lots of $$$ or are super cool.
           </p>
