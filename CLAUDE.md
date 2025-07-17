@@ -74,38 +74,142 @@ export default function Page() {
 * Server-side: Use `requireAuth()` or `requireAdmin()` functions directly in page components
 * Client-side: Wrap components with `<ProtectedRoute>` from `@/components/auth/ProtectedRoute`
 
-## Supabase
+## Supabase Database Layer
+
+### Schema and Type Generation
 * Use supabase client (`npx supabase`) to execute commands (to build out or edit the schema)
 * For local development: Use `npm run supabase:start` to start Docker containers, `npm run supabase:stop` to stop them
 * Run `npm run generate-schema` to update the schema in src/api/schema.ts from local database
-* When updating the schema, create new convenience functions in src/api/db.ts to interact with the database
 * Database migrations: Create new .sql files in supabase/migrations/ and run `npm run db:reset` to apply them
 * Local development uses Docker containers - make sure Docker Desktop is running before starting Supabase
 * Authentication: Use middleware for route protection, separate client/server auth functions
 * Database migrations: Always test with `npm run db:reset` after creating new migrations
 
-Use the supabase schema, defining all functions to access the database via db.ts, e.g.
+### Type-Safe Client Initialization
+**CRITICAL**: Always initialize Supabase clients with the Database schema type for full type safety:
+
 ```ts
-async function getUserById(userId: string): Promise<User | null> {
-  const { data, error } = await supabase
-    .from('users')
-    .select('*')
-    .eq('id', userId)
-    .single();
+// src/api/supabase.ts
+import { createClient } from '@supabase/supabase-js';
+import type { Database } from './schema';
 
-  if (error) {
-    console.error('Error fetching user:', error);
-    return null;
-  }
-  return data as User;
-}
+export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey);
 
-export const db = {
-  users: { getUserById },
-  // Add more groupings and functions as needed
+// For server clients
+export const createServiceRoleClient = () => {
+  return createClient<Database>(supabaseUrl, serviceRoleKey);
+};
+```
+
+### Database Convenience Functions
+**NEVER reference supabase directly in components or other files.** Always use the convenience functions defined in `src/api/db.ts`.
+
+#### Function Structure
+Organize database functions by entity with proper TypeScript types:
+
+```ts
+// Define specific return types
+type AircraftWithPhotos = Tables<'aircraft'> & {
+  photos: AircraftPhoto[];
+  user?: Pick<Tables<'users'>, 'name' | 'phone' | 'email'> | null;
 };
 
-Do not reference supabase directly in components or other files. Always use the convenience functions defined in `src/api/db.ts`.
+// Create type-safe functions
+async function getAircraftById(id: string): Promise<AircraftWithPhotos | null> {
+  try {
+    const { data: aircraftData, error: aircraftError } = await supabase
+      .from('aircraft')
+      .select('*')
+      .eq('id', id)
+      .eq('status', 'active')
+      .single();
+
+    if (aircraftError) throw aircraftError;
+    if (!aircraftData) return null;
+
+    // Additional related data queries...
+    
+    return {
+      ...aircraftData,
+      photos: photosData || [],
+      user: userData || null
+    };
+  } catch (error) {
+    console.error('Error in getAircraftById:', error);
+    throw error;
+  }
+}
+
+// Export structured API
+export const db = {
+  aircraft: {
+    getById: getAircraftById,
+    getBySlug: getAircraftBySlug,
+    search: searchAircraft,
+    create: createAircraft,
+    update: updateAircraft,
+    getAll: getAllAircraft,
+    getUserAircraft: getUserAircraft,
+  },
+  photos: {
+    getAircraftPhotos: getAircraftPhotos,
+    uploadAircraftPhoto: uploadAircraftPhoto,
+    uploadMultipleAircraftPhotos: uploadMultipleAircraftPhotos,
+    getPhotoUrl: getPhotoUrl,
+  },
+  users: {
+    getById: getUserById,
+    getProfile: getUserProfile,
+    updateProfile: updateUserProfile,
+    getCount: getUserCount,
+  },
+  blog: {
+    getPosts: getBlogPosts,
+    getPost: getBlogPost,
+  },
+};
+```
+
+#### Type Safety Requirements
+1. **Use Database schema types**: Import `Tables`, `TablesInsert`, `TablesUpdate` from `./schema`
+2. **Create specific return types**: Define clear interfaces for joined data
+3. **Handle nullable fields**: Match database schema nullability (`string | null` vs `string | undefined`)
+4. **Error handling**: Always wrap in try/catch with meaningful error messages
+5. **Client parameter**: Accept optional `SupabaseClient` parameter for server-side operations
+
+#### Adding New Functions
+When adding new database functions:
+
+1. **Define the return type** based on your query structure
+2. **Create the async function** with proper error handling
+3. **Add to the appropriate `db` namespace** (aircraft, users, photos, etc.)
+4. **Update `src/types/index.ts`** if new interfaces are needed
+5. **Test with `npm run build`** to ensure type safety
+
+#### Usage in Components
+```ts
+// ✅ Correct - use db convenience functions
+import { db } from '@/api/db';
+
+const aircraft = await db.aircraft.getById(id);
+const photoUrl = db.photos.getPhotoUrl(photo.storage_path);
+
+// ❌ Never do this - direct supabase usage
+import { supabase } from '@/api/supabase';
+const { data } = await supabase.from('aircraft').select('*');
+```
+
+#### Server-Side Usage
+For server components and API routes, pass the authenticated client:
+
+```ts
+// API routes
+const supabase = await createServerSupabaseClient();
+const aircraft = await db.aircraft.create(aircraftData, supabase);
+
+// Server components
+const supabase = await createServerSupabaseClient();
+const result = await db.aircraft.search(filters, 1, 20);
 ```
 
 ## Project Structure

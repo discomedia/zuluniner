@@ -871,3 +871,179 @@ git add . && git commit -m "..." && git push    # Deploy via GitHub
 - [ ] Performance monitoring alerts
 - [ ] Backup and disaster recovery plan
 - [ ] Documentation for future maintenance
+
+---
+
+## Database Architecture: Type-Safe Supabase Integration ✅
+
+### Overview
+ZuluNiner implements a fully type-safe database layer that eliminates direct Supabase usage throughout the application. All database operations go through centralized convenience functions in `src/api/db.ts`, providing consistent error handling, proper TypeScript integration, and maintainable data access patterns.
+
+### Type-Safe Client Implementation ✅
+
+**✅ Supabase Client Initialization**
+- [x] **Schema-typed clients**: All Supabase clients initialized with `createClient<Database>()` for full type inference
+- [x] **Centralized client management**: Main client in `src/api/supabase.ts` with Database schema typing
+- [x] **Server-side client factory**: Typed service role client creation for admin operations
+- [x] **Auth client integration**: Browser and server auth clients properly typed with Database schema
+
+**✅ Database API Structure**
+```typescript
+// Organized namespace API structure
+export const db = {
+  aircraft: {
+    getById: getAircraftById,
+    getBySlug: getAircraftBySlug,
+    search: searchAircraft,
+    create: createAircraft,
+    update: updateAircraft,
+    getAll: getAllAircraft,
+    getUserAircraft: getUserAircraft,
+  },
+  photos: {
+    getAircraftPhotos: getAircraftPhotos,
+    uploadAircraftPhoto: uploadAircraftPhoto,
+    uploadMultipleAircraftPhotos: uploadMultipleAircraftPhotos,
+    getPhotoUrl: getPhotoUrl,
+  },
+  users: {
+    getById: getUserById,
+    getProfile: getUserProfile,
+    updateProfile: updateUserProfile,
+    getCount: getUserCount,
+  },
+  blog: {
+    getPosts: getBlogPosts,
+    getPost: getBlogPost,
+  },
+};
+```
+
+### Type Safety Implementation ✅
+
+**✅ Schema Type Integration**
+- [x] **Generated types**: All operations use `Tables`, `TablesInsert`, `TablesUpdate` from generated schema
+- [x] **Nullable field handling**: Proper handling of database nullability (`string | null` vs `string | undefined`)
+- [x] **Return type definitions**: Custom types for joined data (`AircraftWithPhotos`, `AircraftWithUser`, etc.)
+- [x] **Type consistency**: Application types updated to match database schema exactly
+
+**✅ Error Handling & Safety**
+- [x] **Consistent error patterns**: All functions use try/catch with meaningful error messages
+- [x] **Transaction support**: Functions accept optional `SupabaseClient` parameter for server-side operations
+- [x] **Null safety**: Proper handling of nullable database fields throughout the application
+- [x] **Compile-time validation**: TypeScript catches schema mismatches at build time
+
+### Usage Patterns ✅
+
+**✅ Component Integration**
+```typescript
+// ✅ Correct usage - type-safe convenience functions
+import { db } from '@/api/db';
+
+const aircraft = await db.aircraft.getById(id);
+const photoUrl = db.photos.getPhotoUrl(photo.storage_path);
+const searchResults = await db.aircraft.search(filters, page, limit);
+
+// ❌ Never allowed - direct supabase usage
+import { supabase } from '@/api/supabase'; // This pattern eliminated
+```
+
+**✅ Server-Side Operations**
+```typescript
+// API routes and server components
+const supabase = await createServerSupabaseClient();
+const aircraft = await db.aircraft.create(aircraftData, supabase);
+const result = await db.aircraft.update(id, updates, supabase);
+```
+
+### Migration Strategy ✅
+
+**✅ Codebase Migration Completed**
+- [x] **Aircraft detail pages**: Migrated to `db.aircraft.getBySlug()` and `db.photos.getPhotoUrl()`
+- [x] **Aircraft listings**: All components use structured `db` API
+- [x] **Photo gallery**: Updated to use convenience photo functions
+- [x] **Admin interfaces**: Server-side operations properly use authenticated clients
+- [x] **Search functionality**: Uses type-safe `db.aircraft.search()` with proper filtering
+- [x] **Component cleanup**: Removed all direct Supabase imports from UI components
+
+### Development Workflow ✅
+
+**✅ Adding New Database Functions**
+
+1. **Define return types** based on query structure and joins:
+```typescript
+type AircraftWithDetails = Tables<'aircraft'> & {
+  photos: AircraftPhoto[];
+  user: Pick<Tables<'users'>, 'name' | 'email'>;
+};
+```
+
+2. **Create type-safe function** with proper error handling:
+```typescript
+async function getAircraftWithDetails(id: string): Promise<AircraftWithDetails | null> {
+  try {
+    const { data, error } = await supabase
+      .from('aircraft')
+      .select(`*, photos:aircraft_photos(*), user:users(name, email)`)
+      .eq('id', id)
+      .single();
+    
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    console.error('Error in getAircraftWithDetails:', error);
+    throw error;
+  }
+}
+```
+
+3. **Add to db namespace** and test:
+```typescript
+export const db = {
+  aircraft: {
+    // ... existing functions
+    getWithDetails: getAircraftWithDetails,
+  },
+  // ... other namespaces
+};
+```
+
+4. **Verify type safety** with `npm run build`
+
+### Benefits Achieved ✅
+
+**✅ Developer Experience**
+- [x] **IntelliSense**: Full autocomplete for table names, column names, and relationships
+- [x] **Type inference**: Return types automatically inferred from database schema
+- [x] **Refactoring safety**: Schema changes automatically propagate type errors
+- [x] **Consistent patterns**: Standardized error handling and data access across application
+
+**✅ Maintainability**
+- [x] **Centralized data layer**: All database logic contained in `src/api/db.ts`
+- [x] **DRY principle**: No duplicate database queries across components
+- [x] **Error consistency**: Unified error handling patterns
+- [x] **Schema sync**: Database changes automatically reflected in TypeScript types
+
+**✅ Production Readiness**
+- [x] **Type safety**: Compile-time validation prevents runtime database errors
+- [x] **Performance**: Optimized queries with proper joins and indexes
+- [x] **Security**: Server-side client passing for authenticated operations
+- [x] **Monitoring**: Consistent error logging for production debugging
+
+### Technical Standards ✅
+
+**✅ Code Quality Requirements**
+- [x] **Schema alignment**: All application types match database schema nullability
+- [x] **Error boundaries**: Proper try/catch wrapping for all database operations
+- [x] **Client management**: Optional client parameters for server-side operations
+- [x] **Type exports**: No `any` or `unknown` types in database layer
+- [x] **Build verification**: All changes verified with `npm run build` before commit
+
+**✅ Future Development Guidelines**
+- Always use `db.*` namespace functions instead of direct Supabase calls
+- Define specific return types for complex joins and data structures
+- Handle nullable database fields appropriately in component interfaces
+- Pass authenticated Supabase clients for server-side operations
+- Test new functions with TypeScript compiler before deployment
+
+This type-safe database architecture provides a robust foundation for scalable development while maintaining full type safety from database to UI components.

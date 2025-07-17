@@ -423,7 +423,17 @@ async function uploadMultipleAircraftPhotos(
 }
 
 function getPhotoUrl(storagePath: string): string {
-  return supabase.storage.from('aircraft-photos').getPublicUrl(storagePath).data.publicUrl;
+  const baseUrl = supabase.storage.from('aircraft-photos').getPublicUrl(storagePath).data.publicUrl;
+  
+  // For local development, replace localhost with current host if needed
+  if (typeof window !== 'undefined' && baseUrl.includes('127.0.0.1')) {
+    const currentHost = window.location.hostname;
+    if (currentHost !== '127.0.0.1' && currentHost !== 'localhost') {
+      return baseUrl.replace('127.0.0.1', currentHost);
+    }
+  }
+  
+  return baseUrl;
 }
 
 // Blog functions
