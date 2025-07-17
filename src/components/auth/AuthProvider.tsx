@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import { createClient } from '@/lib/auth';
 import type { User } from '@supabase/supabase-js';
 import type { Tables } from '@/api/schema';
@@ -39,7 +39,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [loading, setLoading] = useState(true);
   const supabase = createClient();
 
-  const fetchProfile = async (userId: string) => {
+  const fetchProfile = useCallback(async (userId: string) => {
     try {
       const { data: profile } = await supabase
         .from('users')
@@ -52,7 +52,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       console.error('Error fetching profile:', error);
       setProfile(null);
     }
-  };
+  }, [supabase]);
 
   const refreshProfile = async () => {
     if (user) {
@@ -105,7 +105,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     );
 
     return () => subscription.unsubscribe();
-  }, [supabase]);
+  }, [supabase, fetchProfile]);
 
   const value = {
     user,

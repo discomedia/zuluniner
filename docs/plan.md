@@ -7,14 +7,15 @@ ZuluNiner (zuluniner.com) is an aircraft marketplace built with Next.js, React, 
 
 ## Core Project Data
 - **Project Name**: ZuluNiner
-- **Supabase project ID**: bjwlldxavgoxhyyufffy. Use Docker for local development.
+- **Supabase project ID**: bjwlldxavgoxhyyufffy (production Supabase Cloud project)
+- **Local Development**: Docker-based Supabase for development
 - **GitHub Repository**: [discomedia/zuluniner](https://github.com/discomedia/zuluniner)
-- **Domain**: zuluniner.com
+- **Domain**: zuluniner.com (DNS managed via Cloudflare)
 
 ## Tech Stack
 - **Frontend**: Next.js 14+ (App Router), React, TypeScript, Tailwind CSS
 - **Backend**: Supabase (Database, Auth, Storage, Type-safe functions). Use Docker for local development with `npm run supabase:start/stop`. Create migrations in supabase/migrations/ and apply with `npm run db:reset`.
-- **Deployment**: Netlify or Railway (free tier with custom domain)
+- **Deployment**: Vercel (Next.js frontend) + Supabase Cloud (backend services)
 - **Content Generation**: @discomedia/utils package for LLM integration
 - **Image Processing**: Next.js Image Optimization + Supabase Storage
 
@@ -410,7 +411,7 @@ ZuluNiner (zuluniner.com) is an aircraft marketplace built with Next.js, React, 
 **Important**: This project uses Supabase with Docker for local development. For production deployment:
 
 - [ ] **Supabase Cloud Setup**
-  - [ ] Create production Supabase project at [supabase.com](https://supabase.com)
+  - [ ] Use existing production Supabase project (bjwlldxavgoxhyyufffy)
   - [ ] Copy database schema from local Docker setup to cloud
   - [ ] Run migrations: `npx supabase db push` (pushes local schema to cloud)
   - [ ] Update environment variables to point to cloud instance
@@ -426,7 +427,7 @@ ZuluNiner (zuluniner.com) is an aircraft marketplace built with Next.js, React, 
 
 - [ ] **Environment Variables**
   ```
-  NEXT_PUBLIC_SUPABASE_URL=your-project-url.supabase.co
+  NEXT_PUBLIC_SUPABASE_URL=https://bjwlldxavgoxhyyufffy.supabase.co
   NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
   SUPABASE_SERVICE_ROLE_KEY=your-service-role-key (server-side only)
   ```
@@ -437,6 +438,9 @@ ZuluNiner (zuluniner.com) is an aircraft marketplace built with Next.js, React, 
   - [ ] Set up preview deployments for pull requests
   - [ ] Configure production branch (typically `main` or `master`)
   - [ ] Test deployment with staging environment first
+  - [ ] Configure custom domain (zuluniner.com) in Vercel dashboard
+  - [ ] Update DNS in Cloudflare to point to Vercel
+  - [ ] Verify SSL certificate auto-generation
 
 ### Launch Preparation
 - [ ] **Content creation**
