@@ -22,6 +22,8 @@ export const getAircraft = async (id: string) => {
 };
 
 export const searchAircraft = async (filters: SearchFilters, page = 1, limit = 20) => {
+  console.log('🔍 searchAircraft called with filters:', filters, 'page:', page, 'limit:', limit);
+  
   let query = supabase
     .from('aircraft')
     .select(`
@@ -63,16 +65,25 @@ export const searchAircraft = async (filters: SearchFilters, page = 1, limit = 2
   const offset = (page - 1) * limit;
   query = query.range(offset, offset + limit - 1);
 
+  console.log('🗄️ About to execute query...');
   const { data, error, count } = await query;
+  
+  console.log('📋 Query result - data:', data, 'error:', error, 'count:', count);
 
-  if (error) throw error;
+  if (error) {
+    console.error('💥 Supabase query error:', error);
+    throw error;
+  }
 
-  return {
+  const result = {
     aircraft: data || [],
     total: count || 0,
     page,
     limit
   };
+  
+  console.log('📦 Returning result:', result);
+  return result;
 };
 
 export const createAircraft = async (aircraft: TablesInsert<'aircraft'>, client?: SupabaseClient) => {

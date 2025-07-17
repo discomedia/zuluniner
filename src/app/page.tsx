@@ -46,12 +46,18 @@ export default function Home() {
 
   useEffect(() => {
     const fetchFeaturedAircraft = async () => {
+      console.log('🔄 Starting to fetch featured aircraft...');
       try {
+        console.log('📞 Calling searchAircraft with params:', {}, 1, 3);
         const result = await searchAircraft({}, 1, 3);
+        console.log('✅ searchAircraft result:', result);
+        console.log('📊 Aircraft count:', result.aircraft?.length);
         setFeaturedAircraft(result.aircraft);
+        console.log('🎯 Featured aircraft state updated');
       } catch (error) {
-        console.error('Error fetching featured aircraft:', error);
+        console.error('❌ Error fetching featured aircraft:', error);
       } finally {
+        console.log('🏁 Setting loading to false');
         setLoading(false);
       }
     };
@@ -129,6 +135,7 @@ export default function Home() {
             <div className="text-center py-12">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
               <p className="text-neutral-600">Loading featured aircraft...</p>
+              <p className="text-xs text-neutral-400 mt-2">Loading state: {loading.toString()}</p>
             </div>
           ) : featuredAircraft.length === 0 ? (
             <div className="text-center py-12">
