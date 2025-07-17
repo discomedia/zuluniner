@@ -84,6 +84,30 @@ export default function Page() {
 * Authentication: Use middleware for route protection, separate client/server auth functions
 * Database migrations: Always test with `npm run db:reset` after creating new migrations
 
+Use the supabase schema, defining all functions to access the database via db.ts, e.g.
+```ts
+async function getUserById(userId: string): Promise<User | null> {
+  const { data, error } = await supabase
+    .from('users')
+    .select('*')
+    .eq('id', userId)
+    .single();
+
+  if (error) {
+    console.error('Error fetching user:', error);
+    return null;
+  }
+  return data as User;
+}
+
+export const db = {
+  users: { getUserById },
+  // Add more groupings and functions as needed
+};
+
+Do not reference supabase directly in components or other files. Always use the convenience functions defined in `src/api/db.ts`.
+```
+
 ## Project Structure
 
 ### Source Directory (src/)

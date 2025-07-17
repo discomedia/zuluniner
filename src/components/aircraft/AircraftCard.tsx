@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { MapPin, Calendar, Clock, Plane } from 'lucide-react';
-import { supabase } from '@/api/supabase';
+import { db } from '@/api/db';
 import type { AircraftCardProps } from '@/types';
 
 function formatPrice(price: number): string {
@@ -20,7 +20,7 @@ function formatHours(hours: number | null): string {
 
 export default function AircraftCard({ aircraft, primaryPhoto }: AircraftCardProps) {
   const photoUrl = primaryPhoto ? 
-    supabase.storage.from('aircraft-photos').getPublicUrl(primaryPhoto.storage_path).data.publicUrl : 
+    db.photos.getPhotoUrl(primaryPhoto.storage_path) : 
     null;
 
   return (

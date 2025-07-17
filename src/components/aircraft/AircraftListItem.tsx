@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { MapPin, Calendar, Clock, Plane, Phone, Mail } from 'lucide-react';
-import { supabase } from '@/api/supabase';
+import { db } from '@/api/db';
 import type { AircraftCardProps } from '@/types';
 import Button from '@/components/ui/Button';
 
@@ -22,14 +22,14 @@ function formatHours(hours: number | null): string {
 interface AircraftListItemProps extends AircraftCardProps {
   seller?: {
     name: string;
-    phone?: string;
+    phone?: string | null;
     email: string;
-  };
+  } | null;
 }
 
 export default function AircraftListItem({ aircraft, primaryPhoto, seller }: AircraftListItemProps) {
   const photoUrl = primaryPhoto ? 
-    supabase.storage.from('aircraft-photos').getPublicUrl(primaryPhoto.storage_path).data.publicUrl : 
+    db.photos.getPhotoUrl(primaryPhoto.storage_path) : 
     null;
 
   return (

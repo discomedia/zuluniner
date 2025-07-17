@@ -1,23 +1,18 @@
-import { requireAuth, createServerSupabaseClient } from '@/lib/auth-server';
+import { requireAuth } from '@/lib/auth-server';
 import ContainerLayout from '@/components/layouts/ContainerLayout';
 import PageHeader from '@/components/layouts/PageHeader';
 import { Card, CardHeader, CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Link from 'next/link';
+import { db } from '@/api/db';
 
 // Get user dashboard data
 async function getUserDashboardData(userId: string) {
-  const supabase = await createServerSupabaseClient();
-  
-  // Get user's aircraft
-  const { data: aircraft, count } = await supabase
-    .from('aircraft')
-    .select('*', { count: 'exact' })
-    .eq('user_id', userId)
-    .order('created_at', { ascending: false });
+  // Get user's aircraft using db convenience function
+  const aircraft = await db.aircraft.getUserAircraft(userId);
     
   const stats = {
-    totalListings: count || 0,
+    totalListings: aircraft.length,
     activeListings: aircraft?.filter(a => a.status === 'active').length || 0,
     draftListings: aircraft?.filter(a => a.status === 'draft').length || 0,
     soldListings: aircraft?.filter(a => a.status === 'sold').length || 0,
@@ -30,13 +25,8 @@ export default async function DashboardPage() {
   const user = await requireAuth();
   const { aircraft: _aircraft, stats } = await getUserDashboardData(user.id);
   
-  // Get user profile separately
-  const supabase = await createServerSupabaseClient();
-  const { data: profile } = await supabase
-    .from('users')
-    .select('*')
-    .eq('id', user.id)
-    .single();
+  // Get user profile using db convenience function
+  const profile = await db.users.getProfile(user.id);
 
   return (
     <ContainerLayout>

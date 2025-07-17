@@ -1,92 +1,209 @@
 // Database convenience functions for ZuluNiner
 import { supabase } from './supabase';
 import type { AircraftPhoto, UserProfile, SearchFilters } from '@/types';
-import type { TablesInsert, TablesUpdate, Database } from './schema';
+import type { TablesInsert, TablesUpdate, Database, Tables } from './schema';
 import type { SupabaseClient } from '@supabase/supabase-js';
 
-// Aircraft functions
-export const getAircraft = async (id: string) => {
-  const { data, error } = await supabase
-    .from('aircraft')
-    .select(`
-      *,
-      photos:aircraft_photos(*),
-      user:users(name, company, phone)
-    `)
-    .eq('id', id)
-    .eq('status', 'active')
-    .single();
-
-  if (error) throw error;
-  return data;
+// Types for function return values
+type AircraftWithPhotos = Tables<'aircraft'> & {
+  photos: AircraftPhoto[];
+  user?: Pick<Tables<'users'>, 'name' | 'phone' | 'email'> | null;
 };
 
-export const searchAircraft = async (filters: SearchFilters, page = 1, limit = 20) => {
-  console.log('🔍 searchAircraft called with filters:', filters, 'page:', page, 'limit:', limit);
-  
-  let query = supabase
-    .from('aircraft')
-    .select(`
-      *,
-      photos:aircraft_photos(*)
-    `, { count: 'exact' })
-    .eq('status', 'active');
+type AircraftWithUser = Tables<'aircraft'> & {
+  photos: AircraftPhoto[];
+  user: Pick<Tables<'users'>, 'name' | 'company' | 'phone' | 'email'>;
+};
 
-  // Apply filters
-  if (filters.query) {
-    query = query.textSearch('title,description', filters.query);
-  }
+type AircraftWithUserForAdmin = Tables<'aircraft'> & {
+  photos: AircraftPhoto[];
+  user: Pick<Tables<'users'>, 'name' | 'email' | 'company'>;
+};
 
-  if (filters.priceMin) {
-    query = query.gte('price', filters.priceMin);
-  }
+type SearchResult = {
+  aircraft: AircraftWithPhotos[];
+  total: number;
+  page: number;
+  limit: number;
+};
 
-  if (filters.priceMax) {
-    query = query.lte('price', filters.priceMax);
-  }
+type BlogPostWithAuthor = Tables<'blog_posts'> & {
+  author: Pick<Tables<'users'>, 'name' | 'company'>;
+};
 
-  if (filters.yearMin) {
-    query = query.gte('year', filters.yearMin);
-  }
+type BlogPostsResult = {
+  posts: Array<Tables<'blog_posts'> & { author: Pick<Tables<'users'>, 'name'> }>;
+  total: number;
+  page: number;
+  limit: number;
+};
 
-  if (filters.yearMax) {
-    query = query.lte('year', filters.yearMax);
-  }
+// Aircraft functions
+async function getAircraftById(id: string): Promise<AircraftWithPhotos | null> {
+  try {
+    const { data: aircraftData, error: aircraftError } = await supabase
+      .from('aircraft')
+      .select('*')
+      .eq('id', id)
+      .eq('status', 'active')
+      .single();
 
-  if (filters.make) {
-    query = query.eq('make', filters.make);
-  }
+    if (aircraftError) throw aircraftError;
+    if (!aircraftData) return null;
 
-  if (filters.model) {
-    query = query.eq('model', filters.model);
-  }
+    const { data: photosData, error: photosError } = await supabase
+      .from('aircraft_photos')
+      .select('*')
+      .eq('aircraft_id', id)
+      .order('display_order');
 
-  // Pagination
-  const offset = (page - 1) * limit;
-  query = query.range(offset, offset + limit - 1);
+    if (photosError) {
+      console.error('⚠️ Photos query error (non-critical):', photosError);
+    }
 
-  console.log('🗄️ About to execute query...');
-  const { data, error, count } = await query;
-  
-  console.log('📋 Query result - data:', data, 'error:', error, 'count:', count);
+    const { data: userData, error: userError } = await supabase
+      .from('users')
+      .select('name, phone, email')
+      .eq('id', aircraftData.user_id)
+      .single();
 
-  if (error) {
-    console.error('💥 Supabase query error:', error);
+    if (userError) {
+      console.error('⚠️ User query error (non-critical):', userError);
+    }
+
+    return {
+      ...aircraftData,
+      photos: photosData || [],
+      user: userData || null
+    };
+  } catch (error) {
+    console.error('💥 Error in getAircraftById:', error);
     throw error;
   }
+}
 
-  const result = {
-    aircraft: data || [],
-    total: count || 0,
-    page,
-    limit
-  };
+async function getAircraftBySlug(slug: string): Promise<AircraftWithUser | null> {
+  try {
+    const { data, error } = await supabase
+      .from('aircraft')
+      .select(`
+        *,
+        photos:aircraft_photos(*),
+        user:users(name, company, phone, email)
+      `)
+      .eq('slug', slug)
+      .eq('status', 'active')
+      .single();
+
+    if (error || !data) return null;
+    return data as AircraftWithUser;
+  } catch (error) {
+    console.error('💥 Error in getAircraftBySlug:', error);
+    throw error;
+  }
+}
+
+async function searchAircraft(filters: SearchFilters, page = 1, limit = 20): Promise<SearchResult> {
+  console.log('🔍 searchAircraft called with filters:', filters, 'page:', page, 'limit:', limit);
   
-  console.log('📦 Returning result:', result);
-  return result;
-};
+  try {
+    let query = supabase
+      .from('aircraft')
+      .select('*', { count: 'exact' })
+      .eq('status', 'active');
 
-export const createAircraft = async (aircraft: TablesInsert<'aircraft'>, client?: SupabaseClient) => {
+    // Apply filters
+    if (filters.query) {
+      query = query.or(`title.ilike.%${filters.query}%,description.ilike.%${filters.query}%,make.ilike.%${filters.query}%,model.ilike.%${filters.query}%`);
+    }
+
+    if (filters.priceMin) {
+      query = query.gte('price', filters.priceMin);
+    }
+
+    if (filters.priceMax) {
+      query = query.lte('price', filters.priceMax);
+    }
+
+    if (filters.yearMin) {
+      query = query.gte('year', filters.yearMin);
+    }
+
+    if (filters.yearMax) {
+      query = query.lte('year', filters.yearMax);
+    }
+
+    if (filters.make) {
+      query = query.eq('make', filters.make);
+    }
+
+    if (filters.model) {
+      query = query.eq('model', filters.model);
+    }
+
+    query = query.order('created_at', { ascending: false });
+
+    const offset = (page - 1) * limit;
+    query = query.range(offset, offset + limit - 1);
+
+    console.log('🗄️ About to execute aircraft query...');
+    const { data: aircraftData, error: aircraftError, count } = await query;
+    
+    if (aircraftError) {
+      console.error('💥 Aircraft query error:', aircraftError);
+      throw aircraftError;
+    }
+
+    console.log('📋 Aircraft query result - count:', count, 'data length:', aircraftData?.length);
+
+    if (!aircraftData || aircraftData.length === 0) {
+      console.log('📋 No aircraft found');
+      return {
+        aircraft: [],
+        total: count || 0,
+        page,
+        limit
+      };
+    }
+
+    const aircraftIds = aircraftData.map(aircraft => aircraft.id);
+    
+    console.log('📷 Fetching photos for aircraft IDs:', aircraftIds);
+    
+    const { data: photosData, error: photosError } = await supabase
+      .from('aircraft_photos')
+      .select('*')
+      .in('aircraft_id', aircraftIds)
+      .order('display_order');
+
+    if (photosError) {
+      console.error('⚠️ Photos query error (non-critical):', photosError);
+    }
+
+    console.log('📷 Photos fetched:', photosData?.length || 0);
+
+    const aircraftWithPhotos = aircraftData.map(aircraft => ({
+      ...aircraft,
+      photos: photosData?.filter(photo => photo.aircraft_id === aircraft.id) || []
+    }));
+
+    const result = {
+      aircraft: aircraftWithPhotos,
+      total: count || 0,
+      page,
+      limit
+    };
+    
+    console.log('📦 Returning result with', result.aircraft.length, 'aircraft');
+    return result;
+    
+  } catch (error) {
+    console.error('💥 Unexpected error in searchAircraft:', error);
+    throw error;
+  }
+}
+
+async function createAircraft(aircraft: TablesInsert<'aircraft'>, client?: SupabaseClient): Promise<Tables<'aircraft'>> {
   const supabaseClient = client || supabase;
   const { data, error } = await supabaseClient
     .from('aircraft')
@@ -96,9 +213,9 @@ export const createAircraft = async (aircraft: TablesInsert<'aircraft'>, client?
 
   if (error) throw error;
   return data;
-};
+}
 
-export const updateAircraft = async (id: string, updates: TablesUpdate<'aircraft'>, client?: SupabaseClient) => {
+async function updateAircraft(id: string, updates: TablesUpdate<'aircraft'>, client?: SupabaseClient): Promise<Tables<'aircraft'>> {
   const supabaseClient = client || supabase;
   const { data, error } = await supabaseClient
     .from('aircraft')
@@ -109,10 +226,59 @@ export const updateAircraft = async (id: string, updates: TablesUpdate<'aircraft
 
   if (error) throw error;
   return data;
-};
+}
+
+async function getAllAircraft(page = 1, limit = 20): Promise<{ aircraft: Tables<'aircraft'>[]; total: number; page: number; limit: number }> {
+  const offset = (page - 1) * limit;
+  const { data, error, count } = await supabase
+    .from('aircraft')
+    .select('*', { count: 'exact' })
+    .order('created_at', { ascending: false })
+    .range(offset, offset + limit - 1);
+
+  if (error) throw error;
+
+  return {
+    aircraft: data || [],
+    total: count || 0,
+    page,
+    limit
+  };
+}
+
+async function getAllAircraftForAdmin(client?: SupabaseClient): Promise<{ aircraft: AircraftWithUserForAdmin[]; total: number }> {
+  const supabaseClient = client || supabase;
+  
+  const { data, error, count } = await supabaseClient
+    .from('aircraft')
+    .select(`
+      *,
+      photos:aircraft_photos(*),
+      user:users(name, email, company)
+    `, { count: 'exact' })
+    .order('created_at', { ascending: false });
+
+  if (error) throw error;
+
+  return {
+    aircraft: data || [],
+    total: count || 0,
+  };
+}
+
+async function getUserAircraft(userId: string): Promise<Tables<'aircraft'>[]> {
+  const { data, error } = await supabase
+    .from('aircraft')
+    .select('*')
+    .eq('user_id', userId)
+    .order('created_at', { ascending: false });
+
+  if (error) throw error;
+  return data || [];
+}
 
 // Photo functions
-export const getAircraftPhotos = async (aircraftId: string) => {
+async function getAircraftPhotos(aircraftId: string): Promise<AircraftPhoto[]> {
   const { data, error } = await supabase
     .from('aircraft_photos')
     .select('*')
@@ -121,24 +287,22 @@ export const getAircraftPhotos = async (aircraftId: string) => {
 
   if (error) throw error;
   return data || [];
-};
+}
 
-export const uploadAircraftPhoto = async (
+async function uploadAircraftPhoto(
   aircraftId: string,
   file: File,
   altText: string,
   isPrimary = false,
   supabaseClient?: SupabaseClient<Database>
-): Promise<AircraftPhoto> => {
+): Promise<AircraftPhoto> {
   const client = supabaseClient || supabase;
   
-  // Generate SEO-friendly filename
   const fileExt = file.name.split('.').pop()?.toLowerCase();
   const timestamp = Date.now();
   const safeName = file.name.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
   const fileName = `aircraft-${aircraftId}/${timestamp}-${safeName}.${fileExt}`;
 
-  // Upload to Supabase Storage
   const { error: uploadError } = await client.storage
     .from('aircraft-photos')
     .upload(fileName, file, {
@@ -148,7 +312,6 @@ export const uploadAircraftPhoto = async (
 
   if (uploadError) throw uploadError;
 
-  // Get the next display order
   const { count } = await client
     .from('aircraft_photos')
     .select('*', { count: 'exact', head: true })
@@ -156,7 +319,6 @@ export const uploadAircraftPhoto = async (
 
   const displayOrder = (count || 0) + 1;
 
-  // If this is primary, unset other primary photos
   if (isPrimary) {
     await client
       .from('aircraft_photos')
@@ -164,7 +326,6 @@ export const uploadAircraftPhoto = async (
       .eq('aircraft_id', aircraftId);
   }
 
-  // Create photo record
   const { data, error } = await client
     .from('aircraft_photos')
     .insert({
@@ -179,29 +340,26 @@ export const uploadAircraftPhoto = async (
 
   if (error) throw error;
   return data;
-};
+}
 
-export const uploadMultipleAircraftPhotos = async (
+async function uploadMultipleAircraftPhotos(
   aircraftId: string,
   photos: Array<{ file: File; altText?: string; caption?: string }>,
   supabaseClient?: SupabaseClient<Database>
-): Promise<AircraftPhoto[]> => {
+): Promise<AircraftPhoto[]> {
   const client = supabaseClient || supabase;
   const uploadedPhotos: AircraftPhoto[] = [];
 
   try {
-    // Upload photos sequentially to maintain order
     for (let i = 0; i < photos.length; i++) {
       const { file, altText = '', caption } = photos[i];
-      const isPrimary = i === 0; // First photo is primary
+      const isPrimary = i === 0;
 
-      // Generate SEO-friendly filename
       const fileExt = file.name.split('.').pop()?.toLowerCase();
-      const timestamp = Date.now() + i; // Add index to ensure unique timestamps
+      const timestamp = Date.now() + i;
       const safeName = file.name.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
       const fileName = `aircraft-${aircraftId}/${timestamp}-${safeName}.${fileExt}`;
 
-      // Upload to Supabase Storage
       const { error: uploadError } = await client.storage
         .from('aircraft-photos')
         .upload(fileName, file, {
@@ -211,10 +369,9 @@ export const uploadMultipleAircraftPhotos = async (
 
       if (uploadError) {
         console.error(`Failed to upload photo ${i + 1}:`, uploadError);
-        continue; // Skip this photo but continue with others
+        continue;
       }
 
-      // If this is primary, unset other primary photos
       if (isPrimary) {
         await client
           .from('aircraft_photos')
@@ -222,7 +379,6 @@ export const uploadMultipleAircraftPhotos = async (
           .eq('aircraft_id', aircraftId);
       }
 
-      // Create photo record
       const { data, error } = await client
         .from('aircraft_photos')
         .insert({
@@ -238,7 +394,6 @@ export const uploadMultipleAircraftPhotos = async (
 
       if (error) {
         console.error(`Failed to create photo record ${i + 1}:`, error);
-        // Try to clean up uploaded file
         await client.storage
           .from('aircraft-photos')
           .remove([fileName]);
@@ -250,7 +405,6 @@ export const uploadMultipleAircraftPhotos = async (
 
     return uploadedPhotos;
   } catch (error) {
-    // Cleanup: remove any successfully uploaded photos
     for (const photo of uploadedPhotos) {
       try {
         await client.storage
@@ -266,10 +420,14 @@ export const uploadMultipleAircraftPhotos = async (
     }
     throw error;
   }
-};
+}
+
+function getPhotoUrl(storagePath: string): string {
+  return supabase.storage.from('aircraft-photos').getPublicUrl(storagePath).data.publicUrl;
+}
 
 // Blog functions
-export const getBlogPosts = async (published = true, page = 1, limit = 10) => {
+async function getBlogPosts(published = true, page = 1, limit = 10): Promise<BlogPostsResult> {
   let query = supabase
     .from('blog_posts')
     .select(`
@@ -295,9 +453,9 @@ export const getBlogPosts = async (published = true, page = 1, limit = 10) => {
     page,
     limit
   };
-};
+}
 
-export const getBlogPost = async (slug: string) => {
+async function getBlogPost(slug: string): Promise<BlogPostWithAuthor | null> {
   const { data, error } = await supabase
     .from('blog_posts')
     .select(`
@@ -310,10 +468,24 @@ export const getBlogPost = async (slug: string) => {
 
   if (error) throw error;
   return data;
-};
+}
 
 // User functions
-export const getUserProfile = async (userId: string): Promise<UserProfile | null> => {
+async function getUserById(userId: string): Promise<Tables<'users'> | null> {
+  const { data, error } = await supabase
+    .from('users')
+    .select('*')
+    .eq('id', userId)
+    .single();
+
+  if (error) {
+    console.error('Error fetching user:', error);
+    return null;
+  }
+  return data;
+}
+
+async function getUserProfile(userId: string): Promise<UserProfile | null> {
   const { data, error } = await supabase
     .from('users')
     .select('*')
@@ -326,9 +498,9 @@ export const getUserProfile = async (userId: string): Promise<UserProfile | null
   }
 
   return data;
-};
+}
 
-export const updateUserProfile = async (userId: string, updates: Partial<UserProfile>) => {
+async function updateUserProfile(userId: string, updates: Partial<UserProfile>): Promise<Tables<'users'>> {
   const { data, error } = await supabase
     .from('users')
     .update(updates)
@@ -338,4 +510,56 @@ export const updateUserProfile = async (userId: string, updates: Partial<UserPro
 
   if (error) throw error;
   return data;
+}
+
+async function getUserCount(): Promise<number> {
+  const { count, error } = await supabase
+    .from('users')
+    .select('*', { count: 'exact', head: true });
+
+  if (error) throw error;
+  return count || 0;
+}
+
+// Export structured API
+export const db = {
+  aircraft: {
+    getById: getAircraftById,
+    getBySlug: getAircraftBySlug,
+    search: searchAircraft,
+    create: createAircraft,
+    update: updateAircraft,
+    getAll: getAllAircraft,
+    getAllForAdmin: getAllAircraftForAdmin,
+    getUserAircraft: getUserAircraft,
+  },
+  photos: {
+    getAircraftPhotos: getAircraftPhotos,
+    uploadAircraftPhoto: uploadAircraftPhoto,
+    uploadMultipleAircraftPhotos: uploadMultipleAircraftPhotos,
+    getPhotoUrl: getPhotoUrl,
+  },
+  blog: {
+    getPosts: getBlogPosts,
+    getPost: getBlogPost,
+  },
+  users: {
+    getById: getUserById,
+    getProfile: getUserProfile,
+    updateProfile: updateUserProfile,
+    getCount: getUserCount,
+  },
 };
+
+// Legacy exports for backward compatibility (will be removed)
+export const getAircraft = getAircraftById;
+export { searchAircraft };
+export { createAircraft };
+export { updateAircraft };
+export { getAircraftPhotos };
+export { uploadAircraftPhoto };
+export { uploadMultipleAircraftPhotos };
+export { getBlogPosts };
+export { getBlogPost };
+export { getUserProfile };
+export { updateUserProfile };

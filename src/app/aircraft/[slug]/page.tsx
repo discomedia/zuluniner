@@ -2,8 +2,7 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import { Phone, Mail, MapPin, Calendar, Clock, Settings, Plane } from 'lucide-react';
-// import { getAircraft } from '@/api/db';
-import { supabase } from '@/api/supabase';
+import { db } from '@/api/db';
 import Button from '@/components/ui/Button';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import PhotoGallery from '@/components/aircraft/PhotoGallery';
@@ -19,19 +18,7 @@ interface PageProps {
 }
 
 async function getAircraftBySlug(slug: string) {
-  const { data, error } = await supabase
-    .from('aircraft')
-    .select(`
-      *,
-      photos:aircraft_photos(*),
-      user:users(name, company, phone, email)
-    `)
-    .eq('slug', slug)
-    .eq('status', 'active')
-    .single();
-
-  if (error || !data) return null;
-  return data;
+  return await db.aircraft.getBySlug(slug);
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -44,9 +31,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const primaryPhoto = aircraft.photos?.find((p: { is_primary: boolean }) => p.is_primary) || aircraft.photos?.[0];
+  const primaryPhoto = aircraft.photos?.find((p) => p.is_primary === true) || aircraft.photos?.[0];
   const photoUrl = primaryPhoto ? 
-    supabase.storage.from('aircraft-photos').getPublicUrl(primaryPhoto.storage_path).data.publicUrl : 
+    db.photos.getPhotoUrl(primaryPhoto.storage_path) : 
     undefined;
 
   return {
@@ -89,10 +76,10 @@ export default async function AircraftDetailPage({ params }: PageProps) {
     notFound();
   }
 
-  const primaryPhoto = aircraft.photos?.find((p: { is_primary: boolean }) => p.is_primary) || aircraft.photos?.[0];
+  const primaryPhoto = aircraft.photos?.find((p) => p.is_primary === true) || aircraft.photos?.[0];
   // const remainingPhotos = aircraft.photos?.filter((p) => !p.is_primary) || [];
   const primaryPhotoUrl = primaryPhoto ? 
-    supabase.storage.from('aircraft-photos').getPublicUrl(primaryPhoto.storage_path).data.publicUrl : 
+    db.photos.getPhotoUrl(primaryPhoto.storage_path) : 
     undefined;
 
   const breadcrumbItems = [
@@ -114,16 +101,7 @@ export default async function AircraftDetailPage({ params }: PageProps) {
   return (
     <>
       <AircraftStructuredData 
-        aircraft={{
-          ...aircraft,
-          location: {
-            airport_code: aircraft.airport_code,
-            city: aircraft.city,
-            country: aircraft.country,
-            latitude: aircraft.latitude,
-            longitude: aircraft.longitude,
-          }
-        }} 
+        aircraft={aircraft} 
         primaryPhotoUrl={primaryPhotoUrl}
       />
       
@@ -138,7 +116,7 @@ export default async function AircraftDetailPage({ params }: PageProps) {
             <div className="relative aspect-[4/3] bg-gray-100 rounded-lg overflow-hidden">
               {primaryPhoto ? (
                 <Image
-                  src={supabase.storage.from('aircraft-photos').getPublicUrl(primaryPhoto.storage_path).data.publicUrl}
+                  src={db.photos.getPhotoUrl(primaryPhoto.storage_path)}
                   alt={primaryPhoto.alt_text}
                   fill
                   className="object-cover"

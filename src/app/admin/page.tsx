@@ -1,23 +1,18 @@
-import { requireAdmin, createServerSupabaseClient } from '@/lib/auth-server';
+import { requireAdmin } from '@/lib/auth-server';
 import ContainerLayout from '@/components/layouts/ContainerLayout';
 import PageHeader from '@/components/layouts/PageHeader';
 import { Card, CardHeader, CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Link from 'next/link';
+import { db } from '@/api/db';
 
 // Get dashboard statistics
 async function getDashboardStats() {
-  const supabase = await createServerSupabaseClient();
+  // Get user count using db convenience function
+  const userCount = await db.users.getCount();
   
-  // Get user count
-  const { count: userCount } = await supabase
-    .from('users')
-    .select('*', { count: 'exact', head: true });
-  
-  // Get aircraft counts by status
-  const { data: aircraftData } = await supabase
-    .from('aircraft')
-    .select('status');
+  // Get all aircraft to calculate stats by status
+  const { aircraft: aircraftData } = await db.aircraft.getAll(1, 1000); // Get all for stats
   
   const aircraftStats = {
     total: aircraftData?.length || 0,

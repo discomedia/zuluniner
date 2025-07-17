@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Grid, List, Filter } from 'lucide-react';
-import { searchAircraft } from '@/api/db';
+import { db } from '@/api/db';
 import type { Aircraft, AircraftPhoto, SearchFilters } from '@/types';
 import Button from '@/components/ui/Button';
 import SearchBar from '@/components/ui/SearchBar';
@@ -23,9 +23,9 @@ interface AircraftWithPhotos extends Aircraft {
   photos?: AircraftPhoto[];
   user?: {
     name: string;
-    phone?: string;
+    phone?: string | null;
     email: string;
-  };
+  } | null;
 }
 
 export default function AircraftListingsContent() {
@@ -78,23 +78,9 @@ export default function AircraftListingsContent() {
       setError(null);
 
       try {
-        const result = await searchAircraft(filters, currentPage, itemsPerPage);
+        const result = await db.aircraft.search(filters, currentPage, itemsPerPage);
         
-        // Transform the data to match our interface
-        const transformedAircraft = result.aircraft.map((item) => ({
-          ...item,
-          location: {
-            airport_code: item.airport_code,
-            city: item.city,
-            country: item.country,
-            latitude: item.latitude,
-            longitude: item.longitude,
-          },
-          photos: item.photos || [],
-          user: item.user,
-        }));
-
-        setAircraft(transformedAircraft);
+        setAircraft(result.aircraft);
         setTotalItems(result.total);
       } catch (error) {
         console.error('Error fetching aircraft:', error);

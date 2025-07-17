@@ -1,29 +1,16 @@
-import { requireAdmin } from '@/lib/auth-server';
+import { requireAdmin, createServerSupabaseClient } from '@/lib/auth-server';
 import ContainerLayout from '@/components/layouts/ContainerLayout';
 import PageHeader from '@/components/layouts/PageHeader';
 import { Card, CardHeader, CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Link from 'next/link';
+import { db } from '@/api/db';
+
 // Get all aircraft (including drafts) for admin view
 async function getAllAircraft() {
-  // Get all aircraft with all statuses for admin view
-  const { createServerSupabaseClient } = await import('@/lib/auth-server');
+  // Get all aircraft with all statuses for admin view using db convenience function
   const supabase = await createServerSupabaseClient();
-  
-  const { data, error, count } = await supabase
-    .from('aircraft')
-    .select(`
-      *,
-      photos:aircraft_photos(*)
-    `, { count: 'exact' })
-    .order('created_at', { ascending: false });
-
-  if (error) throw error;
-
-  return {
-    aircraft: data || [],
-    total: count || 0,
-  };
+  return await db.aircraft.getAllForAdmin(supabase);
 }
 
 export default async function AdminAircraftPage() {

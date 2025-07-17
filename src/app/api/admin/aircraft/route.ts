@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerSupabaseClient, requireAdmin } from '@/lib/auth-server';
-import { createAircraft, uploadMultipleAircraftPhotos } from '@/api/db';
+import { createAircraft, uploadMultipleAircraftPhotos, db } from '@/api/db';
 
 export async function POST(request: NextRequest) {
   try {
@@ -141,24 +141,12 @@ export async function GET() {
 
     const supabase = await createServerSupabaseClient();
     
-    // Get all aircraft for admin view (including drafts)
-    const { data: aircraft, error, count } = await supabase
-      .from('aircraft')
-      .select(`
-        *,
-        photos:aircraft_photos(*),
-        user:users(name, email, company)
-      `, { count: 'exact' })
-      .order('created_at', { ascending: false });
-
-    if (error) throw error;
+    // Get all aircraft for admin view using db convenience function
+    const result = await db.aircraft.getAllForAdmin(supabase);
 
     return NextResponse.json({
       success: true,
-      data: {
-        aircraft: aircraft || [],
-        total: count || 0,
-      },
+      data: result,
     });
 
   } catch (error) {

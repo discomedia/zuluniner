@@ -185,7 +185,7 @@ export default function AircraftEditForm({ aircraft }: AircraftEditFormProps) {
 
             <Select
               label="Status"
-              value={formData.status}
+              value={formData.status || 'draft'}
               onChange={(e) => updateFormData({ status: e.target.value as 'draft' | 'active' | 'pending' | 'sold' })}
               required
             >

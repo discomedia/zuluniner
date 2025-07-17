@@ -3,25 +3,25 @@
 export interface Aircraft {
   id: string;
   title: string;
-  description: string;
+  description: string | null;
   price: number;
   year: number;
   make: string;
   model: string;
-  hours: number;
-  engine_type: string;
-  avionics: string;
-  airport_code: string;
-  city: string;
-  country: string;
-  latitude?: number;
-  longitude?: number;
-  status: AircraftStatus;
+  hours: number | null;
+  engine_type: string | null;
+  avionics: string | null;
+  airport_code: string | null;
+  city: string | null;
+  country: string | null;
+  latitude?: number | null;
+  longitude?: number | null;
+  status: string | null;
   slug: string;
-  meta_description?: string;
+  meta_description?: string | null;
   user_id: string;
-  created_at: string;
-  updated_at: string;
+  created_at: string | null;
+  updated_at: string | null;
 }
 
 export interface AircraftLocation {
@@ -39,22 +39,22 @@ export interface AircraftPhoto {
   aircraft_id: string;
   storage_path: string;
   alt_text: string;
-  caption?: string;
+  caption?: string | null;
   display_order: number;
-  is_primary: boolean;
-  created_at: string;
+  is_primary: boolean | null;
+  created_at: string | null;
 }
 
 export interface UserProfile {
   id: string;
   name: string;
   email: string;
-  company?: string;
-  phone?: string;
-  location?: string;
-  role: UserRole;
-  created_at: string;
-  updated_at: string;
+  company?: string | null;
+  phone?: string | null;
+  location?: string | null;
+  role: string | null;
+  created_at: string | null;
+  updated_at: string | null;
 }
 
 export type UserRole = 'admin' | 'seller' | 'buyer';

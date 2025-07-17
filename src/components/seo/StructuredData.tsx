@@ -6,8 +6,8 @@ interface AircraftStructuredDataProps {
     photos?: AircraftPhoto[];
     user?: {
       name: string;
-      company?: string;
-      phone?: string;
+      company?: string | null;
+      phone?: string | null;
       email: string;
     };
   };

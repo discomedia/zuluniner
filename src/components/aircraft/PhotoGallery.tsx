@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
-import { supabase } from '@/api/supabase';
+import { db } from '@/api/db';
 import type { AircraftPhoto } from '@/types';
 import Modal from '@/components/ui/Modal';
 
@@ -80,7 +80,7 @@ export default function PhotoGallery({ photos }: PhotoGalleryProps) {
             className="relative aspect-square bg-gray-100 rounded-lg overflow-hidden hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
             <Image
-              src={supabase.storage.from('aircraft-photos').getPublicUrl(photo.storage_path).data.publicUrl}
+              src={db.photos.getPhotoUrl(photo.storage_path)}
               alt={photo.alt_text}
               fill
               className="object-cover"
@@ -136,7 +136,7 @@ export default function PhotoGallery({ photos }: PhotoGalleryProps) {
             {/* Photo */}
             <div className="relative w-full h-[80vh] bg-black rounded-lg overflow-hidden">
               <Image
-                src={supabase.storage.from('aircraft-photos').getPublicUrl(sortedPhotos[selectedPhotoIndex].storage_path).data.publicUrl}
+                src={db.photos.getPhotoUrl(sortedPhotos[selectedPhotoIndex].storage_path)}
                 alt={sortedPhotos[selectedPhotoIndex].alt_text}
                 fill
                 className="object-contain"
