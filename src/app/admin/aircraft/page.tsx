@@ -5,6 +5,7 @@ import { Card, CardHeader, CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Link from 'next/link';
 import { db } from '@/api/db';
+import AircraftListClient from '@/components/admin/AircraftListClient';
 
 // Get all aircraft (including drafts) for admin view
 async function getAllAircraft() {
@@ -102,81 +103,7 @@ export default async function AdminAircraftPage() {
           </div>
         </CardHeader>
         <CardContent>
-          {aircraft.length === 0 ? (
-            <div className="text-center py-8">
-              <p className="text-gray-500 mb-4">No aircraft listings found.</p>
-              <Link href="/admin/aircraft/new">
-                <Button variant="primary">
-                  Create Your First Listing
-                </Button>
-              </Link>
-            </div>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead className="border-b">
-                  <tr className="text-left">
-                    <th className="pb-2 font-medium">Aircraft</th>
-                    <th className="pb-2 font-medium">Status</th>
-                    <th className="pb-2 font-medium">Price</th>
-                    <th className="pb-2 font-medium">Photos</th>
-                    <th className="pb-2 font-medium">Created</th>
-                    <th className="pb-2 font-medium">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {aircraft.map((aircraft) => (
-                    <tr key={aircraft.id} className="border-b last:border-0">
-                      <td className="py-3">
-                        <div>
-                          <div className="font-medium">{aircraft.title}</div>
-                          <div className="text-gray-500 text-xs">
-                            {aircraft.year} {aircraft.make} {aircraft.model}
-                          </div>
-                        </div>
-                      </td>
-                      <td className="py-3">
-                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                          aircraft.status === 'active' 
-                            ? 'bg-green-100 text-green-800'
-                            : aircraft.status === 'draft'
-                            ? 'bg-yellow-100 text-yellow-800'
-                            : aircraft.status === 'pending'
-                            ? 'bg-blue-100 text-blue-800'
-                            : 'bg-gray-100 text-gray-800'
-                        }`}>
-                          {aircraft.status ? aircraft.status.charAt(0).toUpperCase() + aircraft.status.slice(1) : 'Unknown'}
-                        </span>
-                      </td>
-                      <td className="py-3">
-                        ${aircraft.price.toLocaleString()}
-                      </td>
-                      <td className="py-3">
-                        {aircraft.photos?.length || 0} photos
-                      </td>
-                      <td className="py-3 text-gray-500">
-                        {new Date(aircraft.created_at || '').toLocaleDateString()}
-                      </td>
-                      <td className="py-3">
-                        <div className="flex gap-1">
-                          <Link href={`/admin/aircraft/${aircraft.id}/edit`}>
-                            <Button variant="secondary" size="sm">
-                              Edit
-                            </Button>
-                          </Link>
-                          <Link href={`/aircraft/${aircraft.slug}`}>
-                            <Button variant="ghost" size="sm">
-                              View
-                            </Button>
-                          </Link>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
+          <AircraftListClient aircraft={aircraft} total={total} />
         </CardContent>
       </Card>
     </ContainerLayout>
