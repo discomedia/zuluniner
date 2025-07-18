@@ -33,7 +33,7 @@ async function getDashboardStats() {
 }
 
 export default async function AdminDashboard() {
-  const { user: _user, profile } = await requireAdmin();
+  const { profile } = await requireAdmin();
   const stats = await getDashboardStats();
 
   return (
