@@ -248,6 +248,128 @@ supabase/
 └── config.toml           # Supabase configuration
 ```
 
+## Data Fetching Architecture
+
+### Server Components vs Client Components
+
+**CRITICAL**: Use server components for data fetching to avoid network connectivity issues between client-side and Supabase.
+
+#### Server Components (Recommended for Data Fetching)
+Use server components when:
+- Fetching data from Supabase
+- Accessing authentication state
+- SEO optimization needed
+- No client-side interactivity required
+
+```typescript
+// ✅ Server component pattern (works in production)
+export default async function AircraftPage({ params }: { params: { slug: string } }) {
+  // Direct database access on server
+  const aircraft = await db.aircraft.getBySlug(params.slug);
+  
+  if (!aircraft) {
+    notFound();
+  }
+
+  return (
+    <div>
+      <h1>{aircraft.title}</h1>
+      {/* Static content */}
+    </div>
+  );
+}
+```
+
+#### Client Components (Interactive Elements Only)
+Use client components for:
+- User interactions (buttons, forms, modals)
+- Browser APIs (localStorage, geolocation)
+- State management
+- Event handlers
+
+```typescript
+// ✅ Client component pattern (interactive wrapper)
+'use client';
+
+export default function InteractiveWrapper({ children, initialData }: Props) {
+  const [state, setState] = useState(initialData);
+  
+  const handleClick = () => {
+    // Client-side logic
+  };
+
+  return (
+    <div>
+      <button onClick={handleClick}>Interactive Button</button>
+      {children}
+    </div>
+  );
+}
+```
+
+#### Hybrid Pattern (Server + Client)
+For pages needing both data and interactivity:
+
+```typescript
+// ✅ Main page: Server component with data
+export default async function HomePage() {
+  const featuredAircraft = await db.aircraft.search({}, 1, 3);
+  
+  return (
+    <MainLayout>
+      <HomePageClient>
+        {/* Server-rendered content with data */}
+        <AircraftGrid aircraft={featuredAircraft} />
+      </HomePageClient>
+    </MainLayout>
+  );
+}
+
+// ✅ Client wrapper: Interactive elements
+'use client';
+export default function HomePageClient({ children }: { children: ReactNode }) {
+  const router = useRouter();
+  
+  const handleSearch = (query: string) => {
+    router.push(`/aircraft?q=${query}`);
+  };
+
+  return (
+    <>
+      <SearchBar onSearch={handleSearch} />
+      {children}
+    </>
+  );
+}
+```
+
+### Network Connectivity Issues
+
+**Problem**: Client-side Supabase requests can timeout in production (Vercel) due to network issues.
+
+**Solution**: Always fetch data server-side and pass to client components as props.
+
+```typescript
+// ❌ Problematic client-side fetching
+'use client';
+export default function ProblematicPage() {
+  const [data, setData] = useState([]);
+  
+  useEffect(() => {
+    // This can timeout in production
+    db.aircraft.search().then(setData);
+  }, []);
+}
+
+// ✅ Fixed server-side fetching
+export default async function FixedPage() {
+  // Always works - server has reliable Supabase connection
+  const data = await db.aircraft.search();
+  
+  return <ClientComponent initialData={data} />;
+}
+```
+
 ## Testing
 
 For complex new features or revisions, write tests and execute them. Write test files in TypeScript in src/testing, with filenames like "new-feature-test.ts". Execute them with `npm run build && node src/testing/new-feature-test.js`.
