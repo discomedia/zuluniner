@@ -4,7 +4,15 @@ import type { Database } from '@/api/schema';
 export function createClient() {
   return createBrowserClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      auth: {
+        persistSession: true,
+        detectSessionInUrl: true,
+        // Suppress auth errors when session is missing (expected for logged out users)
+        debug: false
+      }
+    }
   );
 }
 

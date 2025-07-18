@@ -49,7 +49,7 @@ export async function GET(request: NextRequest) {
 
         if (profileError) {
           console.error('Error creating user profile:', profileError);
-          return NextResponse.redirect(`${origin}/auth/login?error=profile_creation_failed`);
+          return NextResponse.redirect(`${origin}/?error=profile_creation_failed`);
         }
       }
 
@@ -67,5 +67,5 @@ export async function GET(request: NextRequest) {
   }
 
   // return the user to an error page with instructions
-  return NextResponse.redirect(`${origin}/auth/login?error=verification_failed`);
+  return NextResponse.redirect(`${origin}/?error=verification_failed`);
 }

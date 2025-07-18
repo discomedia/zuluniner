@@ -45,8 +45,9 @@ export async function middleware(request: NextRequest) {
   // If user is not signed in and is trying to access a protected route
   if (!user && (isProtectedRoute || isAdminRoute)) {
     const redirectUrl = request.nextUrl.clone();
-    redirectUrl.pathname = '/auth/login';
+    redirectUrl.pathname = '/';
     redirectUrl.searchParams.set('redirectTo', request.nextUrl.pathname);
+    redirectUrl.searchParams.set('auth', 'required');
     return NextResponse.redirect(redirectUrl);
   }
 

@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { Suspense } from 'react';
 import MainLayout from '../components/layouts/MainLayout';
 import ContainerLayout from '../components/layouts/ContainerLayout';
 import Button from '../components/ui/Button';
@@ -31,13 +32,14 @@ export default async function Home() {
 
   return (
     <MainLayout>
-      <HomePageClient>
-        {/* Stats Section */}
-        <section className="bg-white border-b border-neutral-200">
-          <ContainerLayout className="py-16">
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
-              <div className="text-center">
-                <div className="text-4xl font-bold text-primary-600">500+</div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <HomePageClient>
+          {/* Stats Section */}
+          <section className="bg-white border-b border-neutral-200">
+            <ContainerLayout className="py-16">
+              <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
+                <div className="text-center">
+                  <div className="text-4xl font-bold text-primary-600">500+</div>
                 <div className="mt-2 text-lg text-neutral-600">Aircraft Listed</div>
               </div>
               <div className="text-center">
@@ -140,7 +142,8 @@ export default async function Home() {
             </div>
           </ContainerLayout>
         </section>
-      </HomePageClient>
+        </HomePageClient>
+      </Suspense>
     </MainLayout>
   );
 }

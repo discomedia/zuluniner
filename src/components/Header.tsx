@@ -4,9 +4,12 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/components/auth/AuthProvider';
 import Button from '@/components/ui/Button';
+import SignInModal from '@/components/auth/SignInModal';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+  const [authModalMode, setAuthModalMode] = useState<'signin' | 'signup'>('signin');
   const { user, profile, loading, signOut } = useAuth();
 
   const navigation = [
@@ -79,18 +82,24 @@ export default function Header() {
               </>
             ) : (
               <>
-                <Link
-                  href="/auth/login"
+                <button
+                  onClick={() => {
+                    setAuthModalMode('signin');
+                    setIsSignInModalOpen(true);
+                  }}
                   className="text-neutral-600 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors"
                 >
                   Sign In
-                </Link>
-                <Link
-                  href="/auth/register"
+                </button>
+                <button
+                  onClick={() => {
+                    setAuthModalMode('signup');
+                    setIsSignInModalOpen(true);
+                  }}
                   className="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
                 >
                   Get Started
-                </Link>
+                </button>
               </>
             )}
           </div>
@@ -166,20 +175,26 @@ export default function Header() {
                   </>
                 ) : (
                   <>
-                    <Link
-                      href="/auth/login"
-                      className="text-neutral-600 hover:text-primary-600 block px-3 py-2 text-base font-medium transition-colors"
-                      onClick={() => setIsMobileMenuOpen(false)}
+                    <button
+                      onClick={() => {
+                        setAuthModalMode('signin');
+                        setIsSignInModalOpen(true);
+                        setIsMobileMenuOpen(false);
+                      }}
+                      className="text-neutral-600 hover:text-primary-600 block px-3 py-2 text-base font-medium transition-colors w-full text-left"
                     >
                       Sign In
-                    </Link>
-                    <Link
-                      href="/auth/register"
-                      className="bg-primary-600 hover:bg-primary-700 text-white block mx-3 mt-2 px-4 py-2 rounded-lg text-base font-medium transition-colors text-center"
-                      onClick={() => setIsMobileMenuOpen(false)}
+                    </button>
+                    <button
+                      onClick={() => {
+                        setAuthModalMode('signup');
+                        setIsSignInModalOpen(true);
+                        setIsMobileMenuOpen(false);
+                      }}
+                      className="bg-primary-600 hover:bg-primary-700 text-white block mx-3 mt-2 px-4 py-2 rounded-lg text-base font-medium transition-colors text-center w-auto"
                     >
                       Get Started
-                    </Link>
+                    </button>
                   </>
                 )}
               </div>
@@ -187,6 +202,14 @@ export default function Header() {
           </div>
         )}
       </div>
+      
+      {/* Sign In Modal */}
+      <SignInModal
+        isOpen={isSignInModalOpen}
+        onClose={() => setIsSignInModalOpen(false)}
+        redirectTo="/dashboard"
+        initialMode={authModalMode}
+      />
     </header>
   );
 }

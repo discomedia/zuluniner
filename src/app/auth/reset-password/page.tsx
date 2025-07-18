@@ -111,7 +111,7 @@ function ResetPasswordForm() {
               Didn&apos;t receive the email? Check your spam folder.
             </p>
             <Link
-              href="/auth/login"
+              href="/?auth=signin"
               className="text-primary hover:text-primary/80 hover:underline font-medium"
             >
               Return to Sign In
@@ -142,7 +142,7 @@ function ResetPasswordForm() {
           
           <div className="text-center">
             <Link
-              href="/auth/login"
+              href="/?auth=signin"
               className="text-primary hover:text-primary/80 hover:underline font-medium"
             >
               Sign In
@@ -258,7 +258,7 @@ function ResetPasswordForm() {
           <p className="text-sm text-gray-600">
             Remember your password?{' '}
             <Link 
-              href="/auth/login" 
+              href="/?auth=signin" 
               className="text-primary hover:text-primary/80 hover:underline font-medium"
             >
               Sign in

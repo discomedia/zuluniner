@@ -41,15 +41,23 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const fetchProfile = useCallback(async (userId: string) => {
     try {
-      const { data: profile } = await supabase
+      console.log('🔍 Fetching profile for user:', userId);
+      const { data: profile, error } = await supabase
         .from('users')
         .select('*')
         .eq('id', userId)
         .single();
       
+      if (error) {
+        console.error('❌ Error fetching profile:', error);
+        setProfile(null);
+        return;
+      }
+      
+      console.log('✅ Profile fetched successfully:', profile);
       setProfile(profile);
     } catch (error) {
-      console.error('Error fetching profile:', error);
+      console.error('❌ Unexpected error fetching profile:', error);
       setProfile(null);
     }
   }, [supabase]);
@@ -74,15 +82,46 @@ export function AuthProvider({ children }: AuthProviderProps) {
   useEffect(() => {
     const initializeAuth = async () => {
       try {
-        const { data: { user } } = await supabase.auth.getUser();
-        setUser(user);
+        console.log('🔄 Initializing auth...');
         
-        if (user) {
-          await fetchProfile(user.id);
+        // Add a timeout to prevent hanging
+        const authPromise = supabase.auth.getUser();
+        const timeoutPromise = new Promise<never>((_, reject) => 
+          setTimeout(() => reject(new Error('Auth timeout')), 10000)
+        );
+        
+        const result = await Promise.race([authPromise, timeoutPromise]);
+        const { data: { user }, error } = result;
+        
+        if (error) {
+          // Check if it's the expected "session missing" error
+          if (error.message?.includes('Auth session missing') || error.name === 'AuthSessionMissingError') {
+            console.log('ℹ️ No active session (user not logged in)');
+          } else {
+            console.error('❌ Unexpected auth error:', error);
+          }
+          setUser(null);
+          setProfile(null);
+        } else {
+          console.log('👤 User from getUser:', user ? `${user.email} (${user.id})` : 'No user');
+          setUser(user);
+          
+          if (user) {
+            await fetchProfile(user.id);
+          }
         }
-      } catch (error) {
-        console.error('Error initializing auth:', error);
+      } catch (error: unknown) {
+        // Handle any unexpected errors gracefully
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+        if (errorMessage === 'Auth timeout') {
+          console.warn('⏰ Auth initialization timed out, assuming no user');
+        } else {
+          console.error('❌ Error initializing auth:', error);
+        }
+        setUser(null);
+        setProfile(null);
       } finally {
+        console.log('✅ Auth initialization complete, setting loading to false');
         setLoading(false);
       }
     };
@@ -92,15 +131,23 @@ export function AuthProvider({ children }: AuthProviderProps) {
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
-        setUser(session?.user ?? null);
+        console.log('🔄 Auth state change:', event, session?.user ? `${session.user.email} (${session.user.id})` : 'No user');
         
-        if (session?.user) {
-          await fetchProfile(session.user.id);
-        } else {
+        try {
+          setUser(session?.user ?? null);
+          
+          if (session?.user) {
+            await fetchProfile(session.user.id);
+          } else {
+            setProfile(null);
+          }
+        } catch (error) {
+          console.error('❌ Error handling auth state change:', error);
+          setUser(null);
           setProfile(null);
+        } finally {
+          setLoading(false);
         }
-        
-        setLoading(false);
       }
     );
 

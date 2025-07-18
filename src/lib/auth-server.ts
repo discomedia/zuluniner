@@ -70,7 +70,7 @@ export async function requireAuth() {
   const user = await getUser();
   
   if (!user) {
-    redirect('/auth/login');
+    redirect('/?auth=required');
   }
   
   return user;

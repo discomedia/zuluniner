@@ -12,7 +12,7 @@ export async function ServerProtectedRoute({
   children,
   requireAuth = true,
   requireAdmin = false,
-  redirectTo = '/auth/login',
+  redirectTo = '/?auth=required',
 }: ServerProtectedRouteProps) {
   if (!requireAuth && !requireAdmin) {
     return <>{children}</>;

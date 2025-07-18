@@ -19,7 +19,7 @@ export function ProtectedRoute({
   children,
   requireAuth = true,
   requireAdmin = false,
-  redirectTo = '/auth/login',
+  redirectTo = '/?auth=required',
   fallback = <Loading />,
 }: ClientProtectedRouteProps) {
   const [user, setUser] = useState<User | null>(null);
