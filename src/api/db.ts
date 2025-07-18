@@ -154,11 +154,31 @@ async function searchAircraft(filters: SearchFilters, page = 1, limit = 20): Pro
       isClientSide: typeof window !== 'undefined'
     });
     
-    const { data: aircraftData, error: aircraftError, count } = await query;
+    console.log('⏰ Starting query with 15s timeout...');
     
-    if (aircraftError) {
-      console.error('💥 Aircraft query error:', aircraftError);
-      throw aircraftError;
+    let aircraftData, aircraftError, count;
+    
+    try {
+      const timeoutPromise = new Promise<never>((_, reject) => {
+        setTimeout(() => reject(new Error('Query timeout after 15 seconds')), 15000);
+      });
+      
+      const result = await Promise.race([
+        query,
+        timeoutPromise
+      ]);
+      
+      aircraftData = result.data;
+      aircraftError = result.error;
+      count = result.count;
+    
+      if (aircraftError) {
+        console.error('💥 Aircraft query error:', aircraftError);
+        throw aircraftError;
+      }
+    } catch (error) {
+      console.error('💥 Query failed or timed out:', error);
+      throw error;
     }
 
     console.log('📋 Aircraft query result - count:', count, 'data length:', aircraftData?.length);
