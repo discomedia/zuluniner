@@ -15,7 +15,7 @@ async function getAllAircraft() {
 }
 
 export default async function AdminAircraftPage() {
-  const { user: _user, profile } = await requireAdmin();
+  const { profile } = await requireAdmin();
   const { aircraft, total } = await getAllAircraft();
 
   const statusCounts = {

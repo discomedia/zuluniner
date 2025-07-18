@@ -23,7 +23,7 @@ async function getUserDashboardData(userId: string) {
 
 export default async function DashboardPage() {
   const user = await requireAuth();
-  const { aircraft: _aircraft, stats } = await getUserDashboardData(user.id);
+  const { stats } = await getUserDashboardData(user.id);
   
   // Get user profile using db convenience function
   const profile = await db.users.getProfile(user.id);

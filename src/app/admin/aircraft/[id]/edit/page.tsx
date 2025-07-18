@@ -13,7 +13,7 @@ interface EditAircraftPageProps {
 }
 
 export default async function EditAircraftPage({ params }: EditAircraftPageProps) {
-  const { user: _user, profile } = await requireAdmin();
+  const { profile } = await requireAdmin();
   const { id } = await params;
 
   try {

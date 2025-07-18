@@ -10,7 +10,7 @@ interface RouteParams {
 
 export async function PUT(request: NextRequest, { params }: RouteParams) {
   try {
-    const { user: _user } = await requireAdmin();
+    await requireAdmin();
 
     const body = await request.json();
     const { id } = await params;
@@ -65,7 +65,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
 
 export async function DELETE(_: NextRequest, { params }: RouteParams) {
   try {
-    const { user: _user } = await requireAdmin();
+    await requireAdmin();
 
     const { id } = await params;
 
