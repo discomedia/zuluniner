@@ -148,7 +148,7 @@ export async function POST(request: NextRequest) {
       The description should be detailed and suitable for an aircraft listing website.
       Suggest an appropriate airport code based on where this type of aircraft is commonly based.
       The meta_description should be compelling and under 160 characters for SEO.
-      The url_slug should be lowercase, hyphen-separated, and include key identifying information.`,
+      The url_slug should be lowercase, hyphen-separated, and include key identifying information, be under 100 characters.`,
       {
         model: config.llm.model,
         responseFormat: config.llm.responseFormat.json,
