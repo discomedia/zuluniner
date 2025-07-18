@@ -14,17 +14,70 @@ export async function POST(request: NextRequest) {
     }
 
     // Basic validation for aircraft title format
-    const titleLower = title.toLowerCase();
-    if (!titleLower.match(/\d{4}/) || (!titleLower.includes('piper') && !titleLower.includes('cessna') && !titleLower.includes('beechcraft') && !titleLower.includes('mooney') && !titleLower.includes('cirrus'))) {
+    // Check for at least a 2- or 4-digit year and some additional words
+    const hasYear = /\b(19|20)\d{2}\b|\b\d{2}\b/.test(title);
+    const wordCount = title.trim().split(/\s+/).length;
+    
+    if (!hasYear) {
       return NextResponse.json(
-        { error: 'Please include year, make, and model in the title (e.g., "1978 Piper Archer II – Low Time Engine, Garmin Avionics")' },
+        { error: 'Please include the year of the aircraft in the title' },
+        { status: 400 }
+      );
+    }
+    
+    if (wordCount < 3) {
+      return NextResponse.json(
+        { error: 'Please provide more details: year, make, model, and condition notes are required' },
         { status: 400 }
       );
     }
 
+    // Use LLM to validate and enhance the title
+    const validationResponse = await disco.llm.call(
+      `Analyze this aircraft title and determine if it contains enough information for a listing: "${title}"
+      
+      Required information:
+      - Year (2-digit or 4-digit)
+      - Make/manufacturer 
+      - Model
+      - Any additional details about condition, equipment, or price
+      
+      If valid, also provide an enhanced title with more searchable details.
+      
+      Respond with JSON:
+      {
+        "valid": boolean,
+        "missing": string[] (list what's missing if invalid),
+        "enhanced_title": "string (enhanced version with more details for better searching, only if valid)",
+        "details": {
+          "year": string or null,
+          "make": string or null, 
+          "model": string or null,
+          "hasConditionInfo": boolean
+        }
+      }`,
+      {
+        model: config.llm.model,
+        responseFormat: config.llm.responseFormat.json,
+      }
+    );
+
+    if (!validationResponse.response?.valid) {
+      const missing = validationResponse.response?.missing || ['year, make, and model'];
+      return NextResponse.json(
+        { 
+          error: `Missing required information: ${missing.join(', ')}. Please include year, make, model, and condition details (e.g., "1978 Piper Archer II – Low Time Engine" or "2001 Kitfox 5 Outback (recently restored) $108K")` 
+        },
+        { status: 400 }
+      );
+    }
+
+    // Use the enhanced title for better search results
+    const searchTitle = validationResponse.response?.enhanced_title || title;
+
     // Step 1: Search for comprehensive aircraft information
     const textResponse = await disco.llm.call(
-      `Search for detailed information about a ${title} aircraft for sale, and return comprehensive details that aircraft buyers and sellers need:
+      `Search for detailed information about a ${searchTitle} aircraft for sale, and return comprehensive details that aircraft buyers and sellers need:
       
       BASIC INFO: Make, full model name, year of manufacture, production years, country of origin, typical serial number format
       
@@ -87,12 +140,15 @@ export async function POST(request: NextRequest) {
           "common_issues": "string[]",
           "maintenance_notes": "string[]"
         },
-        "meta_description": "string (SEO-friendly description under 160 characters)"
+        "meta_description": "string (SEO-friendly description under 160 characters)",
+        "url_slug": "string (URL-friendly slug like 'year-make-model-location', e.g., '1978-piper-archer-ii-florida')"
       }
       
       Make sure to provide realistic estimates for all numeric values based on typical aircraft of this make, model, and year.
       The description should be detailed and suitable for an aircraft listing website.
-      Suggest an appropriate airport code based on where this type of aircraft is commonly based.`,
+      Suggest an appropriate airport code based on where this type of aircraft is commonly based.
+      The meta_description should be compelling and under 160 characters for SEO.
+      The url_slug should be lowercase, hyphen-separated, and include key identifying information.`,
       {
         model: config.llm.model,
         responseFormat: config.llm.responseFormat.json,
@@ -110,7 +166,7 @@ export async function POST(request: NextRequest) {
     const aircraftData = jsonResponse.response;
 
     // Calculate total cost
-    const totalCost = textResponse.usage.cost + jsonResponse.usage.cost;
+    const totalCost = validationResponse.usage.cost + textResponse.usage.cost + jsonResponse.usage.cost;
 
     return NextResponse.json({
       success: true,
