@@ -35,11 +35,20 @@ export default async function AdminBlogPage() {
   return (
     <div className="space-y-8">
       {/* Header */}
-      <div className="border-b border-neutral-200 pb-6">
-        <div className="flex items-center justify-between">
+      {/* Back to Admin Dashboard */}
+      <div className="w-full flex justify-start mb-2 mt-2">
+        <Link href="/admin" className="inline-flex items-center gap-1 text-primary-700 hover:underline font-medium text-sm px-2 py-1 rounded transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+          </svg>
+          Back to admin dashboard
+        </Link>
+      </div>
+      <div className="bg-white border-b border-neutral-200 rounded-xl shadow-sm px-6 py-6 mb-6 mx-2 md:mx-6">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-neutral-900">Blog Management</h1>
-            <p className="mt-2 text-neutral-600">
+            <h1 className="text-3xl font-extrabold text-gray-900">Blog Management</h1>
+            <p className="mt-2 text-gray-800">
               Manage your blog posts and content as {profile?.name || 'Admin'}
             </p>
           </div>
@@ -50,25 +59,25 @@ export default async function AdminBlogPage() {
       </div>
 
       {/* Statistics */}
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 mb-4">
         <Card>
           <CardHeader>
-            <h3 className="text-sm font-medium text-neutral-600">Total Posts</h3>
-            <p className="text-2xl font-bold text-neutral-900">{blogData.total}</p>
+            <h3 className="text-base font-semibold text-gray-900">Total Posts</h3>
+            <p className="text-3xl font-extrabold text-gray-900">{blogData.total}</p>
           </CardHeader>
         </Card>
         <Card>
           <CardHeader>
-            <h3 className="text-sm font-medium text-neutral-600">Published</h3>
-            <p className="text-2xl font-bold text-success-600">
+            <h3 className="text-base font-semibold text-gray-900">Published</h3>
+            <p className="text-3xl font-extrabold text-green-600">
               {blogData.posts.filter(post => post.published).length}
             </p>
           </CardHeader>
         </Card>
         <Card>
           <CardHeader>
-            <h3 className="text-sm font-medium text-neutral-600">Drafts</h3>
-            <p className="text-2xl font-bold text-warning-600">
+            <h3 className="text-base font-semibold text-gray-900">Drafts</h3>
+            <p className="text-3xl font-extrabold text-yellow-600">
               {blogData.posts.filter(post => !post.published).length}
             </p>
           </CardHeader>
@@ -78,44 +87,34 @@ export default async function AdminBlogPage() {
       {/* Posts Table */}
       <Card>
         <CardHeader>
-          <h2 className="text-lg font-semibold text-neutral-900">All Blog Posts</h2>
+          <h2 className="text-2xl font-bold text-gray-900">All Blog Posts</h2>
         </CardHeader>
         <CardContent>
           {blogData.posts.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-neutral-600">No blog posts yet.</p>
+              <p className="text-gray-700 text-lg">No blog posts yet.</p>
               <Link href="/admin/blog/new" className="mt-4 inline-block">
                 <Button>Create Your First Post</Button>
               </Link>
             </div>
           ) : (
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-neutral-200">
-                <thead className="bg-neutral-50">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">
-                      Title
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">
-                      Status
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">
-                      Author
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">
-                      Created
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">
-                      Actions
-                    </th>
+                    <th className="px-6 py-3 text-left text-base font-bold text-gray-900">Title</th>
+                    <th className="px-6 py-3 text-left text-base font-bold text-gray-900">Status</th>
+                    <th className="px-6 py-3 text-left text-base font-bold text-gray-900">Author</th>
+                    <th className="px-6 py-3 text-left text-base font-bold text-gray-900">Created</th>
+                    <th className="px-6 py-3 text-left text-base font-bold text-gray-900">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-neutral-200">
+                <tbody className="bg-white divide-y divide-gray-200">
                   {blogData.posts.map((post) => (
-                    <tr key={post.id} className="hover:bg-neutral-50">
+                    <tr key={post.id} className="hover:bg-gray-50">
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div>
-                          <div className="text-sm font-medium text-neutral-900 line-clamp-1">
+                          <div className="text-base font-semibold text-gray-900 line-clamp-1">
                             {post.title}
                           </div>
                           {post.blurb && (

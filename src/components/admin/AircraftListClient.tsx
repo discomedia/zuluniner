@@ -128,15 +128,43 @@ export default function AircraftListClient({ aircraft: initialAircraft, total }:
         </div>
       ) : (
         <div className="overflow-x-auto">
+          <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-2 mb-4">
+            <h3 className="text-2xl font-bold text-gray-900">All Aircraft Listings ({total})</h3>
+            {/* Search and Filter Bar */}
+            <div className="flex flex-col md:flex-row gap-2 w-full md:w-auto">
+              <div className="relative w-full md:w-64">
+                <input
+                  type="text"
+                  placeholder="Search aircraft..."
+                  className="px-3 py-2 border border-gray-400 rounded-lg text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 w-full placeholder-gray-500"
+                />
+                <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+                  <svg className="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </div>
+              </div>
+              <select className="px-3 py-2 border border-gray-400 rounded-lg text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 placeholder-gray-500">
+                <option value="">All Status</option>
+                <option value="active">Active</option>
+                <option value="draft">Draft</option>
+                <option value="pending">Pending</option>
+                <option value="sold">Sold</option>
+              </select>
+              <Button variant="secondary" size="sm">
+                Export
+              </Button>
+            </div>
+          </div>
           <table className="w-full text-sm">
             <thead className="border-b">
-              <tr className="text-left">
-                <th className="pb-2 font-medium">Aircraft</th>
-                <th className="pb-2 font-medium">Status</th>
-                <th className="pb-2 font-medium">Price</th>
-                <th className="pb-2 font-medium">Photos</th>
-                <th className="pb-2 font-medium">Created</th>
-                <th className="pb-2 font-medium">Actions</th>
+              <tr className="text-left text-gray-900">
+                <th className="pb-2 font-bold text-lg text-gray-900">Aircraft</th>
+                <th className="pb-2 font-bold text-lg text-gray-900">Status</th>
+                <th className="pb-2 font-bold text-lg text-gray-900">Price</th>
+                <th className="pb-2 font-bold text-lg text-gray-900">Photos</th>
+                <th className="pb-2 font-bold text-lg text-gray-900">Created</th>
+                <th className="pb-2 font-bold text-lg text-gray-900">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -144,8 +172,8 @@ export default function AircraftListClient({ aircraft: initialAircraft, total }:
                 <tr key={aircraft.id} className="border-b last:border-0">
                   <td className="py-3">
                     <div>
-                      <div className="font-medium">{aircraft.title}</div>
-                      <div className="text-gray-500 text-xs">
+                      <div className="font-semibold text-gray-900">{aircraft.title}</div>
+                      <div className="text-gray-700 text-xs">
                         {aircraft.year} {aircraft.make} {aircraft.model}
                       </div>
                     </div>
@@ -163,13 +191,13 @@ export default function AircraftListClient({ aircraft: initialAircraft, total }:
                       {aircraft.status ? aircraft.status.charAt(0).toUpperCase() + aircraft.status.slice(1) : 'Unknown'}
                     </span>
                   </td>
-                  <td className="py-3">
+                  <td className="py-3 text-gray-900">
                     ${aircraft.price.toLocaleString()}
                   </td>
-                  <td className="py-3">
+                  <td className="py-3 text-gray-900">
                     {aircraft.photos?.length || 0} photos
                   </td>
-                  <td className="py-3 text-gray-500">
+                  <td className="py-3 text-gray-700">
                     {new Date(aircraft.created_at || '').toLocaleDateString()}
                   </td>
                   <td className="py-3">
