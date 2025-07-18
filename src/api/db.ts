@@ -480,6 +480,90 @@ async function getBlogPost(slug: string): Promise<BlogPostWithAuthor | null> {
   return data;
 }
 
+async function getAllBlogPostsForAdmin(page = 1, limit = 20): Promise<BlogPostsResult> {
+  const offset = (page - 1) * limit;
+  
+  const { data, error, count } = await supabase
+    .from('blog_posts')
+    .select(`
+      *,
+      author:users(name)
+    `, { count: 'exact' })
+    .order('created_at', { ascending: false })
+    .range(offset, offset + limit - 1);
+
+  if (error) throw error;
+
+  return {
+    posts: data || [],
+    total: count || 0,
+    page,
+    limit
+  };
+}
+
+async function getBlogPostByIdForAdmin(id: string): Promise<BlogPostWithAuthor | null> {
+  const { data, error } = await supabase
+    .from('blog_posts')
+    .select(`
+      *,
+      author:users(name, company)
+    `)
+    .eq('id', id)
+    .single();
+
+  if (error) {
+    console.error('Error fetching blog post:', error);
+    return null;
+  }
+  return data;
+}
+
+async function createBlogPost(
+  postData: Omit<Tables<'blog_posts'>, 'id' | 'created_at' | 'updated_at'>,
+  client?: SupabaseClient<Database>
+): Promise<Tables<'blog_posts'>> {
+  const supabaseClient = client || supabase;
+  
+  const { data, error } = await supabaseClient
+    .from('blog_posts')
+    .insert(postData)
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data;
+}
+
+async function updateBlogPost(
+  id: string,
+  updates: Partial<Omit<Tables<'blog_posts'>, 'id' | 'created_at'>>,
+  client?: SupabaseClient<Database>
+): Promise<Tables<'blog_posts'>> {
+  const supabaseClient = client || supabase;
+  
+  const { data, error } = await supabaseClient
+    .from('blog_posts')
+    .update({ ...updates, updated_at: new Date().toISOString() })
+    .eq('id', id)
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data;
+}
+
+async function deleteBlogPost(id: string, client?: SupabaseClient<Database>): Promise<void> {
+  const supabaseClient = client || supabase;
+  
+  const { error } = await supabaseClient
+    .from('blog_posts')
+    .delete()
+    .eq('id', id);
+
+  if (error) throw error;
+}
+
 // User functions
 async function getUserById(userId: string): Promise<Tables<'users'> | null> {
   const { data, error } = await supabase
@@ -552,6 +636,11 @@ export const db = {
   blog: {
     getPosts: getBlogPosts,
     getPost: getBlogPost,
+    getAllForAdmin: getAllBlogPostsForAdmin,
+    getByIdForAdmin: getBlogPostByIdForAdmin,
+    create: createBlogPost,
+    update: updateBlogPost,
+    delete: deleteBlogPost,
   },
   users: {
     getById: getUserById,
