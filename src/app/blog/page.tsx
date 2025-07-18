@@ -4,6 +4,14 @@ import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { formatDate } from '@/lib/utils';
 import Link from 'next/link';
 import Image from 'next/image';
+import type { Tables } from '@/api/schema';
+
+type BlogPostsResult = {
+  posts: Array<Tables<'blog_posts'> & { author: Pick<Tables<'users'>, 'name'> }>;
+  total: number;
+  page: number;
+  limit: number;
+};
 
 export const metadata = {
   title: 'Aviation Blog | ZuluNiner',
@@ -13,7 +21,7 @@ export const metadata = {
 export default async function BlogPage() {
   console.log('🔄 Starting to fetch blog posts...');
   
-  let blogData = { posts: [], total: 0, page: 1, limit: 10 };
+  let blogData: BlogPostsResult = { posts: [], total: 0, page: 1, limit: 10 };
   
   try {
     blogData = await db.blog.getPosts(true, 1, 12);
@@ -79,7 +87,7 @@ export default async function BlogPage() {
                             <div className="flex items-center space-x-2">
                               <span>By {post.author?.name || 'ZuluNiner'}</span>
                             </div>
-                            <time dateTime={post.published_at || post.created_at}>
+                            <time dateTime={post.published_at || post.created_at || undefined}>
                               {formatDate(post.published_at || post.created_at)}
                             </time>
                           </div>

@@ -8,13 +8,14 @@ import remarkGfm from 'remark-gfm';
 import Link from 'next/link';
 
 interface BlogPostPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps) {
-  const post = await db.blog.getPost(params.slug);
+  const { slug } = await params;
+  const post = await db.blog.getPost(slug);
   
   if (!post) {
     return {
@@ -34,12 +35,13 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  console.log(`🔄 Fetching blog post with slug: ${params.slug}`);
+  const { slug } = await params;
+  console.log(`🔄 Fetching blog post with slug: ${slug}`);
   
-  const post = await db.blog.getPost(params.slug);
+  const post = await db.blog.getPost(slug);
   
   if (!post) {
-    console.log(`❌ Blog post not found: ${params.slug}`);
+    console.log(`❌ Blog post not found: ${slug}`);
     notFound();
   }
 
@@ -86,7 +88,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <span className="text-sm font-medium">By {post.author?.name || 'ZuluNiner'}</span>
             </div>
             <span className="text-neutral-400">•</span>
-            <time dateTime={post.published_at || post.created_at} className="text-sm">
+            <time dateTime={post.published_at || post.created_at || undefined} className="text-sm">
               {formatDate(post.published_at || post.created_at)}
             </time>
           </div>

@@ -3,9 +3,9 @@ import { requireAdmin } from '@/lib/auth-server';
 import { db } from '@/api/db';
 
 interface RouteParams {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export async function PUT(request: NextRequest, { params }: RouteParams) {
@@ -13,7 +13,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
     const { user: _user } = await requireAdmin();
 
     const body = await request.json();
-    const { id } = params;
+    const { id } = await params;
     
     const { title, slug, blurb, content, meta_description, header_photo, published } = body;
 
@@ -67,7 +67,7 @@ export async function DELETE(_: NextRequest, { params }: RouteParams) {
   try {
     const { user: _user } = await requireAdmin();
 
-    const { id } = params;
+    const { id } = await params;
 
     const existingPost = await db.blog.getByIdForAdmin(id);
     if (!existingPost) {

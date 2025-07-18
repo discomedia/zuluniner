@@ -4,13 +4,14 @@ import { notFound } from 'next/navigation';
 import BlogPostForm from '@/components/admin/blog/BlogPostForm';
 
 interface EditBlogPostPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({ params }: EditBlogPostPageProps) {
-  const post = await db.blog.getByIdForAdmin(params.id);
+  const { id } = await params;
+  const post = await db.blog.getByIdForAdmin(id);
   
   if (!post) {
     return {
@@ -25,14 +26,15 @@ export async function generateMetadata({ params }: EditBlogPostPageProps) {
 }
 
 export default async function EditBlogPostPage({ params }: EditBlogPostPageProps) {
-  const user = await requireAdmin();
+  const { profile } = await requireAdmin();
+  const { id } = await params;
   
-  console.log(`🔄 Fetching blog post for editing: ${params.id}`);
+  console.log(`🔄 Fetching blog post for editing: ${id}`);
   
-  const post = await db.blog.getByIdForAdmin(params.id);
+  const post = await db.blog.getByIdForAdmin(id);
   
   if (!post) {
-    console.log(`❌ Blog post not found: ${params.id}`);
+    console.log(`❌ Blog post not found: ${id}`);
     notFound();
   }
 
@@ -44,7 +46,7 @@ export default async function EditBlogPostPage({ params }: EditBlogPostPageProps
       <div className="border-b border-neutral-200 pb-6">
         <h1 className="text-3xl font-bold text-neutral-900">Edit Blog Post</h1>
         <p className="mt-2 text-neutral-600">
-          Editing &ldquo;{post.title}&rdquo; as {user?.name || 'Admin'}
+          Editing &ldquo;{post.title}&rdquo; as {profile?.name || 'Admin'}
         </p>
       </div>
 

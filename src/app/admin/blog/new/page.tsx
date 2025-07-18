@@ -7,7 +7,7 @@ export const metadata = {
 };
 
 export default async function NewBlogPostPage() {
-  const user = await requireAdmin();
+  const { profile } = await requireAdmin();
 
   return (
     <div className="space-y-8">
@@ -15,7 +15,7 @@ export default async function NewBlogPostPage() {
       <div className="border-b border-neutral-200 pb-6">
         <h1 className="text-3xl font-bold text-neutral-900">Create New Blog Post</h1>
         <p className="mt-2 text-neutral-600">
-          Create and publish a new blog post as {user?.name || 'Admin'}
+          Create and publish a new blog post as {profile?.name || 'Admin'}
         </p>
       </div>
 

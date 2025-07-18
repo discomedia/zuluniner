@@ -4,6 +4,14 @@ import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import { formatDate } from '@/lib/utils';
 import Link from 'next/link';
+import type { Tables } from '@/api/schema';
+
+type BlogPostsResult = {
+  posts: Array<Tables<'blog_posts'> & { author: Pick<Tables<'users'>, 'name'> }>;
+  total: number;
+  page: number;
+  limit: number;
+};
 
 export const metadata = {
   title: 'Blog Management | Admin - ZuluNiner',
@@ -11,11 +19,11 @@ export const metadata = {
 };
 
 export default async function AdminBlogPage() {
-  const user = await requireAdmin();
+  const { profile } = await requireAdmin();
   
   console.log('🔄 Fetching blog posts for admin...');
   
-  let blogData = { posts: [], total: 0, page: 1, limit: 20 };
+  let blogData: BlogPostsResult = { posts: [], total: 0, page: 1, limit: 20 };
   
   try {
     blogData = await db.blog.getAllForAdmin(1, 20);
@@ -32,7 +40,7 @@ export default async function AdminBlogPage() {
           <div>
             <h1 className="text-3xl font-bold text-neutral-900">Blog Management</h1>
             <p className="mt-2 text-neutral-600">
-              Manage your blog posts and content as {user?.name || 'Admin'}
+              Manage your blog posts and content as {profile?.name || 'Admin'}
             </p>
           </div>
           <Link href="/admin/blog/new">
