@@ -2,38 +2,66 @@ import { NextRequest, NextResponse } from 'next/server';
 import { disco } from '@discomedia/utils';
 import { config } from '@/config/config';
 
-export async function POST(request: NextRequest) {
+// Increase serverless function timeout for LLM calls
+export const maxDuration = 60; // 60 seconds
+
+// Type definitions for LLM responses
+interface ValidationResponse {
+  valid: boolean;
+  missing?: string[];
+  enhanced_title?: string;
+  details: {
+    year: string | null;
+    make: string | null;
+    model: string | null;
+    hasConditionInfo: boolean;
+  };
+}
+
+interface AircraftData {
+  make: string;
+  model: string;
+  year: number;
+  title: string;
+  description: string;
+  price: number;
+  hours: number;
+  engine_type: string;
+  avionics: string;
+  location: {
+    airport_code: string;
+    city: string;
+    country: string;
+  };
+  specifications: {
+    category: string;
+    seats: number;
+    empty_weight: number;
+    max_takeoff_weight: number;
+    fuel_capacity: number;
+    cruise_speed: number;
+    service_ceiling: number;
+    range: number;
+  };
+  market_info: {
+    price_range: {
+      min: number;
+      max: number;
+    };
+    desirable_features: string[];
+    common_issues: string[];
+    maintenance_notes: string[];
+  };
+  meta_description: string;
+  url_slug: string;
+}
+
+// LLM call functions
+async function validateAndEnhanceTitle(title: string): Promise<{ response: ValidationResponse; cost: number }> {
+  console.log('🧠 Starting LLM validation...');
+  
   try {
-    const { title } = await request.json();
-
-    if (!title || typeof title !== 'string') {
-      return NextResponse.json(
-        { error: 'Aircraft title is required' },
-        { status: 400 }
-      );
-    }
-
-    // Basic validation for aircraft title format
-    // Check for at least a 2- or 4-digit year and some additional words
-    const hasYear = /\b(19|20)\d{2}\b|\b\d{2}\b/.test(title);
-    const wordCount = title.trim().split(/\s+/).length;
-    
-    if (!hasYear) {
-      return NextResponse.json(
-        { error: 'Please include the year of the aircraft in the title' },
-        { status: 400 }
-      );
-    }
-    
-    if (wordCount < 3) {
-      return NextResponse.json(
-        { error: 'Please provide more details: year, make, model, and condition notes are required' },
-        { status: 400 }
-      );
-    }
-
-    // Use LLM to validate and enhance the title
-    const validationResponse = await disco.llm.call(
+    const response = await disco.llm.call(
       `Analyze this aircraft title and determine if it contains enough information for a listing: "${title}"
       
       Required information:
@@ -61,22 +89,23 @@ export async function POST(request: NextRequest) {
         responseFormat: config.llm.responseFormat.json,
       }
     );
+    
+    console.log('✅ LLM validation completed');
+    return {
+      response: response.response as ValidationResponse,
+      cost: response.usage.cost
+    };
+  } catch (error) {
+    console.error('❌ Validation LLM call failed:', error);
+    throw new Error(`Validation failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+  }
+}
 
-    if (!validationResponse.response?.valid) {
-      const missing = validationResponse.response?.missing || ['year, make, and model'];
-      return NextResponse.json(
-        { 
-          error: `Missing required information: ${missing.join(', ')}. Please include year, make, model, and condition details (e.g., "1978 Piper Archer II – Low Time Engine" or "2001 Kitfox 5 Outback (recently restored) $108K")` 
-        },
-        { status: 400 }
-      );
-    }
-
-    // Use the enhanced title for better search results
-    const searchTitle = validationResponse.response?.enhanced_title || title;
-
-    // Step 1: Search for comprehensive aircraft information
-    const textResponse = await disco.llm.call(
+async function searchAircraftInformation(searchTitle: string): Promise<{ response: string; cost: number }> {
+  console.log('🌐 Starting comprehensive search...');
+  
+  try {
+    const response = await disco.llm.call(
       `Search for detailed information about a ${searchTitle} aircraft for sale, and return comprehensive details that aircraft buyers and sellers need:
       
       BASIC INFO: Make, full model name, year of manufacture, production years, country of origin, typical serial number format
@@ -100,10 +129,24 @@ export async function POST(request: NextRequest) {
         useWebSearch: true,
       }
     );
+    
+    console.log('✅ Comprehensive search completed');
+    return {
+      response: response.response as string,
+      cost: response.usage.cost
+    };
+  } catch (error) {
+    console.error('❌ Search LLM call failed:', error);
+    throw new Error(`Search failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+  }
+}
 
-    // Step 2: Convert to structured JSON matching our Aircraft interface
-    const jsonResponse = await disco.llm.call(
-      `Convert the following aircraft information to structured JSON format: ${textResponse.response}
+async function convertToStructuredData(searchResults: string): Promise<{ response: AircraftData; cost: number }> {
+  console.log('🔄 Converting to structured JSON...');
+  
+  try {
+    const response = await disco.llm.call(
+      `Convert the following aircraft information to structured JSON format: ${searchResults}
       
       Use this exact structure:
       {
@@ -154,29 +197,112 @@ export async function POST(request: NextRequest) {
         responseFormat: config.llm.responseFormat.json,
       }
     );
+    
+    console.log('✅ JSON conversion completed');
+    return {
+      response: response.response as AircraftData,
+      cost: response.usage.cost
+    };
+  } catch (error) {
+    console.error('❌ Conversion LLM call failed:', error);
+    throw new Error(`Data conversion failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+  }
+}
 
-    // Validate the LLM response
-    if (!jsonResponse.response || typeof jsonResponse.response !== 'object') {
+export async function POST(request: NextRequest) {
+  console.log('🚀 Auto-populate API called');
+  
+  try {
+    const { title } = await request.json();
+    console.log('📝 Received title:', title);
+
+    if (!title || typeof title !== 'string') {
+      console.log('❌ Invalid title provided');
+      return NextResponse.json(
+        { error: 'Aircraft title is required' },
+        { status: 400 }
+      );
+    }
+
+    // Basic validation for aircraft title format
+    // Check for at least a 2- or 4-digit year and some additional words
+    const hasYear = /\b(19|20)\d{2}\b|\b\d{2}\b/.test(title);
+    const wordCount = title.trim().split(/\s+/).length;
+    console.log('🔍 Validation - hasYear:', hasYear, 'wordCount:', wordCount);
+    
+    if (!hasYear) {
+      console.log('❌ No year found in title');
+      return NextResponse.json(
+        { error: 'Please include the year of the aircraft in the title' },
+        { status: 400 }
+      );
+    }
+    
+    if (wordCount < 3) {
+      console.log('❌ Insufficient words in title');
+      return NextResponse.json(
+        { error: 'Please provide more details: year, make, model, and condition notes are required' },
+        { status: 400 }
+      );
+    }
+
+    // Step 1: Validate and enhance the title
+    const validation = await validateAndEnhanceTitle(title);
+    console.log('✅ LLM validation completed, valid:', validation.response.valid);
+
+    if (!validation.response.valid) {
+      const missing = validation.response.missing || ['year, make, and model'];
+      console.log('❌ Validation failed, missing:', missing);
+      return NextResponse.json(
+        { 
+          error: `Missing required information: ${missing.join(', ')}. Please include year, make, model, and condition details (e.g., "1978 Piper Archer II – Low Time Engine" or "2001 Kitfox 5 Outback (recently restored) $108K")` 
+        },
+        { status: 400 }
+      );
+    }
+
+    // Use the enhanced title for better search results
+    const searchTitle = validation.response.enhanced_title || title;
+    console.log('🔍 Search title:', searchTitle);
+
+    // Step 2: Search for comprehensive aircraft information
+    const searchResults = await searchAircraftInformation(searchTitle);
+
+    // Step 3: Convert to structured JSON
+    const structuredData = await convertToStructuredData(searchResults.response);
+
+    // Validate the final response structure
+    if (!structuredData.response || typeof structuredData.response !== 'object') {
+      console.log('❌ Invalid LLM response structure');
       return NextResponse.json(
         { error: 'Invalid response from AI service' },
         { status: 500 }
       );
     }
 
-    const aircraftData = jsonResponse.response;
+    console.log('📊 Aircraft data prepared');
 
     // Calculate total cost
-    const totalCost = validationResponse.usage.cost + textResponse.usage.cost + jsonResponse.usage.cost;
+    const totalCost = validation.cost + searchResults.cost + structuredData.cost;
+    console.log('💰 Total cost:', totalCost);
 
+    console.log('🎉 Auto-populate completed successfully');
     return NextResponse.json({
       success: true,
-      data: aircraftData,
+      data: structuredData.response,
       cost: totalCost,
       message: 'Aircraft information auto-populated successfully'
     });
 
   } catch (error) {
-    console.error('Auto-populate API error:', error);
+    console.error('💥 Auto-populate API error:', error);
+    
+    // Log detailed error information
+    if (error instanceof Error) {
+      console.error('Error name:', error.name);
+      console.error('Error message:', error.message);
+      console.error('Error stack:', error.stack);
+    }
     
     let errorMessage = 'Failed to auto-populate aircraft information';
     let statusCode = 500;
@@ -191,9 +317,13 @@ export async function POST(request: NextRequest) {
       } else if (error.message.includes('unauthorized') || error.message.includes('authentication')) {
         errorMessage = 'Authentication error. Please contact support.';
         statusCode = 401;
+      } else if (error.message.includes('timeout')) {
+        errorMessage = 'Request timed out. Please try again.';
+        statusCode = 408;
       }
     }
     
+    console.log('📤 Returning error response:', { errorMessage, statusCode });
     return NextResponse.json(
       { error: errorMessage },
       { status: statusCode }
