@@ -114,11 +114,11 @@ export default async function AdminBlogPage() {
                     <tr key={post.id} className="hover:bg-gray-50">
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div>
-                          <div className="text-base font-semibold text-gray-800 line-clamp-1">
+                          <div className="text-base font-semibold text-gray-900 line-clamp-1">
                             {post.title}
                           </div>
                           {post.blurb && (
-                            <div className="text-sm text-gray-700 line-clamp-1 mt-1">
+                            <div className="text-sm text-neutral-500 line-clamp-1 mt-1">
                               {post.blurb}
                             </div>
                           )}
