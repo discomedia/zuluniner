@@ -172,22 +172,22 @@ export default function HomePageClient({ children }: HomePageClientProps) {
               Find Your Perfect Aircraft
             </h1>
             <p className="mt-6 text-xl text-primary-100 max-w-3xl mx-auto">
-              The premier marketplace connecting pilots, dealers, and aviation enthusiasts worldwide. 
-              Discover your next aircraft with confidence and trust.
+              The premier marketplace by pilots and for pilots. 
+              Discover your next aircraft with confidence, trust, and panache.
             </p>
             <div className="mt-10 max-w-2xl mx-auto">
               <SearchBar
-                placeholder="Search aircraft by make, model, or location..."
+                placeholder="Search by make, model, or location..."
                 onSearch={handleSearch}
                 size="lg"
                 className="mb-6"
               />
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" variant="secondary" className="bg-white text-primary-700 hover:bg-neutral-100" onClick={handleBrowseAircraft}>
-                  Browse Aircraft
+                  Browse 
                 </Button>
                 <Button size="lg" variant="ghost" className="text-white border-white hover:bg-primary-500" onClick={handleSellAircraft}>
-                  Sell Your Aircraft
+                  Sell
                 </Button>
               </div>
             </div>

@@ -5,9 +5,9 @@ export default function Footer() {
 
   const navigation = {
     marketplace: [
-      { name: 'Browse Aircraft', href: '/aircraft' },
-      { name: 'Sell Aircraft', href: '/sell' },
-      { name: 'Advanced Search', href: '/search' },
+      { name: 'Browse', href: '/aircraft' },
+      { name: 'Sell', href: '/sell' },
+      { name: 'Search', href: '/search' },
       { name: 'Price Guide', href: '/pricing' },
     ],
     company: [

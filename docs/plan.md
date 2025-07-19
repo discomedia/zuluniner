@@ -560,7 +560,7 @@ ZuluNiner (zuluniner.com) is an aircraft marketplace built with Next.js, React, 
 
 ### Front Page Navigation & Content ✅
 - [x] **Fixed navigation buttons**
-  - [x] "Browse Aircraft" button now navigates to `/aircraft` page
+  - [x] "Browse" button now navigates to `/aircraft` page
   - [x] "View All Aircraft" button now navigates to `/aircraft` page  
   - [x] "Sell Your Aircraft" buttons now navigate to `/sell` page
   - [x] "List Your Aircraft" button now navigates to `/sell` page
@@ -1120,7 +1120,7 @@ export default function SearchInterface({ children }: { children: ReactNode }) {
     <>
       <SearchBar onSearch={handleSearch} />
       <Button onClick={() => handleNavigation('/aircraft')}>
-        Browse Aircraft
+        Browse
       </Button>
       {children}
     </>
@@ -1212,7 +1212,7 @@ export default function HomePageClient({ children }: { children: ReactNode }) {
           <h1>Find Your Perfect Aircraft</h1>
           <SearchBar onSearch={handleSearch} />
           <Button onClick={() => router.push('/aircraft')}>
-            Browse Aircraft
+            Browse
           </Button>
         </div>
       </section>

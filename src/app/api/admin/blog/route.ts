@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { requireAdmin } from '@/lib/auth-server';
+import { requireAdmin, createServerSupabaseClient } from '@/lib/auth-server';
 import { db } from '@/api/db';
 
 export async function POST(request: NextRequest) {
@@ -28,7 +28,9 @@ export async function POST(request: NextRequest) {
 
     console.log('📝 Creating blog post:', { title, slug, published });
 
-    const newPost = await db.blog.create(blogPostData);
+    // Create the blog post using authenticated client
+    const supabase = await createServerSupabaseClient();
+    const newPost = await db.blog.create(blogPostData, supabase);
 
     console.log('✅ Blog post created successfully:', newPost.id);
 

@@ -14,7 +14,7 @@ type BlogPostsResult = {
 };
 
 export const metadata = {
-  title: 'Aviation Blog | ZuluNiner',
+  title: 'ZuluNiner Blog | Aircraft, Aviation, and Industry Insights',
   description: 'Expert insights, aircraft reviews, and aviation industry news from the ZuluNiner community.',
 };
 
@@ -38,10 +38,10 @@ export default async function BlogPage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-                Aviation Blog
+                ZuluNiner Blog
               </h1>
               <p className="mt-6 max-w-2xl mx-auto text-xl text-primary-100">
-                Expert insights, aircraft reviews, and aviation industry news from the ZuluNiner community.
+                You like planes? We like planes too.
               </p>
             </div>
           </div>

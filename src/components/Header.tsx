@@ -13,8 +13,8 @@ export default function Header() {
   const { user, profile, loading, signOut } = useAuth();
 
   const navigation = [
-    { name: 'Browse Aircraft', href: '/aircraft' },
-    { name: 'Sell Aircraft', href: '/sell' },
+    { name: 'Browse', href: '/aircraft' },
+    { name: 'Sell', href: '/sell' },
     { name: 'Blog', href: '/blog' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' },
