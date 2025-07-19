@@ -443,12 +443,14 @@ async function getBlogPosts(published = true, page = 1, limit = 10): Promise<Blo
     .select(`
       *,
       author:users(name)
-    `, { count: 'exact' })
-    .order('published_at', { ascending: false });
+    `, { count: 'exact' });
 
   if (published) {
     query = query.eq('published', true);
   }
+
+  // Order by created_at as primary sort since published_at might be null
+  query = query.order('created_at', { ascending: false });
 
   const offset = (page - 1) * limit;
   query = query.range(offset, offset + limit - 1);
