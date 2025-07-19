@@ -64,7 +64,7 @@ export default async function BlogPage() {
                         {post.header_photo && (
                           <div className="aspect-video w-full overflow-hidden rounded-t-lg">
                             <Image
-                              src={post.header_photo}
+                              src={db.blog.getImageUrl(post.header_photo)}
                               alt={post.title}
                               width={400}
                               height={225}

@@ -12,25 +12,25 @@ import { db } from '@/api/db';
 async function getDashboardStats() {
   // Get user count using db convenience function
   const userCount = await db.users.getCount();
-  
+
   // Get all aircraft to calculate stats by status
   const { aircraft: aircraftData } = await db.aircraft.getAll(1, 1000); // Get all for stats
-  
+
   const aircraftStats = {
     total: aircraftData?.length || 0,
     active: aircraftData?.filter(a => a.status === 'active').length || 0,
     draft: aircraftData?.filter(a => a.status === 'draft').length || 0,
     pending: aircraftData?.filter(a => a.status === 'pending').length || 0,
   };
-  
-  // Get blog post count (placeholder since blog system isn't implemented yet)
-  const blogCount = 0;
-  
+
+  // Get published blog post count
+  const { posts: publishedPosts } = await db.blog.getPosts(true, 1, 1000);
+  const blogCount = publishedPosts.length;
+
   return {
     userCount: userCount || 0,
     aircraftStats,
     blogCount,
-    pendingReviews: aircraftStats.pending,
   };
 }
 
@@ -103,7 +103,7 @@ export default async function AdminDashboard() {
       </div>
 
       {/* Quick Stats integrated visually with cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
         <Card className="flex flex-col items-center py-6 bg-primary-50 border-0">
           <UserIcon className="w-7 h-7 mb-2 text-primary-600" />
           <div className="text-3xl font-extrabold text-primary-700">{stats.userCount}</div>
@@ -118,11 +118,6 @@ export default async function AdminDashboard() {
           <BookOpenIcon className="w-7 h-7 mb-2 text-blue-600" />
           <div className="text-3xl font-extrabold text-blue-700">{stats.blogCount}</div>
           <div className="text-base font-medium text-neutral-800 mt-1">Blog Posts</div>
-        </Card>
-        <Card className="flex flex-col items-center py-6 bg-yellow-50 border-0">
-          <span className="w-7 h-7 mb-2 inline-block rounded-full bg-yellow-200" />
-          <div className="text-3xl font-extrabold text-yellow-700">{stats.pendingReviews}</div>
-          <div className="text-base font-medium text-neutral-800 mt-1">Pending Reviews</div>
         </Card>
       </div>
     </ContainerLayout>

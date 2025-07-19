@@ -488,7 +488,8 @@ async function getBlogPosts(published = true, page = 1, limit = 10): Promise<Blo
     query = query.eq('published', true);
   }
 
-  // Order by created_at as primary sort since published_at might be null
+  // Order by published_at DESC, then created_at DESC (so posts with null published_at still show)
+  query = query.order('published_at', { ascending: false, nullsFirst: false });
   query = query.order('created_at', { ascending: false });
 
   const offset = (page - 1) * limit;
