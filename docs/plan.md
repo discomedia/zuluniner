@@ -622,10 +622,11 @@ ZuluNiner (zuluniner.com) is an aircraft marketplace built with Next.js, React, 
   - [ ] Search within blog posts
   - [ ] Pagination and infinite scroll option
   
-- [ ] **Article detail pages**
-  - [ ] Markdown content rendering
+- [x] **Article detail pages**
+  - [x] Markdown content rendering (ReactMarkdown + remarkGfm)
+  - [x] @tailwindcss/typography plugin installed for proper prose styling
   - [ ] Header image display
-  - [ ] Author information
+  - [x] Author information
   - [ ] Related articles suggestions
   - [ ] Social sharing buttons
 
