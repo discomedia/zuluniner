@@ -14,7 +14,7 @@ async function getDashboardStats() {
   const userCount = await db.users.getCount();
 
   // Get all aircraft to calculate stats by status
-  const { aircraft: aircraftData } = await db.aircraft.getAll(1, 1000); // Get all for stats
+  const { aircraft: aircraftData } = await db.aircraft.getAllForAdmin();
 
   const aircraftStats = {
     total: aircraftData?.length || 0,

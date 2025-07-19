@@ -33,7 +33,7 @@ export default async function AdminBlogPage() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="px-2 md:px-6 space-y-8">
       {/* Header */}
       {/* Back to Admin Dashboard */}
       <div className="w-full flex justify-start mb-2 mt-2">
@@ -44,7 +44,7 @@ export default async function AdminBlogPage() {
           Back to admin dashboard
         </Link>
       </div>
-      <div className="bg-white border-b border-neutral-200 rounded-xl shadow-sm px-6 py-6 mb-6 mx-2 md:mx-6">
+      <div className="bg-white border-b border-neutral-200 rounded-xl shadow-sm px-6 py-6 mb-4">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <h1 className="text-3xl font-extrabold text-gray-900">Blog Management</h1>
@@ -126,8 +126,8 @@ export default async function AdminBlogPage() {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                          post.published 
-                            ? 'bg-success-100 text-success-800' 
+                          post.published
+                            ? 'bg-success-100 text-success-800'
                             : 'bg-warning-100 text-warning-800'
                         }`}>
                           {post.published ? 'Published' : 'Draft'}
@@ -141,14 +141,14 @@ export default async function AdminBlogPage() {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
                         {post.published && (
-                          <Link 
+                          <Link
                             href={`/blog/${post.slug}`}
                             className="text-primary-600 hover:text-primary-900"
                           >
                             View
                           </Link>
                         )}
-                        <Link 
+                        <Link
                           href={`/admin/blog/${post.id}/edit`}
                           className="text-primary-600 hover:text-primary-900"
                         >
