@@ -1,6 +1,7 @@
 'use client';
 
 import { Card, CardHeader, CardContent } from '@/components/ui/Card';
+import Image from 'next/image';
 import type { AircraftFormData } from './AircraftWizard';
 
 interface AircraftPreviewStepProps {
@@ -58,10 +59,14 @@ export default function AircraftPreviewStep({
           {/* Hero Image */}
           {photos.length > 0 && (
             <div className="aspect-video bg-gray-100 rounded-lg overflow-hidden mb-6">
-              <img
+              <Image
                 src={URL.createObjectURL(photos[0])}
                 alt="Primary aircraft photo"
+                fill
                 className="w-full h-full object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                style={{ objectFit: 'cover' }}
+                unoptimized
               />
             </div>
           )}
@@ -124,10 +129,14 @@ export default function AircraftPreviewStep({
               <div className="grid grid-cols-3 md:grid-cols-6 gap-2">
                 {photos.slice(0, 6).map((photo, index) => (
                   <div key={index} className="aspect-square bg-gray-100 rounded overflow-hidden">
-                    <img
+                    <Image
                       src={URL.createObjectURL(photo)}
                       alt={`Photo ${index + 1}`}
+                      fill
                       className="w-full h-full object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 16vw"
+                      style={{ objectFit: 'cover' }}
+                      unoptimized
                     />
                   </div>
                 ))}

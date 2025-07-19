@@ -1,9 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useState } from 'react';
 import { Grid, List, Filter } from 'lucide-react';
-import { db } from '@/api/db';
 import type { Aircraft, AircraftPhoto, SearchFilters } from '@/types';
 import Button from '@/components/ui/Button';
 import SearchBar from '@/components/ui/SearchBar';
@@ -28,70 +26,39 @@ interface AircraftWithPhotos extends Aircraft {
   } | null;
 }
 
-export default function AircraftListingsContent() {
-  const searchParams = useSearchParams();
-  const [aircraft, setAircraft] = useState<AircraftWithPhotos[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [viewMode, setViewMode] = useState<ViewMode>('grid');
-  const [sortBy, setSortBy] = useState<SortOption>('newest');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalItems, setTotalItems] = useState(0);
-  const [showFilters, setShowFilters] = useState(false);
-  const [filters, setFilters] = useState<SearchFilters>({});
+interface AircraftListingsContentProps {
+  initialAircraft: AircraftWithPhotos[];
+  initialTotal: number;
+  initialPage: number;
+  initialFilters: SearchFilters;
+  initialSort: string;
+  initialView: string;
+  itemsPerPage: number;
+}
 
-  const itemsPerPage = viewMode === 'grid' ? 12 : 8;
+export default function AircraftListingsContent({
+  initialAircraft,
+  initialTotal,
+  initialPage,
+  initialFilters,
+  initialSort,
+  initialView,
+  itemsPerPage,
+}: AircraftListingsContentProps) {
+  const [aircraft] = useState<AircraftWithPhotos[]>(initialAircraft);
+  const [loading] = useState(false);
+  const [error] = useState<string | null>(null);
+  const [viewMode, setViewMode] = useState<ViewMode>(initialView as ViewMode);
+  const [sortBy, setSortBy] = useState<SortOption>(initialSort as SortOption);
+  const [currentPage, setCurrentPage] = useState(initialPage);
+  const [totalItems] = useState(initialTotal);
+  const [showFilters, setShowFilters] = useState(false);
+  const [filters, setFilters] = useState<SearchFilters>(initialFilters);
+
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-  // Initialize filters from URL params
-  useEffect(() => {
-    const initialFilters: SearchFilters = {};
-    
-    const query = searchParams.get('q');
-    if (query) initialFilters.query = query;
-    
-    const priceMin = searchParams.get('price_min');
-    if (priceMin) initialFilters.priceMin = parseInt(priceMin);
-    
-    const priceMax = searchParams.get('price_max');
-    if (priceMax) initialFilters.priceMax = parseInt(priceMax);
-    
-    const make = searchParams.get('make');
-    if (make) initialFilters.make = make;
-    
-    const sort = searchParams.get('sort') as SortOption;
-    if (sort) setSortBy(sort);
-    
-    const page = searchParams.get('page');
-    if (page) setCurrentPage(parseInt(page));
-    
-    const view = searchParams.get('view') as ViewMode;
-    if (view) setViewMode(view);
-
-    setFilters(initialFilters);
-  }, [searchParams]);
-
-  // Fetch aircraft
-  useEffect(() => {
-    const fetchAircraft = async () => {
-      setLoading(true);
-      setError(null);
-
-      try {
-        const result = await db.aircraft.search(filters, currentPage, itemsPerPage);
-        
-        setAircraft(result.aircraft);
-        setTotalItems(result.total);
-      } catch (error) {
-        console.error('Error fetching aircraft:', error);
-        setError('Failed to load aircraft listings. Please try again.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchAircraft();
-  }, [filters, currentPage, itemsPerPage, sortBy]);
+  // Optionally: implement client-side navigation/filtering by updating URL and triggering a reload
+  // (for now, just update state; real implementation should use router.push with query params)
 
   const handleSearch = (query: string) => {
     setFilters(prev => ({ ...prev, query }));

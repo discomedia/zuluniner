@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
+import Image from 'next/image';
 import Button from '@/components/ui/Button';
 import { validateImageFile, optimizeImage } from '@/lib/image-utils';
 import type { AircraftPhoto } from '@/types';
@@ -148,12 +149,16 @@ export default function AircraftPhotosStep({
               return (
                 <div key={photoKey} className="relative group">
                   <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
-                    <img
+                    <Image
                       src={URL.createObjectURL(photo)}
                       alt={`Photo ${index + 1}`}
+                      fill
                       className={`w-full h-full object-cover transition-opacity ${
                         isUploading ? 'opacity-60' : 'opacity-100'
                       }`}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      style={{ objectFit: 'cover' }}
+                      unoptimized
                     />
                     
                     {/* Upload Progress Overlay */}
