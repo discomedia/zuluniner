@@ -84,14 +84,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       try {
         console.log('🔄 Initializing auth...');
         
-        // Add a timeout to prevent hanging
-        const authPromise = supabase.auth.getUser();
-        const timeoutPromise = new Promise<never>((_, reject) => 
-          setTimeout(() => reject(new Error('Auth timeout')), 10000)
-        );
-        
-        const result = await Promise.race([authPromise, timeoutPromise]);
-        const { data: { user }, error } = result;
+        const { data: { user }, error } = await supabase.auth.getUser();
         
         if (error) {
           // Check if it's the expected "session missing" error
@@ -112,12 +105,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         }
       } catch (error: unknown) {
         // Handle any unexpected errors gracefully
-        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-        if (errorMessage === 'Auth timeout') {
-          console.warn('⏰ Auth initialization timed out, assuming no user');
-        } else {
-          console.error('❌ Error initializing auth:', error);
-        }
+        console.error('❌ Error initializing auth:', error);
         setUser(null);
         setProfile(null);
       } finally {

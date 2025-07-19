@@ -1289,3 +1289,239 @@ export default function ProblematicPage() {
 4. Verify functionality in both development and production
 
 This architecture ensures reliable data loading across all deployment environments while maintaining the interactive user experience expected in modern web applications.
+
+---
+
+## Improvements
+
+*Based on industry insights and user feedback, the following improvements are organized by implementation priority and technical difficulty.*
+
+### High Priority & Easy Implementation
+
+#### 1. N-Number Data Lookup
+**Description**: Integrate with FAA Registry API to auto-populate aircraft data using tail number (N-Number).
+
+**Steps to implement**:
+1. Create API endpoint `/api/aircraft/lookup-nnumber`
+2. Integrate with FAA Aircraft Registry API (https://registry.faa.gov/AircraftInquiry/)
+3. Add N-Number input field with lookup button in aircraft creation form
+4. Auto-populate: make, model, year, engine type, certification type
+5. Show registration validity and airworthiness status
+
+**API Integration**: Uses FAA public APIs for aircraft registration data
+
+#### 2. Market Price Estimation (Zestimate)
+**Description**: AI-powered price estimation algorithm like Zillow's Zestimate for aircraft valuation. Use DiscoMedia's LLM for market analysis.
+
+**Steps to implement**:
+1. Collect market data from existing listings and sold aircraft
+2. Create ML model considering: year, hours, engine time, avionics, location
+3. Build API endpoint `/api/aircraft/estimate-price`
+4. Display price range and confidence interval on listing pages
+5. Show price comparison with similar aircraft
+
+**API Integration**: Uses machine learning APIs and market data analysis
+
+#### 3. Engine TBO Calculator
+**Description**: Calculate remaining engine life and associated costs based on hours and TBO (Time Between Overhaul).
+
+**Steps to implement**:
+1. Create engine database with TBO specifications by model
+2. Build calculator function for remaining hours and cost estimation
+3. Add visual indicators (green/yellow/red) for engine condition
+4. Display "Expect $X overhaul in Y hours" messaging
+5. Include in aircraft detail and listing card components
+
+**API Integration**: Database lookup with cost calculation algorithms
+
+#### 4. Accident History Badge
+**Description**: Show accident-free status or accident history using NTSB database.
+
+**Steps to implement**:
+1. Integrate with NTSB Aviation Accident Database API
+2. Create background job to check accident history by N-Number
+3. Add "Accident Free" badge or "View History" link
+4. Cache results to avoid repeated API calls
+5. Display prominently on aircraft detail pages
+
+**API Integration**: NTSB Aviation Accident Database (public API)
+
+### Medium Priority & Moderate Implementation
+
+#### 5. Flight Activity Tracking
+**Description**: Track how often aircraft is flown as health indicator using FlightAware data.
+
+**Steps to implement**:
+1. Integrate with FlightAware API for flight tracking
+2. Create dashboard showing monthly flight hours/frequency
+3. Add "Regular flyer" or "Rarely used" indicators
+4. Store flight data in database for trend analysis
+5. Display flight activity timeline on aircraft pages
+
+**API Integration**: FlightAware API (subscription required)
+
+#### 6. Airworthiness Directives (AD) Lookup
+**Description**: Display applicable ADs and compliance status for aircraft make/model.
+
+**Steps to implement**:
+1. Create database of FAA Airworthiness Directives by aircraft type
+2. Build matching algorithm for applicable ADs
+3. Create API endpoint `/api/aircraft/airworthiness-directives`
+4. Display AD list with compliance status indicators
+5. Estimate inspection burden costs
+
+**API Integration**: FAA FSIMS API and AD database
+
+#### 7. Hangar/Tie-down Pricing
+**Description**: Provide local hangar and tie-down pricing by airport location.
+
+**Steps to implement**:
+1. Create database of hangar pricing by airport code
+2. Integrate with airport services APIs where available
+3. Build pricing lookup by location/radius
+4. Display estimated monthly storage costs
+5. Include contact information for facilities
+
+**API Integration**: Airport services APIs and manual data collection
+
+#### 8. Insurance Cost Estimation
+**Description**: Estimate insurance costs based on aircraft type, pilot experience, and location.
+
+**Steps to implement**:
+1. Partner with aviation insurance providers for data
+2. Create cost model considering aircraft value, pilot hours, location
+3. Build API endpoint `/api/aircraft/insurance-estimate`
+4. Display cost ranges and referral links
+5. Include in total cost of ownership calculator
+
+**API Integration**: Insurance partner APIs and actuarial data
+
+### Medium Priority & Complex Implementation
+
+#### 9. A&P Mechanic Locator
+**Description**: Find licensed A&P mechanics for pre-buy inspections based on aircraft location.
+
+**Steps to implement**:
+1. Create database of A&P mechanics with location and specialties
+2. Build search API with radius and aircraft type filtering
+3. Integrate with FAA Mechanic Registry for verification
+4. Add rating/review system for mechanics
+5. Create booking system for pre-buy inspections
+
+**API Integration**: FAA Airmen Certification Database
+
+#### 10. Advanced Search with Saved Alerts
+**Description**: Nuanced search with saved criteria and email alerts for new matching aircraft.
+
+**Steps to implement**:
+1. Expand search filters: seats, range, fuel burn, useful load, avionics
+2. Create saved search functionality for logged-in users
+3. Build alert system checking new listings against saved criteria
+4. Implement email notification system
+5. Add "brands I like" preference matching
+
+**API Integration**: Email service integration (SendGrid/Mailgun)
+
+#### 11. Aircraft Comparison Tool
+**Description**: Side-by-side comparison of multiple aircraft specifications and pricing.
+
+**Steps to implement**:
+1. Add "Compare" checkboxes to aircraft cards
+2. Create comparison page with side-by-side layout
+3. Build specification comparison table
+4. Add photo galleries for each aircraft
+5. Export comparison as PDF report
+
+**API Integration**: PDF generation service
+
+#### 12. Enhanced Photo Management with AI
+**Description**: AI-powered photo enhancement and automatic aircraft walkaround videos.
+
+**Steps to implement**:
+1. Integrate with AI photo enhancement services
+2. Create automated photo categorization (exterior, interior, panel, engine)
+3. Build video creation from photo sequences
+4. Add drone integration for aerial photography
+5. Implement "Airbnb-style" stunning photo standards
+
+**API Integration**: AI photo enhancement APIs, video generation services
+
+### Low Priority & Complex Implementation
+
+#### 13. Digital Logbook Analysis
+**Description**: AI-powered logbook digitization and compliance verification.
+
+**Steps to implement**:
+1. Create photo upload interface for logbook pages
+2. Integrate OCR/AI services for text extraction
+3. Build compliance checking algorithms
+4. Create digital logbook display interface
+5. Generate maintenance summary reports
+
+**API Integration**: OCR/AI services (Google Vision, AWS Textract)
+
+#### 14. Marketplace Analytics Dashboard
+**Description**: Detailed analytics on listing performance and market trends.
+
+**Steps to implement**:
+1. Track listing views, inquiries, and engagement metrics
+2. Build seller dashboard with performance analytics
+3. Create market trend analysis and reporting
+4. Add competitor pricing analysis
+5. Implement time-to-sell predictions
+
+**API Integration**: Analytics processing and data visualization APIs
+
+### Very Hard Implementation
+
+#### 15. Financing Integration
+**Description**: Connect buyers with specialized aviation financing options.
+
+**Steps to implement**:
+1. Partner with aviation lenders and specialty finance companies
+2. Build loan application workflow and qualification system
+3. Integrate with credit checking services
+4. Create loan calculator with payment scenarios
+5. Implement secure document upload and processing
+6. Build lender portal for application review
+
+**API Integration**: Credit bureau APIs, banking/lending platform APIs
+
+#### 16. Escrow and Transaction Management
+**Description**: Full-service transaction platform with escrow and title services.
+
+**Steps to implement**:
+1. Partner with aviation escrow and title companies
+2. Build secure transaction workflow system
+3. Integrate payment processing and wire transfers
+4. Create document management and digital signatures
+5. Implement milestone-based fund release
+6. Build transaction tracking and communication tools
+
+**API Integration**: Banking APIs, document management, payment processors
+
+#### 17. Blockchain Aircraft History
+**Description**: Immutable aircraft history and ownership tracking using blockchain.
+
+**Steps to implement**:
+1. Design blockchain schema for aircraft records
+2. Integrate with aircraft registration systems
+3. Build smart contracts for ownership transfers
+4. Create maintenance record verification system
+5. Implement multi-party verification workflow
+6. Build public aircraft history explorer
+
+**API Integration**: Blockchain networks, smart contract platforms
+
+#### 18. International Market Expansion
+**Description**: Support for international aircraft sales with regulatory compliance.
+
+**Steps to implement**:
+1. Research international aviation regulations by country
+2. Build multi-currency pricing and conversion
+3. Integrate with international aircraft registries
+4. Create country-specific compliance checking
+5. Build international shipping and logistics integration
+6. Implement multi-language support
+
+**API Integration**: International registry APIs, currency conversion, shipping APIs
