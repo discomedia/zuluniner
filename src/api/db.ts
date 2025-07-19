@@ -435,6 +435,80 @@ function getPhotoUrl(storagePath: string): string {
   
   return baseUrl;
 }
+// Get public URL for a blog image storage path
+export function getBlogImageUrl(storagePath: string): string {
+  if (!storagePath) return '';
+  // Always return absolute URL for Next.js <Image>
+  const url = supabase.storage.from('blog-images').getPublicUrl(storagePath).data.publicUrl;
+  // For local dev, replace 127.0.0.1 with window.location.hostname if needed
+  if (typeof window !== 'undefined' && url.includes('127.0.0.1')) {
+    const currentHost = window.location.hostname;
+    if (currentHost !== '127.0.0.1' && currentHost !== 'localhost') {
+      return url.replace('127.0.0.1', currentHost);
+    }
+  }
+  return url;
+}
+import sharp from 'sharp';
+
+// Blog image upload (Supabase Storage: blog-images) with compression and keyword filename
+export async function uploadBlogImageCompressed(
+  file: Buffer,
+  filename: string,
+  altText: string,
+  supabaseClient?: SupabaseClient<Database>
+): Promise<{ storage_path: string; alt_text: string; public_url: string }> {
+  const client = supabaseClient || supabase;
+  const timestamp = Date.now();
+  const safeName = filename.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
+  const storagePath = `blog/${timestamp}-${safeName}.webp`;
+
+  console.log(`🗜️ Compressing blog image for "${filename}"...`);
+  const compressed = await sharp(file)
+    .resize({ width: 1200, withoutEnlargement: true })
+    .webp({ quality: 82 })
+    .toBuffer();
+
+  console.log(`⬆️ Uploading compressed image to Supabase Storage: ${storagePath}`);
+  const { error: uploadError } = await client.storage
+    .from('blog-images')
+    .upload(storagePath, compressed, {
+      contentType: 'image/webp',
+      cacheControl: '3600',
+      upsert: false,
+    });
+
+  if (uploadError) throw uploadError;
+
+  const publicUrl = client.storage.from('blog-images').getPublicUrl(storagePath).data.publicUrl;
+  console.log(`🌐 Blog image public URL: ${publicUrl}`);
+
+  return { storage_path: storagePath, alt_text: altText, public_url: publicUrl };
+}
+// Blog image upload (Supabase Storage: blog-images)
+export async function uploadBlogImage(
+  file: Buffer,
+  filename: string,
+  altText: string,
+  supabaseClient?: SupabaseClient<Database>
+): Promise<{ storage_path: string; alt_text: string }> {
+  const client = supabaseClient || supabase;
+  const timestamp = Date.now();
+  const safeName = filename.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
+  const storagePath = `blog/${timestamp}-${safeName}.webp`;
+
+  const { error: uploadError } = await client.storage
+    .from('blog-images')
+    .upload(storagePath, file, {
+      contentType: 'image/webp',
+      cacheControl: '3600',
+      upsert: false,
+    });
+
+  if (uploadError) throw uploadError;
+
+  return { storage_path: storagePath, alt_text: altText };
+}
 
 // Blog functions
 async function getBlogPosts(published = true, page = 1, limit = 10): Promise<BlogPostsResult> {
@@ -643,6 +717,8 @@ export const db = {
     create: createBlogPost,
     update: updateBlogPost,
     delete: deleteBlogPost,
+    uploadImage: uploadBlogImage,
+    getImageUrl: getBlogImageUrl,
   },
   users: {
     getById: getUserById,

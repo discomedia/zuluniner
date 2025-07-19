@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
@@ -19,15 +20,15 @@ export default function BlogPostForm({ initialData, isEditing = false }: BlogPos
   const [error, setError] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
   const [generationProgress, setGenerationProgress] = useState('');
-  
+  const [blogImageUrl, setBlogImageUrl] = useState<string | null>(null);
+
   const [formData, setFormData] = useState({
     title: initialData?.title || '',
     slug: initialData?.slug || '',
     blurb: initialData?.blurb || '',
     content: initialData?.content || '',
     meta_description: initialData?.meta_description || '',
-    header_photo: initialData?.header_photo || '',
-    published: initialData?.published || false,
+    published: initialData?.published ?? true,
   });
 
   const generateSlug = (title: string) => {
@@ -53,8 +54,11 @@ export default function BlogPostForm({ initialData, isEditing = false }: BlogPos
     setError('');
 
     try {
+      // Omit header_photo from payload if present
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { header_photo, ...rest } = formData as typeof formData & { header_photo?: string };
       const submitData = {
-        ...formData,
+        ...rest,
         published: asDraft ? false : formData.published,
       };
 
@@ -79,6 +83,10 @@ export default function BlogPostForm({ initialData, isEditing = false }: BlogPos
 
       const result = await response.json();
       console.log('✅ Blog post saved:', result);
+
+      if (result.post?.image_public_url) {
+        setBlogImageUrl(result.post.image_public_url);
+      }
 
       router.push('/admin/blog');
     } catch (err) {
@@ -134,7 +142,6 @@ export default function BlogPostForm({ initialData, isEditing = false }: BlogPos
         blurb: result.data.blurb || prev.blurb,
         content: result.data.content || prev.content,
         meta_description: result.data.meta_description || prev.meta_description,
-        header_photo: result.data.header_photo || prev.header_photo,
       }));
 
       setGenerationProgress('');
@@ -248,14 +255,25 @@ export default function BlogPostForm({ initialData, isEditing = false }: BlogPos
 
           <div>
             <label className="block text-sm font-medium text-neutral-900 mb-2">
-              Header Image URL
+              Header Image
             </label>
-            <Input
-              type="url"
-              value={formData.header_photo}
-              onChange={(e) => setFormData(prev => ({ ...prev, header_photo: e.target.value }))}
-              placeholder="https://example.com/image.jpg"
-            />
+            {blogImageUrl && (
+              <div className="mb-2">
+                <Image
+                  src={blogImageUrl}
+                  alt="Generated blog header"
+                  width={600}
+                  height={160}
+                  className="rounded border border-neutral-200 object-contain"
+                  style={{ maxWidth: '100%', height: 'auto', background: '#f8fafc' }}
+                  priority
+                />
+                <div className="text-xs text-neutral-500 mt-1">AI-generated preview</div>
+              </div>
+            )}
+            <div className="text-sm text-neutral-600">
+              The header image will be generated automatically using AI based on your blog topic. You do not need to upload or select an image.
+            </div>
           </div>
         </CardContent>
       </Card>

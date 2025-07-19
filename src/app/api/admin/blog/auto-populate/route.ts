@@ -81,12 +81,15 @@ async function convertToStructuredBlogData(researchResults: string, originalTopi
       }
 
       CONTENT GUIDELINES:
-      - Write in an authoritative but accessible tone
+      - Write in an authoritative but accessible and funny (but not cliché) tone
+      - Write in the first person and plural (we/us)
+      - Use sophisticated humor, including bait-and-switch, irony, deadpan, satire, absurdism, and self-deprecation. No clichés, overused jokes, or dad jokes.
       - Include specific technical details, model numbers, regulations where relevant
       - Add practical tips and actionable advice
       - Use proper aviation terminology
-      - Structure with clear headings (## in Markdown)
+      - Structure with clear headings (## in Markdown), including using quote blocks, and emphasis.
       - Include bullet points and numbered lists for readability
+      - Absolutely no em-dashes, only hyphens
       - Reference current market conditions or trends
       - Add safety considerations where appropriate
       - Conclude with actionable next steps for readers
@@ -99,7 +102,7 @@ async function convertToStructuredBlogData(researchResults: string, originalTopi
       - Include relevant links where appropriate
       - Format technical specifications in tables if needed
       
-      Make sure the content is valuable to aircraft owners, buyers, pilots, and aviation enthusiasts.`,
+      Make sure the content is valuable to aircraft owners, buyers, pilots, and just anyone who likes planes.`,
       {
         model: config.llm.model,
         responseFormat: config.llm.responseFormat.json,

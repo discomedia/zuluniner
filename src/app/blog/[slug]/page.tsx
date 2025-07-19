@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
     openGraph: {
       title: post.title,
       description: post.meta_description || post.blurb,
-      images: post.header_photo ? [post.header_photo] : [],
+      images: post.header_photo ? [db.blog.getImageUrl(post.header_photo)] : [],
     },
   };
 }
@@ -54,7 +54,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         {post.header_photo && (
           <div className="relative h-96 w-full overflow-hidden">
             <Image
-              src={post.header_photo}
+              src={db.blog.getImageUrl(post.header_photo)}
               alt={post.title}
               fill
               className="object-cover"
