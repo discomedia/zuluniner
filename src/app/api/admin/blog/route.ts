@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdmin, createServerSupabaseClient } from '@/lib/auth-server';
 import { db } from '@/api/db';
-import { uploadBlogImageCompressed } from '@/api/db';
+import { uploadBlogImageCompressed } from '@/api/blog-image-upload';
 import { disco } from '@discomedia/utils';
 
 export async function POST(request: NextRequest) {
