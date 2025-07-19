@@ -37,7 +37,6 @@ export async function middleware(request: NextRequest) {
   const isAdminRoute = request.nextUrl.pathname.startsWith('/admin');
   const isProtectedRoute = [
     '/profile',
-    '/dashboard',
     '/aircraft/create',
     '/aircraft/edit',
   ].some(route => request.nextUrl.pathname.startsWith(route));
@@ -51,10 +50,10 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(redirectUrl);
   }
 
-  // If user is signed in and trying to access auth routes, redirect to dashboard
+  // If user is signed in and trying to access auth routes, redirect to admin
   if (user && isAuthRoute && request.nextUrl.pathname !== '/auth/logout') {
     const redirectUrl = request.nextUrl.clone();
-    redirectUrl.pathname = '/dashboard';
+    redirectUrl.pathname = '/admin';
     return NextResponse.redirect(redirectUrl);
   }
 

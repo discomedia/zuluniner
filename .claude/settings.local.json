@@ -9,7 +9,8 @@
       "Bash(node:*)",
       "Bash(psql:*)",
       "Bash(find:*)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "Bash(ls:*)"
     ],
     "deny": []
   }

@@ -66,12 +66,6 @@ export default function Header() {
                     Admin
                   </Link>
                 )}
-                <Link
-                  href="/dashboard"
-                  className="text-neutral-600 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors"
-                >
-                  Dashboard
-                </Link>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -159,13 +153,6 @@ export default function Header() {
                         Admin
                       </Link>
                     )}
-                    <Link
-                      href="/dashboard"
-                      className="text-neutral-600 hover:text-primary-600 block px-3 py-2 text-base font-medium transition-colors"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      Dashboard
-                    </Link>
                     <button
                       onClick={handleSignOut}
                       className="text-neutral-600 hover:text-primary-600 block w-full text-left px-3 py-2 text-base font-medium transition-colors"
@@ -207,7 +194,7 @@ export default function Header() {
       <SignInModal
         isOpen={isSignInModalOpen}
         onClose={() => setIsSignInModalOpen(false)}
-        redirectTo="/dashboard"
+        redirectTo="/admin"
         initialMode={authModalMode}
       />
     </header>

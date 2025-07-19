@@ -16,7 +16,7 @@ interface SignInModalProps {
   initialMode?: 'signin' | 'signup';
 }
 
-export default function SignInModal({ isOpen, onClose, redirectTo = '/dashboard', initialMode = 'signin' }: SignInModalProps) {
+export default function SignInModal({ isOpen, onClose, redirectTo = '/admin', initialMode = 'signin' }: SignInModalProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
