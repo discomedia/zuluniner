@@ -56,7 +56,6 @@ export default async function AircraftListingsPage({ searchParams }: { searchPar
   const itemsPerPage = view === 'list' ? 8 : 12;
 
   // Fetch aircraft server-side
-  // Only pass 3 arguments as per db.aircraft.search signature
   const result = await db.aircraft.search(filters, page, itemsPerPage);
 
   // Pass all relevant state to the client component

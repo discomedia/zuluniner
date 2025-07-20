@@ -20,12 +20,8 @@ export default async function Home() {
   const loading = false;
   
   try {
-    console.log('📞 Calling searchAircraft with params:', {}, 1, 3);
     const result = await db.aircraft.search({}, 1, 3);
-    console.log('✅ searchAircraft result:', result);
-    console.log('📊 Aircraft count:', result.aircraft?.length);
     featuredAircraft = result.aircraft;
-    console.log('🎯 Featured aircraft loaded');
   } catch (error) {
     console.error('❌ Error fetching featured aircraft:', error);
   }

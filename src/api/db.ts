@@ -104,7 +104,6 @@ async function getAircraftBySlug(slug: string): Promise<AircraftWithUser | null>
 }
 
 async function searchAircraft(filters: SearchFilters, page = 1, limit = 20): Promise<SearchResult> {
-  console.log('🔍 searchAircraft called with filters:', filters, 'page:', page, 'limit:', limit);
   
   try {
     let query = supabase
@@ -146,7 +145,6 @@ async function searchAircraft(filters: SearchFilters, page = 1, limit = 20): Pro
     const offset = (page - 1) * limit;
     query = query.range(offset, offset + limit - 1);
 
-    console.log('🗄️ About to execute aircraft query...');
     const { data: aircraftData, error: aircraftError, count } = await query;
     
     if (aircraftError) {
@@ -154,10 +152,7 @@ async function searchAircraft(filters: SearchFilters, page = 1, limit = 20): Pro
       throw aircraftError;
     }
 
-    console.log('📋 Aircraft query result - count:', count, 'data length:', aircraftData?.length);
-
     if (!aircraftData || aircraftData.length === 0) {
-      console.log('📋 No aircraft found');
       return {
         aircraft: [],
         total: count || 0,
@@ -167,9 +162,7 @@ async function searchAircraft(filters: SearchFilters, page = 1, limit = 20): Pro
     }
 
     const aircraftIds = aircraftData.map(aircraft => aircraft.id);
-    
-    console.log('📷 Fetching photos for aircraft IDs:', aircraftIds);
-    
+        
     const { data: photosData, error: photosError } = await supabase
       .from('aircraft_photos')
       .select('*')
@@ -179,8 +172,6 @@ async function searchAircraft(filters: SearchFilters, page = 1, limit = 20): Pro
     if (photosError) {
       console.error('⚠️ Photos query error (non-critical):', photosError);
     }
-
-    console.log('📷 Photos fetched:', photosData?.length || 0);
 
     const aircraftWithPhotos = aircraftData.map(aircraft => ({
       ...aircraft,
@@ -194,7 +185,6 @@ async function searchAircraft(filters: SearchFilters, page = 1, limit = 20): Pro
       limit
     };
     
-    console.log('📦 Returning result with', result.aircraft.length, 'aircraft');
     return result;
     
   } catch (error) {
