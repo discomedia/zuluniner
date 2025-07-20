@@ -24,6 +24,7 @@ export const metadata: Metadata = {
 
 import { db } from '@/api/db';
 import type { SearchFilters } from '@/types';
+import MainLayout from '@/components/layouts/MainLayout';
 
 function parseFilters(searchParams: URLSearchParams): SearchFilters {
   const filters: SearchFilters = {};
@@ -60,14 +61,16 @@ export default async function AircraftListingsPage({ searchParams }: { searchPar
 
   // Pass all relevant state to the client component
   return (
-    <AircraftListingsContent
-      initialAircraft={result.aircraft}
-      initialTotal={result.total}
-      initialPage={page}
-      initialFilters={filters}
-      initialSort={sort || 'newest'}
-      initialView={view || 'grid'}
-      itemsPerPage={itemsPerPage}
-    />
+    <MainLayout>
+      <AircraftListingsContent
+        initialAircraft={result.aircraft}
+        initialTotal={result.total}
+        initialPage={page}
+        initialFilters={filters}
+        initialSort={sort || 'newest'}
+        initialView={view || 'grid'}
+        itemsPerPage={itemsPerPage}
+      />
+    </MainLayout>
   );
 }
