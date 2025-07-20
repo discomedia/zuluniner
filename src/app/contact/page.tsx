@@ -84,8 +84,8 @@ export default function ContactPage() {
               Contact Us
             </h1>
             <p className="mt-6 text-xl text-primary-100 max-w-3xl mx-auto">
-              Have questions about buying or selling aircraft? Need support with your listing? 
-              We&apos;re here to help connect you with the right solutions.
+              Have questions about buying or selling aircraft? Need support with your listing?
+              We&apos;re here to help connect you with the aviation community.
             </p>
           </div>
         </ContainerLayout>
@@ -102,8 +102,8 @@ export default function ContactPage() {
                 </svg>
               </div>
               <h3 className="text-lg font-semibold text-neutral-900 mb-2">Phone</h3>
-              <p className="text-neutral-600">(555) 123-4567</p>
-              <p className="text-sm text-neutral-500">Mon-Fri 8AM-6PM EST</p>
+              <p className="text-neutral-600">Contact via email</p>
+              <p className="text-sm text-neutral-500">We prefer email communication</p>
             </div>
 
             <div className="text-center">
@@ -113,7 +113,7 @@ export default function ContactPage() {
                 </svg>
               </div>
               <h3 className="text-lg font-semibold text-neutral-900 mb-2">Email</h3>
-              <p className="text-neutral-600">hello@zuluniner.com</p>
+              <p className="text-neutral-600">ninjas@zuluniner.com</p>
               <p className="text-sm text-neutral-500">Response within 24 hours</p>
             </div>
 
@@ -125,8 +125,8 @@ export default function ContactPage() {
                 </svg>
               </div>
               <h3 className="text-lg font-semibold text-neutral-900 mb-2">Office</h3>
-              <p className="text-neutral-600">123 Aviation Blvd</p>
-              <p className="text-neutral-600">Dallas, TX 75201</p>
+              <p className="text-neutral-600">PO Box 4040</p>
+              <p className="text-neutral-600">Melbourne VIC 3000, Australia</p>
             </div>
           </div>
         </ContainerLayout>
@@ -296,7 +296,7 @@ export default function ContactPage() {
                 What are your fees for selling?
               </h3>
               <p className="text-neutral-600 mb-6">
-                We charge a 3% success fee only when your aircraft sells. There are no upfront listing fees or monthly charges. You only pay when we successfully connect you with a buyer.
+                Revenue from listing fees only, though we may implement success fees for auction listings. Any payment processing fees are those of Stripe. You only pay when listing your aircraft.
               </p>
 
               <h3 className="text-lg font-semibold text-neutral-900 mb-3">
@@ -323,10 +323,10 @@ export default function ContactPage() {
               </p>
 
               <h3 className="text-lg font-semibold text-neutral-900 mb-3">
-                Do you provide escrow services?
+                Do you facilitate transactions?
               </h3>
               <p className="text-neutral-600">
-                Yes, we partner with licensed escrow companies to provide secure transaction services for high-value aircraft sales, ensuring both buyer and seller protection throughout the process.
+                ZuluNiner does not facilitate transactions directly. We connect buyers and sellers, but all negotiations and transactions are between the parties involved. We recommend using qualified escrow services for high-value aircraft sales.
               </p>
             </div>
           </div>

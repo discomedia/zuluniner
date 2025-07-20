@@ -181,6 +181,7 @@ export default function HomePageClient({ children }: HomePageClientProps) {
                 onSearch={handleSearch}
                 size="lg"
                 className="mb-6"
+                contrast
               />
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" variant="secondary" className="bg-white text-primary-700 hover:bg-neutral-100" onClick={handleBrowseAircraft}>
