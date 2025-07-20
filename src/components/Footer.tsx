@@ -7,18 +7,14 @@ export default function Footer() {
     marketplace: [
       { name: 'Browse', href: '/aircraft' },
       { name: 'Sell', href: '/sell' },
-      { name: 'Search', href: '/search' },
       { name: 'Price Guide', href: '/pricing' },
     ],
     company: [
       { name: 'About Us', href: '/about' },
       { name: 'Contact', href: '/contact' },
       { name: 'Blog', href: '/blog' },
-      { name: 'Careers', href: '/careers' },
     ],
     support: [
-      { name: 'Help Center', href: '/help' },
-      { name: 'Safety Guidelines', href: '/safety' },
       { name: 'Terms of Service', href: '/terms' },
       { name: 'Privacy Policy', href: '/privacy' },
     ],

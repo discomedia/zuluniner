@@ -857,8 +857,8 @@ git add . && git commit -m "..." && git push    # Deploy via GitHub
 - [ ] **Content creation**
   - [ ] Initial aircraft listings (sample data)
   - [ ] Blog posts for launch
-  - [ ] Legal pages (privacy, terms, contact)
-  - [ ] About page and company information
+  - [x] Legal pages (privacy, terms, contact)
+  - [x] About page and company information
   
 - [ ] **Quality assurance**
   - [ ] Cross-browser testing
@@ -1290,6 +1290,51 @@ export default function ProblematicPage() {
 4. Verify functionality in both development and production
 
 This architecture ensures reliable data loading across all deployment environments while maintaining the interactive user experience expected in modern web applications.
+
+---
+
+## Legal Pages Implementation ✅
+
+### Company Information
+- **Legal Entity**: ZuluNiner, operating under Disco Media Pty Ltd (Australian media company)
+- **Business Address**: PO Box 4040, Melbourne 3000 Victoria, Australia
+- **Contact Information**: ninjas@zuluniner.com
+
+### Business Model & Fees
+- **Revenue Model**: Revenue from listing fees only, though may implement success fees for auction listings
+- **Payment Processing**: Via Stripe. Any fees are those of Stripe
+- **Fee Structure**: Fees charged only on payment of listing fee. If an auction is successful, a fee will be charged to the buyer when payment is made via escrow
+
+### User Requirements & Verification
+- **Age Requirements**: Minimum 18 years old
+- **Account Verification**: May be implemented for sellers if payments are to be made via the platform (not yet implemented)
+
+### Content Moderation Guidelines
+- **Prohibited Content**:
+  - Nothing illegal
+  - No pornographic content
+  - Nothing that harms anyone
+  - No hate or intolerant speech
+  - No scams
+  - No selling of unrelated services/products
+
+### Data & Privacy
+- **Data Collection**: Some cookies may be used for user convenience
+- **Analytics**: Using Google Analytics
+- **Email Communications**: Only transactional or account-related emails, or alerts that users specifically opt into
+- **Data Storage**: Data stored in Supabase in US/EU regions
+
+### Legal Framework
+- **Governing Law**: Australian law
+- **Dispute Resolution**: Mediation or arbitration in Melbourne, Victoria, Australia
+- **Liability**: ZuluNiner does not facilitate transactions, only connects buyers and sellers. We are not liable, though we do our best to verify
+- **Aircraft Condition**: Buyer beware. All negotiation between buyers and sellers. Users should report scam listings
+
+### Implementation Status
+- [x] Footer navigation updated (removed "search", "careers", "help centre", "safety guidelines")
+- [x] Terms of Service and Privacy Policy links added to footer
+- [ ] Terms of Service page creation (`/src/app/terms/page.tsx`)
+- [ ] Privacy Policy page creation (`/src/app/privacy/page.tsx`)
 
 ---
 
