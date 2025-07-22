@@ -249,19 +249,10 @@ export default async function AircraftDetailPage({ params }: PageProps) {
                       </div>
                     )}
                     
-                    <div className="flex items-center gap-2 text-gray-600">
-                      <Mail className="h-4 w-4" />
-                      <a 
-                        href={`mailto:${aircraft.user.email}?subject=Inquiry about ${aircraft.title}`}
-                        className="hover:text-blue-600 transition-colors"
-                      >
-                        Send Email
-                      </a>
-                    </div>
                   </div>
 
                   <Button variant="primary" className="w-full mt-4">
-                    Contact Seller
+                    Enquire
                   </Button>
                 </div>
               </CardContent>

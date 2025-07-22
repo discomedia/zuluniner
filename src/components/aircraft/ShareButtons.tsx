@@ -87,14 +87,13 @@ export default function ShareButtons({ aircraft }: ShareButtonsProps) {
 
   return (
     <div className="relative">
-      <div className="flex items-center gap-3">
-        <span className="text-sm font-medium text-gray-700">Share:</span>
-        
+      <div className="flex items-center gap-3">        
         <Button
           variant="ghost"
           size="sm"
           onClick={handleNativeShare}
           className="flex items-center gap-2"
+          title=""
         >
           <Share2 className="h-4 w-4" />
           Share
@@ -105,6 +104,7 @@ export default function ShareButtons({ aircraft }: ShareButtonsProps) {
           size="sm"
           onClick={copyToClipboard}
           className="flex items-center gap-2"
+          title=""
         >
           {copied ? (
             <>
@@ -122,7 +122,7 @@ export default function ShareButtons({ aircraft }: ShareButtonsProps) {
 
       {/* Custom Share Menu */}
       {showShareMenu && (
-        <div className="absolute top-full left-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg p-4 z-10 min-w-64">
+        <div className="absolute top-full left-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg p-4 z-50 min-w-64">
           <div className="space-y-2">
             <h4 className="font-medium text-gray-900 mb-3">Share this aircraft</h4>
             
@@ -194,7 +194,7 @@ export default function ShareButtons({ aircraft }: ShareButtonsProps) {
       {/* Backdrop to close share menu */}
       {showShareMenu && (
         <div
-          className="fixed inset-0 bg-transparent z-0"
+          className="fixed inset-0 bg-transparent z-40"
           onClick={() => setShowShareMenu(false)}
         />
       )}

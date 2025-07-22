@@ -207,11 +207,13 @@ export default function AircraftListClient({ aircraft: initialAircraft, total }:
                           Edit
                         </Button>
                       </Link>
-                      <Link href={`/aircraft/${aircraft.slug}`}>
-                        <Button variant="ghost" size="sm">
-                          View
-                        </Button>
-                      </Link>
+                      {aircraft.status !== 'draft' && (
+                        <Link href={`/aircraft/${aircraft.slug}`}>
+                          <Button variant="ghost" size="sm">
+                            View
+                          </Button>
+                        </Link>
+                      )}
                       <Button 
                         variant="ghost" 
                         size="sm"

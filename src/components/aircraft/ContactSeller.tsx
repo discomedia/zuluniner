@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Phone, Mail, MessageCircle } from 'lucide-react';
+import { Phone, MessageCircle } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import Modal from '@/components/ui/Modal';
 import Input from '@/components/ui/Input';
@@ -81,11 +81,6 @@ Listing URL: ${window.location.href}
     }
   };
 
-  const handleDirectEmail = () => {
-    const subject = `Inquiry about ${aircraft.title}`;
-    const body = `Hi,\n\nI'm interested in your ${aircraft.title}. Could you please provide more information?\n\nBest regards`;
-    window.location.href = `mailto:${aircraft.user.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  };
 
   return (
     <>
@@ -106,20 +101,11 @@ Listing URL: ${window.location.href}
           
           <Button
             variant="secondary"
-            onClick={handleDirectEmail}
-            className="flex items-center gap-2"
-          >
-            <Mail className="h-4 w-4" />
-            Send Email
-          </Button>
-          
-          <Button
-            variant="ghost"
             onClick={() => setShowContactForm(true)}
             className="flex items-center gap-2"
           >
             <MessageCircle className="h-4 w-4" />
-            Message
+            Enquire
           </Button>
         </div>
       </div>

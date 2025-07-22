@@ -11,7 +11,6 @@ Always check existing component export patterns before importing
 ### Components (src/components/ui/*)
 * All UI components use default exports, e.g. `import Button from '@/components/ui/Button'`
 
-
 ### Layout Components (src/components/layouts/*)
 * All layout components use **default exports**
 * Import pattern: `import ContainerLayout from '@/components/layouts/ContainerLayout'`
