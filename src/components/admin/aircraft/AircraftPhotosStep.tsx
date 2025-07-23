@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import Image from 'next/image';
 import Button from '@/components/ui/Button';
 import { validateImageFile } from '@/lib/image-utils';
+import { db } from '@/api/db';
 import type { AircraftPhoto } from '@/types';
 import type { AircraftFormData } from './AircraftWizard';
 
@@ -15,12 +16,16 @@ interface AircraftPhotosStepProps {
   uploadedPhotos: AircraftPhoto[];
   setUploadedPhotos: (photos: AircraftPhoto[]) => void;
   isUploading?: boolean;
+  draftAircraftId?: string | null;
 }
 
 export default function AircraftPhotosStep({
   photos,
   setPhotos,
   isUploading = false,
+  draftAircraftId,
+  uploadedPhotos,
+  setUploadedPhotos,
 }: AircraftPhotosStepProps) {
   const [dragOver, setDragOver] = useState(false);
   const [processing, setProcessing] = useState(false);
@@ -29,45 +34,51 @@ export default function AircraftPhotosStep({
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileSelect = async (files: FileList | null) => {
-    if (!files) return;
+    if (!files || !draftAircraftId) return;
 
     setProcessing(true);
-    const validFiles: File[] = [];
 
-    // First, add valid files immediately to show thumbnails
-    for (const file of Array.from(files)) {
-      const validation = validateImageFile(file);
-      
-      if (!validation.valid) {
-        alert(`${file.name}: ${validation.error}`);
-        continue;
+    try {
+      const validFiles: File[] = [];
+      for (const file of Array.from(files)) {
+        const validation = validateImageFile(file);
+        if (!validation.valid) {
+          alert(`${file.name}: ${validation.error}`);
+          continue;
+        }
+        validFiles.push(file);
       }
 
-      validFiles.push(file);
+      if (validFiles.length === 0) {
+        setProcessing(false);
+        return;
+      }
+
+      // Upload to server
+      const formData = new FormData();
+      validFiles.forEach((file) => {
+        formData.append('photos', file);
+      });
+
+      const response = await fetch(`/api/admin/aircraft/${draftAircraftId}/photos`, {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to upload photos');
+      }
+
+      const result = await response.json();
+      if (result.success && result.photos) {
+        setUploadedPhotos([...uploadedPhotos, ...result.photos]);
+      }
+    } catch (error) {
+      console.error('Error uploading photos:', error);
+      alert('Failed to upload photos. Please try again.');
+    } finally {
+      setProcessing(false);
     }
-
-    // Add files immediately for instant feedback
-    const currentPhotos = [...photos, ...validFiles];
-    setPhotos(currentPhotos);
-    setProcessing(false);
-
-    // Optimize images in the background (optional - could be done on upload)
-    // for (let i = 0; i < validFiles.length; i++) {
-    //   try {
-    //     const optimized = await optimizeImage(validFiles[i]);
-    //     // Update the specific photo in the array
-    //     setPhotos(prev => {
-    //       const newPhotos = [...prev];
-    //       const photoIndex = photos.length + i;
-    //       if (photoIndex < newPhotos.length) {
-    //         newPhotos[photoIndex] = optimized.optimized;
-    //       }
-    //       return newPhotos;
-    //     });
-    //   } catch (error) {
-    //     console.error('Image optimization failed for', validFiles[i].name, error);
-    //   }
-    // }
   };
 
   const handleDrop = (e: React.DragEvent) => {
@@ -171,14 +182,14 @@ export default function AircraftPhotosStep({
       </div>
 
       {/* Photo Preview Grid */}
-      {photos.length > 0 && (
+      {uploadedPhotos.length > 0 && (
         <div>
           <div className="flex justify-between items-center mb-4">
-            <h4 className="font-medium">Photos ({photos.length})</h4>
+            <h4 className="font-medium">Photos ({uploadedPhotos.length})</h4>
             <Button
               variant="secondary"
               size="sm"
-              onClick={() => setPhotos([])}
+              onClick={() => setUploadedPhotos([])}
               disabled={isUploading}
             >
               Clear All
@@ -186,14 +197,14 @@ export default function AircraftPhotosStep({
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {photos.map((photo, index) => {
-              const photoKey = `${photo.name}-${index}`;
+            {uploadedPhotos.map((photo: AircraftPhoto, index: number) => {
+              const photoKey = `${photo.id}-${index}`;
               const isDragging = draggedIndex === index;
               const isDragOver = dragOverIndex === index;
-              
+
               return (
-                <div 
-                  key={photoKey} 
+                <div
+                  key={photoKey}
                   className={`relative group cursor-move transition-transform ${
                     isDragging ? 'opacity-50 scale-105' : ''
                   } ${isDragOver && !isDragging ? 'scale-105 ring-2 ring-primary-500' : ''}`}
@@ -206,8 +217,8 @@ export default function AircraftPhotosStep({
                 >
                   <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
                     <Image
-                      src={URL.createObjectURL(photo)}
-                      alt={`Photo ${index + 1}`}
+                      src={db.photos.getPhotoUrl(photo.storage_path)}
+                      alt={photo.alt_text || `Photo ${index + 1}`}
                       fill
                       className={`w-full h-full object-cover transition-opacity ${
                         isUploading ? 'opacity-60' : 'opacity-100'
@@ -216,7 +227,7 @@ export default function AircraftPhotosStep({
                       style={{ objectFit: 'cover' }}
                       unoptimized
                     />
-                    
+
                     {/* Upload Progress Overlay */}
                     {isUploading && (
                       <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
@@ -229,7 +240,7 @@ export default function AircraftPhotosStep({
                       </div>
                     )}
                   </div>
-                  
+
                   {/* Primary Badge */}
                   {index === 0 && (
                     <div className="absolute bottom-2 left-2 bg-primary-600 text-white text-xs px-2 py-1 rounded z-10">
@@ -260,7 +271,7 @@ export default function AircraftPhotosStep({
                           ←
                         </button>
                       )}
-                      {index < photos.length - 1 && (
+                      {index < uploadedPhotos.length - 1 && (
                         <button
                           onClick={() => movePhoto(index, index + 1)}
                           className="w-6 h-6 bg-white rounded text-gray-700 hover:bg-gray-100 flex items-center justify-center"
@@ -282,7 +293,7 @@ export default function AircraftPhotosStep({
                   </div>
 
                   <div className="mt-2 text-xs text-gray-600 truncate">
-                    {photo.name}
+                    {photo.alt_text || photo.caption || `Photo ${index + 1}`}
                   </div>
                 </div>
               );

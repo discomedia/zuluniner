@@ -60,13 +60,53 @@ export default function AircraftWizard() {
   });
   const [photos, setPhotos] = useState<File[]>([]);
   const [uploadedPhotos, setUploadedPhotos] = useState<AircraftPhoto[]>([]);
+  const [draftAircraftId, setDraftAircraftId] = useState<string | null>(null);
+  const [creatingDraft, setCreatingDraft] = useState(false);
 
   const updateFormData = (updates: Partial<AircraftFormData>) => {
     setFormData(prev => ({ ...prev, ...updates }));
   };
 
-  const nextStep = () => {
-    if (currentStep < STEPS.length) {
+  // Create draft aircraft after step 1 (Basic Info)
+  const createDraftAircraft = async () => {
+    setCreatingDraft(true);
+    try {
+      const minimal = {
+        title: formData.title,
+        year: formData.year,
+        make: formData.make,
+        model: formData.model,
+        status: 'draft',
+      };
+      const res = await fetch('/api/admin/aircraft', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ aircraft: minimal }),
+      });
+      if (!res.ok) {
+        throw new Error('Failed to create draft aircraft');
+      }
+      const data = await res.json();
+      setDraftAircraftId(data.data.id);
+      return data.data.id as string;
+    } catch (err) {
+      alert('Could not create draft aircraft. Please check your info and try again.');
+      throw err;
+    } finally {
+      setCreatingDraft(false);
+    }
+  };
+
+  const nextStep = async () => {
+    if (currentStep === 1 && !draftAircraftId) {
+      // Create draft before moving to step 2
+      try {
+        await createDraftAircraft();
+        setCurrentStep(currentStep + 1);
+      } catch {
+        // Stay on step 1 if draft creation fails
+      }
+    } else if (currentStep < STEPS.length) {
       setCurrentStep(currentStep + 1);
     }
   };
@@ -199,7 +239,8 @@ export default function AircraftWizard() {
             setPhotos={setPhotos}
             uploadedPhotos={uploadedPhotos}
             setUploadedPhotos={setUploadedPhotos}
-            isUploading={isSubmitting}
+            isUploading={isSubmitting || creatingDraft}
+            draftAircraftId={draftAircraftId}
           />
         </CardContent>
       </Card>
