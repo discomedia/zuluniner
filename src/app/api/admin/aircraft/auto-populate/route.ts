@@ -100,23 +100,19 @@ async function searchAircraftInformation(searchTitle: string): Promise<{ respons
   
   try {
     const response = await disco.llm.call(
-      `Search for detailed information about a ${searchTitle} aircraft for sale, and return comprehensive details that aircraft buyers and sellers need:
+      `Search for detailed information about this specific aircraft for sale, and return comprehensive details that aircraft buyers and sellers need:
+${searchTitle}
+
+If an URL is provided, use it to gather information. Gather information relevant for a specific used aircraft listing for sale, and write it up as if you were trying to create a listing for a used aircraft..
       
-      BASIC INFO: Make, full model name, year of manufacture, production years, country of origin, typical serial number format
-      
-      PHYSICAL SPECS: Aircraft category (single-engine, multi-engine, turboprop, etc.), engine manufacturer and model, number of seats, empty weight, max takeoff weight, fuel capacity, cruise speed, service ceiling, range
-      
-      AVIONICS & EQUIPMENT: Common avionics packages for this model/year, autopilot systems, navigation equipment, communication radios, transponder, engine monitoring, GPS systems
-      
-      PERFORMANCE: Typical cruise speed, fuel consumption, useful load, takeoff/landing distances, stall speed
-      
-      MARKET INFO: Current market price range in USD for good condition examples, what makes this model desirable, common issues to look for, typical total time and engine hours for aircraft of this age
-      
-      LOCATION: Common airports where this type of aircraft is based, typical geographic markets
-      
-      MAINTENANCE: Annual inspection requirements, common maintenance items, engine overhaul intervals, known ADs (Airworthiness Directives)
-      
-      VARIATIONS: Different versions of this model, notable differences between years, engine options, equipment packages`,
+* BASIC INFO: Make, full model name, year of manufacture, production years, country of origin, serial number
+* PHYSICAL SPECS: Aircraft category (single-engine, multi-engine, turboprop, etc.), engine manufacturer and model, number of seats, empty weight, max takeoff weight, fuel capacity, cruise speed, service ceiling, range
+* AVIONICS & EQUIPMENT: Common avionics packages for this model/year, autopilot systems, navigation equipment, communication radios, transponder, engine monitoring, GPS systems
+* PERFORMANCE: Typical cruise speed, fuel consumption, useful load, takeoff/landing distances, stall speed
+* MARKET INFO: Current market price range in USD for good condition examples, what makes this model desirable, common issues to look for, typical total time and engine hours for aircraft of this age
+* LOCATION: Common airports where this type of aircraft is based, typical geographic markets
+* MAINTENANCE: Annual inspection requirements, common maintenance items, engine overhaul intervals, known ADs (Airworthiness Directives)
+* VARIATIONS: Different versions of this model, notable differences between years, engine options, equipment packages`,
       {
         model: config.llm.model,
         responseFormat: config.llm.responseFormat.text,
@@ -140,21 +136,23 @@ async function convertToStructuredData(searchResults: string): Promise<{ respons
   
   try {
     const response = await disco.llm.call(
-      `Convert the following aircraft information to structured JSON format: ${searchResults}
+      `Convert the following aircraft information to structured JSON format: 
+      
+      ${searchResults}
       
       Use this exact structure:
       {
         "make": "string",
         "model": "string", 
         "year": "number",
-        "title": "string (descriptive title for listing)",
-        "description": "string (comprehensive description for listing)",
+        "title": "string (descriptive title for listing - clear, concise, complete, no fluff)",
+        "description": "string (comprehensive description for listing, in markdown format using h2, h3, bullets, and links to authoritative resources)",
         "price": "number (estimated market price in USD)",
         "hours": "number (typical total aircraft hours for this age)",
         "engine_type": "string (engine make and model)",
-        "avionics": "string (common avionics package description)",
+        "avionics": "string",
         "location": {
-          "airport_code": "string (suggest appropriate airport code)",
+          "airport_code": "string",
           "city": "string",
           "country": "string"
         },
@@ -181,11 +179,13 @@ async function convertToStructuredData(searchResults: string): Promise<{ respons
         "url_slug": "string (URL-friendly slug like 'year-make-model-location', e.g., '1978-piper-archer-ii-florida')"
       }
       
-      Make sure to provide realistic estimates for all numeric values based on typical aircraft of this make, model, and year.
-      The description should be detailed and suitable for an aircraft listing website.
-      Suggest an appropriate airport code based on where this type of aircraft is commonly based.
-      The meta_description should be compelling and under 160 characters for SEO.
-      The url_slug should be lowercase, hyphen-separated, and include key identifying information, be under 100 characters.`,
+Requirements:
+* Use only the data provided
+* Write in a factual, clear, and concise manner. No fluff.
+* The description should be relevant for a specific used aircraft listing (one vehicle)
+* If an airport code isn't found, suggest an appropriate airport code based on where this type of aircraft is commonly based.
+* The meta_description should be clear, comprehensive, and concise, and under 160 characters
+* The url_slug should be lowercase, hyphen-separated, and include key identifying information, be under 100 characters.`,
       {
         model: config.llm.model,
         responseFormat: config.llm.responseFormat.json,
