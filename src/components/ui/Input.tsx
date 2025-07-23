@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, forwardRef, useId } from 'react';
+import { InputHTMLAttributes, forwardRef } from 'react';
 import { cn } from '../../lib/utils';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -9,7 +9,6 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ className, type = 'text', label, error, helpText, id, ...props }, ref) => {
-    const generatedId = useId();
     // Deterministic fallback: use id, then name, then label-based slug
     const inputId =
       id ||

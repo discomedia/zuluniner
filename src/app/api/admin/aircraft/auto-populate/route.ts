@@ -14,7 +14,6 @@ interface ValidationResponse {
     year: string | null;
     make: string | null;
     model: string | null;
-    hasConditionInfo: boolean;
   };
 }
 
@@ -62,13 +61,9 @@ async function validateAndEnhanceTitle(title: string): Promise<{ response: Valid
   
   try {
     const response = await disco.llm.call(
-      `Analyze this aircraft title and determine if it contains enough information for a listing: "${title}"
+      `Analyze this aircraft title and determine if it contains enough information to being searching for details."${title}"
       
-      Required information:
-      - Year (2-digit or 4-digit)
-      - Make/manufacturer 
-      - Model
-      - Any additional details about condition, equipment, or price
+      Required information: Year, make, and model.
       
       If valid, also provide an enhanced title with more searchable details.
       
@@ -81,7 +76,6 @@ async function validateAndEnhanceTitle(title: string): Promise<{ response: Valid
           "year": string or null,
           "make": string or null, 
           "model": string or null,
-          "hasConditionInfo": boolean
         }
       }`,
       {
