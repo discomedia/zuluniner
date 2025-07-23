@@ -6,7 +6,7 @@ ZuluNiner is an aircraft marketplace built with Next.js, React, Tailwind CSS, Ty
 ## Core Project Data
 - Project Name: ZuluNiner
 - Supabase project ID: bjwlldxavgoxhyyufffy
-- Local Dev: Docker-based Supabase
+- Database: Production Supabase Cloud only
 - GitHub: discomedia/zuluniner
 - Domain: zuluniner.com (Cloudflare DNS)
 
@@ -39,9 +39,9 @@ ZuluNiner is an aircraft marketplace built with Next.js, React, Tailwind CSS, Ty
 - Performance monitoring
 
 ## Supabase & Database
-- Use Docker for local Supabase
+- Production Supabase Cloud database only
 - Migrations in supabase/migrations/
-- TypeScript types generated from schema
+- TypeScript types generated from production schema
 - RLS policies for all tables
 - Storage buckets for images
 
@@ -88,17 +88,17 @@ ZuluNiner is an aircraft marketplace built with Next.js, React, Tailwind CSS, Ty
 - Monitoring and error tracking
 
 ## Supabase Deployment Notes
-- Use Docker for local, Supabase Cloud for prod
-- Push schema to cloud with `npm run db:push`
-- Update env vars for prod
-- Test all RLS policies in prod
-- Storage buckets for images in prod
+- Production Supabase Cloud database only
+- Push schema changes with `npm run db:push`
+- All env vars point to production
+- Test all RLS policies in production
+- Storage buckets for images in production
 
 ## Schema Update Workflow
-1. Start local Supabase
-2. Make schema changes, create migrations
-3. Test locally, generate types
-4. Push schema and update types in prod
+1. Create migrations in supabase/migrations/
+2. Push schema changes to production with `npm run db:push`
+3. Generate updated types with `npm run generate-schema`
+4. Test changes thoroughly in development
 5. Commit and push to GitHub (triggers Vercel deploy)
 
 ## Project Structure

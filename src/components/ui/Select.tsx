@@ -10,7 +10,13 @@ export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
 
 const Select = forwardRef<HTMLSelectElement, SelectProps>(
   ({ className, label, error, helpText, placeholder, id, children, ...props }, ref) => {
-    const selectId = id || `select-${Math.random().toString(36).substring(2, 9)}`;
+    // Deterministic fallback: use id, then name, then label-based slug
+    const selectId =
+      id ||
+      props.name ||
+      (label
+        ? `select-${label.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9\-]/g, '')}`
+        : undefined);
 
     return (
       <div className="space-y-2">

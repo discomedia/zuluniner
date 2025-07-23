@@ -78,6 +78,7 @@ export default function AircraftEditForm({ aircraft, initialPhotos = [] }: Aircr
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Input
+              id="aircraft-title"
               label="Title"
               value={formData.title}
               onChange={(e) => updateFormData({ title: e.target.value })}
@@ -86,6 +87,7 @@ export default function AircraftEditForm({ aircraft, initialPhotos = [] }: Aircr
             />
 
             <Input
+              id="aircraft-year"
               label="Year"
               type="number"
               value={formData.year}
@@ -94,6 +96,7 @@ export default function AircraftEditForm({ aircraft, initialPhotos = [] }: Aircr
             />
 
             <Input
+              id="aircraft-price"
               label="Price (USD)"
               type="number"
               value={formData.price}
@@ -102,6 +105,7 @@ export default function AircraftEditForm({ aircraft, initialPhotos = [] }: Aircr
             />
 
             <Input
+              id="aircraft-make"
               label="Make"
               value={formData.make}
               onChange={(e) => updateFormData({ make: e.target.value })}
@@ -109,6 +113,7 @@ export default function AircraftEditForm({ aircraft, initialPhotos = [] }: Aircr
             />
 
             <Input
+              id="aircraft-model"
               label="Model"
               value={formData.model}
               onChange={(e) => updateFormData({ model: e.target.value })}
@@ -118,6 +123,7 @@ export default function AircraftEditForm({ aircraft, initialPhotos = [] }: Aircr
 
           <div className="mt-6">
             <Textarea
+              id="aircraft-description"
               label="Description"
               value={formData.description}
               onChange={(e) => updateFormData({ description: e.target.value })}
@@ -135,6 +141,7 @@ export default function AircraftEditForm({ aircraft, initialPhotos = [] }: Aircr
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Input
+              id="aircraft-hours"
               label="Total Hours"
               type="number"
               value={formData.hours}
@@ -143,6 +150,7 @@ export default function AircraftEditForm({ aircraft, initialPhotos = [] }: Aircr
             />
 
             <Input
+              id="aircraft-engine-type"
               label="Engine Type"
               value={formData.engine_type}
               onChange={(e) => updateFormData({ engine_type: e.target.value })}
@@ -150,6 +158,7 @@ export default function AircraftEditForm({ aircraft, initialPhotos = [] }: Aircr
             />
 
             <Input
+              id="aircraft-avionics"
               label="Avionics"
               value={formData.avionics}
               onChange={(e) => updateFormData({ avionics: e.target.value })}
@@ -167,6 +176,7 @@ export default function AircraftEditForm({ aircraft, initialPhotos = [] }: Aircr
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Input
+              id="aircraft-airport-code"
               label="Airport Code"
               value={formData.airport_code}
               onChange={(e) => updateFormData({ airport_code: e.target.value })}
@@ -174,6 +184,7 @@ export default function AircraftEditForm({ aircraft, initialPhotos = [] }: Aircr
             />
 
             <Input
+              id="aircraft-city"
               label="City"
               value={formData.city}
               onChange={(e) => updateFormData({ city: e.target.value })}
@@ -181,6 +192,7 @@ export default function AircraftEditForm({ aircraft, initialPhotos = [] }: Aircr
             />
 
             <Input
+              id="aircraft-country"
               label="Country"
               value={formData.country}
               onChange={(e) => updateFormData({ country: e.target.value })}
@@ -188,6 +200,7 @@ export default function AircraftEditForm({ aircraft, initialPhotos = [] }: Aircr
             />
 
             <Select
+              id="aircraft-status"
               label="Status"
               value={formData.status || 'draft'}
               onChange={(e) => updateFormData({ status: e.target.value as 'draft' | 'active' | 'pending' | 'sold' })}
@@ -221,6 +234,7 @@ export default function AircraftEditForm({ aircraft, initialPhotos = [] }: Aircr
         </CardHeader>
         <CardContent>
           <Input
+            id="aircraft-meta-description"
             label="Meta Description"
             value={formData.meta_description}
             onChange={(e) => updateFormData({ meta_description: e.target.value })}

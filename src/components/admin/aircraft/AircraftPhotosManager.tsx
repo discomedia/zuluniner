@@ -237,7 +237,6 @@ export default function AircraftPhotosManager({
         <div>
           <div className="flex justify-between items-center mb-4">
             <h4 className="font-medium">Photos ({photos.length})</h4>
-            <p className="text-sm text-gray-600">Drag to reorder • First photo is primary</p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -265,6 +264,7 @@ export default function AircraftPhotosManager({
                       fill
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      unoptimized
                     />
                   </div>
                   

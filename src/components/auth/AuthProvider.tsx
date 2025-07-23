@@ -41,7 +41,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const fetchProfile = useCallback(async (userId: string) => {
     try {
-      console.log('🔍 Fetching profile for user:', userId);
+      // console.log('🔍 Fetching profile for user:', userId);
       const { data: profile, error } = await supabase
         .from('users')
         .select('*')
@@ -54,7 +54,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         return;
       }
       
-      console.log('✅ Profile fetched successfully:', profile);
+      //console.log('✅ Profile fetched successfully:', profile);
       setProfile(profile);
     } catch (error) {
       console.error('❌ Unexpected error fetching profile:', error);
@@ -96,7 +96,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
           setUser(null);
           setProfile(null);
         } else {
-          console.log('👤 User from getUser:', user ? `${user.email} (${user.id})` : 'No user');
+          // console.log('👤 User from getUser:', user ? `${user.email} (${user.id})` : 'No user');
           setUser(user);
           
           if (user) {
@@ -109,7 +109,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         setUser(null);
         setProfile(null);
       } finally {
-        console.log('✅ Auth initialization complete, setting loading to false');
+        //console.log('✅ Auth initialization complete, setting loading to false');
         setLoading(false);
       }
     };
@@ -119,7 +119,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
-        console.log('🔄 Auth state change:', event, session?.user ? `${session.user.email} (${session.user.id})` : 'No user');
+        // console.log('🔄 Auth state change:', event, session?.user ? `${session.user.email} (${session.user.id})` : 'No user');
         
         try {
           setUser(session?.user ?? null);

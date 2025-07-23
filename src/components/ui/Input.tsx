@@ -10,7 +10,13 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ className, type = 'text', label, error, helpText, id, ...props }, ref) => {
     const generatedId = useId();
-    const inputId = id || `input-${generatedId}`;
+    // Deterministic fallback: use id, then name, then label-based slug
+    const inputId =
+      id ||
+      props.name ||
+      (label
+        ? `input-${label.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9\-]/g, '')}`
+        : undefined);
 
     return (
       <div className="space-y-2">

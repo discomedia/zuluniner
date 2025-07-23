@@ -78,12 +78,10 @@ export default function Page() {
 
 ### Schema and Type Generation
 * Use supabase client (`npx supabase`) to execute commands (to build out or edit the schema)
-* For local development: Use `npm run supabase:start` to start Docker containers, `npm run supabase:stop` to stop them
-* Run `npm run generate-schema` to update the schema in src/api/schema.ts from local database
-* Database migrations: Create new .sql files in supabase/migrations/ and run `npm run db:reset` to apply them
-* Local development uses Docker containers - make sure Docker Desktop is running before starting Supabase
+* Run `npm run generate-schema` to update the schema in src/api/schema.ts from production database
+* Database migrations: Create new .sql files in supabase/migrations/ and run `npm run db:push` to apply them to production
 * Authentication: Use middleware for route protection, separate client/server auth functions
-* Database migrations: Always test with `npm run db:reset` after creating new migrations
+* Database migrations: Always test schema changes carefully as they apply directly to production
 
 ### Type-Safe Client Initialization
 **CRITICAL**: Always initialize Supabase clients with the Database schema type for full type safety:
@@ -383,10 +381,10 @@ For complex new features or revisions, write tests and execute them. Write test 
 4. Verify protected routes are functioning
 
 ### Common Commands
-* Start Supabase locally: `npm run supabase:start` (requires Docker Desktop)
-* Stop Supabase locally: `npm run supabase:stop`
-* Reset database with migrations: `npm run db:reset`
-* Generate TypeScript types: `npm run generate-schema`
+* Generate TypeScript types: `npm run generate-schema` (from production database)
+* Push schema changes to production: `npm run db:push`
+* Pull schema from production: `npm run db:pull`
+* Check migration status: `npm run db:status`
 * Build and test: `npm run build && node src/testing/[test-file].ts`
 * Type check: `npm run build` (includes type checking)
 

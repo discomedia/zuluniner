@@ -9,7 +9,13 @@ export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
 
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ className, label, error, helpText, id, rows = 4, ...props }, ref) => {
-    const textareaId = id || `textarea-${Math.random().toString(36).substring(2, 9)}`;
+    // Deterministic fallback: use id, then name, then label-based slug
+    const textareaId =
+      id ||
+      props.name ||
+      (label
+        ? `textarea-${label.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9\-]/g, '')}`
+        : undefined);
 
     return (
       <div className="space-y-2">
