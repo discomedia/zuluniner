@@ -7,15 +7,18 @@ import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import Textarea from '@/components/ui/Textarea';
 import Select from '@/components/ui/Select';
-import type { Aircraft } from '@/types';
+import AircraftPhotosManager from './AircraftPhotosManager';
+import type { Aircraft, AircraftPhoto } from '@/types';
 
 interface AircraftEditFormProps {
   aircraft: Aircraft;
+  initialPhotos?: AircraftPhoto[];
 }
 
-export default function AircraftEditForm({ aircraft }: AircraftEditFormProps) {
+export default function AircraftEditForm({ aircraft, initialPhotos = [] }: AircraftEditFormProps) {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [photos, setPhotos] = useState<AircraftPhoto[]>(initialPhotos);
   const [formData, setFormData] = useState({
     title: aircraft.title,
     description: aircraft.description || '',
@@ -34,6 +37,7 @@ export default function AircraftEditForm({ aircraft }: AircraftEditFormProps) {
     meta_description: aircraft.meta_description || '',
     status: aircraft.status,
   });
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -195,6 +199,19 @@ export default function AircraftEditForm({ aircraft }: AircraftEditFormProps) {
               <option value="sold">Sold</option>
             </Select>
           </div>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <h2 className="text-xl font-semibold">Photos</h2>
+        </CardHeader>
+        <CardContent>
+          <AircraftPhotosManager
+            aircraftId={aircraft.id}
+            photos={photos}
+            onPhotosChange={setPhotos}
+          />
         </CardContent>
       </Card>
 

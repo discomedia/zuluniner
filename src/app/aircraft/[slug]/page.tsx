@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Image from 'next/image';
-import { Phone, Mail, MapPin, Calendar, Clock, Settings, Plane } from 'lucide-react';
+import { Phone, MapPin, Calendar, Clock, Settings, Plane } from 'lucide-react';
 import { db } from '@/api/db';
 import Button from '@/components/ui/Button';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';

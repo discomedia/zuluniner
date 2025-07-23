@@ -1,4 +1,4 @@
-import { requireAdmin } from '@/lib/auth-server';
+import { requireAdmin, createServerSupabaseClient } from '@/lib/auth-server';
 import { db } from '@/api/db';
 import ContainerLayout from '@/components/layouts/ContainerLayout';
 import PageHeader from '@/components/layouts/PageHeader';
@@ -15,9 +15,10 @@ interface EditAircraftPageProps {
 export default async function EditAircraftPage({ params }: EditAircraftPageProps) {
   const { profile } = await requireAdmin();
   const { id } = await params;
+  const supabase = await createServerSupabaseClient();
 
   try {
-    const aircraftData = await db.aircraft.getById(id);
+    const aircraftData = await db.aircraft.getByIdForAdmin(id, supabase);
     
     if (!aircraftData) {
       notFound();
@@ -55,7 +56,7 @@ export default async function EditAircraftPage({ params }: EditAircraftPageProps
           description={`${aircraft.year} ${aircraft.make} ${aircraft.model} • Admin: ${profile.name}`}
         />
         
-        <AircraftEditForm aircraft={aircraft} />
+        <AircraftEditForm aircraft={aircraft} initialPhotos={aircraftData.photos || []} />
       </ContainerLayout>
     );
   } catch (error) {

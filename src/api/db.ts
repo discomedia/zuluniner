@@ -82,6 +82,50 @@ async function getAircraftById(id: string): Promise<AircraftWithPhotos | null> {
   }
 }
 
+async function getAircraftByIdForAdmin(id: string, client?: SupabaseClient): Promise<AircraftWithPhotos | null> {
+  const supabaseClient = client || supabase;
+  
+  try {
+    const { data: aircraftData, error: aircraftError } = await supabaseClient
+      .from('aircraft')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (aircraftError) throw aircraftError;
+    if (!aircraftData) return null;
+
+    const { data: photosData, error: photosError } = await supabaseClient
+      .from('aircraft_photos')
+      .select('*')
+      .eq('aircraft_id', id)
+      .order('display_order');
+
+    if (photosError) {
+      console.error('⚠️ Photos query error (non-critical):', photosError);
+    }
+
+    const { data: userData, error: userError } = await supabaseClient
+      .from('users')
+      .select('name, phone, email')
+      .eq('id', aircraftData.user_id)
+      .single();
+
+    if (userError) {
+      console.error('⚠️ User query error (non-critical):', userError);
+    }
+
+    return {
+      ...aircraftData,
+      photos: photosData || [],
+      user: userData || null
+    };
+  } catch (error) {
+    console.error('💥 Error in getAircraftByIdForAdmin:', error);
+    throw error;
+  }
+}
+
 async function getAircraftBySlug(slug: string): Promise<AircraftWithUser | null> {
   try {
     const { data, error } = await supabase
@@ -651,6 +695,7 @@ async function getUserCount(): Promise<number> {
 export const db = {
   aircraft: {
     getById: getAircraftById,
+    getByIdForAdmin: getAircraftByIdForAdmin,
     getBySlug: getAircraftBySlug,
     search: searchAircraft,
     create: createAircraft,

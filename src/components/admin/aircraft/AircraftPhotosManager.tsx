@@ -4,70 +4,83 @@ import { useState, useRef } from 'react';
 import Image from 'next/image';
 import Button from '@/components/ui/Button';
 import { validateImageFile } from '@/lib/image-utils';
+import { db } from '@/api/db';
 import type { AircraftPhoto } from '@/types';
-import type { AircraftFormData } from './AircraftWizard';
 
-interface AircraftPhotosStepProps {
-  formData: AircraftFormData;
-  updateFormData: (updates: Partial<AircraftFormData>) => void;
-  photos: File[];
-  setPhotos: (photos: File[]) => void;
-  uploadedPhotos: AircraftPhoto[];
-  setUploadedPhotos: (photos: AircraftPhoto[]) => void;
-  isUploading?: boolean;
+interface AircraftPhotosManagerProps {
+  aircraftId: string;
+  photos: AircraftPhoto[];
+  onPhotosChange: (photos: AircraftPhoto[]) => void;
 }
 
-export default function AircraftPhotosStep({
+export default function AircraftPhotosManager({
+  aircraftId,
   photos,
-  setPhotos,
-  isUploading = false,
-}: AircraftPhotosStepProps) {
+  onPhotosChange,
+}: AircraftPhotosManagerProps) {
   const [dragOver, setDragOver] = useState(false);
   const [processing, setProcessing] = useState(false);
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
+  const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileSelect = async (files: FileList | null) => {
-    if (!files) return;
+    if (!files || files.length === 0) return;
 
     setProcessing(true);
-    const validFiles: File[] = [];
+    setUploading(true);
+    
+    try {
+      const validFiles: File[] = [];
 
-    // First, add valid files immediately to show thumbnails
-    for (const file of Array.from(files)) {
-      const validation = validateImageFile(file);
-      
-      if (!validation.valid) {
-        alert(`${file.name}: ${validation.error}`);
-        continue;
+      // Validate files first
+      for (const file of Array.from(files)) {
+        const validation = validateImageFile(file);
+        
+        if (!validation.valid) {
+          alert(`${file.name}: ${validation.error}`);
+          continue;
+        }
+
+        validFiles.push(file);
       }
 
-      validFiles.push(file);
+      if (validFiles.length === 0) {
+        setProcessing(false);
+        setUploading(false);
+        return;
+      }
+
+      // Upload photos to server
+      const response = await fetch(`/api/admin/aircraft/${aircraftId}/photos`, {
+        method: 'POST',
+        body: (() => {
+          const formData = new FormData();
+          validFiles.forEach((file) => {
+            formData.append('photos', file);
+          });
+          return formData;
+        })(),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to upload photos');
+      }
+
+      const result = await response.json();
+      
+      if (result.success && result.photos) {
+        // Add new photos to the existing ones
+        onPhotosChange([...photos, ...result.photos]);
+      }
+    } catch (error) {
+      console.error('Error uploading photos:', error);
+      alert('Failed to upload photos. Please try again.');
+    } finally {
+      setProcessing(false);
+      setUploading(false);
     }
-
-    // Add files immediately for instant feedback
-    const currentPhotos = [...photos, ...validFiles];
-    setPhotos(currentPhotos);
-    setProcessing(false);
-
-    // Optimize images in the background (optional - could be done on upload)
-    // for (let i = 0; i < validFiles.length; i++) {
-    //   try {
-    //     const optimized = await optimizeImage(validFiles[i]);
-    //     // Update the specific photo in the array
-    //     setPhotos(prev => {
-    //       const newPhotos = [...prev];
-    //       const photoIndex = photos.length + i;
-    //       if (photoIndex < newPhotos.length) {
-    //         newPhotos[photoIndex] = optimized.optimized;
-    //       }
-    //       return newPhotos;
-    //     });
-    //   } catch (error) {
-    //     console.error('Image optimization failed for', validFiles[i].name, error);
-    //   }
-    // }
   };
 
   const handleDrop = (e: React.DragEvent) => {
@@ -86,15 +99,64 @@ export default function AircraftPhotosStep({
     setDragOver(false);
   };
 
-  const removePhoto = (index: number) => {
-    setPhotos(photos.filter((_, i) => i !== index));
+  const removePhoto = async (photoId: string) => {
+    if (!confirm('Are you sure you want to delete this photo?')) return;
+
+    try {
+      const response = await fetch(`/api/admin/aircraft/${aircraftId}/photos/${photoId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete photo');
+      }
+
+      // Remove photo from local state
+      onPhotosChange(photos.filter(p => p.id !== photoId));
+    } catch (error) {
+      console.error('Error deleting photo:', error);
+      alert('Failed to delete photo. Please try again.');
+    }
   };
 
-  const movePhoto = (fromIndex: number, toIndex: number) => {
+  const movePhoto = async (fromIndex: number, toIndex: number) => {
     const newPhotos = [...photos];
     const [movedPhoto] = newPhotos.splice(fromIndex, 1);
     newPhotos.splice(toIndex, 0, movedPhoto);
-    setPhotos(newPhotos);
+
+    // Update display order
+    const updatedPhotos = newPhotos.map((photo, index) => ({
+      ...photo,
+      display_order: index
+    }));
+
+    // Optimistically update UI
+    onPhotosChange(updatedPhotos);
+
+    // Update server
+    try {
+      const response = await fetch(`/api/admin/aircraft/${aircraftId}/photos/reorder`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          photoOrders: updatedPhotos.map(photo => ({
+            id: photo.id,
+            display_order: photo.display_order
+          }))
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to reorder photos');
+      }
+    } catch (error) {
+      console.error('Error reordering photos:', error);
+      // Revert on error
+      onPhotosChange(photos);
+      alert('Failed to reorder photos. Please try again.');
+    }
   };
 
   const handlePhotosDragStart = (e: React.DragEvent, index: number) => {
@@ -153,10 +215,10 @@ export default function AircraftPhotosStep({
             <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
           </svg>
           <p className="text-lg font-medium mb-2">
-            Drag photos here or click to upload
+            Add more photos
           </p>
           <p className="text-sm">
-            Supports: JPG, PNG, WebP • Max 10MB per file
+            Drag photos here or click to upload
           </p>
         </div>
         
@@ -164,70 +226,46 @@ export default function AircraftPhotosStep({
           variant="primary"
           onClick={() => fileInputRef.current?.click()}
           className="mt-4"
-          disabled={processing || isUploading}
+          disabled={processing || uploading}
         >
-          {processing ? 'Processing...' : isUploading ? 'Uploading...' : 'Choose Photos'}
+          {processing ? 'Processing...' : uploading ? 'Uploading...' : 'Choose Photos'}
         </Button>
       </div>
 
-      {/* Photo Preview Grid */}
+      {/* Photo Grid */}
       {photos.length > 0 && (
         <div>
           <div className="flex justify-between items-center mb-4">
             <h4 className="font-medium">Photos ({photos.length})</h4>
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={() => setPhotos([])}
-              disabled={isUploading}
-            >
-              Clear All
-            </Button>
+            <p className="text-sm text-gray-600">Drag to reorder • First photo is primary</p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {photos.map((photo, index) => {
-              const photoKey = `${photo.name}-${index}`;
               const isDragging = draggedIndex === index;
               const isDragOver = dragOverIndex === index;
               
               return (
                 <div 
-                  key={photoKey} 
+                  key={photo.id} 
                   className={`relative group cursor-move transition-transform ${
                     isDragging ? 'opacity-50 scale-105' : ''
                   } ${isDragOver && !isDragging ? 'scale-105 ring-2 ring-primary-500' : ''}`}
-                  draggable={!isUploading}
+                  draggable={!uploading}
                   onDragStart={(e) => handlePhotosDragStart(e, index)}
                   onDragOver={(e) => handlePhotosDragOver(e, index)}
                   onDragLeave={handlePhotosDragLeave}
                   onDrop={(e) => handlePhotosDrop(e, index)}
                   onDragEnd={handlePhotosDragEnd}
                 >
-                  <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
+                  <div className="relative aspect-square bg-gray-100 rounded-lg overflow-hidden">
                     <Image
-                      src={URL.createObjectURL(photo)}
-                      alt={`Photo ${index + 1}`}
+                      src={db.photos.getPhotoUrl(photo.storage_path)}
+                      alt={photo.alt_text || `Photo ${index + 1}`}
                       fill
-                      className={`w-full h-full object-cover transition-opacity ${
-                        isUploading ? 'opacity-60' : 'opacity-100'
-                      }`}
+                      className="object-cover"
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                      style={{ objectFit: 'cover' }}
-                      unoptimized
                     />
-                    
-                    {/* Upload Progress Overlay */}
-                    {isUploading && (
-                      <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                        <div className="text-white text-center">
-                          <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
-                          <div className="text-xs">
-                            Uploading...
-                          </div>
-                        </div>
-                      </div>
-                    )}
                   </div>
                   
                   {/* Primary Badge */}
@@ -240,7 +278,7 @@ export default function AircraftPhotosStep({
                   {/* Controls */}
                   <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all rounded-lg">
                     {/* Drag Handle */}
-                    {!isUploading && (
+                    {!uploading && (
                       <div className="absolute top-2 left-2 opacity-0 group-hover:opacity-100 transition-opacity z-20">
                         <div className="bg-black bg-opacity-70 text-white rounded p-1 cursor-move">
                           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -249,13 +287,14 @@ export default function AircraftPhotosStep({
                         </div>
                       </div>
                     )}
+
                     <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                       {index > 0 && (
                         <button
                           onClick={() => movePhoto(index, index - 1)}
                           className="w-6 h-6 bg-white rounded text-gray-700 hover:bg-gray-100 flex items-center justify-center"
                           title="Move left"
-                          disabled={isUploading}
+                          disabled={uploading}
                         >
                           ←
                         </button>
@@ -265,16 +304,16 @@ export default function AircraftPhotosStep({
                           onClick={() => movePhoto(index, index + 1)}
                           className="w-6 h-6 bg-white rounded text-gray-700 hover:bg-gray-100 flex items-center justify-center"
                           title="Move right"
-                          disabled={isUploading}
+                          disabled={uploading}
                         >
                           →
                         </button>
                       )}
                       <button
-                        onClick={() => removePhoto(index)}
+                        onClick={() => removePhoto(photo.id)}
                         className="w-6 h-6 bg-red-500 text-white rounded hover:bg-red-600 flex items-center justify-center"
                         title="Remove"
-                        disabled={isUploading}
+                        disabled={uploading}
                       >
                         ×
                       </button>
@@ -282,7 +321,7 @@ export default function AircraftPhotosStep({
                   </div>
 
                   <div className="mt-2 text-xs text-gray-600 truncate">
-                    {photo.name}
+                    {photo.alt_text || photo.caption || `Photo ${index + 1}`}
                   </div>
                 </div>
               );
@@ -291,41 +330,26 @@ export default function AircraftPhotosStep({
         </div>
       )}
 
-      {/* Tips */}
-      <div className="bg-blue-50 p-4 rounded-lg">
-        <h4 className="font-medium text-blue-900 mb-2">📸 Photo Tips</h4>
-        <ul className="text-sm text-blue-800 space-y-1">
-          <li>• The first photo will be the primary listing photo</li>
-          <li>• Drag and drop photos to reorder them</li>
-          <li>• Include exterior shots from multiple angles</li>
-          <li>• Add interior photos showing cockpit, cabin, and avionics</li>
-          <li>• Include close-ups of any damage or notable features</li>
-          <li>• Engine and maintenance photos are valuable to buyers</li>
-          <li>• Use good lighting - outdoor photos often work best</li>
-        </ul>
-      </div>
-
       {/* Upload Status */}
-      {isUploading && photos.length > 0 && (
+      {uploading && (
         <div className="bg-blue-50 p-4 rounded-lg">
           <div className="flex items-center gap-3">
             <div className="w-5 h-5 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
             <div>
               <h4 className="font-medium text-blue-900">Uploading Photos</h4>
               <p className="text-sm text-blue-800">
-                Uploading {photos.length} photo{photos.length > 1 ? 's' : ''} to the server...
+                Adding new photos to your listing...
               </p>
             </div>
           </div>
         </div>
       )}
 
-      {photos.length === 0 && !isUploading && (
+      {photos.length === 0 && !uploading && (
         <div className="bg-yellow-50 p-4 rounded-lg">
-          <h4 className="font-medium text-yellow-900 mb-2">⚠️ Photos Required</h4>
+          <h4 className="font-medium text-yellow-900 mb-2">⚠️ No Photos</h4>
           <p className="text-sm text-yellow-800">
-            At least one photo is required to publish your listing. 
-            Listings with more high-quality photos receive significantly more interest.
+            This listing has no photos. Consider adding high-quality photos to increase buyer interest.
           </p>
         </div>
       )}
