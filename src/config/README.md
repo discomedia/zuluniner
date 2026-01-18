@@ -8,7 +8,7 @@ This directory contains centralized configuration for the ZuluNiner application.
 import { config } from '@/config/config';
 
 // LLM Configuration
-const model = config.llm.model; // 'gpt-4.1-mini'
+const model = config.llm.model; // 'gpt-5-mini'
 const responseFormat = config.llm.responseFormat.json; // 'json'
 
 // Auto-populate settings

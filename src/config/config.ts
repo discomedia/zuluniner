@@ -3,7 +3,7 @@
 export const config = {
   // LLM Configuration
   llm: {
-    model: 'gpt-4.1-mini' as const,
+    model: 'gpt-5-mini' as const,
     timeout: 30000, // 30 seconds
     maxRetries: 3,
     responseFormat: {

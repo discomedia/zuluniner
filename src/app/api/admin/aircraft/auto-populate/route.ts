@@ -60,7 +60,7 @@ async function validateAndEnhanceTitle(title: string): Promise<{ response: Valid
   console.log('🧠 Starting LLM validation...');
   
   try {
-    const response = await disco.llm.call(
+    const response = await disco.llm.call<ValidationResponse>(
       `Analyze this aircraft title and determine if it contains enough information to being searching for details."${title}"
       
       Required information: Year, make, and model.
@@ -86,7 +86,7 @@ async function validateAndEnhanceTitle(title: string): Promise<{ response: Valid
     
     console.log('✅ LLM validation completed');
     return {
-      response: response.response as ValidationResponse,
+      response: response.response,
       cost: response.usage.cost
     };
   } catch (error) {
@@ -135,7 +135,7 @@ async function convertToStructuredData(searchResults: string): Promise<{ respons
   console.log('🔄 Converting to structured JSON...');
   
   try {
-    const response = await disco.llm.call(
+    const response = await disco.llm.call<AircraftData>(
       `Convert the following aircraft information to structured JSON format: 
       
       ${searchResults}
@@ -194,7 +194,7 @@ Requirements:
     
     console.log('✅ JSON conversion completed');
     return {
-      response: response.response as AircraftData,
+      response: response.response,
       cost: response.usage.cost
     };
   } catch (error) {

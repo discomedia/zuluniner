@@ -62,7 +62,7 @@ async function convertToStructuredBlogData(researchResults: string, originalTopi
   console.log('🔄 Converting research to structured blog post...');
   
   try {
-    const response = await disco.llm.call(
+    const response = await disco.llm.call<BlogData>(
       `Create a comprehensive aviation blog post based on this research: ${researchResults}
 
       Original topic: "${originalTopic}"
@@ -111,7 +111,7 @@ async function convertToStructuredBlogData(researchResults: string, originalTopi
     
     console.log('✅ Blog post structure completed');
     return {
-      response: response.response as BlogData,
+      response: response.response,
       cost: response.usage.cost
     };
   } catch (error) {

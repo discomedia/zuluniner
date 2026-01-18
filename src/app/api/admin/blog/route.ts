@@ -3,6 +3,13 @@ import { requireAdmin, createServerSupabaseClient } from '@/lib/auth-server';
 import { db } from '@/api/db';
 import { uploadBlogImageCompressed } from '@/api/blog-image-upload';
 import { disco } from '@discomedia/utils';
+import { config } from '@/config/config';
+
+interface BlogImagePromptData {
+  description: string;
+  altText?: string;
+  filename?: string;
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -33,9 +40,9 @@ Return a JSON object with this structure:
   "filename": "keyword-rich-filename"
 }`;
 
-    const imageDescriptionResponse = await disco.llm.call(imagePrompt, {
-      responseFormat: 'json',
-      model: 'gpt-4.1-mini',
+    const imageDescriptionResponse = await disco.llm.call<BlogImagePromptData>(imagePrompt, {
+      responseFormat: config.llm.responseFormat.json,
+      model: config.llm.model,
     });
 
     const imageData = imageDescriptionResponse.response;
