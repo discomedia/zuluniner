@@ -25,7 +25,7 @@ export default function AircraftCard({ aircraft, primaryPhoto }: AircraftCardPro
     null;
 
   return (
-    <Link href={`/aircraft/${aircraft.slug}`} className="group">
+    <Link prefetch={true} href={`/aircraft/${aircraft.slug}`} className="group">
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-200">
         {/* Photo */}
         <div className="relative aspect-[4/3] bg-gray-100">

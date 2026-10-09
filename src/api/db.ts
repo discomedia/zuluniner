@@ -19,9 +19,10 @@ async function getAircraftBySlug(slug: string): Promise<AircraftWithUser | null>
       `)
       .eq('slug', slug)
       .eq('status', 'active')
-      .single();
+      .maybeSingle();
 
-    if (error || !data) return null;
+    if (error) throw error;
+    if (!data) return null;
     return { ...data, photos: [...data.photos].sort((a, b) => a.display_order - b.display_order) } as AircraftWithUser;
   } catch (error) {
     console.error('💥 Error in getAircraftBySlug:', error);
@@ -95,9 +96,7 @@ async function searchAircraft(filters: SearchFilters, page = 1, limit = 20): Pro
       .in('aircraft_id', aircraftIds)
       .order('display_order');
 
-    if (photosError) {
-      console.error('⚠️ Photos query error (non-critical):', photosError);
-    }
+    if (photosError) throw photosError;
 
     const aircraftWithPhotos = aircraftData.map(aircraft => ({
       ...aircraft,
@@ -135,6 +134,7 @@ function getPhotoUrl(storagePath: string): string {
 
 export function getBlogImageUrl(storagePath: string): string {
   if (!storagePath) return '';
+  if (storagePath.startsWith('https://') || storagePath.startsWith('http://')) return storagePath;
   // Always return absolute URL for Next.js <Image>
   const url = supabase.storage.from('blog-images').getPublicUrl(storagePath).data.publicUrl;
   // For local dev, replace 127.0.0.1 with window.location.hostname if needed

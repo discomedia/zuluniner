@@ -1,4 +1,4 @@
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
 
 import { db } from '@/api/db';
 import MainLayout from '@/components/layouts/MainLayout';
@@ -6,14 +6,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { formatDate } from '@/lib/utils';
 import Link from 'next/link';
 import Image from 'next/image';
-import type { Tables } from '@/api/schema';
-
-type BlogPostsResult = {
-  posts: Array<Tables<'blog_posts'> & { author: Pick<Tables<'users'>, 'name'> }>;
-  total: number;
-  page: number;
-  limit: number;
-};
+import { getPublicPosts } from '@/api/public-content';
 
 export const metadata = {
   title: 'ZuluNiner Blog | Aircraft, Aviation, and Industry Insights',
@@ -21,16 +14,7 @@ export const metadata = {
 };
 
 export default async function BlogPage() {
-  console.log('🔄 Starting to fetch blog posts...');
-  
-  let blogData: BlogPostsResult = { posts: [], total: 0, page: 1, limit: 10 };
-  
-  try {
-    blogData = await db.blog.getPosts(true, 1, 12);
-    console.log('✅ Blog posts loaded:', blogData.posts.length);
-  } catch (error) {
-    console.error('❌ Error fetching blog posts:', error);
-  }
+  const blogData = await getPublicPosts();
 
   return (
     <MainLayout>
@@ -61,7 +45,7 @@ export default async function BlogPage() {
               <>
                 <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
                   {blogData.posts.map((post) => (
-                    <Link key={post.id} href={`/blog/${post.slug}`}>
+                    <Link prefetch={true} key={post.id} href={`/blog/${post.slug}`}>
                       <Card className="h-full transition-all duration-200 hover:shadow-lg hover:scale-[1.02]">
                         {post.header_photo && (
                           <div className="aspect-video w-full overflow-hidden rounded-t-lg">
@@ -70,6 +54,7 @@ export default async function BlogPage() {
                               alt={post.title}
                               width={400}
                               height={225}
+                              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                               className="h-full w-full object-cover"
                             />
                           </div>

@@ -1,6 +1,8 @@
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
 
 import { db } from '@/api/db';
+import { getPublicPost, getPublicPosts } from '@/api/public-content';
+
 import MainLayout from '@/components/layouts/MainLayout';
 import { formatDate } from '@/lib/utils';
 import { notFound } from 'next/navigation';
@@ -8,6 +10,10 @@ import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import Link from 'next/link';
+
+export async function generateStaticParams() {
+  return (await getPublicPosts(1, 100)).posts.map(post => ({ slug: post.slug }));
+}
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -17,7 +23,7 @@ interface BlogPostPageProps {
 
 export async function generateMetadata({ params }: BlogPostPageProps) {
   const { slug } = await params;
-  const post = await db.blog.getPost(slug);
+  const post = await getPublicPost(slug);
   
   if (!post) {
     return {
@@ -38,16 +44,13 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
-  console.log(`🔄 Fetching blog post with slug: ${slug}`);
   
-  const post = await db.blog.getPost(slug);
+  const post = await getPublicPost(slug);
   
   if (!post) {
-    console.log(`❌ Blog post not found: ${slug}`);
     notFound();
   }
 
-  console.log(`✅ Blog post loaded: ${post.title}`);
 
   return (
     <MainLayout>
@@ -59,6 +62,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               src={db.blog.getImageUrl(post.header_photo)}
               alt={post.title}
               fill
+              sizes="100vw"
               className="object-cover"
               priority
             />

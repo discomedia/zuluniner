@@ -1,4 +1,4 @@
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,24 +9,11 @@ import Button from '../components/ui/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../components/ui/Card';
 import HomePageClient from '../components/home/HomePageClient';
 import { db } from '../api/db';
-import type { Aircraft, AircraftPhoto } from '../types';
-
-interface AircraftWithPhotos extends Aircraft {
-  photos?: AircraftPhoto[];
-}
+import { getPublicAircraft } from '@/api/public-content';
 
 export default async function Home() {
-  console.log('🔄 Starting to fetch featured aircraft...');
-  
-  let featuredAircraft: AircraftWithPhotos[] = [];
+  const featuredAircraft = (await getPublicAircraft()).slice(0, 3);
   const loading = false;
-  
-  try {
-    const result = await db.aircraft.search({}, 1, 3);
-    featuredAircraft = result.aircraft;
-  } catch (error) {
-    console.error('❌ Error fetching featured aircraft:', error);
-  }
 
   return (
     <MainLayout>
@@ -81,7 +68,7 @@ export default async function Home() {
                   const photoUrl = primaryPhoto?.storage_path ? db.photos.getPhotoUrl(primaryPhoto.storage_path) : null;
                   
                   return (
-                    <Link key={aircraft.id} href={`/aircraft/${aircraft.slug}`}>
+                    <Link prefetch={true} key={aircraft.id} href={`/aircraft/${aircraft.slug}`}>
                       <Card className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer">
                         <div className="aspect-[4/3] bg-neutral-200 flex items-center justify-center relative">
                           {photoUrl ? (
@@ -132,7 +119,7 @@ export default async function Home() {
             )}
             
             <div className="mt-12 text-center">
-              <Link href="/aircraft">
+              <Link prefetch={true} href="/aircraft">
                 <Button size="lg">
                   View All Aircraft
                 </Button>

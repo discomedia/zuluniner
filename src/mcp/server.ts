@@ -6,6 +6,7 @@ import * as content from './content';
 import { uploadImage } from './images';
 import { contentClient } from './client';
 import { siteOrigin, verifyOwner } from './auth';
+import { invalidatePublicContent } from '@/api/content-cache';
 
 export async function runBatch<T>(items: T[], action: (item: T) => Promise<z.infer<typeof z.json>>) {
   const results: Array<{ index: number; ok: boolean; data?: z.infer<typeof z.json>; error?: string }> = [];
@@ -29,6 +30,10 @@ export function registerContentTools(server: McpServer) {
       const required = readOnly ? 'content:read' : 'content:write';
       if (!ctx.http?.authInfo?.scopes.includes(required)) throw new Error(`${required} permission is required.`);
       const result = await action(inputSchema.parse(input), ownerId);
+      if (result.succeeded > 0) {
+        if (name === 'create_posts' || name === 'update_posts' || name === 'delete_content') invalidatePublicContent('post');
+        if (name === 'create_aircraft' || name === 'update_aircraft' || name === 'set_aircraft_images' || name === 'delete_content') invalidatePublicContent('aircraft');
+      }
       if (!readOnly) console.info(JSON.stringify({ event: 'content_mutation', tool: name, owner_id: ownerId, succeeded: result.succeeded, failed: result.failed }));
       return { content: [{ type: 'text', text: JSON.stringify(result) }], structuredContent: result, isError: result.failed > 0 };
     });

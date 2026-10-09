@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Button from '@/components/ui/Button';
 import SearchBar from '@/components/ui/SearchBar';
@@ -10,6 +11,7 @@ interface HomePageClientProps {
 
 export default function HomePageClient({ children }: HomePageClientProps) {
   const router = useRouter();
+  useEffect(() => { router.prefetch('/aircraft'); router.prefetch('/sell'); }, [router]);
   const handleSearch = (query: string) => {
     if (query.trim()) {
       router.push(`/aircraft?q=${encodeURIComponent(query.trim())}`);

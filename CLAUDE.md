@@ -2,7 +2,7 @@
 
 - Write ECMA2022 TypeScript modules. Use existing generated schema/types; avoid authored `any`/`unknown` types and CommonJS `require`.
 - Read current usages and export patterns before edits. UI/layout components use default exports, except named Card exports.
-- Use server components for public content reads through `src/api/db.ts`. Client components handle interaction. Wrap `useSearchParams` in Suspense.
+- Use server components for public content reads through the anonymous cached reads in `src/api/public-content.ts` and `src/api/db.ts`. Successful MCP content mutations must invalidate public tags/pages through `src/api/content-cache.ts`. Client components handle interaction. Wrap `useSearchParams` in Suspense.
 - MCP writes belong in `src/mcp/content.ts` with schema validation in `src/mcp/schemas.ts`. Always initialize Supabase with the generated Database type. The service role is server-only; never import its client into client components.
 - The `/connect` consent page is the only client Auth UI. There are no legacy admin/profile/AI routes. Do not add server generation APIs or AI credentials.
 - Keep local credentials in ignored `.env`. Never commit credentials or OAuth tokens. Configure Vercel environments separately.

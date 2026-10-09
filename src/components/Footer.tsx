@@ -78,7 +78,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <div className="space-y-8 xl:col-span-1">
-            <Link href="/" className="text-2xl font-bold text-white">
+            <Link prefetch={true} href="/" className="text-2xl font-bold text-white">
               ZuluNiner
             </Link>
             <p className="text-neutral-400 text-base max-w-md">
@@ -100,7 +100,7 @@ export default function Footer() {
                 <ul role="list" className="mt-4 space-y-4">
                   {navigation.marketplace.map((item) => (
                     <li key={item.name}>
-                      <Link href={item.href} className="text-base text-neutral-400 hover:text-neutral-300 transition-colors">
+                      <Link prefetch={true} href={item.href} className="text-base text-neutral-400 hover:text-neutral-300 transition-colors">
                         {item.name}
                       </Link>
                     </li>
@@ -112,7 +112,7 @@ export default function Footer() {
                 <ul role="list" className="mt-4 space-y-4">
                   {navigation.company.map((item) => (
                     <li key={item.name}>
-                      <Link href={item.href} className="text-base text-neutral-400 hover:text-neutral-300 transition-colors">
+                      <Link prefetch={true} href={item.href} className="text-base text-neutral-400 hover:text-neutral-300 transition-colors">
                         {item.name}
                       </Link>
                     </li>
@@ -126,7 +126,7 @@ export default function Footer() {
                 <ul role="list" className="mt-4 space-y-4">
                   {navigation.support.map((item) => (
                     <li key={item.name}>
-                      <Link href={item.href} className="text-base text-neutral-400 hover:text-neutral-300 transition-colors">
+                      <Link prefetch={true} href={item.href} className="text-base text-neutral-400 hover:text-neutral-300 transition-colors">
                         {item.name}
                       </Link>
                     </li>
@@ -140,7 +140,7 @@ export default function Footer() {
           <div className="md:flex md:items-center md:justify-between">
             <div className="flex space-x-6 md:order-2">
               <p className="text-neutral-400 text-base">
-                Need help? <Link href="/contact" className="text-primary-400 hover:text-primary-300 transition-colors">Contact us</Link>
+                Need help? <Link prefetch={true} href="/contact" className="text-primary-400 hover:text-primary-300 transition-colors">Contact us</Link>
               </p>
             </div>
             <p className="mt-8 text-base text-neutral-400 md:mt-0 md:order-1">

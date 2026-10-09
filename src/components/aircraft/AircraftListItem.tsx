@@ -37,7 +37,7 @@ export default function AircraftListItem({ aircraft, primaryPhoto, seller }: Air
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-200">
       <div className="flex flex-col md:flex-row">
         {/* Photo */}
-        <Link href={`/aircraft/${aircraft.slug}`} className="group md:w-80 md:flex-shrink-0">
+        <Link prefetch={true} href={`/aircraft/${aircraft.slug}`} className="group md:w-80 md:flex-shrink-0">
           <div className="relative aspect-[4/3] md:aspect-[3/2] bg-gray-100">
             {photoUrl ? (
               <Image
@@ -63,7 +63,7 @@ export default function AircraftListItem({ aircraft, primaryPhoto, seller }: Air
               {/* Title and Price */}
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3">
                 <div>
-                  <Link href={`/aircraft/${aircraft.slug}`} className="group">
+                  <Link prefetch={true} href={`/aircraft/${aircraft.slug}`} className="group">
                     <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2">
                       {aircraft.title}
                     </h3>
@@ -143,7 +143,7 @@ export default function AircraftListItem({ aircraft, primaryPhoto, seller }: Air
 
             {/* Action Buttons */}
             <div className="flex flex-col gap-3 lg:w-48 lg:flex-shrink-0">
-              <Link href={`/aircraft/${aircraft.slug}`}>
+              <Link prefetch={true} href={`/aircraft/${aircraft.slug}`}>
                 <Button variant="primary" className="w-full">
                   View Details
                 </Button>

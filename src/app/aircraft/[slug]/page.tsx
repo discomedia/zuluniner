@@ -1,4 +1,4 @@
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
 
 import { formatLocation } from '@/lib/utils';
 import { notFound } from 'next/navigation';
@@ -6,6 +6,8 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import { Phone, MapPin, Calendar, Clock, Settings, Plane } from 'lucide-react';
 import { db } from '@/api/db';
+import { getPublicAircraft, getPublicAircraftBySlug } from '@/api/public-content';
+
 import Button from '@/components/ui/Button';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import PhotoGallery from '@/components/aircraft/PhotoGallery';
@@ -14,6 +16,10 @@ import ShareButtons from '@/components/aircraft/ShareButtons';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import { AircraftStructuredData } from '@/components/seo/StructuredData';
 
+export async function generateStaticParams() {
+  return (await getPublicAircraft()).map(aircraft => ({ slug: aircraft.slug }));
+}
+
 interface PageProps {
   params: Promise<{
     slug: string;
@@ -21,7 +27,7 @@ interface PageProps {
 }
 
 async function getAircraftBySlug(slug: string) {
-  return await db.aircraft.getBySlug(slug);
+  return await getPublicAircraftBySlug(slug);
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { filterAircraft, filtersFromParams } from '@/lib/aircraft-search';
 import { Grid, List, Filter } from 'lucide-react';
 import type { Aircraft, AircraftPhoto, SearchFilters } from '@/types';
 import Button from '@/components/ui/Button';
@@ -28,38 +30,44 @@ interface AircraftWithPhotos extends Aircraft {
 
 interface AircraftListingsContentProps {
   initialAircraft: AircraftWithPhotos[];
-  initialTotal: number;
-  initialPage: number;
-  initialFilters: SearchFilters;
-  initialSort: string;
-  initialView: string;
-  itemsPerPage: number;
 }
 
-export default function AircraftListingsContent({
-  initialAircraft,
-  initialTotal,
-  initialPage,
-  initialFilters,
-  initialSort,
-  initialView,
-  itemsPerPage,
-}: AircraftListingsContentProps) {
-  const [aircraft] = useState<AircraftWithPhotos[]>(initialAircraft);
+export default function AircraftListingsContent({ initialAircraft }: AircraftListingsContentProps) {
+  const params = useSearchParams();
+  const sort = params.get('sort');
+  const initialSort: SortOption = sort === 'oldest' || sort === 'price_low' || sort === 'price_high' ? sort : 'newest';
+  return <AircraftListingsResults
+    key={params.toString()}
+    inventory={initialAircraft}
+    initialFilters={filtersFromParams(new URLSearchParams(params.toString()))}
+    initialSort={initialSort}
+    initialView={params.get('view') === 'list' ? 'list' : 'grid'}
+    initialPage={Math.max(1, Math.trunc(Number(params.get('page'))) || 1)}
+  />;
+}
+
+// Render real listings in the static HTML while URL-specific client state hydrates.
+export function AircraftListingsPreview({ initialAircraft }: AircraftListingsContentProps) {
+  return <AircraftListingsResults inventory={initialAircraft} initialFilters={{}} initialSort="newest" initialView="grid" initialPage={1} />;
+}
+
+function AircraftListingsResults({ inventory, initialFilters, initialSort, initialView, initialPage }: {
+  inventory: AircraftWithPhotos[]; initialFilters: SearchFilters; initialSort: SortOption; initialView: ViewMode; initialPage: number;
+}) {
   const [loading] = useState(false);
   const [error] = useState<string | null>(null);
-  const [viewMode, setViewMode] = useState<ViewMode>(initialView as ViewMode);
-  const [sortBy, setSortBy] = useState<SortOption>(initialSort as SortOption);
+  const [viewMode, setViewMode] = useState<ViewMode>(initialView);
+  const [sortBy, setSortBy] = useState<SortOption>(initialSort);
   const [currentPage, setCurrentPage] = useState(initialPage);
-  const [totalItems] = useState(initialTotal);
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState<SearchFilters>(initialFilters);
 
+  const itemsPerPage = viewMode === 'list' ? 8 : 12;
+  const matches = filterAircraft(inventory, filters, sortBy);
+  const totalItems = matches.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-  // Optionally: implement client-side navigation/filtering by updating URL and triggering a reload
-  // (for now, just update state; real implementation should use router.push with query params)
-
+  const displayedPage = Math.min(currentPage, Math.max(1, totalPages));
+  const aircraft = matches.slice((displayedPage - 1) * itemsPerPage, displayedPage * itemsPerPage);
   const handleSearch = (query: string) => {
     setFilters(prev => ({ ...prev, query }));
     setCurrentPage(1);
@@ -103,7 +111,7 @@ export default function AircraftListingsContent({
     <>
       <AircraftListingPageStructuredData
         totalAircraft={totalItems}
-        currentPage={currentPage}
+        currentPage={displayedPage}
         itemsPerPage={itemsPerPage}
       />
       
@@ -253,7 +261,7 @@ export default function AircraftListingsContent({
                 {totalPages > 1 && (
                   <div className="flex justify-center">
                     <Pagination
-                      currentPage={currentPage}
+                      currentPage={displayedPage}
                       totalPages={totalPages}
                       onPageChange={handlePageChange}
                     />

@@ -4,7 +4,13 @@ ZuluNiner runs on Next.js App Router on Vercel, behind Cloudflare at zuluniner.c
 
 ## Public site
 
-Server components read active aircraft and published posts through `src/api/db.ts`, using the anonymous, schema-typed Supabase client. Listing and detail routes render dynamically so MCP changes appear on the next request. Next.js Image serves assets from public Supabase `aircraft-photos` and `blog-images` buckets.
+Public pages are pre-rendered HTML/RSC served from Vercel's edge cache. Home, aircraft browse, blog index and existing detail pages are generated at build time; new slugs generate on demand. Server components read active aircraft and published posts through `src/api/public-content.ts` and `src/api/db.ts`, using the anonymous, schema-typed Supabase client. Public data and pages have a one-hour ISR interval as a backstop for changes made outside MCP. Read failures throw, so regeneration retains the last good page rather than caching empty content or a false 404.
+
+After successful MCP content batches, `src/api/content-cache.ts` expires the corresponding public data tag with `expire: 0` and invalidates index/detail paths (including home for aircraft). The next request regenerates affected pages; subsequent requests use cached HTML. Publish, edit, unpublish, rename, delete and gallery replacement all invalidate. This does not push updates into an already-open browser: visitors refresh, and prefetched client routes may retain a snapshot until their framework cache expires.
+
+Visible navigation/card links prefetch complete routes. Aircraft browse loads the current small public inventory once and searches, filters, sorts and paginates locally, preserving bookmarked query parameters on arrival. This removes database and server round trips from those interactions. If inventory becomes large, replace the full snapshot with paginated cached search.
+
+Next.js Image resizes/optimizes assets from public Supabase `aircraft-photos` and `blog-images` buckets; responsive sizes avoid downloading oversized blog images. Header paths normally reference storage objects; existing absolute URLs are preserved by the URL helper, though external optimizer hosts must be explicitly allowed in Next configuration. The two unavailable legacy external headers were replaced on 2026-10-09 using Cessna photos already in the project, uploaded as WebP to `blog-images`. Original post snapshots are saved privately under `.vercel/backups`.
 
 The existing seller contact flow uses email/telephone links. There is no implemented payment/deposit backend. There are no public admin, profile or registration pages.
 
@@ -24,4 +30,4 @@ Public OAuth discovery endpoints describe the server and protected resource. Bro
 
 Vercel receives the environment variables listed in README. GitHub pushes deploy the site; the Vercel CLI can deploy the same checkout. Node 24 is the production runtime. Supabase table schemas and public images are retained. Historical SQL migrations describe the original schema; they are not a current list of application routes or capabilities.
 
-Run `npm run verify` before release. `npm run test:live:mcp -- <origin>` explicitly runs mutation tests against a deployed site, creating and removing only uniquely named test content. It does not change existing listings or posts. Chrome testing separately checks the actual ChatGPT connection and leaves the requested public test aircraft.
+Run `npm run verify` before release. `npm run test:live:mcp -- <origin>` explicitly runs mutation tests against a deployed site, creating and removing only uniquely named test content. It verifies public cache invalidation across publishing, editing, unpublishing, slug changes and deletion, including warmed 404 responses. It does not change existing listings or posts. Chrome testing separately checks the actual ChatGPT connection and leaves the requested public test aircraft.

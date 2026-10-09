@@ -1,8 +1,8 @@
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
 
 import { Metadata } from 'next';
-import AircraftListingsContent from '@/components/aircraft/AircraftListingsContent';
-type SearchParamsObject = Record<string, string | string[] | undefined>;
+import AircraftListingsContent, { AircraftListingsPreview } from '@/components/aircraft/AircraftListingsContent';
+import { Suspense } from 'react';
 
 export const metadata: Metadata = {
   title: 'Aircraft for Sale - Premium Aircraft Marketplace | ZuluNiner',
@@ -24,54 +24,16 @@ export const metadata: Metadata = {
   },
 };
 
-import { db } from '@/api/db';
-import type { SearchFilters } from '@/types';
+import { getPublicAircraft } from '@/api/public-content';
 import MainLayout from '@/components/layouts/MainLayout';
 
-function parseFilters(searchParams: URLSearchParams): SearchFilters {
-  const filters: SearchFilters = {};
-  if (searchParams.get('q')) filters.query = searchParams.get('q')!;
-  if (searchParams.get('price_min')) filters.priceMin = parseInt(searchParams.get('price_min')!);
-  if (searchParams.get('price_max')) filters.priceMax = parseInt(searchParams.get('price_max')!);
-  if (searchParams.get('make')) filters.make = searchParams.get('make')!;
-  if (searchParams.get('model')) filters.model = searchParams.get('model')!;
-  if (searchParams.get('engine_type')) filters.engineType = searchParams.get('engine_type')!;
-  if (searchParams.get('year_min')) filters.yearMin = parseInt(searchParams.get('year_min')!);
-  if (searchParams.get('year_max')) filters.yearMax = parseInt(searchParams.get('year_max')!);
-  // Add more as needed
-  return filters;
-}
-
-export default async function AircraftListingsPage({ searchParams }: { searchParams?: Promise<SearchParamsObject> }) {
-  const searchParamsObj: SearchParamsObject = (await searchParams) ?? {};
-  // Parse filters and pagination from URL
-  const params = new URLSearchParams(
-    Object.entries(searchParamsObj).flatMap(([k, v]) =>
-      Array.isArray(v) ? v.map(val => [k, val]) : v ? [[k, v]] : []
-    )
-  );
-  const filters = parseFilters(params);
-
-  const sort = params.get('sort') as string | null;
-  const page = parseInt(params.get('page') || '1', 10);
-  const view = params.get('view') as string | null;
-  const itemsPerPage = view === 'list' ? 8 : 12;
-
-  // Fetch aircraft server-side
-  const result = await db.aircraft.search(filters, page, itemsPerPage);
-
-  // Pass all relevant state to the client component
+export default async function AircraftListingsPage() {
+  const aircraft = await getPublicAircraft();
   return (
     <MainLayout>
-      <AircraftListingsContent
-        initialAircraft={result.aircraft}
-        initialTotal={result.total}
-        initialPage={page}
-        initialFilters={filters}
-        initialSort={sort || 'newest'}
-        initialView={view || 'grid'}
-        itemsPerPage={itemsPerPage}
-      />
+      <Suspense fallback={<AircraftListingsPreview initialAircraft={aircraft} />}>
+        <AircraftListingsContent initialAircraft={aircraft} />
+      </Suspense>
     </MainLayout>
   );
 }

@@ -2,7 +2,7 @@
 
 Aircraft listings and Markdown posts, built with Next.js, React, TypeScript and Tailwind. Vercel serves the site and its content MCP; Supabase provides Postgres, owner authentication and image storage. Cloudflare fronts the domain.
 
-Public pages read active aircraft and published posts. Content is managed through the authenticated MCP at **https://zuluniner.com/api/mcp**. The site has no admin editor, AI generator, public account registration UI or AI API key. Agents prepare content and images using their own services.
+Public pages are pre-rendered and edge cached, with a one-hour refresh backstop and cache invalidation after MCP changes. Browse filters/search run locally over the small public inventory. Content is managed through the authenticated MCP at **https://zuluniner.com/api/mcp**. The site has no admin editor, AI generator, public account registration UI or AI API key. Agents prepare content and images using their own services.
 
 ## Development
 
