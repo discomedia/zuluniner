@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { Metadata } from 'next';
 import AircraftListingsContent from '@/components/aircraft/AircraftListingsContent';
 type SearchParamsObject = Record<string, string | string[] | undefined>;

@@ -1,125 +1,27 @@
 # Architecture
 
-## Project Overview
-ZuluNiner is an aircraft marketplace built with Next.js, React, Tailwind CSS, TypeScript, and Supabase. The platform supports aircraft listings, search, photo galleries, and blog content.
+ZuluNiner runs on Next.js App Router on Vercel, behind Cloudflare at zuluniner.com. The Supabase project is `bjwlldxavgoxhyyufffy` and the repository is `discomedia/zuluniner`.
 
-## Core Project Data
-- Project Name: ZuluNiner
-- Supabase project ID: bjwlldxavgoxhyyufffy
-- Database: Production Supabase Cloud only
-- GitHub: discomedia/zuluniner
-- Domain: zuluniner.com (Cloudflare DNS)
+## Public site
 
-## Tech Stack
-- Frontend: Next.js 14+, React, TypeScript, Tailwind CSS
-- Backend: Supabase (DB, Auth, Storage, type-safe functions)
-- Deployment: Vercel (frontend), Supabase Cloud (backend)
-- Content Generation: @discomedia/utils (LLM)
-- Image Processing: Next.js Image, Supabase Storage
+Server components read active aircraft and published posts through `src/api/db.ts`, using the anonymous, schema-typed Supabase client. Listing and detail routes render dynamically so MCP changes appear on the next request. Next.js Image serves assets from public Supabase `aircraft-photos` and `blog-images` buckets.
 
-## Architecture Notes
-- Next.js App Router for performance and SEO
-- Full TypeScript with Supabase types
-- Supabase Storage + Next.js Image for images
-- React Server Components + client state
-- Tailwind CSS with custom tokens
+The existing seller contact flow uses email/telephone links. There is no implemented payment/deposit backend. There are no public admin, profile or registration pages.
 
-## Security
-- Row Level Security (RLS) for all data
-- Input validation and sanitization
-- Rate limiting on content APIs
-- Secure file upload with type validation
-- XSS protection
+## Content management
 
-## Scalability
-- Database indexing for search
-- Image CDN
-- Caching for frequent data
-- API rate limiting
-- Performance monitoring
+`src/mcp` contains validated content operations, image handling and authorization. `/api/mcp` exposes Streamable HTTP through `mcp-handler` and the MCP server SDK. It supports batch CRUD for aircraft and posts, gallery replacement/reordering and supplied image uploads. Markdown is supplied by the calling agent. No server code invokes an LLM or image-generation API.
 
-## Supabase & Database
-- Production Supabase Cloud database only
-- Migrations in supabase/migrations/
-- TypeScript types generated from production schema
-- RLS policies for all tables
-- Storage buckets for images
+Writes use the service-role key exclusively on the server. MCP grants additionally require an explicitly allowlisted owner UUID and a live `users.role=admin` profile. The anonymous public client never receives that key.
 
-## Type Safety
-- Supabase CLI for local dev
-- Automatic type generation
-- Type-safe db client wrapper
-- Migration scripts
+## OAuth
 
-## Database Architecture
-- All db operations via src/api/db.ts
-- Centralized client management
-- Server-side client factory
-- Auth client integration
-- Organized db API structure
-- Generated types for all ops
-- Nullable field handling
-- Custom types for joins
-- Consistent error patterns
-- Transaction support
-- Compile-time validation
-- No direct Supabase usage in UI
+Supabase's native OAuth server is disabled in this project. The site's OAuth authorization-code server uses S256 PKCE, restricted registered callbacks, explicit owner consent, resource-bound opaque access tokens and rotating refresh tokens. Owner sign-in uses Supabase Auth. OAuth records contain hashed token names in the private `zuluniner-mcp-auth` storage bucket, with no policies permitting public access. Storage uniqueness provides single-use claims across Vercel instances. Access tokens expire in 15 minutes; connection families expire in 30 days. Revocation invalidates the entire family. See the MCP guide.
 
-## Data Fetching Architecture
-- All db ops in server components
-- Client components for interactivity only
-- Hybrid pattern for pages needing both
-- Production issues fixed by server-side fetching
+Public OAuth discovery endpoints describe the server and protected resource. Browser origin checks protect MCP and consent requests; per-tool scopes enforce read/write permissions.
 
-## Developer Workflow
-- Use server components for data fetching
-- Use client components for UI interactivity
-- Always test with `npm run build`
-- Use migration scripts for db changes
-- Use type-safe db functions
-- No direct Supabase in components
+## Deployment and verification
 
-## Deployment
-- Vercel deployment via GitHub
-- Automatic deployments on push
-- Custom domain and SSL (Cloudflare)
-- Production config in .env.production
-- CDN for assets
-- Monitoring and error tracking
+Vercel receives the environment variables listed in README. GitHub pushes deploy the site; the Vercel CLI can deploy the same checkout. Node 24 is the production runtime. Supabase table schemas and public images are retained. Historical SQL migrations describe the original schema; they are not a current list of application routes or capabilities.
 
-## Supabase Deployment Notes
-- Production Supabase Cloud database only
-- Push schema changes with `npm run db:push`
-- All env vars point to production
-- Test all RLS policies in production
-- Storage buckets for images in production
-
-## Schema Update Workflow
-1. Create migrations in supabase/migrations/
-2. Push schema changes to production with `npm run db:push`
-3. Generate updated types with `npm run generate-schema`
-4. Test changes thoroughly in development
-5. Commit and push to GitHub (triggers Vercel deploy)
-
-## Project Structure
-
-### Source Directory
-- src/api/: Supabase config, schema, db functions
-- src/app/: Next.js App Router pages
-- src/components/: React components
-- src/lib/: Utility libraries
-- src/types/: TypeScript types
-
-### Database Structure
-- supabase/migrations/: SQL migration files
-- supabase/config.toml: Supabase config
-
-## Legal & Business Model
-- ZuluNiner under Disco Media Pty Ltd (Australia)
-- Revenue: Listing fees, possible auction success fees
-- Payment: Stripe
-- Age: 18+ only
-- Data: Stored in Supabase (US/EU)
-- Analytics: Google Analytics
-- Emails: Transactional/account only
-- Governing Law: Australia
+Run `npm run verify` before release. `npm run test:live:mcp -- <origin>` explicitly runs mutation tests against a deployed site, creating and removing only uniquely named test content. It does not change existing listings or posts. Chrome testing separately checks the actual ChatGPT connection and leaves the requested public test aircraft.

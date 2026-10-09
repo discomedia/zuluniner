@@ -1,3 +1,5 @@
+> Historical notes/ideas from the original application. Current behavior and removed legacy features are documented in [architecture](architecture.md) and [content MCP](content-mcp.md).
+
 # New Features & Improvements (to be implemented)
 
 ## Database Schema

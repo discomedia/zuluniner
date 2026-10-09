@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { db } from '@/api/db';
 import MainLayout from '@/components/layouts/MainLayout';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';

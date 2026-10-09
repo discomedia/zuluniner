@@ -30,6 +30,8 @@ export default function AircraftFilters({ filters, onFiltersChange }: AircraftFi
   const [localFilters, setLocalFilters] = useState<SearchFilters>(filters);
 
   useEffect(() => {
+    // Synchronize the editable form when the parent supplies new search state.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLocalFilters(filters);
   }, [filters]);
 

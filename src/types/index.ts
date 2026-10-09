@@ -119,15 +119,3 @@ export interface ApiResponse<T = unknown> {
   error?: string;
   message?: string;
 }
-
-// Content generation types
-export interface ContentGenerationRequest {
-  title: string;
-  context?: string;
-  type: 'aircraft_description' | 'blog_post' | 'meta_description';
-}
-
-export interface GeneratedContent {
-  content: string;
-  suggestions?: string[];
-}

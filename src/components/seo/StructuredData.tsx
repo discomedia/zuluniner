@@ -33,7 +33,6 @@ export function AircraftStructuredData({ aircraft, primaryPhotoUrl }: AircraftSt
       url: `https://zuluniner.com/aircraft/${aircraft.slug}`,
       priceCurrency: 'USD',
       price: aircraft.price,
-      priceValidUntil: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], // 90 days from now
       itemCondition: 'https://schema.org/UsedCondition',
       availability: aircraft.status === 'active' ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
       seller: {

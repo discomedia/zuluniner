@@ -6,41 +6,53 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint src",
     "generate-schema": "npx supabase gen types typescript --project-id bjwlldxavgoxhyyufffy > src/api/schema.ts",
     "db:push": "npx supabase db push",
     "db:pull": "npx supabase db pull",
     "db:status": "npx supabase migration list",
     "supabase:link": "npx supabase link --project-ref bjwlldxavgoxhyyufffy",
     "deploy:schema": "npm run db:push && npm run generate-schema",
-    "deploy:check": "npm run build && npm run lint"
+    "deploy:check": "npm run build && npm run lint",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test src/testing/*.test.ts",
+    "verify": "npm run typecheck && npm run lint && npm test && npm run build",
+    "test:live:mcp": "node --env-file=.env --import tsx scripts/verify-mcp.ts"
   },
   "dependencies": {
-    "@discomedia/utils": "^1.0.54",
     "@headlessui/react": "^2.2.9",
-    "@heroicons/react": "^2.2.0",
-    "@supabase/ssr": "^0.8.0",
+    "@modelcontextprotocol/server": "2.3.1",
     "@supabase/supabase-js": "^2.90.1",
     "@tailwindcss/typography": "^0.5.19",
     "clsx": "^2.1.1",
+    "ipaddr.js": "2.3.0",
     "lucide-react": "^0.562.0",
-    "next": "16.1.3",
+    "mcp-handler": "2.3.0",
+    "next": "16.4.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-markdown": "^10.1.0",
     "remark-gfm": "^4.0.1",
-    "tailwind-merge": "^3.4.0"
+    "sharp": "0.35.5",
+    "tailwind-merge": "^3.4.0",
+    "zod": "4.6.5"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^25",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.1.3",
+    "eslint-config-next": "16.4.0",
     "supabase": "^2.72.8",
     "tailwindcss": "^4",
+    "tsx": "4.23.15",
     "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=24 <27"
+  },
+  "overrides": {
+    "postcss-selector-parser": "7.1.6"
   }
 }
