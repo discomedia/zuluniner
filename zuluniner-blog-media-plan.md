@@ -6,6 +6,17 @@ Build the blog around the questions pilots argue about after training, the detai
 
 This plan contains 36 proposed posts: 12 launch briefs and 24 follow-on topics. Start with one substantial article per week. Ownership and aircraft selection provide the most direct route to listings; technical explainers and FAA study topics give pilots reasons to discover and revisit the site before they are ready to buy.
 
+## Publication progress
+
+Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03**, followed by final source, calculation and style review. The originals were backed up and deleted; the replacement posts are live. Covers, contents links, tables and classifieds links were checked on desktop and phone layouts after successful deployment.
+
+- [x] **01 — [Four seats, full fuel: will this airplane carry your mission?](https://zuluniner.com/blog/four-seats-full-fuel-aircraft-payload)** — published; original loading cases, CG calculations and mission worksheet.
+- [x] **02 — [Fresh annual vs prebuy: what are you actually buying?](https://zuluniner.com/blog/prebuy-vs-annual-inspection)** — published; buyer-to-mechanic scope worksheet and hypothetical findings.
+- [x] **03 — [Low engine hours, old overhaul: bargain or liability?](https://zuluniner.com/blog/low-engine-hours-old-overhaul)** — published; two hypothetical histories, diagnostic limits and engine-reserve calculation.
+- [ ] **04–36** — not yet written or published.
+
+The published editions use primary-source research and clearly identified fictional examples. No independent CFI/A&P/IA review or specialist interview has occurred; those proposed enhancements are still outstanding and are not counted as completed. Article sources, metadata, cover prompts and validation details are retained in [docs/blog/publication-notes.md](docs/blog/publication-notes.md).
+
 ## Site context and editorial position
 
 The initial research snapshot contained three older posts: “How to Buy Your First Aircraft,” “How to Change Tires on a Cessna,” and “Stop Telling People You're a Pilot.” The owner requested their replacement on 9 October 2026. The replacement set is articles 01–03 below; use 01 as the mission-selection hub and 02–03 as the purchase-assessment cluster. A complete backup of the old records is retained locally under ignored `data/backups/`.
@@ -257,15 +268,15 @@ Effort estimates are editorial planning assumptions: **medium** means about 1–
 
 ## First 12 weeks
 
-Start the sequence when the first reviewed article is ready; these are relative weeks, not publication commitments. Regulatory and type-specific articles move back if required documentation or review is unavailable. Keep at least two completed articles ready before starting a weekly cadence.
+Articles 01–03 were published together on 9 October 2026. Their rows below are complete; use the remaining sequence to plan future releases rather than republishing them. These are relative weeks, not publication commitments. Regulatory and type-specific articles move back if required documentation or review is unavailable. Keep at least two completed articles ready before starting a weekly cadence.
 
 | Week | Article | Companion material | Purpose |
 | --- | --- | --- | --- |
-| 1 | 02 — Annual vs prebuy | Buyer-to-mechanic scope sheet | Extend the existing buying hub. |
+| 1 | ✓ 02 — Annual vs prebuy (published) | Buyer-to-mechanic scope sheet | Support the mission-selection hub. |
 | 2 | 05 — Maneuvering speed | Original diagram and four-question quiz | Establish technical credibility. |
-| 3 | 01 — Payload and mission | Three loading scenarios | Build the central aircraft-selection article. |
+| 3 | ✓ 01 — Payload and mission (published) | Three loading scenarios | Build the central aircraft-selection article. |
 | 4 | 06 — MOSAIC | Aircraft/pilot/operator eligibility worksheet | Address a timely US licensing question. |
-| 5 | 03 — Engine hours and calendar age | Two-ad comparison | Improve how readers interpret ads. |
+| 5 | ✓ 03 — Engine hours and calendar age (published) | Two-ad comparison | Improve how readers interpret ads. |
 | 6 | 08 — Density altitude | Worked departure example | Reach students and experienced pilots together. |
 | 7 | 04 — Ownership costs | Editable budget worksheet | Help readers choose a sustainable purchase budget. |
 | 8 | 11 — Safety-pilot logging | Scenario matrix | Attract private and instrument-training readers. |
