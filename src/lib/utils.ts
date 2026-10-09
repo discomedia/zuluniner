@@ -16,3 +16,7 @@ export function formatDate(dateString: string | null): string {
     day: 'numeric'
   });
 }
+
+export function formatLocation(city: string | null, country: string | null): string {
+  return [city, country].filter(Boolean).join(', ') || 'Not specified';
+}

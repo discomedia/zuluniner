@@ -1,5 +1,6 @@
 export const dynamic = 'force-dynamic';
 
+import { formatLocation } from '@/lib/utils';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Image from 'next/image';
@@ -96,7 +97,7 @@ export default async function AircraftDetailPage({ params }: PageProps) {
     { label: 'Total Time', value: formatHours(aircraft.hours), icon: Clock },
     { label: 'Engine Type', value: aircraft.engine_type || 'N/A', icon: Settings },
     { label: 'Avionics', value: aircraft.avionics || 'N/A', icon: Settings },
-    { label: 'Location', value: `${aircraft.city}, ${aircraft.country}`, icon: MapPin },
+    { label: 'Location', value: formatLocation(aircraft.city, aircraft.country), icon: MapPin },
     { label: 'Airport Code', value: aircraft.airport_code || 'N/A', icon: MapPin },
   ];
 
@@ -148,7 +149,7 @@ export default async function AircraftDetailPage({ params }: PageProps) {
               <div className="flex items-center gap-4 text-gray-600">
                 <div className="flex items-center gap-1">
                   <MapPin className="h-4 w-4" />
-                  <span>{aircraft.city}, {aircraft.country}</span>
+                  <span>{formatLocation(aircraft.city, aircraft.country)}</span>
                 </div>
                 {aircraft.airport_code && (
                   <div className="flex items-center gap-1">

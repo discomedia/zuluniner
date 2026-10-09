@@ -22,7 +22,7 @@ async function getAircraftBySlug(slug: string): Promise<AircraftWithUser | null>
       .single();
 
     if (error || !data) return null;
-    return data as AircraftWithUser;
+    return { ...data, photos: [...data.photos].sort((a, b) => a.display_order - b.display_order) } as AircraftWithUser;
   } catch (error) {
     console.error('💥 Error in getAircraftBySlug:', error);
     throw error;

@@ -1,3 +1,4 @@
+import { formatLocation } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import { MapPin, Calendar, Clock, Plane, Phone, Mail } from 'lucide-react';
@@ -102,7 +103,7 @@ export default function AircraftListItem({ aircraft, primaryPhoto, seller }: Air
                   <div>
                     <p className="text-xs text-gray-500">Location</p>
                     <p className="font-medium truncate">
-                      {aircraft.city}, {aircraft.country}
+                      {formatLocation(aircraft.city, aircraft.country)}
                     </p>
                   </div>
                 </div>
