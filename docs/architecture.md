@@ -18,7 +18,7 @@ Contact uses seller email/telephone links. The contact form opens an email draft
 
 Successful content mutations save immediately, then dispatch GitHub Actions. Responses distinguish saved content from deployed public changes. `publish_status` reports the latest request; `publish_site` retries publication. Static routes appear/disappear only after a completed deployment. There is no periodic database polling or ISR process keeping Neon awake.
 
-The workflow serializes deployments. GitHub may coalesce pending runs; a successful snapshot marks all publication requests older than its transaction timestamp deployed. Newer changes remain pending until a subsequent snapshot. Live checks compare the deployed manifest with the actual built manifest rather than a changing database. Failed builds retain the previous site; failures after deployment are reported and require investigation.
+The workflow serializes deployments. GitHub may coalesce pending runs; a successful snapshot marks all publication requests older than its transaction timestamp deployed. Newer changes remain pending until a subsequent snapshot. Live checks compare the deployed manifest with the actual built manifest rather than a changing database. The manifest check retries a mismatch for up to 45 seconds of waiting to allow edge propagation after upload; it still requires the exact built snapshot before route checks can pass. Failed builds retain the previous site; failures after deployment are reported and require investigation.
 
 ## Owner authentication and MCP OAuth
 

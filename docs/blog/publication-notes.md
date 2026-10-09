@@ -34,4 +34,4 @@ The three original generated covers are WebP, 1,536 × 1,024 pixels (3:2). Files
 - The content connector reports deployed and public changes live. The published inventory contains exactly articles 01–03.
 - All three articles were inspected at desktop width (1,280 px) and phone width (390 px). Covers preserve 3:2; titles and body text fit; tables wrap or scroll inside their own containers. Page width remains 390 px on phones, and contents navigation works.
 
-The first content-only deployment encountered a transient old-manifest response during immediate post-deploy verification. The subsequent queued content deployment and code deployment both completed successfully. No verification check was weakened.
+The first content-only deployment encountered a transient old-manifest response during immediate post-deploy verification. The subsequent queued content deployment and code deployment both completed successfully. A later documentation deployment exposed the same propagation delay, so the manifest comparison now permits up to 45 seconds of waiting with bounded retries. It still requires the exact built snapshot; no verification check was weakened.

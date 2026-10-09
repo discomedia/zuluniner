@@ -1,10 +1,19 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
+import {setTimeout} from 'node:timers/promises';
+import {isDeepStrictEqual} from 'node:util';
 import {z} from 'zod';
 const origin=new URL(process.argv[2]||'https://zuluniner.com').origin;
 const manifestSchema=z.object({snapshot_at:z.string(),aircraft:z.array(z.object({slug:z.string(),title:z.string()})),posts:z.array(z.object({slug:z.string(),title:z.string()}))});
 const expected=manifestSchema.parse(JSON.parse(await readFile('dist/content-manifest.json','utf8')));
-const manifest=manifestSchema.parse(await(await fetch(origin+'/content-manifest.json')).json());
+let manifest=manifestSchema.parse(await(await fetch(origin+'/content-manifest.json',{cache:'no-store'})).json());
+// A completed upload can precede propagation to the checking edge. Allow 45
+// seconds in total, but require the exact built snapshot before checking routes.
+for(let attempt=1;attempt<=5&&!isDeepStrictEqual(manifest,expected);attempt++){
+ console.log(`Waiting for the built snapshot to reach the public endpoint (retry ${attempt}/5).`);
+ await setTimeout(attempt*3000);
+ manifest=manifestSchema.parse(await(await fetch(origin+'/content-manifest.json',{cache:'no-store'})).json());
+}
 assert.deepEqual(manifest,expected,'Deployed content must match the build snapshot.');
 const {aircraft,posts}=manifest;
 const routes=['/','/aircraft','/blog','/about','/sell','/contact','/privacy','/terms','/connect',...aircraft.map(a=>`/aircraft/${a.slug}`),...posts.map(p=>`/blog/${p.slug}`)];
