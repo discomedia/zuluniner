@@ -1,0 +1,41 @@
+[
+  {
+    "plan_id": "01",
+    "file": "docs/blog/01-four-seats-full-fuel.md",
+    "id": "de6a8a4a-abf9-4f91-b2d0-feee7a3af187",
+    "title": "Four seats, full fuel: will this airplane carry your mission?",
+    "slug": "four-seats-full-fuel-aircraft-payload",
+    "blurb": "Check whether a four-seat airplane can carry your people, bags and trip fuel, with worked loading examples, balance calculations and a buyer’s mission worksheet.",
+    "meta_description": "Check whether a four-seat airplane can carry your people, bags and trip fuel, with worked loading examples, balance calculations and a buyer’s mission worksheet.",
+    "header_photo": "mcp/ed098753-0f92-4550-89f2-7ea4d8c5f472-four-seats-full-fuel-cover.webp",
+    "cover_alt": "Illustration of a four-seat airplane beside a balance beam comparing fuel with passengers’ baggage.",
+    "url": "https://zuluniner.com/blog/four-seats-full-fuel-aircraft-payload",
+    "publication_date": "2026-10-09"
+  },
+  {
+    "plan_id": "02",
+    "file": "docs/blog/02-prebuy-vs-annual.md",
+    "id": "f6a0db73-9afb-411d-9383-04d23690ddec",
+    "title": "Fresh annual vs prebuy: what are you actually buying?",
+    "slug": "prebuy-vs-annual-inspection",
+    "blurb": "A fresh annual doesn't answer every buying question. Set an independent prebuy scope, review aircraft records and assess findings before closing.",
+    "meta_description": "A fresh annual doesn't answer every buying question. Set an independent prebuy scope, review aircraft records and assess findings before closing.",
+    "header_photo": "mcp/212658b8-ba67-45e1-880f-71ede4ed7241-prebuy-vs-annual-cover.webp",
+    "cover_alt": "Illustration of a light airplane in a hangar with its engine cowling open for inspection.",
+    "url": "https://zuluniner.com/blog/prebuy-vs-annual-inspection",
+    "publication_date": "2026-10-09"
+  },
+  {
+    "plan_id": "03",
+    "file": "docs/blog/03-low-engine-hours-old-overhaul.md",
+    "id": "dc990583-a5d5-44e6-b37e-f0099f6cba96",
+    "title": "Low engine hours, old overhaul: bargain or liability?",
+    "slug": "low-engine-hours-old-overhaul",
+    "blurb": "Low engine hours don't establish condition. Compare overhaul dates, storage records, inspection evidence and engine reserves before buying an aircraft.",
+    "meta_description": "Low engine hours don't establish condition. Compare overhaul dates, storage records, inspection evidence and engine reserves before buying an aircraft.",
+    "header_photo": "mcp/7e502d84-24d7-4e06-924c-334bb9f0fd3b-engine-hours-calendar-age-cover.webp",
+    "cover_alt": "Illustration of a piston engine inside an airplane’s nose, with changing seasons outside the hangar.",
+    "url": "https://zuluniner.com/blog/low-engine-hours-old-overhaul",
+    "publication_date": "2026-10-09"
+  }
+]

@@ -1,0 +1,23 @@
+{
+  "mode": "built-in image_gen",
+  "created": "2026-10-09",
+  "prompts": [
+    {
+      "key": "payload",
+      "prompt": "Use case: stylized-concept. Asset type: ZuluNiner aviation blog cover. Create a landscape 3:2 image, 1536 by 1024 composition. Restrained somewhat abstract editorial graphic about aircraft payload and fuel planning. Dominant clean silhouette of a realistic four-seat high-wing single-engine piston airplane on a small airport apron beside a hangar, with an understated geometric balance motif made from two simple abstract masses suggesting fuel and baggage. Aircraft and aviation infrastructure dominate, muted blue-grey and warm neutral colors, crisp architectural forms, generous crop-safe margins, readable at thumbnail size. Illustrative graphic design rather than documentary photograph, no people needed. No text anywhere: no title, letters, labels, captions, numbers, logos, badges, registration marks, gauges with numbers, typographic decoration or watermarks. Do not imply any exact aircraft is for sale."
+    },
+    {
+      "key": "prebuy",
+      "prompt": "Use case: stylized-concept. Asset type: ZuluNiner aviation blog cover. Create a landscape 3:2 image, 1536 by 1024 composition. Restrained somewhat abstract editorial graphic about independent aircraft pre-purchase examination. A light low-wing single-engine airplane dominates the scene in a tidy hangar, a small open cowling and subtle inspection-light glow suggest careful examination. Clean aircraft geometry, calm muted blue-grey and warm neutrals, simple architectural composition, no clutter, essential aircraft shapes away from crop edges. Readable at thumbnail size, tasteful contemporary flat and dimensional illustration, not documentary photography. No people needed. Absolutely no text, letters, labels, numbers, captions, logos, registration marks, paperwork with writing, stamps or watermarks. No exaggerated visible damage and no claim of airworthiness."
+    },
+    {
+      "key": "engine",
+      "prompt": "Use case: stylized-concept. Asset type: ZuluNiner aviation blog cover. Create a landscape 3:2 image, 1536 by 1024 composition. Restrained somewhat abstract editorial graphic for an article about low-hour piston aircraft engines and calendar age. A coherent horizontally opposed piston aircraft engine and a small part of its light-airplane nose dominate a quiet hangar scene. Suggest time through subtle layered seasonal light and material textures, without clocks, numeric gauges or calendar lettering. Clean simplified mechanical forms, muted blue-grey and warm neutral palette matching a thoughtful aviation magazine, focused composition, generous crop-safe margins, easy to read at thumbnail size. Illustration, not an actual aircraft condition photograph. No people. Absolutely no text, letters, labels, captions, numbers, logos, registration marks, badges or watermarks. Do not fabricate a dramatic failure or corrosion diagnosis."
+    }
+  ],
+  "final_files": [
+    "docs/blog/images/four-seats-full-fuel-cover.webp",
+    "docs/blog/images/prebuy-vs-annual-cover.webp",
+    "docs/blog/images/engine-hours-calendar-age-cover.webp"
+  ]
+}

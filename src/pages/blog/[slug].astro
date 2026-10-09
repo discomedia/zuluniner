@@ -3,11 +3,11 @@ import Site from '../../layouts/Site.astro';
 import {loadPublicContent} from '../../api/public-content';
 import {imageUrl,responsiveImage} from '../../lib/image-url';
 import {formatDate} from '../../lib/utils';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
+import BlogMarkdown from '../../components/BlogMarkdown';
+import {blogCoverAlt} from '../../lib/blog-covers';
 export async function getStaticPaths(){const {posts}=await loadPublicContent();return posts.map(post=>({params:{slug:post.slug},props:{post}}));}
 const {post}=Astro.props;const image=post.header_photo?imageUrl('blog-images',post.header_photo):undefined;
 ---
 <Site title={`${post.title} | ZuluNiner Blog`} description={post.meta_description||post.blurb||`Read ${post.title} on ZuluNiner.`} image={image}>
-  <article><header class="relative bg-primary-700 text-white">{image&&<img src={image} srcset={responsiveImage(image)} sizes="100vw" alt={post.title} class="w-full h-96 object-cover" loading="eager" decoding="async"/>}<div class:list={['px-4 py-12',image?'absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80':'']}><div class="max-w-4xl mx-auto"><a href="/blog" class="text-primary-100">← All posts</a><h1 class="text-4xl font-bold mt-4">{post.title}</h1><p class="mt-4">{post.author.name}{post.published_at && ` · ${formatDate(post.published_at)}`}</p></div></div></header><div class="max-w-4xl mx-auto px-4 py-12 prose prose-lg prose-sky"><ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content || ''}</ReactMarkdown></div></article>
+  <article><header class="bg-primary-700 text-white"><div class="max-w-4xl mx-auto">{image&&<img src={image} srcset={responsiveImage(image)} sizes="(min-width: 896px) 896px, 100vw" alt={blogCoverAlt(post.slug,post.title)} class="w-full aspect-[3/2] object-cover" loading="eager" decoding="async"/>}<div class="px-4 py-10"><a href="/blog" class="text-primary-100">← All posts</a><h1 class="text-3xl sm:text-4xl font-bold mt-4">{post.title}</h1><p class="mt-4">{post.author.name}{post.published_at && ` · ${formatDate(post.published_at)}`}</p></div></div></header><div class="max-w-4xl mx-auto px-4 py-12 prose prose-lg prose-sky"><BlogMarkdown content={post.content || ''}/></div></article>
 </Site>
