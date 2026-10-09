@@ -4,9 +4,11 @@ Research date: 9 October 2026. Market: United States first. Audience: experience
 
 Build the blog around the questions pilots argue about after training, the details buyers struggle to interpret in aircraft ads, and exam concepts that become easier when connected to an actual airplane. The commercial goal is qualified readership that continues into ZuluNiner's aircraft classifieds. Prioritize useful, specific answers over general aviation news or broad “how to become a pilot” articles.
 
-This plan contains 36 proposed posts: 12 launch briefs and 24 follow-on topics. Start with one substantial article per week. Ownership and aircraft selection provide the most direct route to listings; technical explainers and FAA study topics give pilots reasons to discover and revisit the site before they are ready to buy.
+This plan contains 36 proposed posts: 12 launch briefs and 24 follow-on topics. The current schedule publishes one substantial article per Eastern calendar day, subject to the evidence and release checks below. Ownership and aircraft selection provide the most direct route to listings; technical explainers and FAA study topics give pilots reasons to discover and revisit the site before they are ready to buy.
 
 ## Publication progress
+
+**Current totals:** 3 of 36 published; **33 unpublished**. Next: **04 — Airplane ownership at 50, 100 and 200 hours a year**. Live post inventory reconciled on 10 October 2026 (Australia/Melbourne); publication dates below describe the original launch.
 
 Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03**, followed by final source, calculation and style review. The originals were backed up and deleted; the replacement posts are live. Covers, contents links, tables and classifieds links were checked on desktop and phone layouts after successful deployment.
 
@@ -16,6 +18,14 @@ Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03
 - [ ] **04–36** — not yet written or published.
 
 The published editions use primary-source research and clearly identified fictional examples. No independent CFI/A&P/IA review or specialist interview has occurred; those proposed enhancements are still outstanding and are not counted as completed. Article sources, metadata, cover prompts and validation details are retained in [docs/blog/publication-notes.md](docs/blog/publication-notes.md).
+
+## Scheduled publication
+
+**ZuluNiner daily blog publishing** is active in this chat. It prepares the next eligible article at 6 a.m. Eastern and publishes at a newly randomized time within the **8–10 a.m. America/New_York** window. Random target minutes run from 8:00 through 9:45, leaving deployment time before the window closes. Eastern daylight saving changes are included. The first target is **10 October 2026 at 8:16 a.m. EDT**.
+
+The automation updates the specific completed ID, publication date, canonical URL and totals only after live deployment checks pass. It reconciles existing posts and drafts to avoid duplicates and preserves a limit of one new planned post per Eastern date. Current articles 01–03 stay published.
+
+**Nearly exhausted:** alert when **five or fewer unpublished IDs remain**, including blocked topics. Record the alert once per threshold/queue state. At zero remaining, report completion and pause the schedule. Instructions and recovery state are described in [docs/blog/scheduled-publishing.md](docs/blog/scheduled-publishing.md).
 
 ## Site context and editorial position
 
@@ -266,26 +276,23 @@ Effort estimates are editorial planning assumptions: **medium** means about 1–
 | 35 / P3 | **Can your friends pay for the flight? Private-pilot cost sharing in real scenarios** — FAA private pilot expense sharing | Direct forum signal with conflicting informal advice. [F20] Use current §61.113 and FAA AC 61-142 to discuss common purpose, permitted expenses and solicitation. [A2] [A12] Build reviewed scenarios, not a paid-flight business model. | Partnership/cost content first; no suggestion that ownership enables charter. |
 | 36 / P2 | **Good compressions, bad news: what engine health numbers cannot prove** — aircraft compression vs borescope | Direct maintenance-video theme. [V3] Explain how multiple diagnostic sources complement each other, measurement context and manufacturer criteria. Use reviewed, permission-cleared images; obtain engine-model maintenance data. | Engine-history and prebuy articles; 03 and 02. |
 
-## First 12 weeks
+## Next publication sequence
 
-Articles 01–03 were published together on 9 October 2026. Their rows below are complete; use the remaining sequence to plan future releases rather than republishing them. These are relative weeks, not publication commitments. Regulatory and type-specific articles move back if required documentation or review is unavailable. Keep at least two completed articles ready before starting a weekly cadence.
+Articles 01–03 were published together on 9 October 2026. Continue in numeric ID order, one eligible article per day, beginning with 04. Defer a topic if its required evidence or specialist input is unavailable; record the reason and choose the next eligible ID. The automated cadence supersedes the original weekly launch calendar.
 
-| Week | Article | Companion material | Purpose |
+| Next ID | Article | Companion material | Purpose |
 | --- | --- | --- | --- |
-| 1 | ✓ 02 — Annual vs prebuy (published) | Buyer-to-mechanic scope sheet | Support the mission-selection hub. |
-| 2 | 05 — Maneuvering speed | Original diagram and four-question quiz | Establish technical credibility. |
-| 3 | ✓ 01 — Payload and mission (published) | Three loading scenarios | Build the central aircraft-selection article. |
-| 4 | 06 — MOSAIC | Aircraft/pilot/operator eligibility worksheet | Address a timely US licensing question. |
-| 5 | ✓ 03 — Engine hours and calendar age (published) | Two-ad comparison | Improve how readers interpret ads. |
-| 6 | 08 — Density altitude | Worked departure example | Reach students and experienced pilots together. |
-| 7 | 04 — Ownership costs | Editable budget worksheet | Help readers choose a sustainable purchase budget. |
-| 8 | 11 — Safety-pilot logging | Scenario matrix | Attract private and instrument-training readers. |
-| 9 | 07 — 172/180 conversion | Configuration checklist | Connect a niche question to current inventory. |
-| 10 | 10 — Lean of peak | Terminology diagram | Serve experienced owners and encourage discussion. |
-| 11 | 09 — SR22 G2 | Documentation comparison | Attract upgrading pilots and type shoppers. |
-| 12 | 12 — Comanche 250 | Specialist/owner interview | Build another listing-relevant type guide. |
+| 04 | Ownership costs | Budget worksheet with dated evidence or explicit hypothetical assumptions | Help readers choose a sustainable purchase budget. |
+| 05 | Maneuvering speed | Original diagram and four-question quiz | Establish technical credibility. |
+| 06 | MOSAIC | Aircraft/pilot/operator eligibility worksheet | Address a timely US licensing question. |
+| 07 | 172/180 conversion | Configuration checklist | Connect a niche question to current inventory. |
+| 08 | Density altitude | Worked departure example | Reach students and experienced pilots together. |
+| 09 | SR22 G2 | Documentation comparison | Attract upgrading pilots and type shoppers. |
+| 10 | Lean of peak | Terminology diagram | Serve experienced owners and encourage discussion. |
+| 11 | Safety-pilot logging | Scenario matrix | Attract private and instrument-training readers. |
+| 12 | Comanche 250 | Specialist/owner interview | Build another listing-relevant type guide. |
 
-If only six can be commissioned initially, choose **02, 01, 03, 05, 06 and 08**. They balance ownership relevance, a current US certificate question and practical exam concepts. Commission 04 once usable cost evidence is available; do not fill gaps with invented “typical” prices.
+Continue with the eligible follow-on IDs 13–36. Cost illustrations must label teaching assumptions explicitly; never present invented figures as current quotations or typical market costs.
 
 ## How readers should reach the classifieds
 
