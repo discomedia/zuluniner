@@ -58,5 +58,5 @@ const handler = createMcpHandler(registerContentTools, {
 });
 
 export const authenticatedHandler = withMcpAuth(handler, verifyOwner, {
-  required: true, resourceUrl: `${siteOrigin()}/api/mcp`, resourceMetadataPath: '/.well-known/oauth-protected-resource',
+  required: true, resourceUrl: siteOrigin(), resourceMetadataPath: '/.well-known/oauth-protected-resource',
 });

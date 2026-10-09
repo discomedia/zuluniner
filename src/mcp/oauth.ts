@@ -16,12 +16,19 @@ const tokenSchema = z.object({ user_id: z.uuid(), client_id: z.string(), resourc
 const markerSchema = z.object({ at: z.number() });
 
 async function read<T extends z.ZodType>(path: string, schema: T): Promise<z.output<T> | null> {
-  const { data, error } = await contentClient().storage.from(AUTH_BUCKET).download(path);
-  if (error) {
-    if ('statusCode' in error && ['404', '400'].includes(String(error.statusCode)) && /not found|does not exist/i.test(error.message)) return null;
+  // This older Storage deployment wraps missing-object responses in HTTP 400.
+  // Read the documented REST error explicitly; never confuse outages with absence.
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!key) throw new Error('Authentication storage is unavailable.');
+  const response = await fetch(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/${AUTH_BUCKET}/${path.split('/').map(encodeURIComponent).join('/')}`, {
+    headers: { Authorization: `Bearer ${key}`, apikey: key }, cache: 'no-store', signal: AbortSignal.timeout(10000),
+  });
+  if (!response.ok) {
+    const failure = z.object({ code: z.string().optional(), error: z.string().optional() }).safeParse(await response.json());
+    if (response.status === 404 || (response.status === 400 && failure.success && (failure.data.code === 'NoSuchKey' || failure.data.error === 'not_found'))) return null;
     throw new Error('Authentication storage is unavailable.');
   }
-  return schema.parse(JSON.parse(await data.text()));
+  return schema.parse(await response.json());
 }
 
 async function write(path: string, value: object) {
