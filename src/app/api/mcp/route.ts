@@ -23,7 +23,15 @@ async function handle(request: Request) {
     }
     request = new Request(request, { body: Buffer.concat(chunks).toString('utf8') });
   }
-  const response = await authenticatedHandler(request);
+  let response = await authenticatedHandler(request);
+  if (request.method === 'POST') {
+    // MCP's finite POST stream can resolve before the tool callback finishes.
+    // Drain it inside the route so Next flushes mutation revalidations before
+    // returning success. GET event streams retain their streaming behavior.
+    response = new Response(await response.arrayBuffer(), {
+      status: response.status, statusText: response.statusText, headers: response.headers,
+    });
+  }
   response.headers.set('Cache-Control', 'no-store');
   if (origin) response.headers.set('Access-Control-Allow-Origin', origin);
   return response;

@@ -171,4 +171,4 @@ try {
 }
 
 }
-main().catch(error => { console.error(error instanceof Error ? error.message : 'Verification failed.'); process.exitCode = 1; });
+main().catch(error => { console.error(error instanceof Error ? error.stack : 'Verification failed.'); process.exitCode = 1; });
