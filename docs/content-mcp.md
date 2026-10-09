@@ -33,3 +33,7 @@ Read tools require `content:read`; mutations require `content:write`. Grants are
 Never expose the service-role key or auth bucket. No OpenAI API key is required. Auth storage must be a private `zuluniner-mcp-auth` bucket accepting JSON; create it with the service role. Expired records may be pruned by an operator, retaining revocation markers until their token family can no longer be valid. Back up current content before bulk edits.
 
 `npm run test:live:mcp -- https://zuluniner.com` is an explicit mutation test, using the local service key to authenticate the configured owner and creating only test-prefixed disposable records. It checks batches, supplied images, optimistic edits, auth failures, refresh rotation and revocation. It never deletes existing records. The public aircraft requested for the Chrome/ChatGPT test is separate and retained.
+
+## Legacy database hardening
+
+Live testing confirmed that the original authenticated profile policy allows a user to assign their own admin role. The MCP independently rejects non-allowlisted users, but this does not close direct access through old database policies. Apply `supabase/migrations/20261009000001_retire_legacy_client_writes.sql` using the owning Supabase project account. It removes browser table writes and old storage upload policies and makes the signup trigger assign only buyer roles. This preserves public reads and server service-role writes. The available management account cannot access this project, so do not assume the migration is applied merely because it is in Git.

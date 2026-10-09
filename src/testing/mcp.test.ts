@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { aircraftFields, postPatch, batch, imageInput, storagePath } from '../mcp/schemas';
 import { publicImageAddress, fetchImage } from '../mcp/images';
 import { runBatch } from '../mcp/server';
-import { trustedRedirect, digest } from '../mcp/oauth';
+import { trustedRedirect, digest, readAccessToken } from '../mcp/oauth';
 
 test('batches retain successes and order around a failed item', async () => {
   const result = await runBatch([1, 2, 3], async value => {
@@ -42,4 +42,22 @@ test('OAuth only accepts exact registered agent callbacks', () => {
   for (const url of ['https://chatgpt.com.evil.test/connector_platform_oauth_redirect', 'https://chatgpt.com/connector_platform_oauth_redirect?redirect=evil', 'http://chatgpt.com/connector_platform_oauth_redirect', 'https://example.com/callback']) assert.equal(trustedRedirect(url), false, url);
   assert.equal(digest('secret').length, 64);
   assert.notEqual(digest('secret'), digest('different'));
+});
+
+test('auth storage distinguishes missing tokens from service failures', async () => {
+  const previousFetch = globalThis.fetch;
+  const previousKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  process.env.SUPABASE_SERVICE_ROLE_KEY = 'test-key';
+  try {
+    globalThis.fetch = async () => Response.json({ code: 'NoSuchKey', error: 'not_found' }, { status: 400 });
+    assert.equal(await readAccessToken('missing-test-token'), null);
+    globalThis.fetch = async () => Response.json({ error: 'service_failure' }, { status: 503 });
+    await assert.rejects(readAccessToken('missing-test-token'), /unavailable/);
+    globalThis.fetch = async () => Response.json({ error: 'invalid_request' }, { status: 400 });
+    await assert.rejects(readAccessToken('missing-test-token'), /unavailable/);
+  } finally {
+    globalThis.fetch = previousFetch;
+    if (previousKey === undefined) delete process.env.SUPABASE_SERVICE_ROLE_KEY;
+    else process.env.SUPABASE_SERVICE_ROLE_KEY = previousKey;
+  }
 });

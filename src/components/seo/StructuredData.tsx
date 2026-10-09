@@ -111,7 +111,7 @@ export function AircraftStructuredData({ aircraft, primaryPhotoUrl }: AircraftSt
       id="aircraft-structured-data"
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(structuredData),
+        __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
       }}
     />
   );
@@ -170,7 +170,7 @@ export function AircraftListingPageStructuredData({
       id="aircraft-listing-structured-data"
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(structuredData),
+        __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
       }}
     />
   );
@@ -208,7 +208,7 @@ export function OrganizationStructuredData() {
       id="organization-structured-data"
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(structuredData),
+        __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
       }}
     />
   );
@@ -242,7 +242,7 @@ export function WebsiteStructuredData() {
       id="website-structured-data"
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(structuredData),
+        __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
       }}
     />
   );
