@@ -1,4 +1,3 @@
-'use client';
 
 import { useState, useRef, useEffect } from 'react';
 import { cn } from '../../lib/utils';
@@ -46,7 +45,6 @@ export default function SearchBar({
 
   useEffect(() => {
     // Synchronize the editable form when the parent supplies new search state.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setQuery(value);
   }, [value]);
 

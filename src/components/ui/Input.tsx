@@ -14,7 +14,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       id ||
       props.name ||
       (label
-        ? `input-${label.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9\-]/g, '')}`
+        ? `input-${label.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`
         : undefined);
 
     return (

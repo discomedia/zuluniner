@@ -1,26 +1,20 @@
 // Explicit live mutation test. Deletes only IDs created by this invocation.
 import assert from 'node:assert/strict';
 import { randomBytes, createHash } from 'node:crypto';
-import { createClient } from '@supabase/supabase-js';
+import { neon } from '@neondatabase/serverless';
+import { readFile } from 'node:fs/promises';
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
 import { z } from 'zod';
 import sharp from 'sharp';
 import { output } from '../src/mcp/schemas';
-import type { Database } from '../src/api/schema';
 
 async function main() {
 const origin = new URL(process.argv[2] || 'https://zuluniner.com').origin;
 const resource = `${origin}/api/mcp`;
-const client = createClient<Database>(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, { auth: { persistSession: false } });
-const ownerId = (process.env.ZULUNINER_MCP_OWNER_IDS || '').split(',')[0];
-assert.ok(ownerId, 'Configure an owner UUID in .env.');
-const owner = await client.auth.admin.getUserById(ownerId);
-assert.ok(owner.data.user?.email, 'Owner must have an existing verified Auth account.');
-const link = await client.auth.admin.generateLink({ type: 'magiclink', email: owner.data.user.email });
-if (link.error) throw link.error;
-const ownerAuth = createClient<Database>(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, { auth: { persistSession: false } });
-const login = await ownerAuth.auth.verifyOtp({ type: 'magiclink', token_hash: link.data.properties.hashed_token });
-if (login.error) throw login.error;
-const ownerToken = login.data.session!.access_token;
+const sql=neon(process.env.DATABASE_URL!);
+const ownerToken=process.env.OWNER_IDENTITY_TOKEN || JSON.parse(await readFile('data/owner-test-jwt.json','utf8')).token;
+assert.ok(ownerToken,'Supply an owner Neon Auth JWT.');
 const callback = 'https://chatgpt.com/connector_platform_oauth_redirect';
 const tokenSchema = z.object({ access_token: z.string(), refresh_token: z.string(), expires_in: z.number(), token_type: z.literal('Bearer') });
 const rpcSchema = z.object({ result: z.json().optional(), error: z.object({ message: z.string() }).passthrough().optional() });
@@ -80,7 +74,7 @@ try {
   assert.equal((await fetch(resource, { headers: { Origin: 'https://untrusted.example' } })).status, 403);
   for (const route of ['/admin', '/api/admin/blog', '/api/admin/aircraft/auto-populate']) assert.equal((await fetch(`${origin}${route}`)).status, 404, route);
   const tools = z.object({ tools: z.array(z.object({ name: z.string(), annotations: z.object({ readOnlyHint: z.boolean(), destructiveHint: z.boolean() }).passthrough(), inputSchema: z.json(), outputSchema: z.json() })) }).parse(await rpc('tools/list', {}));
-  assert.equal(tools.tools.length, 11);
+  assert.equal(tools.tools.length, 13);
   assert.ok(tools.tools.find(tool => tool.name === 'delete_content')?.annotations.destructiveHint);
   console.log('Owner OAuth, PKCE, single-use codes, scope discovery, auth/origin rejection and removed routes passed.');
   await call('list_content', { kind: 'aircraft', limit: 2 });
@@ -110,38 +104,22 @@ try {
   assets.push({ kind: 'post', storage_path: postImage.storage_path }, { kind: 'aircraft', storage_path: planeImage.storage_path });
   await call('update_posts', { items: [{ id: postRecords[0].id, changes: { header_photo: postImage.storage_path, content: `Test **Markdown**.\n\n![Test](${postImage.public_url})`, published: true } }] });
   await call('set_aircraft_images', { items: planeRecords.map(item => ({ id: item.id, photos: [{ storage_path: planeImage.storage_path, alt_text: 'Synthetic test image', caption: 'Not a real aircraft' }] })) });
+  await call('set_aircraft_images', {items:[{id:planeRecords[0].id,expected_updated_at:planeRecords[0].updated_at,photos:[]}]},1);
   const readback = await call('get_content', { items: created.map(item => ({ kind: item.kind, identifier: item.id })) });
   const actualPost = z.object({ title: z.string(), blurb: z.string(), header_photo: z.string(), published: z.literal(true) }).parse(readback.results[0].data);
   assert.equal(actualPost.title, 'MCP verification post 0'); assert.equal(actualPost.blurb, 'Updated by batch verification');
   assert.ok(readback.results.filter((_,i) => created[i].kind==='aircraft').every(item => z.object({ photos: z.array(z.object({ is_primary: z.literal(true) })).length(1) }).safeParse(item.data).success));
-  assert.equal((await fetch(`${origin}/blog/${postRecords[0].slug}`)).status, 200);
-  assert.equal((await fetch(`${origin}/aircraft/${planeRecords[0].slug}`)).status, 404, 'Draft must not be public.');
-  assert.ok((await (await fetch(`${origin}/blog`)).text()).includes(postRecords[0].slug), 'Published post must invalidate the cached index.');
-  await call('update_posts', { items: [{ id: postRecords[0].id, changes: { title: 'MCP verification cache update' } }] });
-  assert.ok((await (await fetch(`${origin}/blog/${postRecords[0].slug}`)).text()).includes('MCP verification cache update'), 'Edits must invalidate cached detail HTML.');
-  await call('update_posts', { items: [{ id: postRecords[0].id, changes: { published: false } }] });
-  assert.equal((await fetch(`${origin}/blog/${postRecords[0].slug}`)).status, 404, 'Unpublishing must expire public HTML immediately.');
-  assert.ok(!(await (await fetch(`${origin}/blog`)).text()).includes(postRecords[0].slug), 'Unpublishing must invalidate the index.');
-  const renamedPost = `${prefix}-renamed-post`;
-  await call('update_posts', { items: [{ id: postRecords[0].id, changes: { slug: renamedPost, published: true } }] });
-  assert.equal((await fetch(`${origin}/blog/${postRecords[0].slug}`)).status, 404);
-  assert.equal((await fetch(`${origin}/blog/${renamedPost}`)).status, 200, 'A new slug must render on demand.');
-  await call('update_aircraft', { items: [{ id: planeRecords[0].id, changes: { status: 'active' } }] });
-  assert.equal((await fetch(`${origin}/aircraft/${planeRecords[0].slug}`)).status, 200, 'Publishing must expire a cached draft 404.');
-  assert.ok((await (await fetch(`${origin}/aircraft`)).text()).includes(planeRecords[0].slug), 'Publishing must invalidate the cached inventory.');
-  assert.ok((await (await fetch(`${origin}/`)).text()).includes(planeRecords[0].slug), 'Publishing must invalidate the cached featured aircraft.');
-  await call('update_aircraft', { items: [{ id: planeRecords[0].id, changes: { title: 'MCP verification aircraft cache update — not for sale' } }] });
-  assert.ok((await (await fetch(`${origin}/aircraft/${planeRecords[0].slug}`)).text()).includes('MCP verification aircraft cache update'), 'Aircraft edits must expire detail HTML.');
-  await call('update_aircraft', { items: [{ id: planeRecords[0].id, changes: { status: 'draft' } }] });
-  assert.equal((await fetch(`${origin}/aircraft/${planeRecords[0].slug}`)).status, 404, 'Unpublishing an aircraft must expire cached HTML.');
-  await call('update_aircraft', { items: [{ id: planeRecords[0].id, changes: { status: 'active' } }] });
-  assert.equal((await fetch(`${origin}/aircraft/${planeRecords[0].slug}`)).status, 200);
-  console.log('Public caches: publish, edits, unpublish, rename, cached 404s and featured inventory passed.');
+  // Static publication is asynchronous: saved content is not yet public.
+  const queued = await call('publish_status', {});
+  assert.ok(queued.results[0].ok);
+  assert.equal((await fetch(`${origin}/aircraft/${planeRecords[0].slug}`)).status,404,'Draft aircraft must stay private.');
+  console.log('Saved content and asynchronous publication status passed.');
   await call('set_aircraft_images', { items: planeRecords.map(item => ({ id: item.id, photos: [] })) });
   const direct = await call('begin_image_upload', { items: [{ kind: 'aircraft', filename: 'direct.png' }] });
   const signed = z.object({ storage_path: z.string(), signed_upload_url: z.url() }).parse(direct.results[0].data);
   const upload = await fetch(signed.signed_upload_url, { method: 'PUT', headers: { 'Content-Type': 'image/png' }, body: new Uint8Array(png) });
   assert.ok(upload.ok, 'Signed binary upload must succeed.'); assets.push({ kind: 'aircraft', storage_path: signed.storage_path });
+  assert.equal((await fetch(signed.signed_upload_url,{method:'PUT',headers:{'Content-Type':'image/png'},body:new Uint8Array(png)})).status,409,'Signed upload must be single-use.');
   await call('set_aircraft_images', { items: [{ id: planeRecords[0].id, photos: [{ storage_path: signed.storage_path, alt_text: 'Direct upload test' }] }] });
   await call('upload_images', { items: [{ kind: 'post', filename: 'copy.webp', source_url: postImage.public_url }, { kind: 'post', filename: 'blocked.jpg', source_url: 'https://127.0.0.1/a.jpg' }] }, 1).then(result => { assets.push({ kind: 'post', storage_path: image.parse(result.results[0].data).storage_path }); });
   const readGrant = await oauth('content:read');
@@ -155,19 +133,18 @@ try {
   await call('list_content', { kind: 'post', query: 'MCP verification' });
   console.log('CRUD, batch isolation, image import/direct upload, galleries, drafts, field preservation and read-only scope passed.');
   await call('delete_content', { items: created }); created.length=0;
-  assert.equal((await fetch(`${origin}/blog/${renamedPost}`)).status, 404, 'Deletion must expire cached post HTML.');
-  assert.equal((await fetch(`${origin}/aircraft/${planeRecords[0].slug}`)).status, 404, 'Deletion must expire cached aircraft HTML.');
-  assert.ok(!(await (await fetch(`${origin}/aircraft`)).text()).includes(planeRecords[0].slug));
-  assert.ok(!(await (await fetch(`${origin}/blog`)).text()).includes(renamedPost));
   assert.equal((await form('/oauth/token', { grant_type: 'refresh_token', client_id: grant.client_id, refresh_token: grant.refresh_token })).status, 400);
   assert.equal((await fetch(resource, { headers: { Authorization: `Bearer ${newGrant.access_token}` } })).status, 401, 'Refresh replay must revoke the family.');
   console.log('Batch deletion, refresh rotation/replay revocation passed. All live MCP checks passed.');
 } finally {
-  // Cleanup uses service role only for IDs returned by this run, even if transport failed.
-  for (const item of created) { const result=await client.from(item.kind==='post'?'blog_posts':'aircraft').delete().eq('id',item.id).like('slug',`${prefix}%`);if(result.error)console.error('Test cleanup failed:',item.id); }
-  for (const kind of ['post','aircraft'] as const) { const paths=assets.filter(item=>item.kind===kind).map(item=>item.storage_path);if(paths.length)await client.storage.from(kind==='post'?'blog-images':'aircraft-photos').remove(paths); }
+  // Direct cleanup is restricted to IDs returned by this invocation and its slug prefix.
+  for (const item of created) await sql.query(`DELETE FROM ${item.kind==='post'?'blog_posts':'aircraft'} WHERE id=$1 AND slug LIKE $2`,[item.id,`${prefix}%`]);
+  const run=promisify(execFile);
+  for(const asset of assets)for(const variant of ['', 'variants/480/','variants/960/','variants/1600/']) {
+    const bucket=asset.kind==='post'?'blog-images':'aircraft-photos';
+    await run('node_modules/.bin/wrangler',['r2','object','delete',`zuluniner-images/${variant}${bucket}/${asset.storage_path}`,'--remote']).catch(()=>console.error('Image cleanup needs retry.'));
+  }
   await form('/oauth/revoke', { client_id: grant.client_id, token: grant.access_token });
-  await ownerAuth.auth.signOut();
 }
 
 }

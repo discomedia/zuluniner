@@ -1,8 +1,8 @@
 import { formatLocation } from '@/lib/utils';
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from '@/components/ui/Image';
+
 import { MapPin, Calendar, Clock, Plane } from 'lucide-react';
-import { db } from '@/api/db';
+import { imageUrl } from '@/lib/image-url';
 import type { AircraftCardProps } from '@/types';
 
 function formatPrice(price: number): string {
@@ -20,12 +20,12 @@ function formatHours(hours: number | null): string {
 }
 
 export default function AircraftCard({ aircraft, primaryPhoto }: AircraftCardProps) {
-  const photoUrl = primaryPhoto ? 
-    db.photos.getPhotoUrl(primaryPhoto.storage_path) : 
+  const photoUrl = primaryPhoto ?
+    imageUrl('aircraft-photos', primaryPhoto.storage_path) :
     null;
 
   return (
-    <Link prefetch={true} href={`/aircraft/${aircraft.slug}`} className="group">
+    <a href={`/aircraft/${aircraft.slug}`} className="group">
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-200">
         {/* Photo */}
         <div className="relative aspect-[4/3] bg-gray-100">
@@ -42,7 +42,7 @@ export default function AircraftCard({ aircraft, primaryPhoto }: AircraftCardPro
               <Plane className="h-16 w-16" />
             </div>
           )}
-          
+
           {/* Price Badge */}
           <div className="absolute top-3 right-3 bg-blue-600 text-white px-3 py-1 rounded-lg font-bold text-lg shadow-lg">
             {formatPrice(aircraft.price)}
@@ -67,12 +67,12 @@ export default function AircraftCard({ aircraft, primaryPhoto }: AircraftCardPro
               <Calendar className="h-4 w-4 flex-shrink-0" />
               <span>{aircraft.year}</span>
             </div>
-            
+
             <div className="flex items-center gap-1 text-gray-600">
               <Clock className="h-4 w-4 flex-shrink-0" />
               <span>{formatHours(aircraft.hours)}</span>
             </div>
-            
+
             <div className="flex items-center gap-1 text-gray-600 col-span-2">
               <MapPin className="h-4 w-4 flex-shrink-0" />
               <span className="truncate">
@@ -89,7 +89,7 @@ export default function AircraftCard({ aircraft, primaryPhoto }: AircraftCardPro
           {/* Description Preview */}
           {aircraft.description && (
             <p className="text-gray-600 text-sm line-clamp-2 mb-3">
-              {aircraft.description}
+              {aircraft.description?.slice(0,240)}
             </p>
           )}
 
@@ -108,6 +108,6 @@ export default function AircraftCard({ aircraft, primaryPhoto }: AircraftCardPro
           </div>
         </div>
       </div>
-    </Link>
+    </a>
   );
 }

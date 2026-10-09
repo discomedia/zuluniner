@@ -1,0 +1,39 @@
+---
+import Site from '../../layouts/Site.astro';
+import {loadPublicContent} from '../../api/public-content';
+import {imageUrl,responsiveImage} from '../../lib/image-url';
+import {formatLocation} from '../../lib/utils';
+import {AircraftStructuredData} from '../../components/seo/StructuredData';
+export async function getStaticPaths(){const {aircraft}=await loadPublicContent();return aircraft.map(aircraft=>({params:{slug:aircraft.slug},props:{aircraft}}));}
+const {aircraft}=Astro.props;
+const primary=aircraft.photos.find(p=>p.is_primary)||aircraft.photos[0];
+const photoUrl=primary?imageUrl('aircraft-photos',primary.storage_path):undefined;
+const description=aircraft.meta_description || aircraft.description?.slice(0,160) || `${aircraft.year} ${aircraft.make} ${aircraft.model} for sale.`;
+const specs=[['Year',aircraft.year],['Make',aircraft.make],['Model',aircraft.model],['Total Time',aircraft.hours==null?'Not specified':`${aircraft.hours.toLocaleString()} hours`],['Engine Type',aircraft.engine_type],['Airport',aircraft.airport_code],['Location',formatLocation(aircraft.city,aircraft.country)]];
+---
+<Site title={`${aircraft.title} - ${aircraft.year} ${aircraft.make} ${aircraft.model} | ZuluNiner`} description={description} image={photoUrl}>
+  <AircraftStructuredData aircraft={aircraft} primaryPhotoUrl={photoUrl && new URL(photoUrl,Astro.site).href}/>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <nav class="text-sm text-neutral-600 mb-6" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/aircraft">Aircraft</a> / {aircraft.title}</nav>
+    <div class="flex flex-wrap justify-between gap-4 mb-8"><div><h1 class="text-3xl font-bold text-neutral-900">{aircraft.title}</h1><p class="text-neutral-600 mt-2">{aircraft.year} {aircraft.make} {aircraft.model} · {formatLocation(aircraft.city,aircraft.country)}</p></div><p class="text-3xl font-bold text-primary-600">{new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(aircraft.price)}</p></div>
+    <div class="grid lg:grid-cols-3 gap-8"><div class="lg:col-span-2">
+      <section aria-label="Aircraft photos" class="mb-8">{photoUrl?<><button class="block w-full rounded-xl overflow-hidden bg-neutral-100" data-photo-index={Math.max(0,aircraft.photos.findIndex(p=>p.id===primary?.id))}><img src={photoUrl} srcset={responsiveImage(photoUrl)} sizes="(min-width: 1024px) 66vw, 100vw" alt={primary!.alt_text} class="w-full aspect-[4/3] object-cover" loading="eager" decoding="async"/></button><div class="flex gap-3 overflow-x-auto mt-4">{aircraft.photos.map((photo,index)=><button data-photo-index={index} data-gallery-photo={imageUrl('aircraft-photos',photo.storage_path)} data-caption={photo.caption||''} class="shrink-0"><img src={`${imageUrl('aircraft-photos',photo.storage_path)}?w=480`} width="128" height="96" alt={photo.alt_text} title={photo.caption||undefined} class="rounded-lg object-cover w-32 h-24" loading="lazy"/></button>)}</div></>:<p class="bg-neutral-100 rounded-lg p-16 text-center">No photos available.</p>}</section>
+      <section class="bg-white rounded-lg border border-neutral-200 p-6 mb-8"><h2 class="text-2xl font-semibold mb-4">Description</h2><p class="whitespace-pre-wrap text-neutral-700">{aircraft.description || 'Contact the seller for more information.'}</p></section>
+      {aircraft.avionics && <section class="bg-white rounded-lg border border-neutral-200 p-6"><h2 class="text-2xl font-semibold mb-4">Avionics & Equipment</h2><p class="whitespace-pre-wrap text-neutral-700">{aircraft.avionics}</p></section>}
+    </div><aside class="space-y-6"><section class="bg-white border border-neutral-200 rounded-lg p-6"><h2 class="text-xl font-semibold mb-4">Specifications</h2><dl>{specs.filter(([,v])=>v!=null&&v!=='').map(([label,value])=><div class="flex justify-between gap-4 py-3 border-b border-neutral-100"><dt class="text-neutral-600">{label}</dt><dd class="text-right font-medium">{value}</dd></div>)}</dl></section><section class="bg-white border border-neutral-200 rounded-lg p-6"><h2 class="text-xl font-semibold mb-2">Contact Seller</h2><p class="font-medium">{aircraft.user.company || aircraft.user.name}</p><div class="flex flex-wrap gap-3 mt-4"><a class="bg-primary-600 text-white px-4 py-3 rounded-lg" href={`mailto:${aircraft.user.email}?subject=${encodeURIComponent(`Inquiry about ${aircraft.title}`)}`}>Email seller</a>{aircraft.user.phone && <a class="border border-neutral-300 px-4 py-3 rounded-lg" href={`tel:${aircraft.user.phone}`}>Call seller</a>}</div></section><button id="share-aircraft" class="border border-neutral-300 px-4 py-3 rounded-lg w-full">Share listing</button></aside></div>
+  </div>
+  <dialog id="photo-lightbox" class="m-auto max-w-[95vw] max-h-[95vh] bg-neutral-900 rounded-lg p-4 backdrop:bg-black/80"><button id="close-lightbox" class="block ml-auto text-white px-4 py-2" autofocus>Close</button><img id="lightbox-image" alt="" class="max-w-full max-h-[75vh] object-contain"/><p id="lightbox-caption" class="text-white text-center mt-3"></p><div class="flex justify-between gap-4 mt-3"><button id="previous-photo" class="text-white border rounded px-4 py-2">Previous</button><button id="next-photo" class="text-white border rounded px-4 py-2">Next</button></div></dialog>
+</Site>
+<script>
+const dialog=document.querySelector<HTMLDialogElement>('#photo-lightbox')!;
+const image=document.querySelector<HTMLImageElement>('#lightbox-image')!;
+const photos=[...document.querySelectorAll<HTMLButtonElement>('[data-gallery-photo]')];let current=0;
+function show(index:number){current=(index+photos.length)%photos.length;const button=photos[current];image.src=button.dataset.galleryPhoto!;image.alt=button.querySelector('img')?.alt || 'Aircraft photo';document.querySelector('#lightbox-caption')!.textContent=button.dataset.caption||'';if(!dialog.open)dialog.showModal();}
+document.querySelectorAll<HTMLButtonElement>('[data-photo-index]').forEach(button=>button.addEventListener('click',()=>show(Number(button.dataset.photoIndex))));
+document.querySelector('#previous-photo')!.addEventListener('click',()=>show(current-1));
+document.querySelector('#next-photo')!.addEventListener('click',()=>show(current+1));
+document.querySelector('#close-lightbox')!.addEventListener('click',()=>dialog.close());
+dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close();});
+dialog.addEventListener('keydown',event=>{if(event.key==='ArrowRight')show(current+1);if(event.key==='ArrowLeft')show(current-1);});
+document.querySelector('#share-aircraft')!.addEventListener('click',async()=>{try{if(navigator.share)await navigator.share({title:document.title,url:location.href});else {await navigator.clipboard.writeText(location.href);document.querySelector('#share-aircraft')!.textContent='Link copied';}}catch{/* User can cancel sharing. */}});
+</script>

@@ -1,0 +1,8 @@
+---
+import Site from '../../layouts/Site.astro';
+import {loadPublicContent} from '../../api/public-content';
+import {imageUrl,responsiveImage} from '../../lib/image-url';
+import {formatDate} from '../../lib/utils';
+const {posts}=await loadPublicContent();
+---
+<Site title="ZuluNiner Blog | Aircraft, Aviation, and Industry Insights" description="Expert insights, aircraft reviews, and aviation industry news from the ZuluNiner community."><section class="bg-gradient-to-r from-primary-600 to-primary-700 text-white text-center px-4 py-16"><h1 class="text-4xl font-bold">ZuluNiner Blog</h1><p class="mt-6 text-xl text-primary-100">You like planes? We like planes too.</p></section><section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16"><div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">{posts.map(post=><a href={`/blog/${post.slug}`} class="rounded-lg border border-neutral-200 overflow-hidden hover:shadow-lg transition-shadow">{post.header_photo && <img src={imageUrl('blog-images',post.header_photo)} srcset={responsiveImage(imageUrl('blog-images',post.header_photo))} sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" alt={post.title} class="w-full aspect-[16/9] object-cover" loading="lazy" decoding="async"/>}<div class="p-6"><p class="text-sm text-neutral-500 mb-3">{post.published_at && formatDate(post.published_at)} · {post.author.name}</p><h2 class="text-2xl font-semibold mb-3">{post.title}</h2><p class="text-neutral-600">{post.blurb}</p><span class="inline-block mt-4 text-primary-600 font-medium">Read more →</span></div></a>)}</div>{!posts.length&&<p>No blog posts available yet.</p>}</section></Site>

@@ -14,7 +14,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       id ||
       props.name ||
       (label
-        ? `textarea-${label.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9\-]/g, '')}`
+        ? `textarea-${label.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`
         : undefined);
 
     return (

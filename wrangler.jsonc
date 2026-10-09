@@ -1,0 +1,48 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "zuluniner",
+  "main": "src/worker/index.ts",
+  "account_id": "55259cb38e7471965f8b34e476d0d7a3",
+  "compatibility_date": "2026-10-09",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": [
+      "/api/*",
+      "/oauth/*",
+      "/.well-known/*",
+      "/images/*"
+    ],
+    "html_handling": "drop-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  "r2_buckets": [
+    {
+      "binding": "MEDIA",
+      "bucket_name": "zuluniner-images"
+    }
+  ],
+  "images": {
+    "binding": "IMAGES"
+  },
+  "vars": {
+    "SITE_URL": "https://zuluniner.com",
+    "NEON_AUTH_BASE_URL": "https://ep-empty-morning-b37xphuv.neonauth.c-4.ap-southeast-1.aws.neon.tech/neondb/auth",
+    "NEON_AUTH_JWKS_URL": "https://ep-empty-morning-b37xphuv.neonauth.c-4.ap-southeast-1.aws.neon.tech/neondb/auth/.well-known/jwks.json",
+    "GITHUB_REPOSITORY": "discomedia/zuluniner",
+    "DEPLOY_REF": "master"
+  },
+  "observability": {
+    "enabled": true
+  },
+  "routes": [
+    {
+      "pattern": "zuluniner.com/*",
+      "zone_name": "zuluniner.com"
+    }
+  ],
+  "workers_dev": true
+}

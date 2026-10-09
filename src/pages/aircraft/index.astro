@@ -1,0 +1,7 @@
+---
+import Site from '../../layouts/Site.astro';
+import Listings from '../../components/aircraft/AircraftListingsContent';
+import {loadPublicContent} from '../../api/public-content';
+const {aircraft}=await loadPublicContent();
+---
+<Site title="Aircraft for Sale | ZuluNiner" description="Browse quality aircraft for sale with detailed specifications, photos and seller information."><Listings initialAircraft={aircraft} client:load/></Site>

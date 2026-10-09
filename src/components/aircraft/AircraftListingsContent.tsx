@@ -1,7 +1,6 @@
-'use client';
 
-import { useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useState, useEffect } from 'react';
+
 import { filterAircraft, filtersFromParams } from '@/lib/aircraft-search';
 import { Grid, List, Filter } from 'lucide-react';
 import type { Aircraft, AircraftPhoto, SearchFilters } from '@/types';
@@ -33,7 +32,8 @@ interface AircraftListingsContentProps {
 }
 
 export default function AircraftListingsContent({ initialAircraft }: AircraftListingsContentProps) {
-  const params = useSearchParams();
+  const [params, setParams] = useState(new URLSearchParams());
+  useEffect(() => { const update = () => setParams(new URLSearchParams(window.location.search)); update(); window.addEventListener('popstate', update); return () => window.removeEventListener('popstate', update); }, []);
   const sort = params.get('sort');
   const initialSort: SortOption = sort === 'oldest' || sort === 'price_low' || sort === 'price_high' ? sort : 'newest';
   return <AircraftListingsResults
@@ -169,6 +169,7 @@ function AircraftListingsResults({ inventory, initialFilters, initialSort, initi
                 <Button
                   variant={viewMode === 'grid' ? 'primary' : 'ghost'}
                   size="sm"
+                  aria-label="Grid view"
                   onClick={() => setViewMode('grid')}
                 >
                   <Grid className="h-4 w-4" />
@@ -176,6 +177,7 @@ function AircraftListingsResults({ inventory, initialFilters, initialSort, initi
                 <Button
                   variant={viewMode === 'list' ? 'primary' : 'ghost'}
                   size="sm"
+                  aria-label="List view"
                   onClick={() => setViewMode('list')}
                 >
                   <List className="h-4 w-4" />

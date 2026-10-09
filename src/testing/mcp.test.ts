@@ -1,9 +1,10 @@
-import { test } from 'node:test';
+import { test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { aircraftFields, postPatch, batch, imageInput, storagePath } from '../mcp/schemas';
 import { publicImageAddress, fetchImage } from '../mcp/images';
 import { runBatch } from '../mcp/server';
-import { trustedRedirect, digest, readAccessToken } from '../mcp/oauth';
+import { trustedRedirect, digest } from '../mcp/oauth';
+import { withEnvironment, query, parseTimestamp, type RuntimeEnv } from '../worker/context';
 
 test('batches retain successes and order around a failed item', async () => {
   const result = await runBatch([1, 2, 3], async value => {
@@ -36,28 +37,34 @@ test('image downloads reject private networks, credentials and unsafe schemes', 
   for (const url of ['http://example.com/a.jpg', 'https://user:pass@example.com/a.jpg', 'https://example.com:8443/a.jpg', 'https://127.0.0.1/a.jpg', 'https://[::1]/a.jpg']) await assert.rejects(fetchImage(url));
 });
 
-test('OAuth only accepts exact registered agent callbacks', () => {
+test('OAuth only accepts exact registered agent callbacks', () => withEnvironment({ OAUTH_REDIRECT_URIS: '' } as RuntimeEnv, () => {
   assert.equal(trustedRedirect('https://chatgpt.com/connector_platform_oauth_redirect'), true);
   assert.equal(trustedRedirect('https://chatgpt.com/connector/oauth/abc123'), true);
   for (const url of ['https://chatgpt.com.evil.test/connector_platform_oauth_redirect', 'https://chatgpt.com/connector_platform_oauth_redirect?redirect=evil', 'http://chatgpt.com/connector_platform_oauth_redirect', 'https://example.com/callback']) assert.equal(trustedRedirect(url), false, url);
   assert.equal(digest('secret').length, 64);
   assert.notEqual(digest('secret'), digest('different'));
+}));
+
+test('request environments stay isolated across concurrent MCP operations', async () => {
+  const work = (allowed: string, delay: number) => withEnvironment({ OAUTH_REDIRECT_URIS: allowed } as RuntimeEnv, async () => {
+    await new Promise(resolve => setTimeout(resolve, delay));
+    return trustedRedirect('https://agent.example/callback');
+  });
+  assert.deepEqual(await Promise.all([work('https://agent.example/callback', 10),work('',0)]),[true,false]);
 });
 
-test('auth storage distinguishes missing tokens from service failures', async () => {
-  const previousFetch = globalThis.fetch;
-  const previousKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  process.env.SUPABASE_SERVICE_ROLE_KEY = 'test-key';
-  try {
-    globalThis.fetch = async () => Response.json({ code: 'NoSuchKey', error: 'not_found' }, { status: 400 });
-    assert.equal(await readAccessToken('missing-test-token'), null);
-    globalThis.fetch = async () => Response.json({ error: 'service_failure' }, { status: 503 });
-    await assert.rejects(readAccessToken('missing-test-token'), /unavailable/);
-    globalThis.fetch = async () => Response.json({ error: 'invalid_request' }, { status: 400 });
-    await assert.rejects(readAccessToken('missing-test-token'), /unavailable/);
-  } finally {
-    globalThis.fetch = previousFetch;
-    if (previousKey === undefined) delete process.env.SUPABASE_SERVICE_ROLE_KEY;
-    else process.env.SUPABASE_SERVICE_ROLE_KEY = previousKey;
-  }
+test('revision timestamps retain distinct Postgres microseconds', () => {
+ const first=parseTimestamp('2026-10-09 01:02:03.123456+00');
+ const second=parseTimestamp('2026-10-09 01:02:03.123457+00');
+ assert.equal(first,'2026-10-09T01:02:03.123456+00:00');
+ assert.notEqual(first,second);
+ assert.equal(new Date(first).getTime(),new Date(second).getTime());
+});
+
+test('Neon query results preserve revisions through the HTTP driver', async () => {
+ const fetchMock=mock.method(globalThis,'fetch',async()=>Response.json({fields:[{name:'updated_at',dataTypeID:1184}],rows:[['2026-10-09 01:02:03.123456+00']],rowCount:1,command:'SELECT'}));
+ try {
+  const [row]=await withEnvironment({DATABASE_URL:'postgresql://test:test@ep-example.neon.tech/neondb'} as RuntimeEnv,()=>query<{updated_at:string}>('SELECT updated_at FROM blog_posts WHERE id=$1',['test-id']));
+  assert.equal(row.updated_at,'2026-10-09T01:02:03.123456+00:00');
+ }finally{fetchMock.mock.restore();}
 });

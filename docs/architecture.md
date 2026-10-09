@@ -1,33 +1,37 @@
 # Architecture
 
-ZuluNiner runs on Next.js App Router on Vercel, behind Cloudflare at zuluniner.com. The Supabase project is `bjwlldxavgoxhyyufffy` and the repository is `discomedia/zuluniner`.
+ZuluNiner uses Astro static output on Cloudflare Workers Static Assets. The same Worker handles `/api/*`, `/oauth/*`, `/.well-known/*` and `/images/*`; other requests go directly to static assets. The production domain is `zuluniner.com`, repository `discomedia/zuluniner`.
 
 ## Public site
 
-Public pages are pre-rendered HTML/RSC served from Vercel's edge cache. Home, aircraft browse, blog index and existing detail pages are generated at build time; new slugs generate on demand. Server components read active aircraft and published posts through `src/api/public-content.ts` and `src/api/db.ts`, using the anonymous, schema-typed Supabase client. Public data and pages have a one-hour ISR interval as a backstop for changes made outside MCP. Read failures throw, so regeneration retains the last good page rather than caching empty content or a false 404.
+`src/api/public-content.ts` reads active aircraft, their ordered galleries and published posts at build time in a read-only repeatable-read Neon transaction. Database failures stop the build. Generated pages contain the published snapshot; visitors never query Postgres. `content-manifest.json` records only public titles/slugs and the snapshot timestamp for deployment verification.
 
-After successful MCP content batches, `src/api/content-cache.ts` expires the corresponding public data tag with `expire: 0` and invalidates index/detail paths (including home for aircraft). The next request regenerates affected pages; subsequent requests use cached HTML. Publish, edit, unpublish, rename, delete and gallery replacement all invalidate. This does not push updates into an already-open browser: visitors refresh, and prefetched client routes may retain a snapshot until their framework cache expires.
+Aircraft browse hydrates the existing React filter/search/sort/pagination controls over the small published inventory and preserves query parameters. Other pages render React components only at build time or use native HTML/JavaScript for navigation, galleries, sharing and mailto forms. Markdown is rendered during the build. If inventory grows substantially, reconsider the full browser snapshot.
 
-Visible navigation/card links prefetch complete routes. Aircraft browse loads the current small public inventory once and searches, filters, sorts and paginates locally, preserving bookmarked query parameters on arrival. This removes database and server round trips from those interactions. If inventory becomes large, replace the full snapshot with paginated cached search.
+Images are stored in R2 as originals plus 480/960/1600-width WebP variants. Public image URLs are `/images/aircraft-photos/<path>` and `/images/blog-images/<path>`, with `?w=480`, `960` or `1600` for responsive variants. The Worker reads R2 and caches immutable objects at the edge. New uploads use Cloudflare Images at upload time, store the optimized result and variants once, and do not transform on every view. External absolute image URLs remain supported, but managed R2 paths are preferable.
 
-Next.js Image resizes/optimizes assets from public Supabase `aircraft-photos` and `blog-images` buckets; responsive sizes avoid downloading oversized blog images. Header paths normally reference storage objects; existing absolute URLs are preserved by the URL helper, though external optimizer hosts must be explicitly allowed in Next configuration. The two unavailable legacy external headers were replaced on 2026-10-09 using Cessna photos already in the project, uploaded as WebP to `blog-images`. Original post snapshots are saved privately under `.vercel/backups`.
+Contact uses seller email/telephone links. The contact form opens an email draft; it does not claim to send mail. No payments, deposits or public accounts are implemented.
 
-The existing seller contact flow uses email/telephone links. There is no implemented payment/deposit backend. There are no public admin, profile or registration pages.
+## Content and publication
 
-## Content management
+`src/mcp` validates and manages posts, aircraft and images. Parameterized Neon HTTP queries run only in the Worker. Request configuration is isolated with AsyncLocalStorage. Gallery replacement and stale-revision checking are a single Postgres transaction; multi-item MCP batches retain per-item partial successes.
 
-`src/mcp` contains validated content operations, image handling and authorization. `/api/mcp` exposes Streamable HTTP through `mcp-handler` and the MCP server SDK. It supports batch CRUD for aircraft and posts, gallery replacement/reordering and supplied image uploads. Markdown is supplied by the calling agent. No server code invokes an LLM or image-generation API.
+Successful content mutations save immediately, then dispatch GitHub Actions. Responses distinguish saved content from deployed public changes. `publish_status` reports the latest request; `publish_site` retries publication. Static routes appear/disappear only after a completed deployment. There is no periodic database polling or ISR process keeping Neon awake.
 
-Writes use the service-role key exclusively on the server. MCP grants additionally require an explicitly allowlisted owner UUID and a live `users.role=admin` profile. The anonymous public client never receives that key.
+The workflow serializes deployments. GitHub may coalesce pending runs; a successful snapshot marks all publication requests older than its transaction timestamp deployed. Newer changes remain pending until a subsequent snapshot. Live checks compare the deployed manifest with the actual built manifest rather than a changing database. Failed builds retain the previous site; failures after deployment are reported and require investigation.
 
-## OAuth
+## Owner authentication and MCP OAuth
 
-Supabase's native OAuth server is disabled in this project. The site's OAuth authorization-code server uses S256 PKCE, restricted registered callbacks, explicit owner consent, resource-bound opaque access tokens and rotating refresh tokens. Owner sign-in uses Supabase Auth. OAuth records contain hashed token names in the private `zuluniner-mcp-auth` storage bucket, with no policies permitting public access. Storage uniqueness provides single-use claims across Vercel instances. Access tokens expire in 15 minutes; connection families expire in 30 days. Revocation invalidates the entire family. See the MCP guide.
+Neon Managed Auth provides owner email-code sign-in on `/connect`. Public signup and localhost access are disabled. Email codes currently use Neon's shared sender; custom SMTP credentials are needed before a broader authentication rollout. The preserved application owner UUID maps to the Neon identity via `users.auth_subject`. Signed identity JWTs are verified against the configured JWKS, issuer, audience and expiry before consent; a live admin profile and exact owner allowlist are also required.
 
-Public OAuth discovery endpoints describe the server and protected resource. Browser origin checks protect MCP and consent requests; per-tool scopes enforce read/write permissions.
+The site's OAuth server preserves S256 PKCE, restricted callbacks, explicit consent, resource-bound opaque access tokens and rotating refresh families. Token hashes/claims live in the private `mcp_auth_records` Postgres table. Atomic inserts enforce one-use authorization codes, refresh claims and upload URLs. Access tokens last 15 minutes and refresh families 30 days. Refresh replay revokes the family. Existing Supabase-backed grants are not migrated: reconnect agents after cutover.
 
-## Deployment and verification
+No database credentials or tokens enter client bundles. Read and write scopes are enforced for each MCP tool. Neon Auth tables are provider-managed and separate from application profiles. Images have no public write endpoint apart from signed, scoped uploads.
 
-Vercel receives the environment variables listed in README. GitHub pushes deploy the site; the Vercel CLI can deploy the same checkout. Node 24 is the production runtime. Supabase table schemas and public images are retained. Historical SQL migrations describe the original schema; they are not a current list of application routes or capabilities.
+## Infrastructure and rollback
 
-Run `npm run verify` before release. `npm run test:live:mcp -- <origin>` explicitly runs mutation tests against a deployed site, creating and removing only uniquely named test content. It verifies public cache invalidation across publishing, editing, unpublishing, slug changes and deletion, including warmed 404 responses. It does not change existing listings or posts. Chrome testing separately checks the actual ChatGPT connection and leaves the requested public test aircraft.
+Cloudflare Worker: `zuluniner`; R2 bucket: `zuluniner-images`; Neon project: `crimson-pine-91526170`, Singapore, branch `main`. Operator commands use Wrangler and Neon tools. Runtime secrets are listed in README. The Neon free-plan autosuspend default is retained; static visits require no compute.
+
+`db/migrations/001_initial.sql` defines the migrated application tables, owner mapping, OAuth/publication records and gallery function. Existing application IDs and image paths are preserved. The local ignored backup includes every original row and public image. Historical Supabase migrations are archived, not active tooling.
+
+The existing Vercel/Supabase deployment is retained during the transition. Vercel automatic Git deployments are disabled to keep its original production snapshot intact. The Cloudflare domain route can be removed for immediate traffic rollback to the original DNS origin. Any content saved after cutover must be separately copied back before a data rollback; the retained source database does not receive new edits automatically.

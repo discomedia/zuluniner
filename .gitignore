@@ -40,3 +40,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Astro / Cloudflare
+/dist/
+/.astro/
+/.wrangler/
+.dev.vars*
+worker-configuration.d.ts

@@ -1,4 +1,3 @@
-'use client';
 
 import { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
@@ -31,7 +30,6 @@ export default function AircraftFilters({ filters, onFiltersChange }: AircraftFi
 
   useEffect(() => {
     // Synchronize the editable form when the parent supplies new search state.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLocalFilters(filters);
   }, [filters]);
 

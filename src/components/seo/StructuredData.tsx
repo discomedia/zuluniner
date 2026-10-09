@@ -1,4 +1,4 @@
-import Script from 'next/script';
+
 import type { Aircraft, AircraftPhoto } from '@/types';
 
 interface AircraftStructuredDataProps {
@@ -107,11 +107,11 @@ export function AircraftStructuredData({ aircraft, primaryPhotoUrl }: AircraftSt
   };
 
   return (
-    <Script
+    <script
       id="aircraft-structured-data"
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
+        __html: JSON.stringify(structuredData).replace(/</g, '\\u003c').replace(/</g, '\\u003c'),
       }}
     />
   );
@@ -166,11 +166,11 @@ export function AircraftListingPageStructuredData({
   };
 
   return (
-    <Script
+    <script
       id="aircraft-listing-structured-data"
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
+        __html: JSON.stringify(structuredData).replace(/</g, '\\u003c').replace(/</g, '\\u003c'),
       }}
     />
   );
@@ -204,11 +204,11 @@ export function OrganizationStructuredData() {
   };
 
   return (
-    <Script
+    <script
       id="organization-structured-data"
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
+        __html: JSON.stringify(structuredData).replace(/</g, '\\u003c').replace(/</g, '\\u003c'),
       }}
     />
   );
@@ -238,11 +238,11 @@ export function WebsiteStructuredData() {
   };
 
   return (
-    <Script
+    <script
       id="website-structured-data"
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
+        __html: JSON.stringify(structuredData).replace(/</g, '\\u003c').replace(/</g, '\\u003c'),
       }}
     />
   );

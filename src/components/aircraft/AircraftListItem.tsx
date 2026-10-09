@@ -1,8 +1,8 @@
 import { formatLocation } from '@/lib/utils';
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from '@/components/ui/Image';
+
 import { MapPin, Calendar, Clock, Plane, Phone, Mail } from 'lucide-react';
-import { db } from '@/api/db';
+import { imageUrl } from '@/lib/image-url';
 import type { AircraftCardProps } from '@/types';
 import Button from '@/components/ui/Button';
 
@@ -29,15 +29,15 @@ interface AircraftListItemProps extends AircraftCardProps {
 }
 
 export default function AircraftListItem({ aircraft, primaryPhoto, seller }: AircraftListItemProps) {
-  const photoUrl = primaryPhoto ? 
-    db.photos.getPhotoUrl(primaryPhoto.storage_path) : 
+  const photoUrl = primaryPhoto ?
+    imageUrl('aircraft-photos', primaryPhoto.storage_path) :
     null;
 
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-200">
       <div className="flex flex-col md:flex-row">
         {/* Photo */}
-        <Link prefetch={true} href={`/aircraft/${aircraft.slug}`} className="group md:w-80 md:flex-shrink-0">
+        <a href={`/aircraft/${aircraft.slug}`} className="group md:w-80 md:flex-shrink-0">
           <div className="relative aspect-[4/3] md:aspect-[3/2] bg-gray-100">
             {photoUrl ? (
               <Image
@@ -53,7 +53,7 @@ export default function AircraftListItem({ aircraft, primaryPhoto, seller }: Air
               </div>
             )}
           </div>
-        </Link>
+        </a>
 
         {/* Content */}
         <div className="flex-1 p-6">
@@ -63,16 +63,16 @@ export default function AircraftListItem({ aircraft, primaryPhoto, seller }: Air
               {/* Title and Price */}
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3">
                 <div>
-                  <Link prefetch={true} href={`/aircraft/${aircraft.slug}`} className="group">
+                  <a href={`/aircraft/${aircraft.slug}`} className="group">
                     <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2">
                       {aircraft.title}
                     </h3>
-                  </Link>
+                  </a>
                   <p className="text-gray-600 text-lg">
                     {aircraft.year} {aircraft.make} {aircraft.model}
                   </p>
                 </div>
-                
+
                 <div className="text-right">
                   <p className="text-2xl font-bold text-blue-600">
                     {formatPrice(aircraft.price)}
@@ -89,7 +89,7 @@ export default function AircraftListItem({ aircraft, primaryPhoto, seller }: Air
                     <p className="font-medium">{aircraft.year}</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center gap-2 text-gray-600">
                   <Clock className="h-4 w-4 flex-shrink-0" />
                   <div>
@@ -97,7 +97,7 @@ export default function AircraftListItem({ aircraft, primaryPhoto, seller }: Air
                     <p className="font-medium">{formatHours(aircraft.hours)}</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center gap-2 text-gray-600">
                   <MapPin className="h-4 w-4 flex-shrink-0" />
                   <div>
@@ -122,7 +122,7 @@ export default function AircraftListItem({ aircraft, primaryPhoto, seller }: Air
               {/* Description */}
               {aircraft.description && (
                 <p className="text-gray-600 line-clamp-2 mb-4">
-                  {aircraft.description}
+                  {aircraft.description?.slice(0,240)}
                 </p>
               )}
 
@@ -143,12 +143,12 @@ export default function AircraftListItem({ aircraft, primaryPhoto, seller }: Air
 
             {/* Action Buttons */}
             <div className="flex flex-col gap-3 lg:w-48 lg:flex-shrink-0">
-              <Link prefetch={true} href={`/aircraft/${aircraft.slug}`}>
+              <a href={`/aircraft/${aircraft.slug}`}>
                 <Button variant="primary" className="w-full">
                   View Details
                 </Button>
-              </Link>
-              
+              </a>
+
               {seller && (
                 <>
                   {seller.phone && (
@@ -161,7 +161,7 @@ export default function AircraftListItem({ aircraft, primaryPhoto, seller }: Air
                       Call Seller
                     </Button>
                   )}
-                  
+
                   <Button
                     variant="ghost"
                     onClick={() => window.location.href = `mailto:${seller.email}?subject=Inquiry about ${aircraft.title}`}

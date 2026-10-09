@@ -1,4 +1,4 @@
-import Link from 'next/link';
+
 import { cn } from '../../lib/utils';
 
 interface BreadcrumbItem {
@@ -33,12 +33,12 @@ export default function Breadcrumbs({ items, className }: BreadcrumbsProps) {
               </svg>
             )}
             {item.href && !item.current ? (
-              <Link
+              <a
                 href={item.href}
                 className="text-sm text-neutral-500 hover:text-neutral-700 transition-colors"
               >
                 {item.name}
-              </Link>
+              </a>
             ) : (
               <span
                 className={cn(

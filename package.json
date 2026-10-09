@@ -3,56 +3,59 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint src",
-    "generate-schema": "npx supabase gen types typescript --project-id bjwlldxavgoxhyyufffy > src/api/schema.ts",
-    "db:push": "npx supabase db push",
-    "db:pull": "npx supabase db pull",
-    "db:status": "npx supabase migration list",
-    "supabase:link": "npx supabase link --project-ref bjwlldxavgoxhyyufffy",
-    "deploy:schema": "npm run db:push && npm run generate-schema",
-    "deploy:check": "npm run build && npm run lint",
-    "typecheck": "tsc --noEmit",
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "typecheck": "wrangler types && astro check && tsc --noEmit",
+    "lint": "eslint src scripts",
     "test": "tsx --test src/testing/*.test.ts",
-    "verify": "npm run typecheck && npm run lint && npm test && npm run build",
-    "test:live:mcp": "node --env-file=.env --import tsx scripts/verify-mcp.ts"
+    "verify": "npm run typecheck && npm run lint && npm test && npm run build && npm run worker:check",
+    "worker:dev": "wrangler dev",
+    "worker:check": "wrangler deploy --dry-run",
+    "deploy": "npm run build && wrangler deploy",
+    "test:live:mcp": "node --env-file=.env --import tsx scripts/verify-mcp.ts",
+    "test:live:static": "node --import tsx scripts/verify-static.ts"
   },
   "dependencies": {
-    "@headlessui/react": "^2.2.9",
+    "@astrojs/react": "7.0.1",
+    "@cfworker/json-schema": "4.1.1",
     "@modelcontextprotocol/server": "2.3.1",
-    "@supabase/supabase-js": "^2.90.1",
+    "@neondatabase/auth": "0.5.0-beta",
+    "@neondatabase/serverless": "1.2.0",
     "@tailwindcss/typography": "^0.5.19",
+    "astro": "7.3.8",
     "clsx": "^2.1.1",
+    "image-size": "2.0.4",
     "ipaddr.js": "2.3.0",
+    "jose": "6.2.12",
     "lucide-react": "^0.562.0",
-    "mcp-handler": "2.3.0",
-    "next": "16.4.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-markdown": "^10.1.0",
     "remark-gfm": "^4.0.1",
-    "sharp": "0.35.5",
     "tailwind-merge": "^3.4.0",
     "zod": "4.6.5"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
+    "@astrojs/check": "0.9.10",
+    "@eslint/js": "9.31.0",
+    "@tailwindcss/vite": "4.3.3",
     "@types/node": "^25",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.4.0",
-    "supabase": "^2.72.8",
-    "tailwindcss": "^4",
+    "tailwindcss": "4.3.3",
     "tsx": "4.23.15",
-    "typescript": "^5"
+    "typescript": "^5",
+    "typescript-eslint": "8.71.1",
+    "wrangler": "4.149.0",
+    "sharp": "0.35.5"
   },
   "engines": {
-    "node": "24.x"
+    "node": ">=22.12.0"
   },
   "overrides": {
     "postcss-selector-parser": "7.1.6"
-  }
+  },
+  "type": "module"
 }

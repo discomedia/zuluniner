@@ -1,9 +1,8 @@
 import { createHash, randomBytes, randomUUID, timingSafeEqual } from 'node:crypto';
 import { z } from 'zod';
-import { contentClient } from './client';
-import { siteOrigin, allowedOwner } from './auth';
+import { query, environment } from '@/worker/context';
+import { siteOrigin, ownerFromIdentityToken } from './auth';
 
-export const AUTH_BUCKET = 'zuluniner-mcp-auth';
 export const RESOURCE = () => `${siteOrigin()}/api/mcp`;
 const scope = 'content:read content:write';
 const secret = () => randomBytes(32).toString('base64url');
@@ -16,37 +15,19 @@ const tokenSchema = z.object({ user_id: z.uuid(), client_id: z.string(), resourc
 const markerSchema = z.object({ at: z.number() });
 
 async function read<T extends z.ZodType>(path: string, schema: T): Promise<z.output<T> | null> {
-  // This older Storage deployment wraps missing-object responses in HTTP 400.
-  // Read the documented REST error explicitly; never confuse outages with absence.
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!key) throw new Error('Authentication storage is unavailable.');
-  const response = await fetch(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/${AUTH_BUCKET}/${path.split('/').map(encodeURIComponent).join('/')}`, {
-    headers: { Authorization: `Bearer ${key}`, apikey: key }, cache: 'no-store', signal: AbortSignal.timeout(10000),
-  });
-  if (!response.ok) {
-    const failure = z.object({ code: z.string().optional(), error: z.string().optional() }).safeParse(await response.json());
-    if (response.status === 404 || (response.status === 400 && failure.success && (failure.data.code === 'NoSuchKey' || failure.data.error === 'not_found'))) return null;
-    throw new Error('Authentication storage is unavailable.');
-  }
-  return schema.parse(await response.json());
+  const [row] = await query<{value:unknown}>('SELECT value FROM mcp_auth_records WHERE key=$1', [path]);
+  return row ? schema.parse(row.value) : null;
 }
-
 async function write(path: string, value: object) {
-  const { error } = await contentClient().storage.from(AUTH_BUCKET).upload(path, JSON.stringify(value), { contentType: 'application/json', upsert: false });
-  if (error) throw new Error('Could not persist authorization.');
+  await query('INSERT INTO mcp_auth_records(key,value) VALUES($1,$2::jsonb)', [path,JSON.stringify(value)]);
 }
-
 async function claim(path: string) {
-  // Storage object names are unique in Postgres. Inserting this marker is an
-  // atomic single-use claim across Vercel instances; no in-memory sessions.
-  const { error } = await contentClient().storage.from(AUTH_BUCKET).upload(`used/${path}.json`, JSON.stringify({ at: now() }), { contentType: 'application/json', upsert: false });
-  if (!error) return true;
-  if ('statusCode' in error && String(error.statusCode) === '409') return false;
-  throw new Error('Authentication storage is unavailable.');
+  const rows = await query('INSERT INTO mcp_auth_records(key,value) VALUES($1,$2::jsonb) ON CONFLICT DO NOTHING RETURNING key', [`used/${path}.json`,JSON.stringify({at:now()})]);
+  return rows.length > 0;
 }
 
 export function trustedRedirect(uri: string) {
-  const allowed = (process.env.ZULUNINER_OAUTH_REDIRECT_URIS || '').split(',').filter(Boolean);
+  const allowed = (environment().OAUTH_REDIRECT_URIS || '').split(',').filter(Boolean);
   if (allowed.includes(uri)) return true;
   const url = new URL(uri);
   return url.origin === 'https://chatgpt.com' && !url.search && !url.hash &&
@@ -84,11 +65,7 @@ export async function authorizationDetails(requestId: string) {
 }
 
 export async function approveAuthorization(requestId: string, ownerToken: string, approved: boolean) {
-  const client = contentClient();
-  const user = await client.auth.getUser(ownerToken);
-  if (user.error || !user.data.user || !allowedOwner(user.data.user.id)) throw new Error('Only the configured site owner can connect an agent.');
-  const profile = await client.from('users').select('role').eq('id', user.data.user.id).single();
-  if (profile.error || profile.data.role !== 'admin') throw new Error('Owner access required.');
+  const userId = await ownerFromIdentityToken(ownerToken);
   const { request } = await authorizationDetails(requestId);
   if (!await claim(`request-${digest(requestId)}`)) throw new Error('Authorization request was already completed.');
   const redirect = new URL(request.redirect_uri);
@@ -96,7 +73,7 @@ export async function approveAuthorization(requestId: string, ownerToken: string
   redirect.searchParams.set('iss', siteOrigin());
   if (approved) {
     const code = secret();
-    await write(`codes/${digest(code)}.json`, { ...request, user_id: user.data.user.id, expires_at: now() + 120 });
+    await write(`codes/${digest(code)}.json`, { ...request, user_id: userId, expires_at: now() + 120 });
     redirect.searchParams.set('code', code);
   } else redirect.searchParams.set('error', 'access_denied');
   return { redirect_url: redirect.href };
@@ -150,6 +127,5 @@ export async function revokeToken(params: URLSearchParams) {
   if (!token || !clientId) return;
   const grant = await read(`access/${digest(token)}.json`, tokenSchema) || await read(`refresh/${digest(token)}.json`, tokenSchema);
   if (!grant || grant.client_id !== clientId) return;
-  const { error } = await contentClient().storage.from(AUTH_BUCKET).upload(`revoked/${grant.family_id}.json`, JSON.stringify({ at: now() }), { contentType: 'application/json', upsert: true });
-  if (error) throw new Error('Could not revoke this connection.');
+  await query('INSERT INTO mcp_auth_records(key,value) VALUES($1,$2::jsonb) ON CONFLICT(key) DO UPDATE SET value=excluded.value', [`revoked/${grant.family_id}.json`,JSON.stringify({at:now()})]);
 }

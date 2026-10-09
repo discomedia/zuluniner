@@ -6,12 +6,8 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[]
 
+// Application row types retained from the source database; transport independent.
 export type Database = {
-  // Allows to automatically instanciate createClient with right options
-  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
-  __InternalSupabase: {
-    PostgrestVersion: "12.2.3 (519615d)"
-  }
   public: {
     Tables: {
       aircraft: {
