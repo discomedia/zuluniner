@@ -17,7 +17,8 @@ const owner = await client.auth.admin.getUserById(ownerId);
 assert.ok(owner.data.user?.email, 'Owner must have an existing verified Auth account.');
 const link = await client.auth.admin.generateLink({ type: 'magiclink', email: owner.data.user.email });
 if (link.error) throw link.error;
-const login = await client.auth.verifyOtp({ type: 'magiclink', token_hash: link.data.properties.hashed_token });
+const ownerAuth = createClient<Database>(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, { auth: { persistSession: false } });
+const login = await ownerAuth.auth.verifyOtp({ type: 'magiclink', token_hash: link.data.properties.hashed_token });
 if (login.error) throw login.error;
 const ownerToken = login.data.session!.access_token;
 const callback = 'https://chatgpt.com/connector_platform_oauth_redirect';
@@ -137,7 +138,7 @@ try {
   for (const item of created) { const result=await client.from(item.kind==='post'?'blog_posts':'aircraft').delete().eq('id',item.id).like('slug',`${prefix}%`);if(result.error)console.error('Test cleanup failed:',item.id); }
   for (const kind of ['post','aircraft'] as const) { const paths=assets.filter(item=>item.kind===kind).map(item=>item.storage_path);if(paths.length)await client.storage.from(kind==='post'?'blog-images':'aircraft-photos').remove(paths); }
   await form('/oauth/revoke', { client_id: grant.client_id, token: grant.access_token });
-  await client.auth.signOut();
+  await ownerAuth.auth.signOut();
 }
 
 }
