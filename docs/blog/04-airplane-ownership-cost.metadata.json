@@ -1,0 +1,19 @@
+{
+  "plan_id": "04",
+  "file": "docs/blog/04-airplane-ownership-cost.md",
+  "title": "Airplane ownership at 50, 100 and 200 hours a year",
+  "slug": "airplane-ownership-cost-50-100-200-hours",
+  "blurb": "Compare airplane ownership at 50, 100 and 200 hours with a downloadable calculator covering bills, reserves, downtime, financing and renting.",
+  "meta_description": "Compare airplane ownership at 50, 100 and 200 hours with a downloadable calculator covering bills, reserves, downtime, financing and renting.",
+  "cover_alt": "Illustration of a high-wing piston airplane inside an open hangar, with morning light crossing the apron.",
+  "header_photo": "mcp/1f2f1bf0-4392-49c9-9518-7e603d04d23d-airplane-ownership-cost-cover.webp",
+  "status": "draft",
+  "reserved_publication_at": "2026-10-10T08:16:00-04:00",
+  "worksheet": "public/blog/airplane-ownership-cost-worksheet.xlsx",
+  "image": "docs/blog/images/airplane-ownership-cost-cover.webp",
+  "id": "cd5173bb-a611-4613-a944-6b40794d6dbb",
+  "updated_at": "2026-10-10T10:12:13.641433+00:00",
+  "prepared_at": "2026-10-10T10:12:16.618Z",
+  "publication_date": null,
+  "url": null
+}

@@ -15,7 +15,8 @@ Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03
 - [x] **01 — [Four seats, full fuel: will this airplane carry your mission?](https://zuluniner.com/blog/four-seats-full-fuel-aircraft-payload)** — published; original loading cases, CG calculations and mission worksheet.
 - [x] **02 — [Fresh annual vs prebuy: what are you actually buying?](https://zuluniner.com/blog/prebuy-vs-annual-inspection)** — published; buyer-to-mechanic scope worksheet and hypothetical findings.
 - [x] **03 — [Low engine hours, old overhaul: bargain or liability?](https://zuluniner.com/blog/low-engine-hours-old-overhaul)** — published; two hypothetical histories, diagnostic limits and engine-reserve calculation.
-- [ ] **04–36** — not yet written or published.
+- [ ] **04 — Airplane ownership at 50, 100 and 200 hours a year** — researched and saved as an unpublished draft on 10 October 2026 Eastern; reserved for 8:16 a.m. EDT. [Draft and worksheet record](docs/blog/04-airplane-ownership-cost.notes.md).
+- [ ] **05–36** — not yet written or published.
 
 The published editions use primary-source research and clearly identified fictional examples. No independent CFI/A&P/IA review or specialist interview has occurred; those proposed enhancements are still outstanding and are not counted as completed. Article sources, metadata, cover prompts and validation details are retained in [docs/blog/publication-notes.md](docs/blog/publication-notes.md).
 

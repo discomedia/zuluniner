@@ -1,0 +1,9 @@
+{
+  "plan_id": "04",
+  "file": "docs/blog/images/airplane-ownership-cost-cover.webp",
+  "created_at": "2026-10-10T10:12:16.618Z",
+  "tool": "built-in image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: original ZuluNiner aviation blog cover. Create a restrained, somewhat abstract editorial graphic about the annual cost of owning a small piston airplane. Landscape 3:2 composition, 1536 by 1024 pixels. A single credible high-wing, fixed-gear, single-engine light airplane occupies the foreground of a simple open T-hangar; three broad bands of soft morning light fall across the apron, suggesting different amounts of flying without charts or literal financial symbols. Aircraft and hangar dominate, clear silhouette and mechanically plausible wings, three wheels and propeller, no people. Muted slate blue, warm off-white and a small ochre accent; crisp illustrative forms, soft painted textures and controlled shadows. Entire airplane inside crop, strong thumbnail readability, calm composition. No text anywhere, no letters, no numbers, no registration, no labels, no logos, no watermark, no money or coins, no decorative infographic icons. This is an editorial illustration, not a photograph of a listed aircraft.",
+  "inspection": "Inspected generated cover: aircraft and hangar dominate, no text, 1536 by 1024 pixels, 3:2.",
+  "cover_alt": "Illustration of a high-wing piston airplane inside an open hangar, with morning light crossing the apron."
+}
