@@ -37,5 +37,19 @@
     "cover_alt": "Illustration of a piston engine inside an airplane’s nose, with changing seasons outside the hangar.",
     "url": "https://zuluniner.com/blog/low-engine-hours-old-overhaul",
     "publication_date": "2026-10-09"
+  },
+  {
+    "plan_id": "04",
+    "file": "docs/blog/04-airplane-ownership-cost.md",
+    "id": "cd5173bb-a611-4613-a944-6b40794d6dbb",
+    "title": "Airplane ownership at 50, 100 and 200 hours a year",
+    "slug": "airplane-ownership-cost-50-100-200-hours",
+    "blurb": "Compare airplane ownership at 50, 100 and 200 hours with a downloadable calculator covering bills, reserves, downtime, financing and renting.",
+    "meta_description": "Compare airplane ownership at 50, 100 and 200 hours with a downloadable calculator covering bills, reserves, downtime, financing and renting.",
+    "header_photo": "mcp/1f2f1bf0-4392-49c9-9518-7e603d04d23d-airplane-ownership-cost-cover.webp",
+    "cover_alt": "Illustration of a high-wing piston airplane inside an open hangar, with morning light crossing the apron.",
+    "url": "https://zuluniner.com/blog/airplane-ownership-cost-50-100-200-hours/",
+    "publication_date": "2026-10-10",
+    "published_at": "2026-10-10T12:18:05.184125+00:00"
   }
 ]

@@ -20,7 +20,7 @@ Use the current client timezone to convert the next Eastern timestamp into the l
 
 ## Editorial and release contract
 
-Read the media plan, style guide, AGENTS.md and [publication notes](publication-notes.md). Reconcile the plan with all live posts and drafts before choosing the lowest-numbered eligible unpublished ID. Start with **04 — Airplane ownership at 50, 100 and 200 hours a year**. Reuse drafts and existing work; check titles, slugs and topic overlap before creating content. Maintain a maximum of one new planned publication per Eastern date.
+Read the media plan, style guide, AGENTS.md and [publication notes](publication-notes.md). Reconcile the plan with all live posts and drafts before choosing the lowest-numbered eligible unpublished ID. Articles **01–04** are published as of 10 October 2026 Eastern. The next eligible topic is **05 — Why maneuvering speed gets lower as your airplane gets lighter**; always reconcile the live inventory before choosing. Reuse drafts and existing work; check titles, slugs and topic overlap before creating content. Maintain a maximum of one new planned publication per Eastern date.
 
 Follow the existing article, metadata, source, cover and static-rendering conventions under `docs/blog/`. Research current primary sources; verify calculations and literal banned wording. Clearly identify invented teaching examples. Don't claim specialist review or an interview unless it occurred. If a topic cannot meet its evidence requirements, record the blocker and select another eligible topic without marking the blocked item complete.
 

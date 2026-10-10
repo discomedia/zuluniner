@@ -8,23 +8,30 @@ This plan contains 36 proposed posts: 12 launch briefs and 24 follow-on topics. 
 
 ## Publication progress
 
-**Current totals:** 3 of 36 published; **33 unpublished**. Next: **04 — Airplane ownership at 50, 100 and 200 hours a year**. Live post inventory reconciled on 10 October 2026 (Australia/Melbourne); publication dates below describe the original launch.
+**Current totals:** 4 of 36 published; **32 unpublished**. Next: **05 — Why maneuvering speed gets lower as your airplane gets lighter**. Full post inventory and live manifest reconciled on 10 October 2026 Eastern.
 
 Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03**, followed by final source, calculation and style review. The originals were backed up and deleted; the replacement posts are live. Covers, contents links, tables and classifieds links were checked on desktop and phone layouts after successful deployment.
 
 - [x] **01 — [Four seats, full fuel: will this airplane carry your mission?](https://zuluniner.com/blog/four-seats-full-fuel-aircraft-payload)** — published; original loading cases, CG calculations and mission worksheet.
 - [x] **02 — [Fresh annual vs prebuy: what are you actually buying?](https://zuluniner.com/blog/prebuy-vs-annual-inspection)** — published; buyer-to-mechanic scope worksheet and hypothetical findings.
 - [x] **03 — [Low engine hours, old overhaul: bargain or liability?](https://zuluniner.com/blog/low-engine-hours-old-overhaul)** — published; two hypothetical histories, diagnostic limits and engine-reserve calculation.
-- [ ] **04 — Airplane ownership at 50, 100 and 200 hours a year** — researched and saved as an unpublished draft on 10 October 2026 Eastern; reserved for 8:16 a.m. EDT. [Draft and worksheet record](docs/blog/04-airplane-ownership-cost.notes.md).
+- [x] **04 — [Airplane ownership at 50, 100 and 200 hours a year](https://zuluniner.com/blog/airplane-ownership-cost-50-100-200-hours/)** — published on 10 October 2026 Eastern; hypothetical ownership budgets, financing, rental comparison and downloadable calculator. [Publication and worksheet record](docs/blog/04-airplane-ownership-cost.notes.md).
 - [ ] **05–36** — not yet written or published.
 
 The published editions use primary-source research and clearly identified fictional examples. No independent CFI/A&P/IA review or specialist interview has occurred; those proposed enhancements are still outstanding and are not counted as completed. Article sources, metadata, cover prompts and validation details are retained in [docs/blog/publication-notes.md](docs/blog/publication-notes.md).
 
+### Publication log
+
+| Eastern date | Planned IDs | Verified publication |
+| --- | --- | --- |
+| 9 October 2026 | 01–03 | Original launch; [publication record](docs/blog/publication-notes.md). |
+| 10 October 2026 | 04 | Published at 8:18 a.m. EDT; canonical URL above. [Content deployment](https://github.com/discomedia/zuluniner/actions/runs/38051456113) succeeded; article, card, metadata, covers, contents, calculator and classifieds links checked on desktop and phone. |
+
 ## Scheduled publication
 
-**ZuluNiner daily blog publishing** is active in this chat. It prepares the next eligible article at 6 a.m. Eastern and publishes at a newly randomized time within the **8–10 a.m. America/New_York** window. Random target minutes run from 8:00 through 9:45, leaving deployment time before the window closes. Eastern daylight saving changes are included. The first target is **10 October 2026 at 8:16 a.m. EDT**.
+**ZuluNiner daily blog publishing** is active in this chat. It prepares the next eligible article at 6 a.m. Eastern and publishes at a newly randomized time within the **8–10 a.m. America/New_York** window. Random target minutes run from 8:00 through 9:45, leaving deployment time before the window closes. Eastern daylight saving changes are included. The first target was **10 October 2026 at 8:16 a.m. EDT**; article 04 was published and verified that morning.
 
-The automation updates the specific completed ID, publication date, canonical URL and totals only after live deployment checks pass. It reconciles existing posts and drafts to avoid duplicates and preserves a limit of one new planned post per Eastern date. Current articles 01–03 stay published.
+The automation updates the specific completed ID, publication date, canonical URL and totals only after live deployment checks pass. It reconciles existing posts and drafts to avoid duplicates and preserves a limit of one new planned post per Eastern date. Published articles 01–04 remain live.
 
 **Nearly exhausted:** alert when **five or fewer unpublished IDs remain**, including blocked topics. Record the alert once per threshold/queue state. At zero remaining, report completion and pause the schedule. Instructions and recovery state are described in [docs/blog/scheduled-publishing.md](docs/blog/scheduled-publishing.md).
 

@@ -31,7 +31,15 @@ The three original generated covers are WebP, 1,536 × 1,024 pixels (3:2). Files
 - `PATH=/opt/homebrew/opt/node@24/bin:$PATH npm run verify` passed against the replacement content: type checks, lint, 13 tests, static build and Worker dry run.
 - All 23 article contents links matched generated heading IDs; each article has one H1 and no hydrated React island.
 - [Deployment 37897258710](https://github.com/discomedia/zuluniner/actions/runs/37897258710) succeeded, including the workflow's exact built-manifest comparison and all public routes.
-- The content connector reports deployed and public changes live. The published inventory contains exactly articles 01–03.
+- The content connector reports deployed and public changes live. The launch inventory contained exactly articles 01–03.
 - All three articles were inspected at desktop width (1,280 px) and phone width (390 px). Covers preserve 3:2; titles and body text fit; tables wrap or scroll inside their own containers. Page width remains 390 px on phones, and contents navigation works.
 
 The first content-only deployment encountered a transient old-manifest response during immediate post-deploy verification. The subsequent queued content deployment and code deployment both completed successfully. A later documentation deployment exposed the same propagation delay, so the manifest comparison now permits up to 45 seconds of waiting with bounded retries. It still requires the exact built snapshot; no verification check was weakened.
+
+## Scheduled publications
+
+| Eastern date | Plan ID | Article and verification record |
+| --- | --- | --- |
+| 10 October 2026 | 04 | [Airplane ownership at 50, 100 and 200 hours a year](https://zuluniner.com/blog/airplane-ownership-cost-50-100-200-hours/); [sources, calculator checks and live verification](04-airplane-ownership-cost.notes.md). |
+
+Article 04 passed publication and desktop/phone checks after successful deployment. Current totals are 4 published and 32 unpublished planned IDs. Existing posts and aircraft were preserved.

@@ -1,8 +1,8 @@
-# Article 04 preparation record
+# Article 04 publication record
 
-Prepared on 10 October 2026 Eastern for the stored 8:16 a.m. EDT publication slot. This is an **unpublished draft**. The media-plan published count stays at 3 of 36, with 33 unpublished IDs, until publication and live verification succeed.
+Published on 10 October 2026 at 8:18 a.m. EDT after preparation for the stored 8:16 a.m. slot. Live article: [Airplane ownership at 50, 100 and 200 hours a year](https://zuluniner.com/blog/airplane-ownership-cost-50-100-200-hours/). The media plan now records 4 of 36 published and 32 unpublished IDs.
 
-Article: [04-airplane-ownership-cost.md](04-airplane-ownership-cost.md). Draft identity, revision, metadata and uploaded cover path: [04-airplane-ownership-cost.metadata.json](04-airplane-ownership-cost.metadata.json). Original cover and exact built-in generation prompt: [04-generation-prompt.json](images/04-generation-prompt.json). The editable calculator is served from `public/blog/airplane-ownership-cost-worksheet.xlsx`.
+Article: [04-airplane-ownership-cost.md](04-airplane-ownership-cost.md). Post identity, revision, metadata and uploaded cover path: [04-airplane-ownership-cost.metadata.json](04-airplane-ownership-cost.metadata.json). Original cover and exact built-in generation prompt: [04-generation-prompt.json](images/04-generation-prompt.json). The editable calculator is served from `public/blog/airplane-ownership-cost-worksheet.xlsx`.
 
 ## Inventory reconciliation and backup
 
@@ -33,4 +33,14 @@ Article wording was scanned against the style guide. Rendering through the site'
 
 `PATH=/opt/homebrew/opt/node@24/bin:$PATH npm run verify` passed: type checks, lint, all 13 tests, static build and Worker dry run. The draft-save deployment [38044086188](https://github.com/discomedia/zuluniner/actions/runs/38044086188) completed successfully while the public inventory stayed at three articles. The subsequent source release supplies the worksheet and cover-alt mapping; its terminal result is retained in the ignored publishing state.
 
-Publication-time inspection must still check the exact draft revision, current inventory, live URL/card/metadata/images/contents links/classifieds links and desktop/phone layout. Preparation doesn't mark publication complete.
+## Publication verification
+
+The full inventory contained three published articles and this exact draft before publication; none had a 10 October Eastern publication date. The draft body matched the saved source, and its revision was checked again. Complete records were backed up in ignored `data/backups/blog-before-publish-04-2026-10-10.json` before updating this ID with its revision guard.
+
+`PATH=/opt/homebrew/opt/node@24/bin:$PATH npm run verify` passed again before release, including all 13 tests. [Content deployment 38051456113](https://github.com/discomedia/zuluniner/actions/runs/38051456113) completed successfully. The connector reported deployed/public changes live, and the live manifest contained exactly articles 01–04.
+
+The live article and blog card display the expected title, publication date, metadata and cover alt text. The article has one H1, ten working contents targets and no hydrated island. All internal links, including aircraft classifieds and related articles, returned successfully. The downloadable calculator matches the local workbook byte for byte.
+
+The original and 480/960/1600-requested cover variants returned successfully and retained 3:2 proportions; the largest request preserves the 1,536-pixel original without upscaling. Desktop (1,280 × 900) and phone (390 × 844) screenshots were inspected. Titles and text fit, the cover loads, contents navigation reaches its heading, and wide tables scroll inside their containers without widening the phone page. Native Excel/Numbers execution remains untested; workbook formula and render checks are described above.
+
+The final scoped plan/metadata commit triggers a further source deployment. Its terminal workflow result is retained in the ignored publishing state after verification.
