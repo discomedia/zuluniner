@@ -31,7 +31,7 @@ The published editions use primary-source research and clearly identified fictio
 
 ## Scheduled publication
 
-**ZuluNiner daily blog publishing** is active in this chat. It prepares the next eligible article at 6 a.m. Eastern and publishes at a newly randomized time within the **8–10 a.m. America/New_York** window. Random target minutes run from 8:00 through 9:45, leaving deployment time before the window closes. Eastern daylight saving changes are included. The first target was **10 October 2026 at 8:16 a.m. EDT**; article 04 was published and verified that morning.
+**ZuluNiner daily blog publishing** is active in this chat. It prepares the next eligible article at 6 a.m. Eastern, starting immediately if that preparation wake arrives up to ten minutes early, and publishes at a newly randomized time within the **8–10 a.m. America/New_York** window. Random target minutes run from 8:00 through 9:45, leaving deployment time before the window closes. Eastern daylight saving changes are included. The first target was **10 October 2026 at 8:16 a.m. EDT**; article 04 was published and verified that morning.
 
 The automation updates the specific completed ID, publication date, canonical URL and totals only after live deployment checks pass. It reconciles existing posts and drafts to avoid duplicates and preserves a limit of one new planned post per Eastern date. Published articles 01–05 remain live. The owner's immediate-publication request for article 05 is a one-off exception; subsequent automated articles keep the morning window.
 
