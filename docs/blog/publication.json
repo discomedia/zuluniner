@@ -51,5 +51,19 @@
     "url": "https://zuluniner.com/blog/airplane-ownership-cost-50-100-200-hours/",
     "publication_date": "2026-10-10",
     "published_at": "2026-10-10T12:18:05.184125+00:00"
+  },
+  {
+    "plan_id": "05",
+    "file": "docs/blog/05-maneuvering-speed-weight.md",
+    "id": "e6293749-2894-4d75-82f8-30c73b5b9251",
+    "title": "Why maneuvering speed gets lower as your airplane gets lighter",
+    "slug": "maneuvering-speed-aircraft-weight",
+    "blurb": "Understand why maneuvering speed decreases with weight, read an original load-factor diagram and test the limits with four practice questions.",
+    "meta_description": "Understand why maneuvering speed decreases with weight, read an original load-factor diagram and test the limits with four practice questions.",
+    "header_photo": "mcp/82197371-9889-4c2e-a9c1-129fb470fc66-maneuvering-speed-weight-cover.webp",
+    "cover_alt": "Illustration of a light piston airplane in a shallow bank over countryside, with curved airflow bands behind it.",
+    "url": "https://zuluniner.com/blog/maneuvering-speed-aircraft-weight/",
+    "publication_date": "2026-10-11",
+    "published_at": "2026-10-12T00:33:20.485702+00:00"
   }
 ]

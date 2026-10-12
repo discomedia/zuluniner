@@ -18,9 +18,11 @@ During the publication phase, publish the reviewed draft within the Eastern wind
 
 Use the current client timezone to convert the next Eastern timestamp into the local scheduler clock, and read the saved automation back after every change. If a run wakes early, reschedule to its reserved time and return instead of holding a long sleep. If it wakes too late to publish and verify before 10 a.m., keep the draft and move to the next eligible day. Don't publish outside the window or produce extra catch-up posts.
 
+Article 05 was published outside the morning window on 11 October Eastern (12 October Australia/Melbourne) following the owner's explicit “just publish it then...” request. This one-off exception doesn't change the regular window. Preparation for the next planned topic is reserved for 12 October at 6 a.m. Eastern, followed by the persisted random 8:05 a.m. publication target.
+
 ## Editorial and release contract
 
-Read the media plan, style guide, AGENTS.md and [publication notes](publication-notes.md). Reconcile the plan with all live posts and drafts before choosing the lowest-numbered eligible unpublished ID. Articles **01–04** are published as of 10 October 2026 Eastern. The next eligible topic is **05 — Why maneuvering speed gets lower as your airplane gets lighter**; always reconcile the live inventory before choosing. Reuse drafts and existing work; check titles, slugs and topic overlap before creating content. Maintain a maximum of one new planned publication per Eastern date.
+Read the media plan, style guide, AGENTS.md and [publication notes](publication-notes.md). Reconcile the plan with all live posts and drafts before choosing the lowest-numbered eligible unpublished ID. Articles **01–05** are published as of 11 October 2026 Eastern. The next eligible topic is **06 — Sport pilot vs private pilot after MOSAIC: which airplane can you fly?**; always reconcile the live inventory before choosing. Reuse drafts and existing work; check titles, slugs and topic overlap before creating content. Maintain a maximum of one new planned publication per Eastern date.
 
 Follow the existing article, metadata, source, cover and static-rendering conventions under `docs/blog/`. Research current primary sources; verify calculations and literal banned wording. Clearly identify invented teaching examples. Don't claim specialist review or an interview unless it occurred. If a topic cannot meet its evidence requirements, record the blocker and select another eligible topic without marking the blocked item complete.
 

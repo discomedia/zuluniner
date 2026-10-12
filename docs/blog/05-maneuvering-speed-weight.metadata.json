@@ -9,11 +9,12 @@
   "header_photo": "mcp/82197371-9889-4c2e-a9c1-129fb470fc66-maneuvering-speed-weight-cover.webp",
   "image": "docs/blog/images/maneuvering-speed-weight-cover.webp",
   "diagram": "public/blog/maneuvering-speed-weight-diagram.svg",
-  "status": "draft",
-  "publication_date": null,
-  "url": null,
+  "status": "published",
+  "publication_date": "2026-10-11",
+  "url": "https://zuluniner.com/blog/maneuvering-speed-aircraft-weight/",
   "publication_authorization": "Owner explicitly requested immediate publication on 12 October 2026 Australia/Melbourne, overriding the morning window for this one article.",
   "id": "e6293749-2894-4d75-82f8-30c73b5b9251",
-  "updated_at": "2026-10-12T00:30:10.342974+00:00",
-  "prepared_at": "2026-10-12T00:31:05.923844+00:00"
+  "updated_at": "2026-10-12T00:33:20.485702+00:00",
+  "prepared_at": "2026-10-12T00:31:05.923844+00:00",
+  "published_at": "2026-10-12T00:33:20.485702+00:00"
 }
