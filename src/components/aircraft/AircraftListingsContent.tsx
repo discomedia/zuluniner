@@ -188,6 +188,7 @@ function AircraftListingsResults({ inventory, initialFilters, initialSort, initi
             {/* Advanced Filters */}
             {showFilters && (
               <AircraftFilters
+                inventory={inventory}
                 filters={filters}
                 onFiltersChange={handleFiltersChange}
               />

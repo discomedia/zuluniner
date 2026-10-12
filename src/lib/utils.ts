@@ -20,3 +20,9 @@ export function formatDate(dateString: string | null): string {
 export function formatLocation(city: string | null, country: string | null): string {
   return [city, country].filter(Boolean).join(', ') || 'Not specified';
 }
+
+export function formatAircraftPrice(aircraft: {price: number | null; price_text?: string | null}): string {
+  if (aircraft.price_text) return aircraft.price_text;
+  if (aircraft.price === null) return 'Contact for price';
+  return new Intl.NumberFormat('en-US', {style:'currency',currency:'USD',maximumFractionDigits:0}).format(aircraft.price);
+}

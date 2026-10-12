@@ -23,16 +23,20 @@ export type Database = {
           id: string
           latitude: number | null
           longitude: number | null
-          make: string
+          make: string | null
           meta_description: string | null
           model: string
-          price: number
+          price: number | null
+          price_text: string | null
+          source_url: string | null
+          source_name: string | null
+          source_seller: string | null
           slug: string
           status: string | null
           title: string
           updated_at: string | null
           user_id: string
-          year: number
+          year: number | null
         }
         Insert: {
           airport_code?: string | null
@@ -46,16 +50,20 @@ export type Database = {
           id?: string
           latitude?: number | null
           longitude?: number | null
-          make: string
+          make: string | null
           meta_description?: string | null
           model: string
-          price: number
+          price: number | null
+          price_text?: string | null
+          source_url?: string | null
+          source_name?: string | null
+          source_seller?: string | null
           slug: string
           status?: string | null
           title: string
           updated_at?: string | null
           user_id: string
-          year: number
+          year: number | null
         }
         Update: {
           airport_code?: string | null
@@ -69,16 +77,20 @@ export type Database = {
           id?: string
           latitude?: number | null
           longitude?: number | null
-          make?: string
+          make?: string | null
           meta_description?: string | null
           model?: string
-          price?: number
+          price?: number | null
+          price_text?: string | null
+          source_url?: string | null
+          source_name?: string | null
+          source_seller?: string | null
           slug?: string
           status?: string | null
           title?: string
           updated_at?: string | null
           user_id?: string
-          year?: number
+          year?: number | null
         }
         Relationships: [
           {

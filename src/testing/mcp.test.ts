@@ -31,6 +31,14 @@ test('mutation validation prevents empty, oversized and dangerous inputs', () =>
   assert.equal(postPatch.parse({ content: null }).content, null);
 });
 
+test('source listings preserve missing specifications and accept only safe source links', () => {
+  const ad = {title:'AS 350 B',slug:'as-350-b',price:null,year:null,make:null,model:'AS 350 B',hours:7781.7,source_url:'https://www.barnstormers.com/classified-2061636.html'};
+  assert.equal(aircraftFields.safeParse(ad).success, true);
+  for (const source_url of ['javascript:alert(1)', 'http://example.com/ad', 'https://user:secret@example.com/ad']) {
+    assert.equal(aircraftFields.safeParse({...ad,source_url}).success, false);
+  }
+});
+
 test('image downloads reject private networks, credentials and unsafe schemes', async () => {
   for (const address of ['127.0.0.1', '10.0.0.1', '169.254.169.254', '192.168.1.1', '::1', 'fe80::1', '::ffff:127.0.0.1', '203.0.113.1']) assert.equal(publicImageAddress(address), false, address);
   assert.equal(publicImageAddress('1.1.1.1'), true);

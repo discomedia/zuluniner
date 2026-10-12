@@ -1,12 +1,13 @@
 
 import { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
-import type { SearchFilters } from '@/types';
+import type { Aircraft, SearchFilters } from '@/types';
 import Input from '@/components/ui/Input';
 import Select from '@/components/ui/Select';
 import Button from '@/components/ui/Button';
 
 interface AircraftFiltersProps {
+  inventory: Aircraft[];
   filters: SearchFilters;
   onFiltersChange: (filters: SearchFilters) => void;
 }
@@ -25,7 +26,7 @@ const engineTypes = [
   'Single Jet', 'Twin Jet', 'Electric', 'Rotorcraft'
 ].sort();
 
-export default function AircraftFilters({ filters, onFiltersChange }: AircraftFiltersProps) {
+export default function AircraftFilters({ inventory, filters, onFiltersChange }: AircraftFiltersProps) {
   const [localFilters, setLocalFilters] = useState<SearchFilters>(filters);
 
   useEffect(() => {
@@ -57,21 +58,18 @@ export default function AircraftFilters({ filters, onFiltersChange }: AircraftFi
 
   const makeOptions = [
     { value: '', label: 'Any Make' },
-    ...aircraftMakes.map(make => ({ value: make, label: make }))
+    ...[...new Set([...aircraftMakes, ...inventory.flatMap(a => a.make ? [a.make] : [])])].sort().map(make => ({ value: make, label: make }))
   ];
 
   const engineTypeOptions = [
     { value: '', label: 'Any Engine Type' },
-    ...engineTypes.map(type => ({ value: type, label: type }))
+    ...[...new Set([...engineTypes, ...inventory.flatMap(a => a.engine_type ? [a.engine_type] : [])])].sort().map(type => ({ value: type, label: type }))
   ];
 
   const currentYear = new Date().getFullYear();
   const yearOptions = [
     { value: '', label: 'Any Year' },
-    ...Array.from({ length: 50 }, (_, i) => {
-      const year = currentYear - i;
-      return { value: year.toString(), label: year.toString() };
-    })
+    ...[...new Set([...Array.from({ length: 50 }, (_, i) => currentYear - i), ...inventory.flatMap(a => a.year !== null ? [a.year] : [])])].sort((a,b) => b-a).map(year => ({ value: year.toString(), label: year.toString() }))
   ];
 
   const activeFilterCount = Object.keys(localFilters).length - (localFilters.query ? 1 : 0);

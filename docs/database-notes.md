@@ -2,6 +2,8 @@
 
 Application schema: `db/migrations/001_initial.sql`. Runtime row types: `src/api/schema.ts`; mutation inputs: `src/mcp/schemas.ts`.
 
+Apply subsequent numbered migrations in order. `002_source_listings.sql` permits unknown asking prices, years and manufacturers, preserves fractional flight hours, and adds source attribution. Numeric `price` is a confirmed USD asking price; leave it null when the price or currency is unknown. `price_text` preserves source wording. Unknown prices sort last and are excluded from numeric price filters. Listings with `source_url` send enquiries to the original ad rather than the importing owner's account; source sellers do not receive application profiles or permissions.
+
 `users`, `aircraft`, `aircraft_photos` and `blog_posts` preserve the original UUIDs and relationships. Application profile IDs are independent of Neon Auth IDs; `users.auth_subject` maps the configured owner. Authentication tables in `neon_auth` are provider-managed. Server-side queries enforce owner permissions; browsers receive published static data, with no Postgres credentials or browser write client.
 
 `mcp_auth_records` stores hashed OAuth token records and atomic one-use claims. `site_publications` tracks queued/building/deployed/failed static builds. Expired OAuth rows can be pruned by an operator, but retain family revocations until the maximum family lifetime has passed. No scheduled pruning/refresh job is configured.

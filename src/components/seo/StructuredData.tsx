@@ -23,36 +23,28 @@ export function AircraftStructuredData({ aircraft, primaryPhotoUrl }: AircraftSt
     image: primaryPhotoUrl ? [primaryPhotoUrl] : [],
     sku: aircraft.id,
     mpn: aircraft.id,
-    brand: {
-      '@type': 'Brand',
-      name: aircraft.make,
-    },
+    ...(aircraft.make && {brand: {'@type': 'Brand', name: aircraft.make}}),
     model: aircraft.model,
-    offers: {
+    ...(aircraft.price !== null && {offers: {
       '@type': 'Offer',
-      url: `https://zuluniner.com/aircraft/${aircraft.slug}`,
+      url: aircraft.source_url || `https://zuluniner.com/aircraft/${aircraft.slug}`,
       priceCurrency: 'USD',
       price: aircraft.price,
       itemCondition: 'https://schema.org/UsedCondition',
       availability: aircraft.status === 'active' ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
-      seller: {
+      seller: aircraft.source_url ? {
+        name: aircraft.source_seller || aircraft.source_name || 'Source seller',
+        url: aircraft.source_url,
+      } : {
         '@type': aircraft.user?.company ? 'Organization' : 'Person',
         name: aircraft.user?.company || aircraft.user?.name || 'Private Seller',
         ...(aircraft.user?.phone && { telephone: aircraft.user.phone }),
         ...(aircraft.user?.email && { email: aircraft.user.email }),
       },
-    },
+    }}),
     additionalProperty: [
-      {
-        '@type': 'PropertyValue',
-        name: 'Year',
-        value: aircraft.year.toString(),
-      },
-      {
-        '@type': 'PropertyValue',
-        name: 'Make',
-        value: aircraft.make,
-      },
+      ...(aircraft.year !== null ? [{'@type': 'PropertyValue', name: 'Year', value: aircraft.year.toString()}] : []),
+      ...(aircraft.make ? [{'@type': 'PropertyValue', name: 'Make', value: aircraft.make}] : []),
       {
         '@type': 'PropertyValue',
         name: 'Model',
@@ -98,10 +90,7 @@ export function AircraftStructuredData({ aircraft, primaryPhotoUrl }: AircraftSt
       },
     }),
     category: 'Aircraft',
-    manufacturer: {
-      '@type': 'Organization',
-      name: aircraft.make,
-    },
+    ...(aircraft.make && {manufacturer: {'@type': 'Organization', name: aircraft.make}}),
     dateCreated: aircraft.created_at,
     dateModified: aircraft.updated_at,
   };

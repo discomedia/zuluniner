@@ -4,9 +4,13 @@ export interface Aircraft {
   id: string;
   title: string;
   description: string | null;
-  price: number;
-  year: number;
-  make: string;
+  price: number | null;
+  price_text?: string | null;
+  source_url?: string | null;
+  source_name?: string | null;
+  source_seller?: string | null;
+  year: number | null;
+  make: string | null;
   model: string;
   hours: number | null;
   engine_type: string | null;

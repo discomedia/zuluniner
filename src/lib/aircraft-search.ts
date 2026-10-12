@@ -6,17 +6,20 @@ export function filterAircraft<T extends Aircraft>(inventory: T[], filters: Sear
   const query = filters.query?.trim().toLowerCase();
   const filtered = inventory.filter(aircraft =>
     (!query || [aircraft.title, aircraft.description, aircraft.make, aircraft.model].some(value => value?.toLowerCase().includes(query))) &&
-    (filters.priceMin === undefined || aircraft.price >= filters.priceMin) &&
-    (filters.priceMax === undefined || aircraft.price <= filters.priceMax) &&
-    (filters.yearMin === undefined || aircraft.year >= filters.yearMin) &&
-    (filters.yearMax === undefined || aircraft.year <= filters.yearMax) &&
+    (filters.priceMin === undefined || (aircraft.price !== null && aircraft.price >= filters.priceMin)) &&
+    (filters.priceMax === undefined || (aircraft.price !== null && aircraft.price <= filters.priceMax)) &&
+    (filters.yearMin === undefined || (aircraft.year !== null && aircraft.year >= filters.yearMin)) &&
+    (filters.yearMax === undefined || (aircraft.year !== null && aircraft.year <= filters.yearMax)) &&
     (!filters.make || aircraft.make === filters.make) &&
     (!filters.model || aircraft.model === filters.model) &&
     (!filters.engineType || aircraft.engine_type === filters.engineType)
   );
   return filtered.sort((a, b) => {
-    if (sort === 'price_low') return a.price - b.price;
-    if (sort === 'price_high') return b.price - a.price;
+    if (sort === 'price_low' || sort === 'price_high') {
+      if (a.price === null) return b.price === null ? 0 : 1;
+      if (b.price === null) return -1;
+      return sort === 'price_low' ? a.price - b.price : b.price - a.price;
+    }
     const difference = Date.parse(b.created_at || '') - Date.parse(a.created_at || '');
     return sort === 'oldest' ? -difference : difference;
   });

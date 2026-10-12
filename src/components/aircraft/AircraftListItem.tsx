@@ -1,4 +1,4 @@
-import { formatLocation } from '@/lib/utils';
+import { formatAircraftPrice, formatLocation } from '@/lib/utils';
 import Image from '@/components/ui/Image';
 
 import { MapPin, Calendar, Clock, Plane, Phone, Mail } from 'lucide-react';
@@ -6,17 +6,8 @@ import { imageUrl } from '@/lib/image-url';
 import type { AircraftCardProps } from '@/types';
 import Button from '@/components/ui/Button';
 
-function formatPrice(price: number): string {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(price);
-}
-
 function formatHours(hours: number | null): string {
-  if (!hours) return 'N/A';
+  if (hours === null) return 'N/A';
   return new Intl.NumberFormat('en-US').format(hours) + ' hrs';
 }
 
@@ -75,7 +66,7 @@ export default function AircraftListItem({ aircraft, primaryPhoto, seller }: Air
 
                 <div className="text-right">
                   <p className="text-2xl font-bold text-blue-600">
-                    {formatPrice(aircraft.price)}
+                    {formatAircraftPrice(aircraft)}
                   </p>
                 </div>
               </div>
@@ -86,7 +77,7 @@ export default function AircraftListItem({ aircraft, primaryPhoto, seller }: Air
                   <Calendar className="h-4 w-4 flex-shrink-0" />
                   <div>
                     <p className="text-xs text-gray-500">Year</p>
-                    <p className="font-medium">{aircraft.year}</p>
+                    <p className="font-medium">{aircraft.year ?? 'Not specified'}</p>
                   </div>
                 </div>
 
@@ -135,7 +126,7 @@ export default function AircraftListItem({ aircraft, primaryPhoto, seller }: Air
                 )}
                 {aircraft.avionics && (
                   <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded text-sm">
-                    {aircraft.avionics}
+                    {aircraft.avionics.split('\n')[0]}
                   </span>
                 )}
               </div>
@@ -149,7 +140,9 @@ export default function AircraftListItem({ aircraft, primaryPhoto, seller }: Air
                 </Button>
               </a>
 
-              {seller && (
+              {aircraft.source_url ? (
+                <a className="text-blue-600 font-medium" href={aircraft.source_url} target="_blank" rel="noopener noreferrer">Contact seller on {aircraft.source_name || 'original listing'}</a>
+              ) : seller && (
                 <>
                   {seller.phone && (
                     <Button

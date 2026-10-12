@@ -1,21 +1,12 @@
-import { formatLocation } from '@/lib/utils';
+import { formatAircraftPrice, formatLocation } from '@/lib/utils';
 import Image from '@/components/ui/Image';
 
 import { MapPin, Calendar, Clock, Plane } from 'lucide-react';
 import { imageUrl } from '@/lib/image-url';
 import type { AircraftCardProps } from '@/types';
 
-function formatPrice(price: number): string {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(price);
-}
-
 function formatHours(hours: number | null): string {
-  if (!hours) return 'N/A';
+  if (hours === null) return 'N/A';
   return new Intl.NumberFormat('en-US').format(hours) + ' hrs';
 }
 
@@ -44,8 +35,8 @@ export default function AircraftCard({ aircraft, primaryPhoto }: AircraftCardPro
           )}
 
           {/* Price Badge */}
-          <div className="absolute top-3 right-3 bg-blue-600 text-white px-3 py-1 rounded-lg font-bold text-lg shadow-lg">
-            {formatPrice(aircraft.price)}
+          <div className="absolute top-3 right-3 bg-blue-600 text-white px-3 py-1 rounded-lg font-bold text-base text-right max-w-[85%] shadow-lg">
+            {formatAircraftPrice(aircraft)}
           </div>
         </div>
 
@@ -65,7 +56,7 @@ export default function AircraftCard({ aircraft, primaryPhoto }: AircraftCardPro
           <div className="grid grid-cols-2 gap-3 mb-4 text-sm">
             <div className="flex items-center gap-1 text-gray-600">
               <Calendar className="h-4 w-4 flex-shrink-0" />
-              <span>{aircraft.year}</span>
+              <span>{aircraft.year ?? 'Not specified'}</span>
             </div>
 
             <div className="flex items-center gap-1 text-gray-600">
@@ -102,7 +93,7 @@ export default function AircraftCard({ aircraft, primaryPhoto }: AircraftCardPro
             )}
             {aircraft.avionics && (
               <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded">
-                {aircraft.avionics}
+                {aircraft.avionics.split('\n')[0]}
               </span>
             )}
           </div>
