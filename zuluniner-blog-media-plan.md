@@ -8,7 +8,7 @@ This plan contains 36 proposed posts: 12 launch briefs and 24 follow-on topics. 
 
 ## Publication progress
 
-**Current totals:** 5 of 36 published; **31 unpublished**. Next: **06 — Sport pilot vs private pilot after MOSAIC: which airplane can you fly?**. Full post inventory and live manifest reconciled on 11 October 2026 Eastern (12 October Australia/Melbourne).
+**Current totals:** 5 of 36 published; **31 unpublished**. Next: **06 — Sport pilot vs private pilot after MOSAIC: which airplane can you fly?**. Full post inventory and live manifest reconciled on 12 October 2026 Eastern; article 06 is prepared but remains unpublished.
 
 Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03**, followed by final source, calculation and style review. The originals were backed up and deleted; the replacement posts are live. Covers, contents links, tables and classifieds links were checked on desktop and phone layouts after successful deployment.
 
@@ -17,7 +17,8 @@ Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03
 - [x] **03 — [Low engine hours, old overhaul: bargain or liability?](https://zuluniner.com/blog/low-engine-hours-old-overhaul)** — published; two hypothetical histories, diagnostic limits and engine-reserve calculation.
 - [x] **04 — [Airplane ownership at 50, 100 and 200 hours a year](https://zuluniner.com/blog/airplane-ownership-cost-50-100-200-hours/)** — published on 10 October 2026 Eastern; hypothetical ownership budgets, financing, rental comparison and downloadable calculator. [Publication and worksheet record](docs/blog/04-airplane-ownership-cost.notes.md).
 - [x] **05 — [Why maneuvering speed gets lower as your airplane gets lighter](https://zuluniner.com/blog/maneuvering-speed-aircraft-weight/)** — published on 11 October 2026 Eastern, immediately at the owner's request after the missed morning preparation; original diagram and four practice questions. [Publication record](docs/blog/05-maneuvering-speed-weight.notes.md).
-- [ ] **06–36** — not yet written or published.
+- [ ] **06 — Sport pilot vs private pilot after MOSAIC: which airplane can you fly?** — researched and saved as an unpublished draft on 12 October 2026 Eastern; reserved for 8:05 a.m. EDT. [Preparation record](docs/blog/06-sport-pilot-private-pilot-mosaic.notes.md).
+- [ ] **07–36** — not yet written or published.
 
 The published editions use primary-source research and clearly identified fictional examples. No independent CFI/A&P/IA review or specialist interview has occurred; those proposed enhancements are still outstanding and are not counted as completed. Article sources, metadata, cover prompts and validation details are retained in [docs/blog/publication-notes.md](docs/blog/publication-notes.md).
 

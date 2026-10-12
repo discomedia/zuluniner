@@ -1,0 +1,7 @@
+{
+  "plan_id": "06",
+  "tool": "built-in image_gen",
+  "prompt": "Use case: stylized-concept\nAsset type: ZuluNiner aviation blog cover, landscape 3:2, 1536 by 1024 pixels.\nPrimary request: restrained aircraft-focused editorial illustration for an article comparing sport-pilot and private-pilot aircraft choices after MOSAIC.\nScene/backdrop: two conventional light single-engine piston airplanes parked on a quiet apron beside a modest hangar: a high-wing four-seat trainer and a smaller low-wing two-seat trainer. Keep their silhouettes separate and their wings, tails and propellers coherent. No people.\nStyle/medium: refined somewhat abstract aviation-magazine graphic, clean aircraft shapes, lightly textured surfaces, muted blue, ivory and warm grey, calm daylight.\nComposition/framing: three-quarter view with both aircraft prominent and complete, generous margins around wingtips and tails, uncluttered background, readable at thumbnail size.\nConstraints: no text, no lettering, no numbers, no labels, no charts, no registration marks, no logos and no watermark. No claims of sport-pilot eligibility conveyed by badges. Fictional aircraft illustration, not photographs of actual listings.",
+  "generated_source": "/Users/danahooshmand/.codex/generated_images/01a11f60-c617-79b3-a337-93b5f6fe2afb/exec-767fcf2d-b78f-4c44-b54d-6aba9c7931c4.png",
+  "cover": "docs/blog/images/sport-pilot-private-pilot-mosaic-cover.webp"
+}
