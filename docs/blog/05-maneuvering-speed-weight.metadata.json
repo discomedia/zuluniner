@@ -1,0 +1,19 @@
+{
+  "plan_id": "05",
+  "file": "docs/blog/05-maneuvering-speed-weight.md",
+  "title": "Why maneuvering speed gets lower as your airplane gets lighter",
+  "slug": "maneuvering-speed-aircraft-weight",
+  "blurb": "Understand why maneuvering speed decreases with weight, read an original load-factor diagram and test the limits with four practice questions.",
+  "meta_description": "Understand why maneuvering speed decreases with weight, read an original load-factor diagram and test the limits with four practice questions.",
+  "cover_alt": "Illustration of a light piston airplane in a shallow bank over countryside, with curved airflow bands behind it.",
+  "header_photo": "mcp/82197371-9889-4c2e-a9c1-129fb470fc66-maneuvering-speed-weight-cover.webp",
+  "image": "docs/blog/images/maneuvering-speed-weight-cover.webp",
+  "diagram": "public/blog/maneuvering-speed-weight-diagram.svg",
+  "status": "draft",
+  "publication_date": null,
+  "url": null,
+  "publication_authorization": "Owner explicitly requested immediate publication on 12 October 2026 Australia/Melbourne, overriding the morning window for this one article.",
+  "id": "e6293749-2894-4d75-82f8-30c73b5b9251",
+  "updated_at": "2026-10-12T00:30:10.342974+00:00",
+  "prepared_at": "2026-10-12T00:31:05.923844+00:00"
+}

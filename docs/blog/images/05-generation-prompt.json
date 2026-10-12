@@ -1,0 +1,7 @@
+{
+  "plan_id": "05",
+  "tool": "built-in image_gen",
+  "prompt": "Use case: stylized-concept\nAsset type: ZuluNiner aviation blog cover, landscape 3:2, 1536 by 1024 pixels.\nPrimary request: restrained editorial illustration about a light airplane's maneuvering speed and loading.\nScene/backdrop: a light single-engine piston airplane in a gentle bank over open countryside, with a few broad, subtle curved airflow bands behind it. The airplane dominates the composition and has a clearly coherent wing, tail and propeller arrangement.\nStyle/medium: sophisticated flat graphic illustration with crisp aircraft silhouette, lightly textured surfaces, muted blue, warm ivory and sage, matching an understated aviation magazine.\nComposition/framing: aircraft centered with ample margin around both wingtips and tail, three-quarter view, shallow bank only; calm air rather than a dramatic storm. No people.\nConstraints: no text, no letters, no numbers, no charts or labels, no registration marks, no logos, no watermark. No damage or exaggerated wing bending. This is a fictional aircraft editorial illustration, not a photograph of a listed aircraft.",
+  "generated_source": "/Users/danahooshmand/.codex/generated_images/01a11f60-c617-79b3-a337-93b5f6fe2afb/exec-201748c0-a8e8-47c1-8267-4f10f352faeb.png",
+  "cover": "docs/blog/images/maneuvering-speed-weight-cover.webp"
+}

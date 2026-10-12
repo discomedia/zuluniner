@@ -1,4 +1,5 @@
 const descriptions: Record<string, string> = {
+  'maneuvering-speed-aircraft-weight': 'Illustration of a light piston airplane in a shallow bank over countryside, with curved airflow bands behind it.',
   'airplane-ownership-cost-50-100-200-hours': 'Illustration of a high-wing piston airplane inside an open hangar, with morning light crossing the apron.',
   'four-seats-full-fuel-aircraft-payload': 'Illustration of a four-seat airplane beside a balance beam comparing fuel with passengers’ baggage.',
   'prebuy-vs-annual-inspection': 'Illustration of a light airplane in a hangar with its engine cowling open for inspection.',
