@@ -8,7 +8,7 @@ This plan contains 36 proposed posts: 12 launch briefs and 24 follow-on topics. 
 
 ## Publication progress
 
-**Current totals:** 5 of 36 published; **31 unpublished**. Next: **06 — Sport pilot vs private pilot after MOSAIC: which airplane can you fly?**. Full post inventory and live manifest reconciled on 13 October 2026 Eastern; article 06 is prepared but remains unpublished. Its retired aircraft-listing link was removed during the retained-draft review.
+**Current totals:** 6 of 36 published; **30 unpublished**. Next: **07 — Cessna 172/180 conversions: what the extra horsepower does not tell you**. Full post inventory and live manifest reconciled on 13 October 2026 Eastern; article 06 is published and verified.
 
 Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03**, followed by final source, calculation and style review. The originals were backed up and deleted; the replacement posts are live. Covers, contents links, tables and classifieds links were checked on desktop and phone layouts after successful deployment.
 
@@ -17,7 +17,7 @@ Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03
 - [x] **03 — [Low engine hours, old overhaul: bargain or liability?](https://zuluniner.com/blog/low-engine-hours-old-overhaul)** — published; two hypothetical histories, diagnostic limits and engine-reserve calculation.
 - [x] **04 — [Airplane ownership at 50, 100 and 200 hours a year](https://zuluniner.com/blog/airplane-ownership-cost-50-100-200-hours/)** — published on 10 October 2026 Eastern; hypothetical ownership budgets, financing, rental comparison and downloadable calculator. [Publication and worksheet record](docs/blog/04-airplane-ownership-cost.notes.md).
 - [x] **05 — [Why maneuvering speed gets lower as your airplane gets lighter](https://zuluniner.com/blog/maneuvering-speed-aircraft-weight/)** — published on 11 October 2026 Eastern, immediately at the owner's request after the missed morning preparation; original diagram and four practice questions. [Publication record](docs/blog/05-maneuvering-speed-weight.notes.md).
-- [ ] **06 — Sport pilot vs private pilot after MOSAIC: which airplane can you fly?** — researched and saved as an unpublished draft on 12 October 2026 Eastern. The final clock check missed that day’s publishing window; the same draft is retained for 13 October at the persisted 8:04 a.m. EDT target. [Preparation record](docs/blog/06-sport-pilot-private-pilot-mosaic.notes.md).
+- [x] **06 — [Sport pilot vs private pilot after MOSAIC: which airplane can you fly?](https://zuluniner.com/blog/sport-pilot-private-pilot-mosaic-aircraft/)** — published on 13 October 2026 Eastern at 8:31 a.m. EDT; aircraft/pilot/operator screening worksheet, three fictional cases and current FAA/eCFR source links. [Publication record](docs/blog/06-sport-pilot-private-pilot-mosaic.notes.md).
 - [ ] **07–36** — not yet written or published.
 
 The published editions use primary-source research and clearly identified fictional examples. No independent CFI/A&P/IA review or specialist interview has occurred; those proposed enhancements are still outstanding and are not counted as completed. Article sources, metadata, cover prompts and validation details are retained in [docs/blog/publication-notes.md](docs/blog/publication-notes.md).
@@ -29,12 +29,13 @@ The published editions use primary-source research and clearly identified fictio
 | 9 October 2026 | 01–03 | Original launch; [publication record](docs/blog/publication-notes.md). |
 | 10 October 2026 | 04 | Published at 8:18 a.m. EDT; canonical URL above. [Content deployment](https://github.com/discomedia/zuluniner/actions/runs/38051456113) succeeded; article, card, metadata, covers, contents, calculator and classifieds links checked on desktop and phone. |
 | 11 October 2026 | 05 | Published at 8:33 p.m. EDT following the owner's explicit immediate-publication request; this one post overrides the morning window. [Content deployment](https://github.com/discomedia/zuluniner/actions/runs/38188454229) succeeded; live article/card, metadata, covers, diagram, contents and classifieds links checked on desktop and phone. |
+| 13 October 2026 | 06 | Published at 8:31 a.m. EDT; canonical URL above. [Content deployment](https://github.com/discomedia/zuluniner/actions/runs/38397969023) succeeded; article/card, metadata, covers, contents, worksheet and classifieds links checked on desktop and phone. |
 
 ## Scheduled publication
 
 **ZuluNiner daily blog publishing** is active in this chat. It prepares the next eligible article at 6 a.m. Eastern, starting immediately if that preparation wake arrives up to ten minutes early, and publishes at a newly randomized time within the **8–10 a.m. America/New_York** window. Random target minutes run from 8:00 through 9:45, leaving deployment time before the window closes. Eastern daylight saving changes are included. The first target was **10 October 2026 at 8:16 a.m. EDT**; article 04 was published and verified that morning.
 
-The automation updates the specific completed ID, publication date, canonical URL and totals only after live deployment checks pass. It reconciles existing posts and drafts to avoid duplicates and preserves a limit of one new planned post per Eastern date. Published articles 01–05 remain live. The owner's immediate-publication request for article 05 is a one-off exception; subsequent automated articles keep the morning window.
+The automation updates the specific completed ID, publication date, canonical URL and totals only after live deployment checks pass. It reconciles existing posts and drafts to avoid duplicates and preserves a limit of one new planned post per Eastern date. Published articles 01–06 remain live. The owner's immediate-publication request for article 05 is a one-off exception; subsequent automated articles keep the morning window.
 
 **Nearly exhausted:** alert when **five or fewer unpublished IDs remain**, including blocked topics. Record the alert once per threshold/queue state. At zero remaining, report completion and pause the schedule. Instructions and recovery state are described in [docs/blog/scheduled-publishing.md](docs/blog/scheduled-publishing.md).
 
@@ -176,7 +177,7 @@ Effort estimates are editorial planning assumptions: **medium** means about 1–
 
 **Search intent:** “Cessna 172 180 hp conversion,” “172 180 conversion useful load,” “172 conversion vs 182.”
 
-**Question and gap:** What exactly changed on this airplane? Modified 172s appear in payload discussions, and ZuluNiner currently has an advertised 172/180 conversion. [F1] [S1] This angle is an inventory-led editorial proposal, not a finding that all conversion guides are inadequate.
+**Question and gap:** What exactly changed on this airplane? Modified 172s appear in payload discussions, and a 172/180 conversion in ZuluNiner’s 9 October inventory helped set this early topic. [F1] [S1] That individual listing was no longer live when checked on 13 October; recheck current inventory when drafting. This angle is an inventory-led editorial proposal, not a finding that all conversion guides are inadequate.
 
 **Build the article around:** base model/year; engine and propeller; the actual approved conversion; AFM supplements; weight-and-balance changes; any documented gross-weight change; limitations, performance and insurance/training implications. Extra horsepower does not by itself establish a new approved gross weight.
 
@@ -289,13 +290,10 @@ Effort estimates are editorial planning assumptions: **medium** means about 1–
 
 ## Next publication sequence
 
-Articles 01–03 were published together on 9 October 2026. Continue in numeric ID order, one eligible article per day, beginning with 04. Defer a topic if its required evidence or specialist input is unavailable; record the reason and choose the next eligible ID. The automated cadence supersedes the original weekly launch calendar.
+Articles 01–03 were published together on 9 October 2026; articles 04–06 are now published. Continue in numeric ID order, one eligible article per day, beginning with 07. Defer a topic if its required evidence or specialist input is unavailable; record the reason and choose the next eligible ID. The automated cadence supersedes the original weekly launch calendar.
 
 | Next ID | Article | Companion material | Purpose |
 | --- | --- | --- | --- |
-| 04 | Ownership costs | Budget worksheet with dated evidence or explicit hypothetical assumptions | Help readers choose a sustainable purchase budget. |
-| 05 | Maneuvering speed | Original diagram and four-question quiz | Establish technical credibility. |
-| 06 | MOSAIC | Aircraft/pilot/operator eligibility worksheet | Address a timely US licensing question. |
 | 07 | 172/180 conversion | Configuration checklist | Connect a niche question to current inventory. |
 | 08 | Density altitude | Worked departure example | Reach students and experienced pilots together. |
 | 09 | SR22 G2 | Documentation comparison | Attract upgrading pilots and type shoppers. |

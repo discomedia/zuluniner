@@ -42,5 +42,6 @@ The first content-only deployment encountered a transient old-manifest response 
 | --- | --- | --- |
 | 10 October 2026 | 04 | [Airplane ownership at 50, 100 and 200 hours a year](https://zuluniner.com/blog/airplane-ownership-cost-50-100-200-hours/); [sources, calculator checks and live verification](04-airplane-ownership-cost.notes.md). |
 | 11 October 2026 | 05 | [Why maneuvering speed gets lower as your airplane gets lighter](https://zuluniner.com/blog/maneuvering-speed-aircraft-weight/); [research, original diagram and live verification](05-maneuvering-speed-weight.notes.md). Published immediately at the owner's request after the missed morning preparation. |
+| 13 October 2026 | 06 | [Sport pilot vs private pilot after MOSAIC: which airplane can you fly?](https://zuluniner.com/blog/sport-pilot-private-pilot-mosaic-aircraft/); [research, screening worksheet and live verification](06-sport-pilot-private-pilot-mosaic.notes.md). |
 
-Articles 04–05 passed publication and desktop/phone checks after successful deployments. Current totals are 5 published and 31 unpublished planned IDs. Existing posts and aircraft were preserved.
+Articles 04–06 passed publication and desktop/phone checks after successful deployments. Current totals are 6 published and 30 unpublished planned IDs. Existing posts and aircraft were preserved.

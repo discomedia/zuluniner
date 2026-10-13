@@ -9,11 +9,12 @@
   "header_photo": "mcp/0786df39-e6cf-4c19-9de4-b7bcff0d3461-sport-pilot-private-pilot-mosaic-cover.webp",
   "image": "docs/blog/images/sport-pilot-private-pilot-mosaic-cover.webp",
   "worksheet": "public/blog/sport-pilot-mosaic-eligibility-worksheet.md",
-  "status": "draft",
+  "status": "published",
   "reserved_publication_at": "2026-10-13T08:04:00-04:00",
-  "publication_date": null,
-  "url": null,
+  "publication_date": "2026-10-13",
+  "url": "https://zuluniner.com/blog/sport-pilot-private-pilot-mosaic-aircraft/",
   "id": "70657255-ed6d-4c96-8b33-c2180cea5067",
-  "updated_at": "2026-10-13T09:59:29.631474+00:00",
-  "prepared_at": "2026-10-12T10:14:06.807318+00:00"
+  "updated_at": "2026-10-13T12:31:51.977518+00:00",
+  "prepared_at": "2026-10-12T10:14:06.807318+00:00",
+  "published_at": "2026-10-13T12:31:51.977518+00:00"
 }
