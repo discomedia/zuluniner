@@ -160,6 +160,6 @@ The four seats don't make this a sport-privilege flight: three passengers exceed
 
 A regulation allowing a flight doesn't establish that a particular club will rent you its aircraft or that an insurer will cover the proposed pilot and operation. Ask the operator and insurer for their actual requirements; don't infer them from a forum report. No current rental policy or insurance quote is claimed here.
 
-When you [browse aircraft for sale](/aircraft), request the records before treating an ad as an eligible candidate. For example, an [advertised Cessna 172/180 conversion](/aircraft/1984-cessna-172180-1984-cessna-172180-conversion) raises questions about the base model, original certification and approved alterations. Its listing title alone doesn't establish sport-pilot eligibility.
+When you [browse aircraft for sale](/aircraft), request the records before treating an ad as an eligible candidate. For a Cessna 172/180 conversion, ask about the base model, original certification and approved alterations. A conversion name alone doesn't establish sport-pilot eligibility.
 
 Then assess whether the airplane carries your real mission with credible fuel and performance margins. Our [four-seat loading guide](/blog/four-seats-full-fuel-aircraft-payload) walks through that calculation. Eligibility establishes which aircraft and operations you can consider; the mission calculation establishes whether a particular candidate can do the trip.

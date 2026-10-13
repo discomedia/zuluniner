@@ -8,7 +8,7 @@ This plan contains 36 proposed posts: 12 launch briefs and 24 follow-on topics. 
 
 ## Publication progress
 
-**Current totals:** 5 of 36 published; **31 unpublished**. Next: **06 — Sport pilot vs private pilot after MOSAIC: which airplane can you fly?**. Full post inventory and live manifest reconciled on 12 October 2026 Eastern; article 06 is prepared but remains unpublished.
+**Current totals:** 5 of 36 published; **31 unpublished**. Next: **06 — Sport pilot vs private pilot after MOSAIC: which airplane can you fly?**. Full post inventory and live manifest reconciled on 13 October 2026 Eastern; article 06 is prepared but remains unpublished. Its retired aircraft-listing link was removed during the retained-draft review.
 
 Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03**, followed by final source, calculation and style review. The originals were backed up and deleted; the replacement posts are live. Covers, contents links, tables and classifieds links were checked on desktop and phone layouts after successful deployment.
 
