@@ -28,3 +28,7 @@ Worker secrets, set with `wrangler secret put` or `wrangler secret bulk`:
 Public URLs/bindings are configured in `wrangler.jsonc`. Optional `OAUTH_REDIRECT_URIS` permits additional exact OAuth callback URLs; optional `IMAGE_IMPORT_HOSTS` permits trusted HTTPS image hosts. Public owner registration is disabled in Neon Auth.
 
 See [architecture](docs/architecture.md), [content MCP](docs/content-mcp.md), and [database notes](docs/database-notes.md). Migration utilities and local backups are for operator use; backups and credentials are ignored. The previous Vercel/Supabase deployment is retained for rollback, with historical SQL in `docs/archive/supabase`.
+
+## Marketplace maintenance
+
+The daily source chats use the operator capture and media modules under `scripts/marketplace/`, with local archives and checkpoints under ignored `posts/` and `data/marketplace-sync/`. See [the measured workflow](docs/marketplace-sync.md) before running a source job. Bulk media uses six bounded R2 S3 lanes with existing operator credentials and durable verification receipts. Source discovery and publication have separate checkpoints; unknown ads stay in the retry queue. The deploy verifier checks all public routes with bounded concurrency and retries transient edge responses before failing the workflow.

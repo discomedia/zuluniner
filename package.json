@@ -8,7 +8,7 @@
     "preview": "astro preview",
     "typecheck": "wrangler types && astro check && tsc --noEmit",
     "lint": "eslint src scripts",
-    "test": "tsx --test src/testing/*.test.ts",
+    "test": "tsx --test src/testing/*.test.ts scripts/marketplace/*.test.mjs",
     "verify": "npm run typecheck && npm run lint && npm test && npm run build && npm run worker:check",
     "worker:dev": "wrangler dev",
     "worker:check": "wrangler deploy --dry-run",
@@ -43,13 +43,15 @@
     "@types/node": "^25",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "aws4fetch": "1.0.20",
     "eslint": "^9",
+    "linkedom": "0.18.13",
+    "sharp": "0.35.5",
     "tailwindcss": "4.3.3",
     "tsx": "4.23.15",
     "typescript": "^5",
     "typescript-eslint": "8.71.1",
-    "wrangler": "4.149.0",
-    "sharp": "0.35.5"
+    "wrangler": "4.149.0"
   },
   "engines": {
     "node": ">=22.12.0"
