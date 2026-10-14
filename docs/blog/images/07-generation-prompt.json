@@ -1,0 +1,8 @@
+{
+  "plan_id": "07",
+  "mode": "built-in image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: ZuluNiner aviation blog cover. Create an original restrained editorial illustration in a 3:2 landscape aspect ratio. A single recognizable older four-seat high-wing, strut-braced piston airplane with fixed tricycle landing gear and a stopped two-blade propeller sits beside an open hangar. One upper engine cowling panel is lifted, revealing a tidy horizontally opposed piston engine, suggesting a careful inspection of an engine conversion. Aircraft and its engine dominate, with uncluttered hangar infrastructure secondary. No people. Muted blue, warm grey and off-white palette; soft morning light; clean graphic shapes and limited technical detail, readable at thumbnail size. Keep the full aircraft comfortably inside the image edges. Depict a fictional airplane, not a photograph of a classified listing. No writing, registration letters, numbers, labels, logos, diagrams, badges or watermarks anywhere. No exaggerated speed or power effects.",
+  "source": "/Users/danahooshmand/.codex/generated_images/01a11f60-c617-79b3-a337-93b5f6fe2afb/exec-bd3c1cc2-297b-4c71-905f-fe0646b81ddf.png",
+  "final": "docs/blog/images/cessna-172-180-conversion-cover.webp",
+  "transparent_background": false
+}

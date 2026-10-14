@@ -1,0 +1,20 @@
+{
+  "plan_id": "07",
+  "file": "docs/blog/07-cessna-172-180-conversions.md",
+  "id": "4997aaa9-e68c-43d2-95d4-7e5568dd0713",
+  "title": "Cessna 172/180 conversions: what the extra horsepower doesn't tell you",
+  "slug": "cessna-172-180-conversion-records",
+  "blurb": "Check the approvals, weight records, propeller and performance evidence behind a Cessna 172/180 conversion, with a downloadable buying checklist.",
+  "meta_description": "Check the approvals, weight records, propeller and performance evidence behind a Cessna 172/180 conversion, with a downloadable buying checklist.",
+  "header_photo": null,
+  "updated_at": "2026-10-14T10:13:55.834518+00:00",
+  "cover_alt": "Illustration of a high-wing airplane beside a hangar with its upper engine cowling open.",
+  "image": "docs/blog/images/cessna-172-180-conversion-cover.webp",
+  "worksheet": "public/blog/cessna-172-180-conversion-checklist.md",
+  "status": "draft",
+  "publication_date": null,
+  "url": null,
+  "reserved_publication_at": "2026-10-14T08:09:00-04:00",
+  "asset_blocker": "Cover upload blocked: Cloudflare Images free unique-transformation allowance exhausted (9422). Both standard import and signed upload failed. No cover attached.",
+  "preparation_complete": false
+}
