@@ -16,7 +16,7 @@ Add it as a private/custom MCP plugin in ChatGPT, choose OAuth, sign in with an 
 | `create_aircraft`, `update_aircraft` | Supplied specifications, descriptions, metadata, seller and listing status. |
 | `delete_content` | Permanently remove exact IDs; aircraft gallery records cascade. |
 | `upload_images` | Import public HTTPS or small raw base64 JPEG/PNG/WebP; normalize to WebP. |
-| `begin_image_upload` | Issue a two-hour scoped signed URL for a local binary image. |
+| `begin_image_upload` | Issue a two-hour scoped signed URL for a local binary image or prepared WebP family. |
 | `set_aircraft_images` | Replace/reorder an ordered gallery, choose its cover, change alt text/captions or clear it. |
 
 Mutation tools and `get_content` take `{ "items": [...] }`, with 1–20 items. Batches run sequentially and **are not transactions**. Results include `atomic:false`, success/failure counts and indexed per-item results. A failure does not roll back successful siblings. Retry only failed items. A malformed batch fails validation before any operation runs.
@@ -28,6 +28,17 @@ For source ads, `price`, `year` and `make` accept null when unknown. `price_text
 Upload images first, then use the returned `storage_path` as a post `header_photo` or gallery entry. Use `public_url` for inline Markdown images. Remote imports accept configured trusted HTTPS hosts, reject private/reserved addresses and redirects to untrusted hosts, and optimize to WebP. Other sources can be downloaded locally and uploaded using a signed URL. Base64 is limited to about 1.5 MiB per image, with a 3 MiB total MCP request limit. Use HTTPS imports or signed uploads for larger files. Signed upload URLs are secrets: never include them in published content. Directly uploaded images must be JPEG, PNG or WebP up to 10 MiB and 40 million pixels. Optimized originals and responsive variants are stored once in R2.
 
 Each gallery replacement uses one Postgres transaction, including its optional revision check. Multi-item batches remain non-atomic. Clearing a gallery or deleting content preserves image files so shared images remain usable. Unpublish for reversible removal; `delete_content` permanently removes database records.
+
+### Uploading without Cloudflare Images transformations
+
+For local covers, prefer the prepared-family path. It uses the existing Sharp dependency locally, then uploads the original and all responsive variants through the same signed, scoped, single-use URL. It does not call Cloudflare Images or require a plan change. A `9422` transformation-quota error on ordinary import is a signal to use this path immediately, rather than retrying identical transformations on later days.
+
+1. Back up the affected content and call `begin_image_upload` with the correct kind and filename. Save its complete connector result (or its data object) to an ignored receipt JSON file. The receipt contains a credential; never log it.
+2. Run with Node 24: `node --import tsx scripts/upload-prepared-image.ts SOURCE_FILE RECEIPT_JSON OUTPUT_DIRECTORY`. Use an ignored output directory under `data/`.
+3. The helper decodes, auto-orients and converts the source to metadata-free WebP, bounds the original to 1600×1600 without enlargement, and prepares widths 480/960/1600. It PUTs multipart fields `original`, `480`, `960` and `1600`; total request size is limited to 10 MiB. The 1600 variant is byte-identical to the optimized original. The server checks the complete static WebP containers, dimensions and aspect ratios before writing anything. It stores the original last and cleans up this new family on a storage failure.
+4. The helper verifies the exact public bytes, format and dimensions of all four objects and writes `verified-upload.json`. Its output contains public paths only. Attach that verified `storage_path` using `update_posts` or `set_aircraft_images`, with the current revision guard. Verify the resulting content deployment separately.
+
+If upload verification is interrupted, rerunning with the same receipt/output directory reuses its successful upload result and repeats verification. An expired or already-used receipt without a saved success needs a fresh `begin_image_upload` call. Existing raw binary PUTs and remote/base64 imports remain supported through Cloudflare Images; neither authentication nor upload limits are relaxed.
 
 ## Access and operations
 
