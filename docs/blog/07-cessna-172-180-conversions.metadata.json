@@ -7,21 +7,24 @@
   "blurb": "Check the approvals, weight records, propeller and performance evidence behind a Cessna 172/180 conversion, with a downloadable buying checklist.",
   "meta_description": "Check the approvals, weight records, propeller and performance evidence behind a Cessna 172/180 conversion, with a downloadable buying checklist.",
   "header_photo": "mcp/d181bcbb-d1c3-4301-96c3-78410dc90166-cessna-172-180-conversion-cover.webp",
-  "updated_at": "2026-10-15T19:32:35.156108+00:00",
+  "updated_at": "2026-10-15T22:31:48.971902+00:00",
   "cover_alt": "Illustration of a high-wing airplane beside a hangar with its upper engine cowling open.",
   "image": "docs/blog/images/cessna-172-180-conversion-cover.webp",
   "worksheet": "public/blog/cessna-172-180-conversion-checklist.md",
-  "status": "draft",
-  "publication_date": null,
-  "url": null,
-  "reserved_publication_at": "2026-10-16T09:33:00-04:00",
+  "status": "published",
+  "publication_date": "2026-10-15",
+  "url": "https://zuluniner.com/blog/cessna-172-180-conversion-records/",
+  "reserved_publication_at": null,
   "asset_blocker": null,
   "preparation_complete": true,
   "last_publication_attempt": {
     "et_date": "2026-10-15",
-    "outcome": "held",
-    "reason": "Cover upload retry failed with IMAGES_TRANSFORM_ERROR 9422; no publication update was made."
+    "outcome": "published and live verified",
+    "manual_window_override": true,
+    "reason": "Owner explicitly selected Publish article 07 now."
   },
   "cover_upload_method": "signed prepared WebP family",
-  "cover_verified_at": "2026-10-15T19:32:09.556Z"
+  "cover_verified_at": "2026-10-15T19:32:09.556Z",
+  "published_at": "2026-10-15T22:31:48.971902+00:00",
+  "manual_window_override": true
 }

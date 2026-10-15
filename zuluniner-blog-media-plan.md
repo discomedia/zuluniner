@@ -8,7 +8,7 @@ This plan contains 36 proposed posts: 12 launch briefs and 24 follow-on topics. 
 
 ## Publication progress
 
-**Current totals:** 6 of 36 published; **30 unpublished**. Next: **07 — Cessna 172/180 conversions: what the extra horsepower does not tell you**. Full post inventory and live manifest reconciled on 15 October 2026 Eastern; article 06 is published and verified. Article 07 is ready as an unpublished draft: its cover-upload blocker was fixed on 16 October Australia/Melbourne (15 October Eastern), and the original and all responsive variants are uploaded and verified.
+**Current totals:** 7 of 36 published; **29 unpublished**. Next: **08 — Density altitude: the calculation is only the beginning**. Full post inventory and live manifest reconciled on 15 October 2026 Eastern; article 07 is published and verified, including its cover and all responsive variants.
 
 Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03**, followed by final source, calculation and style review. The originals were backed up and deleted; the replacement posts are live. Covers, contents links, tables and classifieds links were checked on desktop and phone layouts after successful deployment.
 
@@ -18,7 +18,7 @@ Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03
 - [x] **04 — [Airplane ownership at 50, 100 and 200 hours a year](https://zuluniner.com/blog/airplane-ownership-cost-50-100-200-hours/)** — published on 10 October 2026 Eastern; hypothetical ownership budgets, financing, rental comparison and downloadable calculator. [Publication and worksheet record](docs/blog/04-airplane-ownership-cost.notes.md).
 - [x] **05 — [Why maneuvering speed gets lower as your airplane gets lighter](https://zuluniner.com/blog/maneuvering-speed-aircraft-weight/)** — published on 11 October 2026 Eastern, immediately at the owner's request after the missed morning preparation; original diagram and four practice questions. [Publication record](docs/blog/05-maneuvering-speed-weight.notes.md).
 - [x] **06 — [Sport pilot vs private pilot after MOSAIC: which airplane can you fly?](https://zuluniner.com/blog/sport-pilot-private-pilot-mosaic-aircraft/)** — published on 13 October 2026 Eastern at 8:31 a.m. EDT; aircraft/pilot/operator screening worksheet, three fictional cases and current FAA/eCFR source links. [Publication record](docs/blog/06-sport-pilot-private-pilot-mosaic.notes.md).
-- [ ] **07 — Cessna 172/180 conversions: what the extra horsepower does not tell you** — researched and saved as an unpublished draft. The upload blocker is resolved: a signed prepared-family path bypasses Cloudflare Images transformations, with the original and 480/960/1600 variants uploaded, verified and attached to the existing draft. Ready for the reserved 16 October 2026 at 9:33 a.m. EDT publication. [Preparation and fix record](docs/blog/07-cessna-172-180-conversions.notes.md).
+- [x] **07 — [Cessna 172/180 conversions: what the extra horsepower doesn't tell you](https://zuluniner.com/blog/cessna-172-180-conversion-records/)** — published on 15 October 2026 Eastern at 6:31 p.m. EDT (16 October Australia/Melbourne), immediately at the owner's request after the cover-upload fix. Conversion-records checklist, three hypothetical loading cases and live desktop/phone verification. [Publication record](docs/blog/07-cessna-172-180-conversions.notes.md).
 - [ ] **08–36** — not yet written or published.
 
 The published editions use primary-source research and clearly identified fictional examples. No independent CFI/A&P/IA review or specialist interview has occurred; those proposed enhancements are still outstanding and are not counted as completed. Article sources, metadata, cover prompts and validation details are retained in [docs/blog/publication-notes.md](docs/blog/publication-notes.md).
@@ -31,12 +31,13 @@ The published editions use primary-source research and clearly identified fictio
 | 10 October 2026 | 04 | Published at 8:18 a.m. EDT; canonical URL above. [Content deployment](https://github.com/discomedia/zuluniner/actions/runs/38051456113) succeeded; article, card, metadata, covers, contents, calculator and classifieds links checked on desktop and phone. |
 | 11 October 2026 | 05 | Published at 8:33 p.m. EDT following the owner's explicit immediate-publication request; this one post overrides the morning window. [Content deployment](https://github.com/discomedia/zuluniner/actions/runs/38188454229) succeeded; live article/card, metadata, covers, diagram, contents and classifieds links checked on desktop and phone. |
 | 13 October 2026 | 06 | Published at 8:31 a.m. EDT; canonical URL above. [Content deployment](https://github.com/discomedia/zuluniner/actions/runs/38397969023) succeeded; article/card, metadata, covers, contents, worksheet and classifieds links checked on desktop and phone. |
+| 15 October 2026 | 07 | Published at 6:31 p.m. EDT following the owner's explicit immediate-publication approval, a one-off morning-window exception. [Article](https://zuluniner.com/blog/cessna-172-180-conversion-records/) and [content deployment](https://github.com/discomedia/zuluniner/actions/runs/38817733171) verified; metadata, original/variants, 10 contents targets, worksheet, classifieds links and desktop/phone layouts passed. |
 
 ## Scheduled publication
 
 **ZuluNiner daily blog publishing** is active in this chat. It prepares the next eligible article at 6 a.m. Eastern, starting immediately if that preparation wake arrives up to ten minutes early, and publishes at a newly randomized time within the **8–10 a.m. America/New_York** window. Random target minutes run from 8:00 through 9:45, leaving deployment time before the window closes. Eastern daylight saving changes are included. The first target was **10 October 2026 at 8:16 a.m. EDT**; article 04 was published and verified that morning.
 
-The automation updates the specific completed ID, publication date, canonical URL and totals only after live deployment checks pass. It reconciles existing posts and drafts to avoid duplicates and preserves a limit of one new planned post per Eastern date. Published articles 01–06 remain live. The owner's immediate-publication request for article 05 is a one-off exception; subsequent automated articles keep the morning window.
+The automation updates the specific completed ID, publication date, canonical URL and totals only after live deployment checks pass. It reconciles existing posts and drafts to avoid duplicates and preserves a limit of one new planned post per Eastern date. Published articles 01–07 remain live. The owner approved individual immediate-publication exceptions for articles 05 and 07; subsequent automated articles keep the morning window.
 
 **Nearly exhausted:** alert when **five or fewer unpublished IDs remain**, including blocked topics. Record the alert once per threshold/queue state. At zero remaining, report completion and pause the schedule. Instructions and recovery state are described in [docs/blog/scheduled-publishing.md](docs/blog/scheduled-publishing.md).
 
@@ -291,7 +292,7 @@ Effort estimates are editorial planning assumptions: **medium** means about 1–
 
 ## Next publication sequence
 
-Articles 01–03 were published together on 9 October 2026; articles 04–06 are now published. Continue in numeric ID order, one eligible article per day, beginning with 07. Defer a topic if its required evidence or specialist input is unavailable; record the reason and choose the next eligible ID. The automated cadence supersedes the original weekly launch calendar.
+Articles 01–03 were published together on 9 October 2026; articles 04–07 are now published. Continue in numeric ID order, one eligible article per day, beginning with 08. Defer a topic if its required evidence or specialist input is unavailable; record the reason and choose the next eligible ID. The automated cadence supersedes the original weekly launch calendar.
 
 | Next ID | Article | Companion material | Purpose |
 | --- | --- | --- | --- |

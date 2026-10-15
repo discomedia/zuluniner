@@ -1,6 +1,6 @@
 # Article 07 preparation record
 
-Prepared on 14 October 2026 Eastern for the persisted **8:09 a.m. EDT** target. The post was initially incomplete because its cover upload was blocked. **That blocker is now resolved; the existing draft is ready but unpublished.** Do not publish it while `header_photo` is null or the cover/variants remain unverified. Totals remain six published and 30 unpublished planned IDs.
+Published on **15 October 2026 Eastern at 6:31 p.m. EDT** (16 October Australia/Melbourne), immediately after the owner's explicit one-off approval. The cover-upload blocker is resolved and the article is verified live. Totals are seven published and 29 unpublished planned IDs. Earlier preparation attempts and the repair are documented below.
 
 Article: [07-cessna-172-180-conversions.md](07-cessna-172-180-conversions.md). Draft identity, latest revision and asset blocker: [07-cessna-172-180-conversions.metadata.json](07-cessna-172-180-conversions.metadata.json). Original comparison checklist: [07-cessna-172-180-conversion-checklist.md](07-cessna-172-180-conversion-checklist.md), copied to `public/blog/cessna-172-180-conversion-checklist.md`.
 
@@ -80,3 +80,13 @@ The live prepared upload succeeded. The original and 1600 variant are 1536×1024
 The same automation's prompt now uses prepared local cover uploads, so quota error 9422 does not become another daily retry. With preparation complete, its next wake moves directly to the reserved 16 October 9:33 a.m. EDT publication (17 October 12:33 a.m. Australia/Melbourne), using IANA timezone conversion. The morning restriction is preserved unless the owner explicitly approves an immediate one-off publication. This record does not mark the post published; totals remain six published and 30 unpublished until live article verification.
 
 The draft preview was inspected again with the exact optimized cover at 1280×900 and 390×844. The image loaded at 1536×1024, the page had no horizontal overflow, all 10 contents targets existed, and wide tables scrolled within their own containers. This is draft-preview evidence; live article/card inspection is still required after publication. The final Node 24 `npm run verify` check passed.
+
+## Immediate publication after explicit owner approval
+
+The owner selected “Publish article 07 now,” authorizing this article alone outside the morning window. The complete seven-post inventory and six-post live manifest were reconciled, with no new post already published on 15 October Eastern. The exact draft body, metadata, uploaded cover and current revision matched; all four cover objects were reverified byte for byte. Full records were backed up in ignored `data/backups/blog-before-immediate-publication-07.json`. Node 24 `npm run verify` and the 10-target/three-table/loading arithmetic checks passed.
+
+The existing draft ID `4997aaa9-e68c-43d2-95d4-7e5568dd0713` was updated with its revision guard and `published=true` at `2026-10-15T22:31:48.971902+00:00`. Content publication `6856d2de-250e-4c27-8311-9ee5a8af95d4` and [workflow 38817733171](https://github.com/discomedia/zuluniner/actions/runs/38817733171) completed successfully. Live URL: [Cessna 172/180 conversions](https://zuluniner.com/blog/cessna-172-180-conversion-records/).
+
+The live manifest contains seven posts. Article title, canonical/description/Open Graph metadata, cover alt text, all original/variant bytes, 10 contents targets, three tables, 2,188-byte worksheet and internal links passed. The live article has no hydrated React island. The published page was inspected at 1280×900 and 390×844; there was no page overflow, tables scrolled within their containers and the payload contents link navigated to the correct heading. The live blog card was also inspected on a phone. These checks apply to the published page, separately from the earlier draft preview.
+
+In the finally step, the same automation was restored to 16 October's 6 a.m. Eastern preparation, preserving its existing 9:33 a.m. Eastern publication target and all prompt/notification settings. Article 08 is next; no extra article is due for 15 October Eastern. The final source-record deployment and repeated live checks are retained in ignored publishing state.
