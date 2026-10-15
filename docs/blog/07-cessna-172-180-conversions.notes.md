@@ -1,6 +1,6 @@
 # Article 07 preparation record
 
-Prepared on 14 October 2026 Eastern for the persisted **8:09 a.m. EDT** target. The post is **unpublished and incomplete because its cover upload is blocked**. Do not publish it while `header_photo` is null or the cover/variants remain unverified. Totals remain six published and 30 unpublished planned IDs.
+Prepared on 14 October 2026 Eastern for the persisted **8:09 a.m. EDT** target. The post was initially incomplete because its cover upload was blocked. **That blocker is now resolved; the existing draft is ready but unpublished.** Do not publish it while `header_photo` is null or the cover/variants remain unverified. Totals remain six published and 30 unpublished planned IDs.
 
 Article: [07-cessna-172-180-conversions.md](07-cessna-172-180-conversions.md). Draft identity, latest revision and asset blocker: [07-cessna-172-180-conversions.metadata.json](07-cessna-172-180-conversions.metadata.json). Original comparison checklist: [07-cessna-172-180-conversion-checklist.md](07-cessna-172-180-conversion-checklist.md), copied to `public/blog/cessna-172-180-conversion-checklist.md`.
 
@@ -68,3 +68,15 @@ The original cover upload again failed with `IMAGES_TRANSFORM_ERROR 9422: Free u
 The finally step moved the same active automation to 16 October at 6 a.m. Eastern (9 p.m. Australia/Melbourne), with a newly selected uniform random publication minute of 9:33 a.m. EDT stored for that date. IANA timezone conversion was used and the prompt, kind, destination, name, status and notification setting were read back unchanged. The existing draft ID, revision and local artifacts are held. Totals stay six published and 30 unpublished, so no exhaustion alert is due. Source-record deployment and final live checks are recorded in ignored publishing state.
 
 Node 24 `npm run verify` passed for this record release. Live classifieds, four related articles and the byte-identical worksheet returned HTTP 200; the unpublished article route returned HTTP 404.
+
+## Cover upload fix — 16 October Australia/Melbourne (15 October Eastern)
+
+The owner requested a permanent repair rather than another identical quota retry. The Worker now accepts a complete, locally optimized WebP family through its existing scoped, signed, single-use upload URL. The new helper `scripts/upload-prepared-image.ts` uses the existing Sharp dependency, decodes the source, prepares the original and 480/960/1600 variants, and verifies each public object byte for byte. No Cloudflare Images transformations or billing change are required for this path. Ordinary imports still use Cloudflare Images, with an actionable quota error pointing to the prepared upload path. Both paths prepare every variant before writing the original, with cleanup of the new family on storage failure.
+
+Node 24 `npm run verify` passed, including 39 tests. New cases cover JPEG/PNG/WebP, small images, missing/duplicate/truncated/non-WebP/incorrect-size variants, failed storage cleanup, scope, expiry and replay. Source fix `f2db107aaec4a316a40171d1ff8024bc60dc7f83` deployed successfully in workflow 38794400531.
+
+The live prepared upload succeeded. The original and 1600 variant are 1536×1024 (129,358 bytes); 480 is 480×320 (20,520 bytes); 960 is 960×640 (57,156 bytes). All four public responses matched the prepared bytes and decoded as WebP. The thumbnail was inspected. The verified path is `mcp/d181bcbb-d1c3-4301-96c3-78410dc90166-cessna-172-180-conversion-cover.webp`; it was attached to the existing draft with its revision guard and `published=false`. The exact ID and source text were preserved. Metadata and ignored state record the new revision and clear the blocker.
+
+The same automation's prompt now uses prepared local cover uploads, so quota error 9422 does not become another daily retry. With preparation complete, its next wake moves directly to the reserved 16 October 9:33 a.m. EDT publication (17 October 12:33 a.m. Australia/Melbourne), using IANA timezone conversion. The morning restriction is preserved unless the owner explicitly approves an immediate one-off publication. This record does not mark the post published; totals remain six published and 30 unpublished until live article verification.
+
+The draft preview was inspected again with the exact optimized cover at 1280×900 and 390×844. The image loaded at 1536×1024, the page had no horizontal overflow, all 10 contents targets existed, and wide tables scrolled within their own containers. This is draft-preview evidence; live article/card inspection is still required after publication. The final Node 24 `npm run verify` check passed.
