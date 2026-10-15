@@ -58,3 +58,13 @@ At the 6 a.m. Eastern preparation wake, the same automation was moved first to t
 The original cover was retried through the connector after a full ignored inventory backup. It again returned `IMAGES_TRANSFORM_ERROR 9422: Free unique transformations by account has been exhausted`. No header or publication update was made. State advances to the publication phase with `preparation_complete=false` and the cover blocker retained, so the reserved wake can retry without duplicating the article. Local article checks passed: 10 contents targets, three tables, three hypothetical loading rows, no banned wording and a matching downloadable worksheet. Totals remain six published and 30 unpublished; no exhaustion alert is due.
 
 Node 24 `npm run verify` passed. Live checks returned HTTP 200 for classifieds, all four related articles and the byte-identical worksheet; the unpublished article route returned HTTP 404 as expected. The source-record deployment result is retained in ignored publishing state.
+
+## 15 October publication attempt
+
+The publication wake arrived shortly before its reserved time. The early interval was used to read the article and metadata, reconcile the complete seven-post inventory with the live six-post manifest, compare the exact draft ID/revision and check for an existing 15 October Eastern publication. The draft matched after trailing-whitespace normalization; no new post was published that date. Full records were backed up in ignored `data/backups/blog-before-publish-attempt-07-2026-10-15.json`.
+
+The original cover upload again failed with `IMAGES_TRANSFORM_ERROR 9422: Free unique transformations by account has been exhausted`. The run continued through the 8:51 a.m. EDT reservation after an interruptible wait. The article's 10 contents targets, three tables, three hypothetical loading rows, wording scan and matching worksheet passed. The missing cover and unverified responsive variants still prevent publication; no post update was sent.
+
+The finally step moved the same active automation to 16 October at 6 a.m. Eastern (9 p.m. Australia/Melbourne), with a newly selected uniform random publication minute of 9:33 a.m. EDT stored for that date. IANA timezone conversion was used and the prompt, kind, destination, name, status and notification setting were read back unchanged. The existing draft ID, revision and local artifacts are held. Totals stay six published and 30 unpublished, so no exhaustion alert is due. Source-record deployment and final live checks are recorded in ignored publishing state.
+
+Node 24 `npm run verify` passed for this record release. Live classifieds, four related articles and the byte-identical worksheet returned HTTP 200; the unpublished article route returned HTTP 404.
