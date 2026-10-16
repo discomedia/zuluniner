@@ -8,7 +8,7 @@ This plan contains 36 proposed posts: 12 launch briefs and 24 follow-on topics. 
 
 ## Publication progress
 
-**Current totals:** 7 of 36 published; **29 unpublished**. Next: **08 — Density altitude: the calculation is only the beginning**. Full post inventory and live manifest reconciled on 15 October 2026 Eastern; article 07 is published and verified, including its cover and all responsive variants.
+**Current totals:** 7 of 36 published; **29 unpublished**. Next: **08 — Density altitude: the calculation is only the beginning**. Full post inventory and live manifest reconciled on 15 October 2026 Eastern; article 07 is published and verified, including its cover and all responsive variants. Article 08 is prepared as an unpublished draft for 16 October at 9:33 a.m. EDT.
 
 Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03**, followed by final source, calculation and style review. The originals were backed up and deleted; the replacement posts are live. Covers, contents links, tables and classifieds links were checked on desktop and phone layouts after successful deployment.
 
@@ -19,7 +19,8 @@ Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03
 - [x] **05 — [Why maneuvering speed gets lower as your airplane gets lighter](https://zuluniner.com/blog/maneuvering-speed-aircraft-weight/)** — published on 11 October 2026 Eastern, immediately at the owner's request after the missed morning preparation; original diagram and four practice questions. [Publication record](docs/blog/05-maneuvering-speed-weight.notes.md).
 - [x] **06 — [Sport pilot vs private pilot after MOSAIC: which airplane can you fly?](https://zuluniner.com/blog/sport-pilot-private-pilot-mosaic-aircraft/)** — published on 13 October 2026 Eastern at 8:31 a.m. EDT; aircraft/pilot/operator screening worksheet, three fictional cases and current FAA/eCFR source links. [Publication record](docs/blog/06-sport-pilot-private-pilot-mosaic.notes.md).
 - [x] **07 — [Cessna 172/180 conversions: what the extra horsepower doesn't tell you](https://zuluniner.com/blog/cessna-172-180-conversion-records/)** — published on 15 October 2026 Eastern at 6:31 p.m. EDT (16 October Australia/Melbourne), immediately at the owner's request after the cover-upload fix. Conversion-records checklist, three hypothetical loading cases and live desktop/phone verification. [Publication record](docs/blog/07-cessna-172-180-conversions.notes.md).
-- [ ] **08–36** — not yet written or published.
+- [ ] **08 — Density altitude: the calculation is only the beginning** — prepared on 16 October 2026 Eastern as an unpublished draft, with two fictional departure scenarios, a Cessna 172N reference-table comparison, original study checks and a downloadable worksheet. Cover and responsive variants uploaded and verified; publication reserved for 9:33 a.m. EDT. [Preparation record](docs/blog/08-density-altitude-departure-performance.notes.md).
+- [ ] **09–36** — not yet written or published.
 
 The published editions use primary-source research and clearly identified fictional examples. No independent CFI/A&P/IA review or specialist interview has occurred; those proposed enhancements are still outstanding and are not counted as completed. Article sources, metadata, cover prompts and validation details are retained in [docs/blog/publication-notes.md](docs/blog/publication-notes.md).
 

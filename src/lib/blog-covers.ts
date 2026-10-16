@@ -1,4 +1,5 @@
 const descriptions: Record<string, string> = {
+  'density-altitude-takeoff-climb-performance': 'Illustration of a high-wing airplane beside a dry runway at a mountain airport, with a windsock in the distance.',
   'cessna-172-180-conversion-records': 'Illustration of a high-wing airplane beside a hangar with its upper engine cowling open.',
   'sport-pilot-private-pilot-mosaic-aircraft': 'Illustration of a high-wing airplane and a smaller low-wing airplane parked on an apron beside a hangar.',
   'maneuvering-speed-aircraft-weight': 'Illustration of a light piston airplane in a shallow bank over countryside, with curved airflow bands behind it.',

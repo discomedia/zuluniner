@@ -22,6 +22,8 @@ Article 05 was published outside the morning window on 11 October Eastern (12 Oc
 
 Article 07's cover-upload blocker was resolved on 16 October Australia/Melbourne (15 October Eastern). The owner then explicitly selected “Publish article 07 now,” authorizing a one-off exception. It was published on 15 October at 6:31 p.m. EDT and verified live on desktop and phone. The same automation returns to preparation on 16 October at 6 a.m. Eastern (9 p.m. Australia/Melbourne), with that date's existing 9:33 a.m. EDT publication target preserved for the next eligible topic. Its prompt uses the prepared upload path for local covers. Subsequent automated posts keep the 8–10 a.m. Eastern window.
 
+Article 08 was prepared on 16 October Eastern and saved as an unpublished draft with its verified cover and variants. The same automation is reserved for that day's 9:33 a.m. EDT publication (12:33 a.m. on 17 October Australia/Melbourne). Its draft ID and current revision are in ignored publishing state; article 08 is not marked published.
+
 ## Editorial and release contract
 
 Read the media plan, style guide, AGENTS.md and [publication notes](publication-notes.md). Reconcile the plan with all live posts and drafts before choosing the lowest-numbered eligible unpublished ID. Articles **01–07** are published as of 15 October 2026 Eastern. The next eligible topic is **08 — Density altitude: the calculation is only the beginning**; always reconcile the live inventory before choosing. Reuse drafts and existing work; check titles, slugs and topic overlap before creating content. Maintain a maximum of one new planned publication per Eastern date.

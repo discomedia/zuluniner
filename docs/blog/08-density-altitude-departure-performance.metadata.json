@@ -1,0 +1,22 @@
+{
+  "plan_id": "08",
+  "file": "docs/blog/08-density-altitude-departure-performance.md",
+  "title": "Density altitude: the calculation is only the beginning",
+  "slug": "density-altitude-takeoff-climb-performance",
+  "blurb": "Use pressure altitude and temperature correctly, compare two Cessna 172N training departures, and check what takeoff distance leaves unanswered about climb.",
+  "meta_description": "Use pressure altitude and temperature correctly, compare two Cessna 172N training departures, and check what takeoff distance leaves unanswered about climb.",
+  "header_photo": "mcp/92f5d4c3-789b-4334-9c92-a29d06cdc02d-density-altitude-departure-cover.webp",
+  "cover_alt": "Illustration of a high-wing airplane beside a dry runway at a mountain airport, with a windsock in the distance.",
+  "image": "docs/blog/images/density-altitude-departure-cover.webp",
+  "worksheet": "public/blog/density-altitude-departure-worksheet.md",
+  "status": "draft",
+  "publication_date": null,
+  "url": null,
+  "reserved_publication_at": "2026-10-16T09:33:00-04:00",
+  "source_checked_date": "2026-10-16",
+  "preparation_complete": true,
+  "cover_upload_method": "signed prepared WebP family",
+  "cover_verified_at": "2026-10-16T10:11:12.975Z",
+  "id": "ad48e779-5d33-4397-af13-6f61c99af948",
+  "updated_at": "2026-10-16T10:14:01.392267+00:00"
+}
