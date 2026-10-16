@@ -9,14 +9,17 @@
   "cover_alt": "Illustration of a high-wing airplane beside a dry runway at a mountain airport, with a windsock in the distance.",
   "image": "docs/blog/images/density-altitude-departure-cover.webp",
   "worksheet": "public/blog/density-altitude-departure-worksheet.md",
-  "status": "draft",
-  "publication_date": null,
-  "url": null,
-  "reserved_publication_at": "2026-10-16T09:33:00-04:00",
+  "status": "published",
+  "publication_date": "2026-10-16",
+  "url": "https://zuluniner.com/blog/density-altitude-takeoff-climb-performance/",
+  "reserved_publication_at": null,
   "source_checked_date": "2026-10-16",
   "preparation_complete": true,
   "cover_upload_method": "signed prepared WebP family",
   "cover_verified_at": "2026-10-16T10:11:12.975Z",
   "id": "ad48e779-5d33-4397-af13-6f61c99af948",
-  "updated_at": "2026-10-16T10:14:01.392267+00:00"
+  "updated_at": "2026-10-16T13:34:14.687371+00:00",
+  "published_at": "2026-10-16T13:34:14.687371+00:00",
+  "publication_verified_at": "2026-10-16T13:36:09.595Z",
+  "publication_workflow_id": 38908866372
 }

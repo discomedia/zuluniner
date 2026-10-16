@@ -1,8 +1,8 @@
-# Article 08 preparation record
+# Article 08 publication record
 
 Prepared on **16 October 2026 Eastern** for the persisted **9:33 a.m. EDT** publication target (12:33 a.m. on 17 October Australia/Melbourne, converted with IANA timezone data). The existing automation's wake was moved to that target before research began, including this preparation wake just before 6 a.m. Its prompt, kind, destination, name, status and notification settings were preserved.
 
-The article is **an unpublished, complete draft**, not a verified publication. Counts stay seven published and 29 unpublished planned IDs. Draft ID/revision and uploaded cover are in [metadata](08-density-altitude-departure-performance.metadata.json). Do not mark the plan published until the publication wake completes its live checks.
+The article is **published and verified** at [its canonical URL](https://zuluniner.com/blog/density-altitude-takeoff-climb-performance/). It was published on 16 October 2026 at 9:34 a.m. EDT, after the reserved 9:33 a.m. target. Current totals are eight published and 28 unpublished planned IDs. Record identity and timestamps are in [metadata](08-density-altitude-departure-performance.metadata.json).
 
 ## Reconciliation
 
@@ -45,3 +45,13 @@ The cover used the signed prepared-family upload through the ZuluNiner connector
 The draft preview used the production template/CSS and the uploaded cover. Desktop 1280×900 and phone 390×844 were inspected: title and cover fit, page width stayed 390 px on the phone, all 10 contents targets existed, the Cessna-table contents link scrolled to its heading, and tables stayed inside scrolling containers. There is no hydrated island. This is preview evidence; the live article and card must be inspected after publication.
 
 Node 24 `npm run verify` passed. The local article check verifies 10 contents targets, three tables, no banned prose, the transcribed table conversions, density-altitude/percentage/climb-gradient arithmetic and a byte-identical worksheet. The exact complete post was saved through the connector as `published=false`, with the uploaded header, and its ID/revision persisted in state with phase `publish`. Terminal draft-save/source-deployment results and final live unpublished-state checks are recorded in ignored publishing state.
+
+## Publication verification — 16 October 2026 Eastern
+
+The early 9:30 a.m. wake inspected the existing draft and reconciled the full eight-record inventory with the seven-post live manifest. No post had been published that Eastern date. Complete records were backed up under ignored `data/backups/blog-before-publish-08-2026-10-16.json`. The draft content, metadata, ID and revision matched the prepared source. All cover-family bytes and dimensions were reverified. Node 24 `npm run verify` passed, including 39 tests, and the article check passed its calculations, banned-word scan, worksheet and ten contents targets.
+
+The connector updated only the existing draft's `published` field, guarded by revision. Publication timestamp: `2026-10-16T13:34:14.687371+00:00`; publication ID: `aef19098-6efe-4271-9ddc-bc6cec4616b9`. [Content deployment 38908866372](https://github.com/discomedia/zuluniner/actions/runs/38908866372) finished successfully, and the connector confirmed deployed/public changes live. The live manifest contains eight posts. Canonical and social metadata, card, descriptive cover alt, all original/480/960/1600 image bytes, ten contents targets, three tables, worksheet and every internal link passed.
+
+Live desktop 1280×900 and phone 390×844 layouts were inspected. The phone page stays 390 px wide; tables remain inside scrolling containers. The contents link to the Cessna tables landed at the heading. The cover and blog card render correctly. There is no hydrated island. Machine-readable evidence remains under ignored `data/blog-08-live-verification.json`.
+
+A finally step returned the same automation to 17 October's 6 a.m. Eastern preparation (9 p.m. Melbourne) and persisted a new uniform random target of 8:21 a.m. Eastern (11:21 p.m. Melbourne), using IANA timezone conversion. Readback confirmed the prompt, kind, destination, status and notification settings were preserved. Next planned ID is 09; no exhaustion alert is due with 28 IDs remaining.
