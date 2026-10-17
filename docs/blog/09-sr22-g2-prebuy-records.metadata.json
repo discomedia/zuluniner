@@ -1,0 +1,34 @@
+{
+  "plan_id": "09",
+  "file": "docs/blog/09-sr22-g2-prebuy-records.md",
+  "title": "Buying an older SR22 G2: what to check beyond the glass panel",
+  "slug": "sr22-g2-prebuy-records",
+  "blurb": "Compare two advertised SR22 G2 configurations, check navigator repair support and CAPS paperwork, and build a records checklist before buying.",
+  "meta_description": "Compare two advertised SR22 G2 configurations, check navigator repair support and CAPS paperwork, and build a records checklist before buying.",
+  "header_photo": "mcp/11992472-982b-4c14-b5f6-e5a873ee09f3-sr22-g2-prebuy-records-cover.webp",
+  "cover_alt": "Illustration of a low-wing composite airplane parked outside a maintenance hangar, with another airplane in the background.",
+  "image": "docs/blog/images/sr22-g2-prebuy-records-cover.webp",
+  "worksheet": "public/blog/sr22-g2-prebuy-records-checklist.md",
+  "status": "draft",
+  "publication_date": null,
+  "url": null,
+  "reserved_publication_at": "2026-10-17T08:21:00-04:00",
+  "source_checked_date": "2026-10-17",
+  "preparation_complete": true,
+  "cover_upload_method": "signed prepared WebP family",
+  "cover_verified_at": "2026-10-17T10:02:06.668Z",
+  "listing_comparisons": [
+    {
+      "id": "78d9743e-7447-4447-9075-934f45c97063",
+      "slug": "2005-cirrus-sr22-g2-261316121-controller",
+      "verification_basis": "seller-supplied listing snapshot only"
+    },
+    {
+      "id": "418a958d-aa40-4151-acb6-f5f4ec23eac0",
+      "slug": "2004-cirrus-sr22-g2-261431083-controller",
+      "verification_basis": "seller-supplied listing snapshot only"
+    }
+  ],
+  "id": "5ed1d3be-67b5-4b72-b94b-5c222e9504af",
+  "updated_at": "2026-10-17T10:05:36.359086+00:00"
+}

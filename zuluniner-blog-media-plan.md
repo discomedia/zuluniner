@@ -8,7 +8,7 @@ This plan contains 36 proposed posts: 12 launch briefs and 24 follow-on topics. 
 
 ## Publication progress
 
-**Current totals:** 8 of 36 published; **28 unpublished**. Next: **09 — Buying an older SR22 G2: what to check beyond the glass panel**. Full post inventory and live manifest reconciled on 16 October 2026 Eastern; article 08 is published and verified, including its cover and all responsive variants.
+**Current totals:** 8 of 36 published; **28 unpublished**. Next: **09 — Buying an older SR22 G2: what to check beyond the glass panel**. Full post inventory and live manifest reconciled on 16 October 2026 Eastern; article 08 is published and verified, including its cover and all responsive variants. Article 09 is prepared as an unpublished draft for 17 October at 8:21 a.m. EDT.
 
 Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03**, followed by final source, calculation and style review. The originals were backed up and deleted; the replacement posts are live. Covers, contents links, tables and classifieds links were checked on desktop and phone layouts after successful deployment.
 
@@ -20,7 +20,8 @@ Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03
 - [x] **06 — [Sport pilot vs private pilot after MOSAIC: which airplane can you fly?](https://zuluniner.com/blog/sport-pilot-private-pilot-mosaic-aircraft/)** — published on 13 October 2026 Eastern at 8:31 a.m. EDT; aircraft/pilot/operator screening worksheet, three fictional cases and current FAA/eCFR source links. [Publication record](docs/blog/06-sport-pilot-private-pilot-mosaic.notes.md).
 - [x] **07 — [Cessna 172/180 conversions: what the extra horsepower doesn't tell you](https://zuluniner.com/blog/cessna-172-180-conversion-records/)** — published on 15 October 2026 Eastern at 6:31 p.m. EDT (16 October Australia/Melbourne), immediately at the owner's request after the cover-upload fix. Conversion-records checklist, three hypothetical loading cases and live desktop/phone verification. [Publication record](docs/blog/07-cessna-172-180-conversions.notes.md).
 - [x] **08 — [Density altitude: the calculation is only the beginning](https://zuluniner.com/blog/density-altitude-takeoff-climb-performance/)** — published on 16 October 2026 Eastern at 9:34 a.m. EDT; two fictional departure scenarios, Cessna 172N reference tables, original study checks and a downloadable worksheet. Cover, variants, contents, classifieds links and desktop/phone layouts verified. [Publication record](docs/blog/08-density-altitude-departure-performance.notes.md).
-- [ ] **09–36** — not yet written or published.
+- [ ] **09 — Buying an older SR22 G2: what to check beyond the glass panel** — prepared on 17 October 2026 Eastern as an unpublished draft; two seller-advertised configuration comparisons, manufacturer repair-support checks, a hypothetical loading exercise and a downloadable records checklist. Cover and variants verified; publication reserved for 8:21 a.m. EDT. No service intervals or maintenance prices are assigned without applicable publications and specialist review. [Preparation record](docs/blog/09-sr22-g2-prebuy-records.notes.md).
+- [ ] **10–36** — not yet written or published.
 
 The published editions use primary-source research and clearly identified fictional examples. No independent CFI/A&P/IA review or specialist interview has occurred; those proposed enhancements are still outstanding and are not counted as completed. Article sources, metadata, cover prompts and validation details are retained in [docs/blog/publication-notes.md](docs/blog/publication-notes.md).
 

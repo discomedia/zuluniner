@@ -24,6 +24,8 @@ Article 07's cover-upload blocker was resolved on 16 October Australia/Melbourne
 
 Article 08 was prepared on 16 October Eastern and published at 9:34 a.m. EDT, after its persisted 9:33 a.m. target. The early publication wake inspected the draft and completed release checks before publishing; it did not skip the day. Its deployment, live page/card, metadata, cover variants, worksheet, contents and desktop/phone layouts passed. The same automation next prepares on 17 October at 6 a.m. EDT (9 p.m. Australia/Melbourne), with a persisted uniformly selected publication target of 8:21 a.m. EDT (11:21 p.m. Australia/Melbourne that day). These particular conversions use IANA timezone data.
 
+Article 09 was prepared during the early 17 October preparation wake and saved as an unpublished draft with its verified cover and variants. The same automation is reserved for that day's 8:21 a.m. EDT publication (11:21 p.m. Australia/Melbourne). Its exact draft ID/revision are in ignored publishing state; ID 09 stays unpublished in the plan until live publication verification.
+
 ## Editorial and release contract
 
 Read the media plan, style guide, AGENTS.md and [publication notes](publication-notes.md). Reconcile the plan with all live posts and drafts before choosing the lowest-numbered eligible unpublished ID. Articles **01–08** are published as of 16 October 2026 Eastern. The next eligible topic is **09 — Buying an older SR22 G2: what to check beyond the glass panel**; always reconcile the live inventory before choosing. Reuse drafts and existing work; check titles, slugs and topic overlap before creating content. Maintain a maximum of one new planned publication per Eastern date.
