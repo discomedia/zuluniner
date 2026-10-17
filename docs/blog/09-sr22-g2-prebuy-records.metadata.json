@@ -9,10 +9,10 @@
   "cover_alt": "Illustration of a low-wing composite airplane parked outside a maintenance hangar, with another airplane in the background.",
   "image": "docs/blog/images/sr22-g2-prebuy-records-cover.webp",
   "worksheet": "public/blog/sr22-g2-prebuy-records-checklist.md",
-  "status": "draft",
-  "publication_date": null,
-  "url": null,
-  "reserved_publication_at": "2026-10-17T08:21:00-04:00",
+  "status": "published",
+  "publication_date": "2026-10-17",
+  "url": "https://zuluniner.com/blog/sr22-g2-prebuy-records/",
+  "reserved_publication_at": null,
   "source_checked_date": "2026-10-17",
   "preparation_complete": true,
   "cover_upload_method": "signed prepared WebP family",
@@ -30,5 +30,8 @@
     }
   ],
   "id": "5ed1d3be-67b5-4b72-b94b-5c222e9504af",
-  "updated_at": "2026-10-17T10:05:36.359086+00:00"
+  "updated_at": "2026-10-17T13:24:18.211439+00:00",
+  "published_at": "2026-10-17T13:24:18.211439+00:00",
+  "publication_verified_at": "2026-10-17T13:42:04.001Z",
+  "publication_workflow_id": 39036416031
 }

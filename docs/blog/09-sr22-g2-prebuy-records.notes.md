@@ -1,8 +1,8 @@
-# Article 09 preparation record
+# Article 09 publication record
 
 Prepared on **17 October 2026 Eastern** for the persisted **8:21 a.m. EDT** publication target (**11:21 p.m. Australia/Melbourne** on that date, converted with IANA timezone data). The 5:58 a.m. preparation wake started work immediately under the ten-minute early allowance. Before drafting, the same heartbeat was moved to the reserved publication clock; readback confirmed its prompt, kind, destination, name, status and notification settings were preserved.
 
-The article is a **complete unpublished draft**. Current totals stay eight published and 28 unpublished planned IDs. Its exact ID, revision and uploaded cover path are in [metadata](09-sr22-g2-prebuy-records.metadata.json). Publication must recheck the actual Eastern clock, daily publication limit, latest revision, live deployment and desktop/phone layouts before marking plan ID 09 complete.
+The article is **published and verified** at [its canonical URL](https://zuluniner.com/blog/sr22-g2-prebuy-records/). Publication occurred on 17 October 2026 at 9:24 a.m. EDT, within the regular morning window after the reserved target. Current totals are nine published and 27 unpublished planned IDs. Exact identity and timestamps are in [metadata](09-sr22-g2-prebuy-records.metadata.json).
 
 ## Reconciliation and scope
 
@@ -46,3 +46,13 @@ Node 24 `npm run verify` passed: generated bindings, Astro/TypeScript checks, li
 The unpublished preview used the production template and stylesheet with the new body and verified cover. Desktop 1280×900 and phone 390×844 were inspected. Phone page width stays 390 px; both tables fit their 358 px containers, with overflow handling retained. Clicking the comparison section's contents link landed at the correct heading. The title, cover and body render correctly. This is preview evidence; actual public article/card checks remain for publication.
 
 The connector saved the complete post as `published=false`, ID `5ed1d3be-67b5-4b72-b94b-5c222e9504af`, revision `2026-10-17T10:05:36.359086+00:00`. Exact readback and terminal draft-save/source-deployment verification are retained in ignored publishing state. No plan item is marked published during preparation.
+
+## Publication verification — 17 October 2026 Eastern
+
+The publication wake reconciled the complete nine-record inventory (eight published and the prepared draft) with the eight-post live manifest. No article had been published on that Eastern date. The complete inventory was backed up to ignored `data/backups/blog-before-publish-09-2026-10-17.json`. The draft's current revision, content, metadata and cover matched the prepared source. Node 24 `npm run verify` passed again, including all 39 tests; the article calculation, transcription and structure checks passed. Original/480/960/1600 cover objects were reverified byte-for-byte.
+
+The actual Eastern clock was checked immediately before updating only the exact existing draft's `published` field with its latest revision guard. Publication timestamp: `2026-10-17T13:24:18.211439+00:00`; publication ID: `9ce4c326-b983-4f29-8cc9-e42dd12ca0bb`. [Content deployment 39036416031](https://github.com/discomedia/zuluniner/actions/runs/39036416031) succeeded, and the connector confirmed deployed/public changes live. A transient status-read transport failure resolved on the next read; it did not require another publication mutation.
+
+The live manifest contains nine posts. Canonical/social metadata, blog card, cover alt and responsive sources, all four exact cover objects, ten contents targets, two tables, byte-identical checklist and every internal link passed, including both advertised aircraft routes. The public article and blog card were inspected at 1280×900 and 390×844. The phone page stays 390 px wide and tables fit their 358 px scrolling containers. The comparison contents link lands at its heading. The cover loads on the phone and desktop. No hydrated island is present. Evidence remains in ignored `data/blog-09-live-verification.json`.
+
+A finally step reserved the same automation for 18 October at 6 a.m. Eastern and persisted a fresh uniform random publication minute of 8:23 a.m. Eastern. IANA conversion gives 9 p.m. preparation and 11:23 p.m. publication in Australia/Melbourne on 18 October. Prompt, kind, destination, status and notification settings were checked unchanged. Next planned topic is 10; no exhaustion alert is due with 27 unpublished IDs remaining.

@@ -8,7 +8,7 @@ This plan contains 36 proposed posts: 12 launch briefs and 24 follow-on topics. 
 
 ## Publication progress
 
-**Current totals:** 8 of 36 published; **28 unpublished**. Next: **09 — Buying an older SR22 G2: what to check beyond the glass panel**. Full post inventory and live manifest reconciled on 16 October 2026 Eastern; article 08 is published and verified, including its cover and all responsive variants. Article 09 is prepared as an unpublished draft for 17 October at 8:21 a.m. EDT.
+**Current totals:** 9 of 36 published; **27 unpublished**. Next: **10 — Lean of peak: why pilots give incompatible advice**. Full post inventory and live manifest reconciled on 17 October 2026 Eastern; article 09 is published and verified, including its cover and all responsive variants.
 
 Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03**, followed by final source, calculation and style review. The originals were backed up and deleted; the replacement posts are live. Covers, contents links, tables and classifieds links were checked on desktop and phone layouts after successful deployment.
 
@@ -20,7 +20,7 @@ Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03
 - [x] **06 — [Sport pilot vs private pilot after MOSAIC: which airplane can you fly?](https://zuluniner.com/blog/sport-pilot-private-pilot-mosaic-aircraft/)** — published on 13 October 2026 Eastern at 8:31 a.m. EDT; aircraft/pilot/operator screening worksheet, three fictional cases and current FAA/eCFR source links. [Publication record](docs/blog/06-sport-pilot-private-pilot-mosaic.notes.md).
 - [x] **07 — [Cessna 172/180 conversions: what the extra horsepower doesn't tell you](https://zuluniner.com/blog/cessna-172-180-conversion-records/)** — published on 15 October 2026 Eastern at 6:31 p.m. EDT (16 October Australia/Melbourne), immediately at the owner's request after the cover-upload fix. Conversion-records checklist, three hypothetical loading cases and live desktop/phone verification. [Publication record](docs/blog/07-cessna-172-180-conversions.notes.md).
 - [x] **08 — [Density altitude: the calculation is only the beginning](https://zuluniner.com/blog/density-altitude-takeoff-climb-performance/)** — published on 16 October 2026 Eastern at 9:34 a.m. EDT; two fictional departure scenarios, Cessna 172N reference tables, original study checks and a downloadable worksheet. Cover, variants, contents, classifieds links and desktop/phone layouts verified. [Publication record](docs/blog/08-density-altitude-departure-performance.notes.md).
-- [ ] **09 — Buying an older SR22 G2: what to check beyond the glass panel** — prepared on 17 October 2026 Eastern as an unpublished draft; two seller-advertised configuration comparisons, manufacturer repair-support checks, a hypothetical loading exercise and a downloadable records checklist. Cover and variants verified; publication reserved for 8:21 a.m. EDT. No service intervals or maintenance prices are assigned without applicable publications and specialist review. [Preparation record](docs/blog/09-sr22-g2-prebuy-records.notes.md).
+- [x] **09 — [Buying an older SR22 G2: what to check beyond the glass panel](https://zuluniner.com/blog/sr22-g2-prebuy-records/)** — published on 17 October 2026 Eastern at 9:24 a.m. EDT; two seller-advertised configurations, manufacturer repair-support checks, a hypothetical loading example and a records checklist. Metadata, cover variants, contents, classifieds links and desktop/phone layouts verified. [Publication record](docs/blog/09-sr22-g2-prebuy-records.notes.md).
 - [ ] **10–36** — not yet written or published.
 
 The published editions use primary-source research and clearly identified fictional examples. No independent CFI/A&P/IA review or specialist interview has occurred; those proposed enhancements are still outstanding and are not counted as completed. Article sources, metadata, cover prompts and validation details are retained in [docs/blog/publication-notes.md](docs/blog/publication-notes.md).
@@ -35,12 +35,13 @@ The published editions use primary-source research and clearly identified fictio
 | 13 October 2026 | 06 | Published at 8:31 a.m. EDT; canonical URL above. [Content deployment](https://github.com/discomedia/zuluniner/actions/runs/38397969023) succeeded; article/card, metadata, covers, contents, worksheet and classifieds links checked on desktop and phone. |
 | 15 October 2026 | 07 | Published at 6:31 p.m. EDT following the owner's explicit immediate-publication approval, a one-off morning-window exception. [Article](https://zuluniner.com/blog/cessna-172-180-conversion-records/) and [content deployment](https://github.com/discomedia/zuluniner/actions/runs/38817733171) verified; metadata, original/variants, 10 contents targets, worksheet, classifieds links and desktop/phone layouts passed. |
 | 16 October 2026 | 08 | Published at 9:34 a.m. EDT after the reserved 9:33 a.m. target. [Article](https://zuluniner.com/blog/density-altitude-takeoff-climb-performance/) and [content deployment](https://github.com/discomedia/zuluniner/actions/runs/38908866372) verified; metadata, cover variants, 10 contents targets, worksheet, classifieds links and desktop/phone layouts passed. |
+| 17 October 2026 | 09 | Published at 9:24 a.m. EDT, within the morning window after the reserved 8:21 a.m. target. [Article](https://zuluniner.com/blog/sr22-g2-prebuy-records/) and [content deployment](https://github.com/discomedia/zuluniner/actions/runs/39036416031) verified; metadata, cover variants, 10 contents targets, checklist, classifieds links and desktop/phone layouts passed. |
 
 ## Scheduled publication
 
 **ZuluNiner daily blog publishing** is active in this chat. It prepares the next eligible article at 6 a.m. Eastern, starting immediately if that preparation wake arrives up to ten minutes early, and publishes at a newly randomized time within the **8–10 a.m. America/New_York** window. Random target minutes run from 8:00 through 9:45, leaving deployment time before the window closes. Eastern daylight saving changes are included. The first target was **10 October 2026 at 8:16 a.m. EDT**; article 04 was published and verified that morning.
 
-The automation updates the specific completed ID, publication date, canonical URL and totals only after live deployment checks pass. It reconciles existing posts and drafts to avoid duplicates and preserves a limit of one new planned post per Eastern date. Published articles 01–08 remain live. The owner approved individual immediate-publication exceptions for articles 05 and 07; subsequent automated articles keep the morning window.
+The automation updates the specific completed ID, publication date, canonical URL and totals only after live deployment checks pass. It reconciles existing posts and drafts to avoid duplicates and preserves a limit of one new planned post per Eastern date. Published articles 01–09 remain live. The owner approved individual immediate-publication exceptions for articles 05 and 07; subsequent automated articles keep the morning window.
 
 **Nearly exhausted:** alert when **five or fewer unpublished IDs remain**, including blocked topics. Record the alert once per threshold/queue state. At zero remaining, report completion and pause the schedule. Instructions and recovery state are described in [docs/blog/scheduled-publishing.md](docs/blog/scheduled-publishing.md).
 
@@ -295,11 +296,10 @@ Effort estimates are editorial planning assumptions: **medium** means about 1–
 
 ## Next publication sequence
 
-Articles 01–03 were published together on 9 October 2026; articles 04–08 are now published. Continue in numeric ID order, one eligible article per day, beginning with 09. Defer a topic if its required evidence or specialist input is unavailable; record the reason and choose the next eligible ID. The automated cadence supersedes the original weekly launch calendar.
+Articles 01–03 were published together on 9 October 2026; articles 04–09 are now published. Continue in numeric ID order, one eligible article per day, beginning with 10. Defer a topic if its required evidence or specialist input is unavailable; record the reason and choose the next eligible ID. The automated cadence supersedes the original weekly launch calendar.
 
 | Next ID | Article | Companion material | Purpose |
 | --- | --- | --- | --- |
-| 09 | SR22 G2 | Documentation comparison | Attract upgrading pilots and type shoppers. |
 | 10 | Lean of peak | Terminology diagram | Serve experienced owners and encourage discussion. |
 | 11 | Safety-pilot logging | Scenario matrix | Attract private and instrument-training readers. |
 | 12 | Comanche 250 | Specialist/owner interview | Build another listing-relevant type guide. |
