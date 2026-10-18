@@ -1,4 +1,5 @@
 const descriptions: Record<string, string> = {
+  'safety-pilot-pic-cross-country': 'Illustration of a high-wing training airplane parked on an apron, with two pilots seated in the front cabin.',
   'sr22-g2-prebuy-records': 'Illustration of a low-wing composite airplane parked outside a maintenance hangar, with another airplane in the background.',
   'density-altitude-takeoff-climb-performance': 'Illustration of a high-wing airplane beside a dry runway at a mountain airport, with a windsock in the distance.',
   'cessna-172-180-conversion-records': 'Illustration of a high-wing airplane beside a hangar with its upper engine cowling open.',

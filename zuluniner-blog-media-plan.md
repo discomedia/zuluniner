@@ -8,7 +8,7 @@ This plan contains 36 proposed posts: 12 launch briefs and 24 follow-on topics. 
 
 ## Publication progress
 
-**Current totals:** 9 of 36 published; **27 unpublished**. Next: **10 — Lean of peak: why pilots give incompatible advice**. Full post inventory and live manifest reconciled on 17 October 2026 Eastern; article 09 is published and verified, including its cover and all responsive variants.
+**Current totals:** 9 of 36 published; **27 unpublished**. Next eligible: **11 — Safety-pilot time: who can log PIC and cross-country?**, prepared as an unpublished draft for 18 October at 8:23 a.m. Eastern. Full post inventory and live manifest reconciled on 18 October 2026 Eastern; articles 01–09 are live. Topic 10 is deferred pending its required current aircraft manuals and specialist input; it remains in the 27 unpublished IDs.
 
 Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03**, followed by final source, calculation and style review. The originals were backed up and deleted; the replacement posts are live. Covers, contents links, tables and classifieds links were checked on desktop and phone layouts after successful deployment.
 
@@ -21,7 +21,9 @@ Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03
 - [x] **07 — [Cessna 172/180 conversions: what the extra horsepower doesn't tell you](https://zuluniner.com/blog/cessna-172-180-conversion-records/)** — published on 15 October 2026 Eastern at 6:31 p.m. EDT (16 October Australia/Melbourne), immediately at the owner's request after the cover-upload fix. Conversion-records checklist, three hypothetical loading cases and live desktop/phone verification. [Publication record](docs/blog/07-cessna-172-180-conversions.notes.md).
 - [x] **08 — [Density altitude: the calculation is only the beginning](https://zuluniner.com/blog/density-altitude-takeoff-climb-performance/)** — published on 16 October 2026 Eastern at 9:34 a.m. EDT; two fictional departure scenarios, Cessna 172N reference tables, original study checks and a downloadable worksheet. Cover, variants, contents, classifieds links and desktop/phone layouts verified. [Publication record](docs/blog/08-density-altitude-departure-performance.notes.md).
 - [x] **09 — [Buying an older SR22 G2: what to check beyond the glass panel](https://zuluniner.com/blog/sr22-g2-prebuy-records/)** — published on 17 October 2026 Eastern at 9:24 a.m. EDT; two seller-advertised configurations, manufacturer repair-support checks, a hypothetical loading example and a records checklist. Metadata, cover variants, contents, classifieds links and desktop/phone layouts verified. [Publication record](docs/blog/09-sr22-g2-prebuy-records.notes.md).
-- [ ] **10–36** — not yet written or published.
+- [ ] **10 — Lean of peak: why pilots give incompatible advice** — deferred; [evidence blocker](docs/blog/10-lean-of-peak.blocker.md). Still unpublished and counted in the remaining plan.
+- [ ] **11 — Safety-pilot time: who can log PIC and cross-country?** — prepared as an unpublished draft for 18 October at 8:23 a.m. Eastern; six original scenarios and a briefing/logging worksheet. [Preparation record](docs/blog/11-safety-pilot-logging.notes.md).
+- [ ] **12–36** — not yet written or published.
 
 The published editions use primary-source research and clearly identified fictional examples. No independent CFI/A&P/IA review or specialist interview has occurred; those proposed enhancements are still outstanding and are not counted as completed. Article sources, metadata, cover prompts and validation details are retained in [docs/blog/publication-notes.md](docs/blog/publication-notes.md).
 
@@ -222,6 +224,8 @@ Effort estimates are editorial planning assumptions: **medium** means about 1–
 **Question and gap:** Why do seemingly experienced pilots recommend different leaning methods? Two discussions explicitly mix carburetion, engine instrumentation and meanings of “peak.” [F5] [F6]
 
 **Build the article around:** peak EGT versus peak RPM/power; EGT and CHT as different indications; mixture distribution; injected versus carbureted configurations; power setting; instrument capability; and the aircraft/engine manufacturer's instructions. Explain why advice for one installation may not transfer to another.
+
+**Evidence gate, 18 October 2026:** deferred until the applicable current aircraft-manual set and specialist input can be verified. Manufacturer engine guidance alone does not establish installation-specific procedures. [Blocker record](docs/blog/10-lean-of-peak.blocker.md). Topic 11 is the next eligible prepared article.
 
 **Distinctive asset:** an original terminology diagram and a table of the information needed before evaluating any recommendation. Use current installation-specific manuals and a piston-engine specialist. Savvy's diagnostic material is useful supplementary context, not a replacement for those instructions. [V2] [V3]
 
