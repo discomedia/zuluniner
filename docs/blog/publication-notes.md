@@ -47,4 +47,6 @@ The first content-only deployment encountered a transient old-manifest response 
 | 16 October 2026 | 08 | [Density altitude: the calculation is only the beginning](https://zuluniner.com/blog/density-altitude-takeoff-climb-performance/); [research, worksheet and live verification](08-density-altitude-departure-performance.notes.md). Published at 9:34 a.m. EDT after the reserved 9:33 a.m. target. |
 | 17 October 2026 | 09 | [Buying an older SR22 G2: what to check beyond the glass panel](https://zuluniner.com/blog/sr22-g2-prebuy-records/); [research, comparison checklist and live verification](09-sr22-g2-prebuy-records.notes.md). Published at 9:24 a.m. EDT within the morning window. |
 
-Articles 04–09 passed publication and desktop/phone checks after successful deployments. Current totals are 9 published and 27 unpublished planned IDs. Existing posts and aircraft were preserved.
+| 18 October 2026 | 11 | [Safety-pilot time: who can log PIC and cross-country?](https://zuluniner.com/blog/safety-pilot-pic-cross-country/); [research, six original scenarios, worksheet and live verification](11-safety-pilot-logging.notes.md). Published at 9:04 a.m. EDT within the morning window. |
+
+Articles 04–09 and 11 passed publication and desktop/phone checks after successful deployments. Current totals are 10 published and 26 unpublished planned IDs, including blocked topic 10. Existing posts and aircraft were preserved.

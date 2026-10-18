@@ -9,9 +9,9 @@
   "cover_alt": "Illustration of a high-wing training airplane parked on an apron, with two pilots seated in the front cabin.",
   "image": "docs/blog/images/safety-pilot-logging-cover.webp",
   "worksheet": "public/blog/safety-pilot-logging-worksheet.md",
-  "status": "draft",
-  "publication_date": null,
-  "url": null,
+  "status": "published",
+  "publication_date": "2026-10-18",
+  "url": "https://zuluniner.com/blog/safety-pilot-pic-cross-country/",
   "reserved_publication_at": "2026-10-18T08:23:00-04:00",
   "source_checked_date": "2026-10-18",
   "regulations_displayed_as_of": "2026-10-15",
@@ -19,6 +19,11 @@
   "cover_upload_method": "signed prepared WebP family",
   "cover_verified_at": "2026-10-18T10:05:23.565Z",
   "id": "3c58e13b-a0e2-4776-9154-1dcaecf8e12c",
-  "updated_at": "2026-10-18T10:09:30.641678+00:00",
-  "draft_save_publication_id": "df4dbc2e-cd73-40d8-805f-d42b6e5e145a"
+  "updated_at": "2026-10-18T13:04:39.997361+00:00",
+  "draft_save_publication_id": "df4dbc2e-cd73-40d8-805f-d42b6e5e145a",
+  "published_at": "2026-10-18T13:04:39.997361+00:00",
+  "publication_id": "d21450b1-ddce-4731-8f25-48be7ad39e18",
+  "workflow_id": 39129968040,
+  "workflow_conclusion": "success",
+  "verified_at": "2026-10-18T16:11:01.495179+00:00"
 }
