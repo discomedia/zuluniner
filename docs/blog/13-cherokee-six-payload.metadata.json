@@ -1,0 +1,23 @@
+{
+  "plan_id": "13",
+  "file": "docs/blog/13-cherokee-six-payload.md",
+  "title": "Cherokee Six vs a four-seat single: how much payload do you gain?",
+  "slug": "cherokee-six-vs-four-seat-payload",
+  "blurb": "Compare three fictional airplane loads, account for older oil-weight conventions, and check whether a Cherokee Six carries your actual group and trip fuel.",
+  "meta_description": "Compare three fictional airplane loads, account for older oil-weight conventions, and check whether a Cherokee Six carries your actual group and trip fuel.",
+  "header_photo": "mcp/5cfaa4bb-a178-4ef7-a343-3e4fc4538771-cherokee-six-payload-comparison-cover.webp",
+  "cover_alt": "Illustration of a low-wing six-seat airplane and a smaller high-wing trainer parked near travel bags on an apron.",
+  "image": "docs/blog/images/cherokee-six-payload-comparison-cover.webp",
+  "worksheet": "public/blog/cherokee-six-payload-comparison-worksheet.md",
+  "status": "draft",
+  "publication_date": null,
+  "url": null,
+  "reserved_publication_at": "2026-10-19T09:06:00-04:00",
+  "source_checked_date": "2026-10-19",
+  "preparation_complete": true,
+  "cover_verified_at": "2026-10-19T13:07:08.392Z",
+  "cover_upload_method": "signed prepared WebP family",
+  "id": "d1d41205-a442-4991-9544-d18da8842c39",
+  "updated_at": "2026-10-19T13:08:20.368711+00:00",
+  "draft_save_publication_id": "c9f08485-c43d-43e3-8b51-1f7838f7e068"
+}

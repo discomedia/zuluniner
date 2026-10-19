@@ -8,7 +8,7 @@ This plan contains 36 proposed posts: 12 launch briefs and 24 follow-on topics. 
 
 ## Publication progress
 
-**Current totals:** 10 of 36 published; **26 unpublished**. Next eligible: **12 — Piper Comanche 250: affordable speed, but what are you taking on?** Full post inventory and live manifest reconciled on 18 October 2026 Eastern; articles 01–09 and 11 are live. Topic 10 is deferred pending its required current aircraft manuals and specialist input; it remains in the 26 unpublished IDs.
+**Current totals:** 10 of 36 published; **26 unpublished**. Next eligible: **13 — Cherokee Six vs a four-seat single: how much payload do you gain?**, saved as an unpublished draft for the 19 October 9:06 a.m. Eastern target. Inventory and live manifest were reconciled on 19 October Eastern. Topics 10 and 12 are deferred for their recorded evidence requirements and still count among the 26 unpublished IDs.
 
 Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03**, followed by final source, calculation and style review. The originals were backed up and deleted; the replacement posts are live. Covers, contents links, tables and classifieds links were checked on desktop and phone layouts after successful deployment.
 
@@ -23,7 +23,9 @@ Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03
 - [x] **09 — [Buying an older SR22 G2: what to check beyond the glass panel](https://zuluniner.com/blog/sr22-g2-prebuy-records/)** — published on 17 October 2026 Eastern at 9:24 a.m. EDT; two seller-advertised configurations, manufacturer repair-support checks, a hypothetical loading example and a records checklist. Metadata, cover variants, contents, classifieds links and desktop/phone layouts verified. [Publication record](docs/blog/09-sr22-g2-prebuy-records.notes.md).
 - [ ] **10 — Lean of peak: why pilots give incompatible advice** — deferred; [evidence blocker](docs/blog/10-lean-of-peak.blocker.md). Still unpublished and counted in the remaining plan.
 - [x] **11 — [Safety-pilot time: who can log PIC and cross-country?](https://zuluniner.com/blog/safety-pilot-pic-cross-country/)** — published on 18 October 2026 Eastern at 9:04 a.m. EDT; six original scenarios and a briefing/logging worksheet. Metadata, cover variants, contents, classifieds links and desktop/phone layouts verified. [Publication record](docs/blog/11-safety-pilot-logging.notes.md).
-- [ ] **12–36** — not yet written or published.
+- [ ] **12 — Comanche 250** — deferred; [evidence blocker](docs/blog/12-comanche-250.blocker.md). Still unpublished.
+- [ ] **13 — Cherokee Six vs a four-seat single: how much payload do you gain?** — prepared as an unpublished draft; [research and validation](docs/blog/13-cherokee-six-payload.notes.md).
+- [ ] **14–36** — not yet written or published.
 
 The published editions use primary-source research and clearly identified fictional examples. No independent CFI/A&P/IA review or specialist interview has occurred; those proposed enhancements are still outstanding and are not counted as completed. Article sources, metadata, cover prompts and validation details are retained in [docs/blog/publication-notes.md](docs/blog/publication-notes.md).
 
@@ -301,12 +303,12 @@ Effort estimates are editorial planning assumptions: **medium** means about 1–
 
 ## Next publication sequence
 
-Articles 01–03 were published together on 9 October 2026; articles 04–09 are now published. Continue in numeric ID order, one eligible article per day, beginning with 10. Defer a topic if its required evidence or specialist input is unavailable; record the reason and choose the next eligible ID. The automated cadence supersedes the original weekly launch calendar.
+Articles 01–09 and 11 are published. Topic 13 is the next eligible prepared article; topics 10 and 12 have recorded evidence blockers. Continue in numeric ID order among eligible unpublished topics, one article per day. Defer a topic if its required evidence or specialist input is unavailable; record the reason and choose the next eligible ID. The automated cadence supersedes the original weekly launch calendar.
 
 | Next ID | Article | Companion material | Purpose |
 | --- | --- | --- | --- |
 | 10 | Lean of peak | Terminology diagram | Serve experienced owners and encourage discussion. |
-| 11 | Safety-pilot logging | Scenario matrix | Attract private and instrument-training readers. |
+| 13 | Cherokee Six payload comparison | Mission worksheet | Compare individual aircraft carrying capacity. |
 | 12 | Comanche 250 | Specialist/owner interview | Build another listing-relevant type guide. |
 
 Continue with the eligible follow-on IDs 13–36. Cost illustrations must label teaching assumptions explicitly; never present invented figures as current quotations or typical market costs.
