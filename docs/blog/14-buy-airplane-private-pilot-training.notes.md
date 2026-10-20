@@ -2,7 +2,7 @@
 
 Prepared on 20 October 2026 Eastern. **Unpublished draft; no completed-publication claim.** Reserved publication: **20 October at 9:25 a.m. EDT**, or **21 October at 12:25 a.m. Australia/Melbourne**, converted with IANA timezone data. The 5:56 a.m. Eastern preparation wake started immediately, as authorized. Before drafting, this same heartbeat was moved to the existing publication target; its prompt, kind, destination, status and notification settings were preserved and read back.
 
-Draft ID: `d6a509d7-e7d4-4854-ae1d-9aea1f6c5981`. Saved revision: `2026-10-20T10:04:14.077565+00:00`. Slug: `buy-airplane-private-pilot-training`. Draft-save publication ID: `3a6e3304-9b4a-4f29-8233-73a4928ce4aa`. At publication, read the latest revision again and update this exact draft ID with its current revision guard. The eventual canonical URL is expected to be `https://zuluniner.com/blog/buy-airplane-private-pilot-training/`; this preparation doesn't make it live.
+Draft ID: `d6a509d7-e7d4-4854-ae1d-9aea1f6c5981`. Saved revision: `2026-10-20T10:07:10.085046+00:00`. Slug: `buy-airplane-private-pilot-training`. Draft-save publication ID: `38942464-67ee-4e10-abe4-325be17e2b89`. At publication, read the latest revision again and update this exact draft ID with its current revision guard. The eventual canonical URL is expected to be `https://zuluniner.com/blog/buy-airplane-private-pilot-training/`; this preparation doesn't make it live.
 
 The full connector inventory and live manifest contained 11 published posts and no overlapping draft before creation. A complete inventory backup was saved under ignored `data/backups/` before the production mutation. Topic 14 is the lowest eligible unpublished topic; blockers 10 and 12 are unchanged. Counts remain **11 published, 25 unpublished**, including those blocked IDs and this draft.
 
@@ -53,6 +53,6 @@ The signed prepared-family helper uploaded and byte-verified the original and 48
 
 The existing static cover-alt map supplies a descriptive sentence. The article links to available aircraft browsing and the live mission, prebuy and annual-ownership articles. No individual listing is recommended or assigned the model's invented prices.
 
-Node 24 `npm run verify` passed: 39 tests, Astro/TypeScript, lint, published-data build and Worker dry run. A separate production-renderer check passed 1,947 words, eight contents targets, two tables with ten body rows, all budget calculations, worksheet identity and the literal banned-word scan. No hydrated article island is introduced.
+Node 24 `npm run verify` passed: 39 tests, Astro/TypeScript, lint, published-data build and Worker dry run. A separate production-renderer check passed 1,948 words, eight contents targets, two tables with ten body rows, all budget calculations, worksheet identity and the literal banned-word scan. No hydrated article island is introduced.
 
 Desktop 1280 × 900 and phone 390 × 844 previews were inspected. Cover and title fit. Phone width stays 390 pixels and tables have contained horizontal overflow. Keyboard activation of the budget contents link reaches its matching heading. Preparation source/deployment evidence is retained in ignored state; live article/card/device checks must be repeated after publication. Don't mark the media-plan checkbox published until those checks pass.

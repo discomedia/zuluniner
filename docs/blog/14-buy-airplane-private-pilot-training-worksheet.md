@@ -18,7 +18,7 @@ Original planning worksheet. All worked amounts are hypothetical USD inputs, not
 
 ## Make the costs comparable
 
-- Wet rental quote and inclusions:
+- Rental quote and whether fuel is included:
 - Billing meter, minimum charges and fuel-reimbursement rules:
 - Instruction fees and travel costs under each alternative:
 - Purchase cash price:

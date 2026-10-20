@@ -71,7 +71,7 @@ Every amount below is an **invented teaching assumption in USD**, not a quote, t
 
 | Assumption | Chosen amount |
 | --- | --- |
-| Wet rental aircraft rate | USD 175 per flight hour |
+| Rental aircraft rate, including fuel | USD 175 per flight hour |
 | Owner operating-cost allowance, including fuel and routine maintenance allocation | USD 85 per flight hour |
 | Holding costs for the six-month period | USD 4,500 |
 | Prebuy and acquisition administration | USD 1,500 |
