@@ -8,7 +8,7 @@ This plan contains 36 proposed posts: 12 launch briefs and 24 follow-on topics. 
 
 ## Publication progress
 
-**Current totals:** 11 of 36 published; **25 unpublished**. Next eligible: **14 — Should you buy an airplane for your private-pilot training?** Full inventory and live manifest reconciled on 19 October 2026 Eastern; articles 01–09, 11 and 13 are live. Topics 10 and 12 are deferred for their recorded evidence requirements and still count among the 25 unpublished IDs.
+**Current totals:** 11 of 36 published; **25 unpublished**. Next eligible: **14 — Should you buy an airplane for your private-pilot training?**, prepared as an unpublished draft for 20 October at 9:25 a.m. Eastern. Inventory and live manifest reconciled on 20 October 2026 Eastern; articles 01–09, 11 and 13 are live. Topics 10 and 12 are deferred for their recorded evidence requirements and still count among the 25 unpublished IDs.
 
 Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03**, followed by final source, calculation and style review. The originals were backed up and deleted; the replacement posts are live. Covers, contents links, tables and classifieds links were checked on desktop and phone layouts after successful deployment.
 
@@ -25,7 +25,8 @@ Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03
 - [x] **11 — [Safety-pilot time: who can log PIC and cross-country?](https://zuluniner.com/blog/safety-pilot-pic-cross-country/)** — published on 18 October 2026 Eastern at 9:04 a.m. EDT; six original scenarios and a briefing/logging worksheet. Metadata, cover variants, contents, classifieds links and desktop/phone layouts verified. [Publication record](docs/blog/11-safety-pilot-logging.notes.md).
 - [ ] **12 — Comanche 250** — deferred; [evidence blocker](docs/blog/12-comanche-250.blocker.md). Still unpublished.
 - [x] **13 — [Cherokee Six vs a four-seat single: how much payload do you gain?](https://zuluniner.com/blog/cherokee-six-vs-four-seat-payload/)** — published on 19 October 2026 Eastern at 9:12 a.m. EDT; three fictional candidates, four/five/six-adult loads, historical oil-weight conventions and a worksheet. Metadata, cover variants, contents, classifieds links and desktop/phone layouts verified. [Publication record](docs/blog/13-cherokee-six-payload.notes.md).
-- [ ] **14–36** — not yet written or published.
+- [ ] **14 — Should you buy an airplane for your private-pilot training?** — prepared as an unpublished draft for 20 October at 9:25 a.m. Eastern; current FAA rules, an original buy/rent budget, an adverse case and a decision worksheet. [Preparation record](docs/blog/14-buy-airplane-private-pilot-training.notes.md).
+- [ ] **15–36** — not yet written or published.
 
 The published editions use primary-source research and clearly identified fictional examples. No independent CFI/A&P/IA review or specialist interview has occurred; those proposed enhancements are still outstanding and are not counted as completed. Article sources, metadata, cover prompts and validation details are retained in [docs/blog/publication-notes.md](docs/blog/publication-notes.md).
 
@@ -304,7 +305,7 @@ Effort estimates are editorial planning assumptions: **medium** means about 1–
 
 ## Next publication sequence
 
-Articles 01–09, 11 and 13 are published. Topic 14 is next eligible; topics 10 and 12 have recorded evidence blockers. Continue in numeric ID order among eligible unpublished topics, one article per day. Defer a topic if its required evidence or specialist input is unavailable; record the reason and choose the next eligible ID. The automated cadence supersedes the original weekly launch calendar.
+Articles 01–09, 11 and 13 are published. Topic 14 is prepared as an unpublished draft for 20 October; topics 10 and 12 have recorded evidence blockers. Continue in numeric ID order among eligible unpublished topics, one article per day. Defer a topic if its required evidence or specialist input is unavailable; record the reason and choose the next eligible ID. The automated cadence supersedes the original weekly launch calendar.
 
 | Next ID | Article | Companion material | Purpose |
 | --- | --- | --- | --- |
