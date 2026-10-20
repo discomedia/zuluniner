@@ -9,9 +9,9 @@
   "cover_alt": "Illustration of a high-wing training airplane parked outside a hangar, with two small figures and another trainer in the background.",
   "image": "docs/blog/images/buy-airplane-private-pilot-training-cover.webp",
   "worksheet": "public/blog/buy-airplane-private-pilot-training-worksheet.md",
-  "status": "draft",
-  "publication_date": null,
-  "url": null,
+  "status": "published",
+  "publication_date": "2026-10-20",
+  "url": "https://zuluniner.com/blog/buy-airplane-private-pilot-training/",
   "reserved_publication_at": "2026-10-20T09:25:00-04:00",
   "source_checked_date": "2026-10-20",
   "regulations_displayed_as_of": "2026-10-16",
@@ -19,6 +19,11 @@
   "cover_verified_at": "2026-10-20T10:02:28.205Z",
   "cover_upload_method": "signed prepared WebP family",
   "id": "d6a509d7-e7d4-4854-ae1d-9aea1f6c5981",
-  "updated_at": "2026-10-20T10:07:10.085046+00:00",
-  "draft_save_publication_id": "38942464-67ee-4e10-abe4-325be17e2b89"
+  "updated_at": "2026-10-20T13:35:12.369502+00:00",
+  "draft_save_publication_id": "38942464-67ee-4e10-abe4-325be17e2b89",
+  "published_at": "2026-10-20T13:35:12.369502+00:00",
+  "publication_id": "fb3e4907-7877-4d98-ac1c-c4745a2ea168",
+  "publication_workflow_id": 39431684415,
+  "publication_workflow_conclusion": "success",
+  "live_verified_at": "2026-10-20T13:38:57.572781+00:00"
 }
