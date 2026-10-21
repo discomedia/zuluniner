@@ -8,7 +8,7 @@ This plan contains 36 proposed posts: 12 launch briefs and 24 follow-on topics. 
 
 ## Publication progress
 
-**Current totals:** 12 of 36 published; **24 unpublished**. Next eligible: **16 — Buying an airplane for IFR: how to check an avionics ad**, prepared as an unpublished draft for 21 October at 9:04 a.m. Eastern. Inventory and live manifest reconciled on 21 October 2026 Eastern; articles 01–09, 11, 13 and 14 are live. Topics 10, 12 and 15 are deferred for their recorded evidence requirements and still count among the 24 unpublished IDs.
+**Current totals:** 13 of 36 published; **23 unpublished**. Next planned topic: **17 — High airframe time vs damage history: which questions matter more?**, subject to its evidence requirements. Inventory and live manifest reconciled on 21 October 2026 Eastern; articles 01–09, 11, 13, 14 and 16 are live. Topics 10, 12 and 15 are deferred for their recorded evidence requirements and still count among the 23 unpublished IDs.
 
 Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03**, followed by final source, calculation and style review. The originals were backed up and deleted; the replacement posts are live. Covers, contents links, tables and classifieds links were checked on desktop and phone layouts after successful deployment.
 
@@ -27,7 +27,7 @@ Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03
 - [x] **13 — [Cherokee Six vs a four-seat single: how much payload do you gain?](https://zuluniner.com/blog/cherokee-six-vs-four-seat-payload/)** — published on 19 October 2026 Eastern at 9:12 a.m. EDT; three fictional candidates, four/five/six-adult loads, historical oil-weight conventions and a worksheet. Metadata, cover variants, contents, classifieds links and desktop/phone layouts verified. [Publication record](docs/blog/13-cherokee-six-payload.notes.md).
 - [x] **14 — [Should you buy an airplane for your private-pilot training?](https://zuluniner.com/blog/buy-airplane-private-pilot-training/)** — published on 20 October 2026 Eastern at 9:35 a.m. EDT; current FAA rules, an original buy/rent budget, an adverse case and a decision worksheet. Metadata, cover variants, eight contents targets, both tables, worksheet, classifieds links and desktop/phone layouts verified. [Publication record](docs/blog/14-buy-airplane-private-pilot-training.notes.md).
 - [ ] **15 — Two owners, one airplane** — deferred pending partner interviews and legal review; [evidence blocker](docs/blog/15-aircraft-partnership.blocker.md). Still unpublished and counted.
-- [ ] **16 — Buying an airplane for IFR: how to check an avionics ad** — prepared as an unpublished draft for 21 October at 9:04 a.m. Eastern; three fictional ads, a records exercise and a seller-question worksheet. [Preparation record](docs/blog/16-ifr-avionics-ad-checklist.notes.md).
+- [x] **16 — [Buying an airplane for IFR: how to check an avionics ad](https://zuluniner.com/blog/ifr-avionics-ad-checklist/)** — published on 21 October 2026 Eastern at 9:23 a.m. EDT; three fictional ads, a records exercise and a seller-question worksheet. Deployment, metadata, covers, contents, tables, worksheet and classifieds links passed; final device checks completed after 10 a.m. [Publication record](docs/blog/16-ifr-avionics-ad-checklist.notes.md).
 - [ ] **17–36** — not yet written or published.
 
 The published editions use primary-source research and clearly identified fictional examples. No independent CFI/A&P/IA review or specialist interview has occurred; those proposed enhancements are still outstanding and are not counted as completed. Article sources, metadata, cover prompts and validation details are retained in [docs/blog/publication-notes.md](docs/blog/publication-notes.md).
@@ -46,12 +46,13 @@ The published editions use primary-source research and clearly identified fictio
 | 18 October 2026 | 11 | Published at 9:04 a.m. EDT, after the reserved 8:23 a.m. target. [Article](https://zuluniner.com/blog/safety-pilot-pic-cross-country/) and [content deployment](https://github.com/discomedia/zuluniner/actions/runs/39129968040) verified; metadata, cover variants, eight contents targets, worksheet, classifieds links and desktop/phone layouts passed. Topic 10 remains blocked. |
 | 19 October 2026 | 13 | Published at 9:12 a.m. EDT after the reserved 9:06 a.m. target. [Article](https://zuluniner.com/blog/cherokee-six-vs-four-seat-payload/) and [content deployment](https://github.com/discomedia/zuluniner/actions/runs/39258192639) verified; metadata, cover variants, eight contents targets, two tables, worksheet, classifieds links and desktop/phone layouts passed. Topics 10 and 12 remain blocked. |
 | 20 October 2026 | 14 | Published at 9:35 a.m. EDT after the reserved 9:25 a.m. target. [Article](https://zuluniner.com/blog/buy-airplane-private-pilot-training/) and [content deployment](https://github.com/discomedia/zuluniner/actions/runs/39431684415) verified; metadata, cover variants, eight contents targets, two tables, worksheet, classifieds links and desktop/phone layouts passed. Topics 10 and 12 remain blocked. |
+| 21 October 2026 | 16 | Published at 9:23 a.m. EDT after the reserved 9:04 a.m. target. [Article](https://zuluniner.com/blog/ifr-avionics-ad-checklist/) and [content deployment](https://github.com/discomedia/zuluniner/actions/runs/39607522608) verified; automated live checks passed at 9:47 a.m. EDT. Final desktop/phone checks completed after 10 a.m. Topics 10, 12 and 15 remain blocked. |
 
 ## Scheduled publication
 
 **ZuluNiner daily blog publishing** is active in this chat. It prepares the next eligible article at 6 a.m. Eastern, starting immediately if that preparation wake arrives up to ten minutes early, and publishes at a newly randomized time within the **8–10 a.m. America/New_York** window. Random target minutes run from 8:00 through 9:45, leaving deployment time before the window closes. Eastern daylight saving changes are included. The first target was **10 October 2026 at 8:16 a.m. EDT**; article 04 was published and verified that morning.
 
-The automation updates the specific completed ID, publication date, canonical URL and totals only after live deployment checks pass. It reconciles existing posts and drafts to avoid duplicates and preserves a limit of one new planned post per Eastern date. Published articles 01–09, 11, 13 and 14 remain live. The owner approved individual immediate-publication exceptions for articles 05 and 07; subsequent automated articles keep the morning window.
+The automation updates the specific completed ID, publication date, canonical URL and totals only after live deployment checks pass. It reconciles existing posts and drafts to avoid duplicates and preserves a limit of one new planned post per Eastern date. Published articles 01–09, 11, 13, 14 and 16 remain live. The owner approved individual immediate-publication exceptions for articles 05 and 07; subsequent automated articles keep the morning window.
 
 **Nearly exhausted:** alert when **five or fewer unpublished IDs remain**, including blocked topics. Record the alert once per threshold/queue state. At zero remaining, report completion and pause the schedule. Instructions and recovery state are described in [docs/blog/scheduled-publishing.md](docs/blog/scheduled-publishing.md).
 
@@ -308,16 +309,16 @@ Effort estimates are editorial planning assumptions: **medium** means about 1–
 
 ## Next publication sequence
 
-Articles 01–09, 11, 13 and 14 are published. Topic 16 is prepared as an unpublished draft for 21 October; topics 10, 12 and 15 have recorded evidence blockers. Continue in numeric ID order among eligible unpublished topics, one article per day. Defer a topic if its required evidence or specialist input is unavailable; record the reason and choose the next eligible ID. The automated cadence supersedes the original weekly launch calendar.
+Articles 01–09, 11, 13, 14 and 16 are published. Topic 17 is next, subject to its evidence requirements; topics 10, 12 and 15 have recorded evidence blockers. Continue in numeric ID order among eligible unpublished topics, one article per day. Defer a topic if its required evidence or specialist input is unavailable; record the reason and choose the next eligible ID. The automated cadence supersedes the original weekly launch calendar.
 
 | Next ID | Article | Companion material | Purpose |
 | --- | --- | --- | --- |
 | 10 | Lean of peak — blocked | Terminology diagram | Obtain the evidence in its blocker record before drafting. |
 | 15 | Two owners, one airplane — blocked | Partner interviews and legal review | Obtain the evidence in its blocker record before drafting. |
-| 16 | IFR avionics ad screening | Seller-question worksheet | Verify the advertised installation, records and mission capability. |
+| 17 | High airframe time vs damage history | Anonymized records comparison | Obtain type-specialist input and the required records before drafting. |
 | 12 | Comanche 250 — blocked | Specialist/owner interview | Obtain the evidence in its blocker record before drafting. |
 
-Continue with eligible follow-on IDs 16–36; reconsider blocked IDs 10, 12 and 15 when their missing evidence becomes available. Cost illustrations must label teaching assumptions explicitly; never present invented figures as current quotations or typical market costs.
+Continue with eligible follow-on IDs 17–36; reconsider blocked IDs 10, 12 and 15 when their missing evidence becomes available. Cost illustrations must label teaching assumptions explicitly; never present invented figures as current quotations or typical market costs.
 
 ## How readers should reach the classifieds
 

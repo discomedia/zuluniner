@@ -1,8 +1,8 @@
-# Article 16 preparation record
+# Article 16 publication record
 
-Prepared on 21 October 2026 Eastern. **Unpublished draft.** Reserved publication: 21 October at **9:04 a.m. EDT**, or 22 October at **12:04 a.m. Australia/Melbourne**, using IANA timezone conversion. Before drafting, the same automation was moved to that stored time and its prompt and other settings were preserved and read back.
+Prepared on 21 October 2026 Eastern. Initially saved as an unpublished draft; verified publication is recorded below. Reserved publication: 21 October at **9:04 a.m. EDT**, or 22 October at **12:04 a.m. Australia/Melbourne**, using IANA timezone conversion. Before drafting, the same automation was moved to that stored time and its prompt and other settings were preserved and read back.
 
-The full connector inventory and live manifest contained 12 published posts, no drafts and no overlapping article. The inventory was backed up under ignored `data/backups/` before production mutation. Topic 15's required interviews and legal review weren't obtained; its blocker was recorded. Topics 10 and 12 are still blocked. Counts stay **12 published, 24 unpublished**, including blocked topics and this draft.
+The full connector inventory and live manifest contained 12 published posts, no drafts and no overlapping article. The inventory was backed up under ignored `data/backups/` before production mutation. Topic 15's required interviews and legal review weren't obtained; its blocker was recorded. Topics 10 and 12 are still blocked. At preparation, counts were **12 published, 24 unpublished**, including blocked topics and this draft.
 
 ## Sources and limits
 
@@ -33,4 +33,14 @@ The signed prepared-family upload verified original and all 480/960/1600 WebP va
 
 Node 24 `npm run verify` passed: 39 tests, Astro/TypeScript, lint, static build and Worker dry run. Production-renderer checks passed 2,075 words, eight contents targets, two tables with seven body rows, the calendar exercise, worksheet identity and banned wording. The cover alt mapping is static; no article island is introduced.
 
-Desktop 1280 × 900 and phone 390 × 844 previews were inspected. Cover and title fit, tables stay in contained overflow containers, page width stays 390 pixels, and keyboard activation of the fictional-ad contents link reaches its heading. Source/draft deployment and live preparation checks are retained in ignored state. Repeat article/card/metadata/device checks at publication, and don't mark topic 16 published until those checks pass.
+Desktop 1280 × 900 and phone 390 × 844 previews were inspected. Cover and title fit, tables stay in contained overflow containers, page width stays 390 pixels, and keyboard activation of the fictional-ad contents link reaches its heading. Source/draft deployment and live preparation checks are retained in ignored state. Those checks were repeated after publication, as recorded below.
+
+## Verified publication — 21 October 2026 Eastern
+
+The exact draft `a0c84ec4-b400-47fa-9a6e-a0943275d910` was published at **9:23:04 a.m. EDT**, after the preserved 9:04 a.m. target. Its current revision is `2026-10-21T13:23:04.378326+00:00`. Publication `939e437e-3a87-4e0f-9148-c255de73577f` reports deployed; [content workflow 39607522608](https://github.com/discomedia/zuluniner/actions/runs/39607522608) succeeded at 9:24 a.m. EDT. The draft-save and preparation-source workflows also succeeded; the source commit was `285beae880eb09a62dcc7e38fb8f9b4c599140c2`.
+
+The full prepublication inventory contained 12 published posts and this matching draft; no newly published post belonged to 21 October Eastern. The reviewed payload matched all saved fields. The supporting worksheet was verified deployed before publishing, while the draft was still absent from the live manifest, blog cards and public route.
+
+The [live article](https://zuluniner.com/blog/ifr-avionics-ad-checklist/) passed one-H1/title, canonical, description and Open Graph checks, cover alt text and responsive paths, eight contents targets, both tables, all internal links including aircraft browsing, the exact 3,586-byte worksheet, blog card and the 13-post manifest. Original and all responsive cover files matched the verified family bytes. No hydrated article island was present. Automated live checks passed at **9:47:55 a.m. EDT**. Desktop and phone layouts and contents navigation were inspected; phone width was 390 pixels and table overflow stayed contained. Final device verification completed after 10 a.m. EDT, missing the full verification deadline. Publication and content deployment occurred within the morning window.
+
+The same automation was reset in a finally step to **22 October at 6 a.m. EDT** (9 p.m. Australia/Melbourne), with a new persisted **8:47 a.m. EDT** publication target (11:47 p.m. Australia/Melbourne on 22 October). IANA conversion and saved-settings readback confirmed the schedule, with other settings preserved. Totals: **13 published, 23 unpublished**, including blocked topics 10, 12 and 15. Topic 17 is next, subject to its evidence requirements. No exhaustion alert is due.
