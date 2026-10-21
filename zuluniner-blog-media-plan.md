@@ -8,7 +8,7 @@ This plan contains 36 proposed posts: 12 launch briefs and 24 follow-on topics. 
 
 ## Publication progress
 
-**Current totals:** 12 of 36 published; **24 unpublished**. Next eligible: **15 — Two owners, one airplane: what to agree before buying a share**. Inventory and live manifest reconciled on 20 October 2026 Eastern; articles 01–09, 11, 13 and 14 are live. Topics 10 and 12 are deferred for their recorded evidence requirements and still count among the 24 unpublished IDs.
+**Current totals:** 12 of 36 published; **24 unpublished**. Next eligible: **16 — Buying an airplane for IFR: how to check an avionics ad**, prepared as an unpublished draft for 21 October at 9:04 a.m. Eastern. Inventory and live manifest reconciled on 21 October 2026 Eastern; articles 01–09, 11, 13 and 14 are live. Topics 10, 12 and 15 are deferred for their recorded evidence requirements and still count among the 24 unpublished IDs.
 
 Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03**, followed by final source, calculation and style review. The originals were backed up and deleted; the replacement posts are live. Covers, contents links, tables and classifieds links were checked on desktop and phone layouts after successful deployment.
 
@@ -26,7 +26,9 @@ Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03
 - [ ] **12 — Comanche 250** — deferred; [evidence blocker](docs/blog/12-comanche-250.blocker.md). Still unpublished.
 - [x] **13 — [Cherokee Six vs a four-seat single: how much payload do you gain?](https://zuluniner.com/blog/cherokee-six-vs-four-seat-payload/)** — published on 19 October 2026 Eastern at 9:12 a.m. EDT; three fictional candidates, four/five/six-adult loads, historical oil-weight conventions and a worksheet. Metadata, cover variants, contents, classifieds links and desktop/phone layouts verified. [Publication record](docs/blog/13-cherokee-six-payload.notes.md).
 - [x] **14 — [Should you buy an airplane for your private-pilot training?](https://zuluniner.com/blog/buy-airplane-private-pilot-training/)** — published on 20 October 2026 Eastern at 9:35 a.m. EDT; current FAA rules, an original buy/rent budget, an adverse case and a decision worksheet. Metadata, cover variants, eight contents targets, both tables, worksheet, classifieds links and desktop/phone layouts verified. [Publication record](docs/blog/14-buy-airplane-private-pilot-training.notes.md).
-- [ ] **15–36** — not yet written or published.
+- [ ] **15 — Two owners, one airplane** — deferred pending partner interviews and legal review; [evidence blocker](docs/blog/15-aircraft-partnership.blocker.md). Still unpublished and counted.
+- [ ] **16 — Buying an airplane for IFR: how to check an avionics ad** — prepared as an unpublished draft for 21 October at 9:04 a.m. Eastern; three fictional ads, a records exercise and a seller-question worksheet. [Preparation record](docs/blog/16-ifr-avionics-ad-checklist.notes.md).
+- [ ] **17–36** — not yet written or published.
 
 The published editions use primary-source research and clearly identified fictional examples. No independent CFI/A&P/IA review or specialist interview has occurred; those proposed enhancements are still outstanding and are not counted as completed. Article sources, metadata, cover prompts and validation details are retained in [docs/blog/publication-notes.md](docs/blog/publication-notes.md).
 
@@ -306,15 +308,16 @@ Effort estimates are editorial planning assumptions: **medium** means about 1–
 
 ## Next publication sequence
 
-Articles 01–09, 11, 13 and 14 are published. Topic 15 is next; topics 10 and 12 have recorded evidence blockers. Continue in numeric ID order among eligible unpublished topics, one article per day. Defer a topic if its required evidence or specialist input is unavailable; record the reason and choose the next eligible ID. The automated cadence supersedes the original weekly launch calendar.
+Articles 01–09, 11, 13 and 14 are published. Topic 16 is prepared as an unpublished draft for 21 October; topics 10, 12 and 15 have recorded evidence blockers. Continue in numeric ID order among eligible unpublished topics, one article per day. Defer a topic if its required evidence or specialist input is unavailable; record the reason and choose the next eligible ID. The automated cadence supersedes the original weekly launch calendar.
 
 | Next ID | Article | Companion material | Purpose |
 | --- | --- | --- | --- |
 | 10 | Lean of peak — blocked | Terminology diagram | Obtain the evidence in its blocker record before drafting. |
-| 15 | Two owners, one airplane | Partnership decision checklist | Assess scheduling, reserves, maintenance decisions and exits; obtain required partner interviews and legal review. |
+| 15 | Two owners, one airplane — blocked | Partner interviews and legal review | Obtain the evidence in its blocker record before drafting. |
+| 16 | IFR avionics ad screening | Seller-question worksheet | Verify the advertised installation, records and mission capability. |
 | 12 | Comanche 250 — blocked | Specialist/owner interview | Obtain the evidence in its blocker record before drafting. |
 
-Continue with eligible follow-on IDs 15–36; reconsider blocked IDs 10 and 12 when their missing evidence becomes available. Cost illustrations must label teaching assumptions explicitly; never present invented figures as current quotations or typical market costs.
+Continue with eligible follow-on IDs 16–36; reconsider blocked IDs 10, 12 and 15 when their missing evidence becomes available. Cost illustrations must label teaching assumptions explicitly; never present invented figures as current quotations or typical market costs.
 
 ## How readers should reach the classifieds
 

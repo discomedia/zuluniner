@@ -1,0 +1,7 @@
+{
+  "plan_id": "16",
+  "tool": "built-in imagegen",
+  "prompt": "Use case: stylized-concept. Asset type: aviation editorial blog cover, exactly 3:2 landscape. Primary request: a restrained, somewhat abstract illustration of the instrument panel and windshield of a small single-engine private airplane parked on an apron, viewed from the empty cabin. Aviation technology dominates: a clear uncluttered dark charcoal panel with several simple round instruments and two small recessed rectangular navigation screens, with muted blue and ochre geometric shapes on the screens. A faint small airplane and hangar are visible through the broad windshield. Medium: refined editorial graphic illustration, controlled shapes and subtle texture, realistic overall aircraft cockpit proportions without claiming to depict any actual certified installation. Palette: slate navy, muted teal, warm gray, soft daylight. Composition: panel in the lower two-thirds, windshield and quiet airport in the upper third; essential forms inset from crop edges and readable at thumbnail size. No people. No logos or brands. Absolutely no text anywhere, no letters, no digits, no dial numerals, no captions, no labels, no typographic decorations, no watermark. This is an atmospheric editorial illustration, not an instructional diagram or operating display.",
+  "generated_source": "/Users/danahooshmand/.codex/generated_images/01a11f60-c617-79b3-a337-93b5f6fe2afb/exec-564e47a8-07da-429f-bed0-267038476773.png",
+  "selected_asset": "docs/blog/images/ifr-avionics-ad-checklist-cover.webp"
+}
