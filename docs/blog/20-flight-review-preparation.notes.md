@@ -1,14 +1,14 @@
-# Article 20 preparation record
+# Article 20 preparation and publication record
 
-Prepared on 22 October 2026 Eastern. **Unpublished draft.** Reserved publication: **22 October at 8:47 a.m. EDT**, or **22 October at 11:47 p.m. Australia/Melbourne**, converted using IANA timezone data. Before drafting, this same heartbeat was moved to the stored publication target and its settings were read back. Prompt, kind, destination, status and notification settings were preserved.
+Prepared on 22 October 2026 Eastern. Saved as an unpublished draft during preparation. Reserved publication: **22 October at 8:47 a.m. EDT**, or **22 October at 11:47 p.m. Australia/Melbourne**, converted using IANA timezone data. Before drafting, this same heartbeat was moved to the stored publication target and its settings were read back. Prompt, kind, destination, status and notification settings were preserved.
 
-Draft ID: `19b04756-d273-4bff-922b-fc29500c879c`. Saved revision: `2026-10-22T10:08:36.744514+00:00`. Draft-save publication ID: `f2c0025d-4cc6-40b9-8fba-d7726adcee54`. Slug: `flight-review-preparation`. At publication, read and inspect this exact draft again, and use its latest revision guard. The expected canonical URL is `https://zuluniner.com/blog/flight-review-preparation/`; preparation doesn't make it live.
+Draft ID: `19b04756-d273-4bff-922b-fc29500c879c`. Saved revision: `2026-10-22T10:08:36.744514+00:00`. Draft-save publication ID: `f2c0025d-4cc6-40b9-8fba-d7726adcee54`. Slug: `flight-review-preparation`. The exact draft was read and inspected again at publication, and its latest revision guard was used. The canonical URL is `https://zuluniner.com/blog/flight-review-preparation/`; preparation doesn't make it live.
 
 ## Reconciliation and evidence gates
 
 The full connector inventory and live manifest were reconciled: 13 published articles, no drafts and no overlapping article. A complete post-inventory backup was saved under ignored `data/backups/` before production mutation. Topics 10, 12 and 15 retain their previous evidence blockers. Topics 17–19 were considered in order and deferred for their recorded evidence requirements; no findings, interviews, quotes or document access were invented.
 
-Topic 20 is the lowest eligible unpublished topic. Totals remain **13 published, 23 unpublished**, including blocked topics 10, 12, 15, 17, 18 and 19 and this prepared draft. No exhaustion alert is due.
+At preparation, topic 20 was the lowest eligible unpublished topic. Totals were **13 published, 23 unpublished**, including blocked topics 10, 12, 15, 17, 18 and 19 and this prepared draft. No exhaustion alert is due.
 
 ## Sources actually inspected
 
@@ -37,3 +37,14 @@ The signed prepared-family helper uploaded and byte-verified the original and 48
 Node 24 `npm run verify` passed: 39 tests, Astro/TypeScript, lint, static build and Worker dry run. A separate production-renderer check passed 1,923 words, eight contents targets, one table with three body rows, the calendar arithmetic, worksheet identity and the banned-word scan. No hydrated article island is introduced. Cover alt text uses the existing static mapping.
 
 Desktop 1280 × 900 and phone 390 × 844 previews were inspected. Cover and title fit; phone page width stays 390 pixels, table overflow is contained, and keyboard activation of the pilot-profiles contents link reaches its heading. Draft/source deployment and live preparation verification evidence is retained in ignored state. Repeat live article/card/metadata/images/links and device checks at publication before marking topic 20 complete.
+
+
+## Verified publication — 22 October 2026
+
+The full 14-post inventory (13 published and this draft) and live 13-post manifest were backed up and reconciled again before publication. No post had been published on 22 October Eastern. Node 24 `npm run verify` passed again, including all 39 tests. The exact reviewed draft matched all saved content and metadata fields.
+
+Published at **8:50:30 a.m. EDT**, after the reserved 8:47 a.m. target and within the morning window. Revision guard: `2026-10-22T10:08:36.744514+00:00`; resulting revision: `2026-10-22T12:50:30.657762+00:00`. Publication ID: `bacad9ea-f8d3-4a23-88d8-fea95236fc19`. The [content deployment](https://github.com/discomedia/zuluniner/actions/runs/39781690260) completed successfully before live verification.
+
+The live article, blog card, canonical and Open Graph metadata, cover alt text, original and all three responsive image variants passed. Every variant matched the prepared bytes. All eight contents targets, the three-row table, 2,469-byte worksheet, related articles and aircraft-browse links passed; no hydrated article island was present. Desktop 1280 × 900 and phone 390 × 844 rendering were inspected; cover/title fit, page overflow was contained, and the pilot-profile contents link reached its heading. Evidence is retained in ignored `data/blog-20-live-verification.json` and `data/blog-20-device-verification.json`.
+
+In a finally step, the same automation was reset to **23 October at 6 a.m. EDT** (9 p.m. Australia/Melbourne), with a fresh uniformly selected target of **9:42 a.m. EDT** (24 October at 12:42 a.m. Australia/Melbourne). IANA conversion and a settings readback confirmed the schedule and preservation of all other automation settings. Totals are **14 published, 22 unpublished**, including blocked IDs 10, 12, 15 and 17–19. Next eligible topic: 21, subject to its evidence requirements. No exhaustion alert is due.
