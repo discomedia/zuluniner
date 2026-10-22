@@ -51,4 +51,6 @@ The first content-only deployment encountered a transient old-manifest response 
 | 20 October 2026 | 14 | [Should you buy an airplane for your private-pilot training?](https://zuluniner.com/blog/buy-airplane-private-pilot-training/); [research, original buy/rent examples, worksheet and live verification](14-buy-airplane-private-pilot-training.notes.md). Published at 9:35 a.m. EDT. |
 | 21 October 2026 | 16 | [Buying an airplane for IFR: how to check an avionics ad](https://zuluniner.com/blog/ifr-avionics-ad-checklist/); [research, fictional ad cases, worksheet and live verification](16-ifr-avionics-ad-checklist.notes.md). Published at 9:23 a.m. EDT and deployed at 9:24; final device checks completed after 10 a.m. |
 
-Articles 04–09, 11, 13, 14 and 16 passed publication and desktop/phone checks after successful deployments. Current totals are 13 published and 23 unpublished planned IDs, including blocked topics 10, 12 and 15. Existing posts and aircraft were preserved.
+Articles 04–09, 11, 13, 14 and 16 passed publication and desktop/phone checks after successful deployments. Current totals are 13 published and 23 unpublished planned IDs, including blocked topics 10, 12, 15 and 17–19. Existing posts and aircraft were preserved.
+
+Article 20 was prepared as an unpublished draft on 22 October for the preserved 8:47 a.m. Eastern target. See its [preparation and evidence record](20-flight-review-preparation.notes.md). It is not included in the published total.
