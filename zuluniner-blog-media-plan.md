@@ -8,7 +8,7 @@ This plan contains 36 proposed posts: 12 launch briefs and 24 follow-on topics. 
 
 ## Publication progress
 
-**Current totals:** 14 of 36 published; **22 unpublished**. Next eligible: **21 — VFR personal minimums for a trip you actually want to make**, prepared as an unpublished draft for 23 October at 9:42 a.m. Eastern. Inventory and live manifest reconciled on 23 October 2026 Eastern; articles 01–09, 11, 13, 14, 16 and 20 are live. Topics 10, 12, 15 and 17–19 have recorded evidence blockers and still count among the 22 unpublished IDs.
+**Current totals:** 15 of 36 published; **21 unpublished**. Next planned topic: **22 — The engine-failure turnback: why a single altitude is the wrong answer**, subject to its required evidence and instructor review. Inventory and live manifest reconciled on 23 October 2026 Eastern; articles 01–09, 11, 13, 14, 16, 20 and 21 are live. Topics 10, 12, 15 and 17–19 have recorded evidence blockers and still count among the 21 unpublished IDs.
 
 Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03**, followed by final source, calculation and style review. The originals were backed up and deleted; the replacement posts are live. Covers, contents links, tables and classifieds links were checked on desktop and phone layouts after successful deployment.
 
@@ -32,7 +32,7 @@ Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03
 - [ ] **18 — Fixed-pitch vs constant-speed ownership** — deferred pending matched installation evidence and quotations; [blocker](docs/blog/18-propeller-ownership.blocker.md).
 - [ ] **19 — Buying a Rotax 912 airplane** — deferred pending a verified current aircraft/engine manual set and support evidence; [blocker](docs/blog/19-rotax-912-buyer.blocker.md).
 - [x] **20 — [A flight review that addresses the flying you actually do](https://zuluniner.com/blog/flight-review-preparation/)** — published on 22 October 2026 Eastern at 8:50 a.m. EDT; FAA requirements and guidance, three fictional pilot profiles and a preparation/follow-up sheet. Deployment, metadata, cover family, eight contents targets, table, worksheet, classifieds links and desktop/phone layouts verified. [Publication record](docs/blog/20-flight-review-preparation.notes.md).
-- [ ] **21 — VFR personal minimums for a trip you actually want to make** — prepared as an unpublished draft for 23 October at 9:42 a.m. Eastern; three fictional weather/terrain/passenger scenarios and a trip decision worksheet. [Preparation record](docs/blog/21-vfr-personal-minimums.notes.md).
+- [x] **21 — [VFR personal minimums for a trip you actually want to make](https://zuluniner.com/blog/vfr-personal-minimums/)** — published on 23 October 2026 Eastern at 9:46 a.m. EDT; three fictional weather/terrain/passenger scenarios and a trip decision worksheet. Deployment, metadata, cover family, eight contents targets, table, worksheet, classifieds links and desktop/phone layouts verified. [Publication record](docs/blog/21-vfr-personal-minimums.notes.md).
 - [ ] **22–36** — not yet written or published.
 
 The published editions use primary-source research and clearly identified fictional examples. No independent CFI/A&P/IA review or specialist interview has occurred; those proposed enhancements are still outstanding and are not counted as completed. Article sources, metadata, cover prompts and validation details are retained in [docs/blog/publication-notes.md](docs/blog/publication-notes.md).
@@ -53,12 +53,13 @@ The published editions use primary-source research and clearly identified fictio
 | 20 October 2026 | 14 | Published at 9:35 a.m. EDT after the reserved 9:25 a.m. target. [Article](https://zuluniner.com/blog/buy-airplane-private-pilot-training/) and [content deployment](https://github.com/discomedia/zuluniner/actions/runs/39431684415) verified; metadata, cover variants, eight contents targets, two tables, worksheet, classifieds links and desktop/phone layouts passed. Topics 10 and 12 remain blocked. |
 | 21 October 2026 | 16 | Published at 9:23 a.m. EDT after the reserved 9:04 a.m. target. [Article](https://zuluniner.com/blog/ifr-avionics-ad-checklist/) and [content deployment](https://github.com/discomedia/zuluniner/actions/runs/39607522608) verified; automated live checks passed at 9:47 a.m. EDT. Final desktop/phone checks completed after 10 a.m. Topics 10, 12 and 15 remain blocked. |
 | 22 October 2026 | 20 | Published at 8:50 a.m. EDT after the reserved 8:47 a.m. target. [Article](https://zuluniner.com/blog/flight-review-preparation/) and [content deployment](https://github.com/discomedia/zuluniner/actions/runs/39781690260) verified; metadata, original and responsive covers, eight contents targets, table, worksheet, classifieds links and desktop/phone layouts passed. Topics 10, 12, 15 and 17–19 remain blocked. |
+| 23 October 2026 | 21 | Published at 9:46 a.m. EDT after the reserved 9:42 a.m. target. [Article](https://zuluniner.com/blog/vfr-personal-minimums/) and [content deployment](https://github.com/discomedia/zuluniner/actions/runs/39963960323) verified; metadata, original and responsive covers, eight contents targets, table, worksheet, classifieds links and desktop/phone layouts passed. Topics 10, 12, 15 and 17–19 remain blocked. |
 
 ## Scheduled publication
 
 **ZuluNiner daily blog publishing** is active in this chat. It prepares the next eligible article at 6 a.m. Eastern, starting immediately if that preparation wake arrives up to ten minutes early, and publishes at a newly randomized time within the **8–10 a.m. America/New_York** window. Random target minutes run from 8:00 through 9:45, leaving deployment time before the window closes. Eastern daylight saving changes are included. The first target was **10 October 2026 at 8:16 a.m. EDT**; article 04 was published and verified that morning.
 
-The automation updates the specific completed ID, publication date, canonical URL and totals only after live deployment checks pass. It reconciles existing posts and drafts to avoid duplicates and preserves a limit of one new planned post per Eastern date. Published articles 01–09, 11, 13, 14, 16 and 20 remain live. The owner approved individual immediate-publication exceptions for articles 05 and 07; subsequent automated articles keep the morning window.
+The automation updates the specific completed ID, publication date, canonical URL and totals only after live deployment checks pass. It reconciles existing posts and drafts to avoid duplicates and preserves a limit of one new planned post per Eastern date. Published articles 01–09, 11, 13, 14, 16, 20 and 21 remain live. The owner approved individual immediate-publication exceptions for articles 05 and 07; subsequent automated articles keep the morning window.
 
 **Nearly exhausted:** alert when **five or fewer unpublished IDs remain**, including blocked topics. Record the alert once per threshold/queue state. At zero remaining, report completion and pause the schedule. Instructions and recovery state are described in [docs/blog/scheduled-publishing.md](docs/blog/scheduled-publishing.md).
 
@@ -315,17 +316,17 @@ Effort estimates are editorial planning assumptions: **medium** means about 1–
 
 ## Next publication sequence
 
-Articles 01–09, 11, 13, 14, 16 and 20 are published. Topic 21 is prepared as an unpublished draft for 23 October; topics 10, 12, 15 and 17–19 have recorded evidence blockers. Continue in numeric ID order among eligible unpublished topics, one article per day. Defer a topic if its required evidence or specialist input is unavailable; record the reason and choose the next eligible ID. The automated cadence supersedes the original weekly launch calendar.
+Articles 01–09, 11, 13, 14, 16, 20 and 21 are published. Topic 22 is next, subject to its required evidence and instructor review; topics 10, 12, 15 and 17–19 have recorded evidence blockers. Continue in numeric ID order among eligible unpublished topics, one article per day. Defer a topic if its required evidence or specialist input is unavailable; record the reason and choose the next eligible ID. The automated cadence supersedes the original weekly launch calendar.
 
 | Next ID | Article | Companion material | Purpose |
 | --- | --- | --- | --- |
 | 10 | Lean of peak — blocked | Terminology diagram | Obtain the evidence in its blocker record before drafting. |
 | 15 | Two owners, one airplane — blocked | Partner interviews and legal review | Obtain the evidence in its blocker record before drafting. |
 | 17–19 | Airframe records, propeller ownership and Rotax buying — blocked | Recorded evidence requirements | Obtain the evidence in each blocker record before drafting. |
-| 21 | VFR personal minimums | Three mission scenarios | Connect weather, terrain, passengers and pilot readiness using current FAA decision-making material. |
+| 22 | Engine-failure turnback | Instructor-reviewed departure briefing | Obtain the required evidence and review; no universal altitude or unsupervised practice recipe. |
 | 12 | Comanche 250 — blocked | Specialist/owner interview | Obtain the evidence in its blocker record before drafting. |
 
-Continue with eligible follow-on IDs 21–36; reconsider blocked IDs 10, 12, 15 and 17–19 when their missing evidence becomes available. Cost illustrations must label teaching assumptions explicitly; never present invented figures as current quotations or typical market costs.
+Continue with eligible follow-on IDs 22–36; reconsider blocked IDs 10, 12, 15 and 17–19 when their missing evidence becomes available. Cost illustrations must label teaching assumptions explicitly; never present invented figures as current quotations or typical market costs.
 
 ## How readers should reach the classifieds
 
