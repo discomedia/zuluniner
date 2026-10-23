@@ -8,7 +8,7 @@ This plan contains 36 proposed posts: 12 launch briefs and 24 follow-on topics. 
 
 ## Publication progress
 
-**Current totals:** 14 of 36 published; **22 unpublished**. Next eligible: **21 — VFR personal minimums for a trip you actually want to make**, subject to research and evidence checks. Inventory and live manifest reconciled on 22 October 2026 Eastern; articles 01–09, 11, 13, 14, 16 and 20 are live. Topics 10, 12, 15 and 17–19 have recorded evidence blockers and still count among the 22 unpublished IDs.
+**Current totals:** 14 of 36 published; **22 unpublished**. Next eligible: **21 — VFR personal minimums for a trip you actually want to make**, prepared as an unpublished draft for 23 October at 9:42 a.m. Eastern. Inventory and live manifest reconciled on 23 October 2026 Eastern; articles 01–09, 11, 13, 14, 16 and 20 are live. Topics 10, 12, 15 and 17–19 have recorded evidence blockers and still count among the 22 unpublished IDs.
 
 Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03**, followed by final source, calculation and style review. The originals were backed up and deleted; the replacement posts are live. Covers, contents links, tables and classifieds links were checked on desktop and phone layouts after successful deployment.
 
@@ -32,7 +32,8 @@ Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03
 - [ ] **18 — Fixed-pitch vs constant-speed ownership** — deferred pending matched installation evidence and quotations; [blocker](docs/blog/18-propeller-ownership.blocker.md).
 - [ ] **19 — Buying a Rotax 912 airplane** — deferred pending a verified current aircraft/engine manual set and support evidence; [blocker](docs/blog/19-rotax-912-buyer.blocker.md).
 - [x] **20 — [A flight review that addresses the flying you actually do](https://zuluniner.com/blog/flight-review-preparation/)** — published on 22 October 2026 Eastern at 8:50 a.m. EDT; FAA requirements and guidance, three fictional pilot profiles and a preparation/follow-up sheet. Deployment, metadata, cover family, eight contents targets, table, worksheet, classifieds links and desktop/phone layouts verified. [Publication record](docs/blog/20-flight-review-preparation.notes.md).
-- [ ] **21–36** — not yet written or published.
+- [ ] **21 — VFR personal minimums for a trip you actually want to make** — prepared as an unpublished draft for 23 October at 9:42 a.m. Eastern; three fictional weather/terrain/passenger scenarios and a trip decision worksheet. [Preparation record](docs/blog/21-vfr-personal-minimums.notes.md).
+- [ ] **22–36** — not yet written or published.
 
 The published editions use primary-source research and clearly identified fictional examples. No independent CFI/A&P/IA review or specialist interview has occurred; those proposed enhancements are still outstanding and are not counted as completed. Article sources, metadata, cover prompts and validation details are retained in [docs/blog/publication-notes.md](docs/blog/publication-notes.md).
 
@@ -314,7 +315,7 @@ Effort estimates are editorial planning assumptions: **medium** means about 1–
 
 ## Next publication sequence
 
-Articles 01–09, 11, 13, 14, 16 and 20 are published. Topic 21 is next, subject to evidence checks; topics 10, 12, 15 and 17–19 have recorded evidence blockers. Continue in numeric ID order among eligible unpublished topics, one article per day. Defer a topic if its required evidence or specialist input is unavailable; record the reason and choose the next eligible ID. The automated cadence supersedes the original weekly launch calendar.
+Articles 01–09, 11, 13, 14, 16 and 20 are published. Topic 21 is prepared as an unpublished draft for 23 October; topics 10, 12, 15 and 17–19 have recorded evidence blockers. Continue in numeric ID order among eligible unpublished topics, one article per day. Defer a topic if its required evidence or specialist input is unavailable; record the reason and choose the next eligible ID. The automated cadence supersedes the original weekly launch calendar.
 
 | Next ID | Article | Companion material | Purpose |
 | --- | --- | --- | --- |

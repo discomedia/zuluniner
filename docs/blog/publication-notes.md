@@ -55,3 +55,5 @@ The first content-only deployment encountered a transient old-manifest response 
 Articles 04–09, 11, 13, 14, 16 and 20 passed publication and desktop/phone checks after successful deployments. Current totals are 14 published and 22 unpublished planned IDs, including blocked topics 10, 12, 15 and 17–19. Existing posts and aircraft were preserved.
 
 Article 20 was prepared as an unpublished draft and published after the preserved 8:47 a.m. Eastern target on 22 October. Its verified publication is included in the totals above.
+
+Article 21 was prepared as an unpublished draft on 23 October for the preserved 9:42 a.m. Eastern target. See its [preparation and evidence record](21-vfr-personal-minimums.notes.md). It is not included in the published total.

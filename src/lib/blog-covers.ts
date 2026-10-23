@@ -1,4 +1,5 @@
 const descriptions: Record<string, string> = {
+  'vfr-personal-minimums': 'Illustration of a high-wing airplane parked beside a rural hangar, with low hills and layered clouds in the distance.',
   'flight-review-preparation': 'Illustration of a low-wing airplane on an apron, with two small figures beside a hangar and a runway in the distance.',
   'ifr-avionics-ad-checklist': 'Illustration of an empty light-airplane cockpit with round instruments and two navigation screens, overlooking an apron and hangar.',
   'buy-airplane-private-pilot-training': 'Illustration of a high-wing training airplane parked outside a hangar, with two small figures and another trainer in the background.',
