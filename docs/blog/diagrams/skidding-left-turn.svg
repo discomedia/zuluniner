@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="420" viewBox="0 0 600 420" role="img" aria-labelledby="title desc">
+<title id="title">Skidding left turn, plan-view schematic</title>
+<desc id="desc">An original schematic comparing the nose axis with a left-curving air path. Left bank is assumed, not depicted. No scale or control deflections are specified.</desc>
+<defs><marker id="path-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#146a9e"/></marker><marker id="nose-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#a33630"/></marker></defs>
+<rect width="600" height="420" fill="#fff"/>
+<path d="M235 365 A220 220 0 0 0 235 55" fill="none" stroke="#146a9e" stroke-width="5" marker-end="url(#path-arrow)"/>
+<text x="35" y="327" font-family="Arial,sans-serif" font-size="28" fill="#146a9e">Air path</text><path d="M155 318 235 318" stroke="#146a9e" stroke-width="2" fill="none"/>
+<g transform="translate(300 210) rotate(-20)"><path d="M0 -60 V-130" stroke="#a33630" stroke-width="4" marker-end="url(#nose-arrow)"/>
+<path d="M0 -60 C-10 -53 -10 -15 -9 0 L-112 19 -112 34 -8 22 -6 62 -38 75 -38 86 0 78 38 86 38 75 6 62 8 22 112 34 112 19 9 0 C10 -15 10 -53 0 -60Z" fill="#e7edf1" stroke="#202d36" stroke-width="3" stroke-linejoin="round"/>
+<path d="M0 -48 V72" stroke="#202d36" stroke-width="2" stroke-dasharray="6 5"/></g>
+<text x="425" y="90" font-family="Arial,sans-serif" font-size="28" fill="#a33630">Nose</text>
+</svg>

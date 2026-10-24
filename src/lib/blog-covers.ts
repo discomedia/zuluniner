@@ -1,4 +1,5 @@
 const descriptions: Record<string, string> = {
+  'slip-vs-skid-base-to-final': 'Illustration of a light low-wing airplane in a gentle bank over countryside, with a small runway and hangars below.',
   'vfr-personal-minimums': 'Illustration of a high-wing airplane parked beside a rural hangar, with low hills and layered clouds in the distance.',
   'flight-review-preparation': 'Illustration of a low-wing airplane on an apron, with two small figures beside a hangar and a runway in the distance.',
   'ifr-avionics-ad-checklist': 'Illustration of an empty light-airplane cockpit with round instruments and two navigation screens, overlooking an apron and hangar.',

@@ -1,0 +1,42 @@
+# Article 24 preparation record
+
+Prepared on 24 October 2026 Eastern. **Unpublished draft.** Reserved publication: **24 October at 9:25 a.m. EDT**, or **25 October at 12:25 a.m. Australia/Melbourne**, converted using IANA timezone data. Before drafting, the same heartbeat was moved to the stored publication target and its saved settings were read back. Prompt, kind, destination, status and notification settings were preserved.
+
+Draft ID: `46a535ab-c480-4e9c-b1ea-4b6a84c92380`. Saved revision: `2026-10-24T10:09:54.524472+00:00`. Draft-save publication ID: `ad84e38c-cabb-4c2f-8441-c82b8efe25aa`. Slug: `slip-vs-skid-base-to-final`. At publication, inspect the exact draft again and use its latest revision guard. Expected canonical URL: `https://zuluniner.com/blog/slip-vs-skid-base-to-final/`; preparation does not make it live.
+
+## Reconciliation and evidence gates
+
+The full connector inventory and live manifest both contained 15 published posts, no drafts and no matching article. Matching content, titles and slugs were checked for overlap. The manifest contained 1,566 aircraft; the article uses the existing general browse link and makes no claim about an individual listing. A complete inventory backup was saved to ignored `data/backups/blog-before-draft-24-oct24.json` before production mutation. Existing posts and aircraft were preserved.
+
+Topics 10, 12, 15 and 17–19 keep their recorded blockers. Topic 22 requires an instructor-reviewed departure briefing and topic 23 requires CFI review of a worked example; neither review has occurred. Their blockers are recorded separately. Published FAA guidance cannot establish that a review occurred. No third party was contacted on the owner's behalf.
+
+Topic 24 is the lowest eligible unpublished ID. Totals stay **15 published, 21 unpublished**, including eight blocked topics and this draft. No exhaustion alert is due.
+
+## Sources actually inspected
+
+* [FAA handbook inventory](https://www.faa.gov/regulations_policies/handbooks_manuals/aviation) and [Airplane Flying Handbook chapter catalog](https://www.faa.gov/regulations_policies/handbooks_manuals/aviation/airplane_handbook): FAA-H-8083-3C, 2021, with an October 2025 addendum listed. The [four-page addendum](https://www.faa.gov/regulations_policies/handbooks_manuals/aviation/AFH_Addendum_%28MOSAIC%29.pdf) was inspected; it addresses Chapters 1, 2, 4, 6 and removal/relocation of Chapter 17 material, not the cited coordination/slip discussion in Chapters 3, 5 and 9. The general inventory displays a 31 July 2026 update date. No newer handbook edition was assumed.
+* [Chapter 3](https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aviation/airplane_handbook/04_afh_ch3.pdf): printed pages 3-12 and 3-13 read in full, including bank/lift, rudder coordination, adverse yaw and Figure 3-13's ball positions. The web reader rejected the 42 MB document; a direct download succeeded, and text was extracted locally using the bundled PDF runtime. Printed page 3-13 was rendered and visually inspected.
+* [Chapter 5](https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aviation/airplane_handbook/06_afh_ch5.pdf): critical AOA and stall discussion, printed pages 5-12/5-13; cross-control stall and base-to-final overshoot, printed page 5-20; spin awareness, printed page 5-22. The passage explicitly says that a stall in a slip or skid can lead to a spin. The article doesn't promise a benign slip stall or copy a maneuver-entry/recovery procedure.
+* [Chapter 9](https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aviation/airplane_handbook/10_afh_ch9.pdf): downloaded and extracted. Printed pages 9-12 through 9-14 read in full; page 9-13 rendered and visually inspected. Includes intentional slips, forward versus sideslip purposes, airspeed indication and applicable aircraft limitations. Stabilized-approach/go-around material was also read. No generic threshold, flap restriction or maneuver procedure is presented as universally applicable.
+* [FAA Angle of Attack Awareness](https://www.faa.gov/sites/faa.gov/files/2022-01/Angle%20of%20Attack%20Awareness.pdf): both-page text inspected, including chord/relative-wind definition, critical AOA, loading and the assumptions behind a quoted stall speed. Its [FAA catalog](https://www.faa.gov/newsroom/safety-briefing/angle-attack-awareness) was checked. This is FAA-hosted educational guidance, not a newly issued 2026 operating rule.
+* [Audience question and replies](https://www.reddit.com/r/flying/comments/10d8jms/): inspected the question, the overshoot discussion and the disagreement over whether opposed controls necessarily imply a slip. This establishes the explanatory gap; comments aren't technical authority, a pilot interview or ZuluNiner experience.
+
+All nine unique external and related/browse links returned HTTP 200 in the Node check. Primary-source files and extraction/rendering evidence stay under ignored `data/blog-24-sources/`. No source-access, professional-review or flying-experience claim was invented.
+
+## Original diagrams and teaching material
+
+The three SVGs compare coordinated, slipping and skidding left turns. Blue is a curved air path; red is the forward nose axis. Each airplane is placed at the path's local upward tangent. The coordinated example aligns with it, the slip rotates the nose toward the outside/right and the skid toward the inside/left. Path arrow direction and nose arrow direction were checked after rendering all three SVGs. Left bank is assumed, not shown; the caption says the drawings are schematic, not to scale, and aren't ground-track or wind diagrams. The nose/path angle isn't identified as wing AOA.
+
+Only essential labels appear inside each drawing: “Air path” and “Nose.” Each 600 × 420 source uses 28-pixel label text, which remains legible when displayed at roughly 358 pixels wide on a phone. Public copies match the retained source SVGs byte for byte. Each diagram has a descriptive article alt text and an internal SVG title/description. These are original educational drawings, not modified FAA figures.
+
+The overshoot story and three table cases are explicitly invented ground-study examples. No universal practice altitude, bank limit, low-altitude demonstration, flight-test finding or spin-recovery checklist is supplied. Instructor briefing and aircraft-specific limitations are kept beside the relevant discussion. No independent professional review occurred.
+
+## Cover and validation
+
+Built-in image generation produced an original 3:2 illustration of a low-wing airplane in a bank over countryside, with a rural runway secondary below. Generated output and final WebP were inspected. No text or people appear; the cover does not portray a stall, spin or flight-procedure diagram. Exact prompt and source path: `images/24-generation-prompt.json`; project asset: `images/slip-vs-skid-base-to-final-cover.webp`.
+
+The signed prepared-family helper uploaded and byte-verified original and 480/960/1600 WebP variants without Cloudflare Images transformations. Original/1600: 1536 × 1024, 158,424 bytes; 480: 480 × 320, 27,332 bytes; 960: 960 × 640, 73,756 bytes. Signed credentials stay ignored under `data/`; only the verified storage path is attached. Cover alt text uses the existing static mapping.
+
+Node 24 `npm run verify` passed, including all 39 tests, Astro/TypeScript, lint, static build and Worker dry run. The production Markdown renderer passes 1,886 words, eight contents targets, one table with three body rows, three diagrams, a 157-character description and the literal banned-word scan. No hydrated article island is introduced.
+
+An explicitly unpublished preview used the actual article template and production Markdown renderer. Desktop 1280 × 900 and phone 390 × 844 cover/title/body layouts were inspected, with diagram legibility checked on both. Phone page width stays 390 pixels; diagrams fit at about 358 pixels and table overflow is contained by a 358-pixel parent. Keyboard contents navigation reached the ground-study heading. Temporary viewport settings were reset and the preview tab was closed. Repeat live article/card, metadata, image family, all three SVGs, contents, links and device checks at publication before marking topic 24 complete.

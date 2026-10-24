@@ -1,0 +1,27 @@
+{
+  "plan_id": "24",
+  "file": "docs/blog/24-slip-vs-skid.md",
+  "title": "Slip vs skid in the base-to-final turn: what the rudder is doing",
+  "slug": "slip-vs-skid-base-to-final",
+  "blurb": "Understand slips, skids and the base-to-final overshoot with original diagrams, three ground-study cases and FAA explanations of coordination and stall risk.",
+  "meta_description": "Understand slips, skids and the base-to-final overshoot with original diagrams, three ground-study cases and FAA explanations of coordination and stall risk.",
+  "header_photo": "mcp/940f271f-2f6f-49c9-8ad6-a3258b9b92be-slip-vs-skid-base-to-final-cover.webp",
+  "cover_alt": "Illustration of a light low-wing airplane in a gentle bank over countryside, with a small runway and hangars below.",
+  "image": "docs/blog/images/slip-vs-skid-base-to-final-cover.webp",
+  "diagrams": [
+    "public/blog/diagrams/coordinated-left-turn.svg",
+    "public/blog/diagrams/slipping-left-turn.svg",
+    "public/blog/diagrams/skidding-left-turn.svg"
+  ],
+  "status": "draft",
+  "publication_date": null,
+  "url": null,
+  "reserved_publication_at": "2026-10-24T09:25:00-04:00",
+  "source_checked_date": "2026-10-24",
+  "cover_verified_at": "2026-10-24T10:08:14.603Z",
+  "cover_upload_method": "signed prepared WebP family",
+  "id": "46a535ab-c480-4e9c-b1ea-4b6a84c92380",
+  "updated_at": "2026-10-24T10:09:54.524472+00:00",
+  "draft_save_publication_id": "ad84e38c-cabb-4c2f-8441-c82b8efe25aa",
+  "preparation_complete": true
+}
