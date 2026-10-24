@@ -13,15 +13,20 @@
     "public/blog/diagrams/slipping-left-turn.svg",
     "public/blog/diagrams/skidding-left-turn.svg"
   ],
-  "status": "draft",
-  "publication_date": null,
-  "url": null,
+  "status": "published",
+  "publication_date": "2026-10-24",
+  "url": "https://zuluniner.com/blog/slip-vs-skid-base-to-final/",
   "reserved_publication_at": "2026-10-24T09:25:00-04:00",
   "source_checked_date": "2026-10-24",
   "cover_verified_at": "2026-10-24T10:08:14.603Z",
   "cover_upload_method": "signed prepared WebP family",
   "id": "46a535ab-c480-4e9c-b1ea-4b6a84c92380",
-  "updated_at": "2026-10-24T10:09:54.524472+00:00",
+  "updated_at": "2026-10-24T13:27:19.36218+00:00",
   "draft_save_publication_id": "ad84e38c-cabb-4c2f-8441-c82b8efe25aa",
-  "preparation_complete": true
+  "preparation_complete": true,
+  "published_at": "2026-10-24T13:27:19.36218+00:00",
+  "publication_id": "2ec92e5c-cc5d-434e-8230-7e7ab756bda3",
+  "publication_workflow_id": "40098203212",
+  "publication_workflow_conclusion": "success",
+  "live_verified_at": "2026-10-24T13:29:16.968Z"
 }

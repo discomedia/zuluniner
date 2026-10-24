@@ -52,11 +52,12 @@ The first content-only deployment encountered a transient old-manifest response 
 | 21 October 2026 | 16 | [Buying an airplane for IFR: how to check an avionics ad](https://zuluniner.com/blog/ifr-avionics-ad-checklist/); [research, fictional ad cases, worksheet and live verification](16-ifr-avionics-ad-checklist.notes.md). Published at 9:23 a.m. EDT and deployed at 9:24; final device checks completed after 10 a.m. |
 | 22 October 2026 | 20 | [A flight review that addresses the flying you actually do](https://zuluniner.com/blog/flight-review-preparation/); [FAA sources, fictional profiles, worksheet and live verification](20-flight-review-preparation.notes.md). Published at 8:50 a.m. EDT after the reserved 8:47 a.m. target. |
 | 23 October 2026 | 21 | [VFR personal minimums for a trip you actually want to make](https://zuluniner.com/blog/vfr-personal-minimums/); [FAA sources, fictional scenarios, worksheet and live verification](21-vfr-personal-minimums.notes.md). Published at 9:46 a.m. EDT after the reserved 9:42 a.m. target. |
+| 24 October 2026 | 24 | [Slip vs skid in the base-to-final turn: what the rudder is doing](https://zuluniner.com/blog/slip-vs-skid-base-to-final/); [FAA sources, original diagrams, ground-study cases and live verification](24-slip-vs-skid.notes.md). Published at 9:27 a.m. EDT after the reserved 9:25 a.m. target. |
 
-Articles 04–09, 11, 13, 14, 16, 20 and 21 passed publication and desktop/phone checks after successful deployments. Current totals are 15 published and 21 unpublished planned IDs, including blocked topics 10, 12, 15, 17–19, 22 and 23. Existing posts and aircraft were preserved.
+Articles 04–09, 11, 13, 14, 16, 20, 21 and 24 passed publication and desktop/phone checks after successful deployments. Current totals are 16 published and 20 unpublished planned IDs, including blocked topics 10, 12, 15, 17–19, 22 and 23. Existing posts and aircraft were preserved.
 
 Article 20 was prepared as an unpublished draft and published after the preserved 8:47 a.m. Eastern target on 22 October. Its verified publication is included in the totals above.
 
 Article 21 was prepared as an unpublished draft and published after the preserved 9:42 a.m. Eastern target on 23 October. Its verified publication is included in the totals above.
 
-Article 24 was prepared as an unpublished draft on 24 October for the preserved 9:25 a.m. Eastern target. Topics 22 and 23 were deferred for their required instructor reviews. See the [preparation and evidence record](24-slip-vs-skid.notes.md). The draft is not included in the published total.
+Article 24 was prepared as an unpublished draft on 24 October for the preserved 9:25 a.m. Eastern target. Topics 22 and 23 were deferred for their required instructor reviews. See the [preparation and evidence record](24-slip-vs-skid.notes.md). It was published at 9:27 a.m. EDT, passed live checks and is included in the published total.

@@ -1,8 +1,8 @@
-# Article 24 preparation record
+# Article 24 preparation and publication record
 
-Prepared on 24 October 2026 Eastern. **Unpublished draft.** Reserved publication: **24 October at 9:25 a.m. EDT**, or **25 October at 12:25 a.m. Australia/Melbourne**, converted using IANA timezone data. Before drafting, the same heartbeat was moved to the stored publication target and its saved settings were read back. Prompt, kind, destination, status and notification settings were preserved.
+Prepared on 24 October 2026 Eastern. Initially saved as an **unpublished draft**; publication verification is recorded below. Reserved publication: **24 October at 9:25 a.m. EDT**, or **25 October at 12:25 a.m. Australia/Melbourne**, converted using IANA timezone data. Before drafting, the same heartbeat was moved to the stored publication target and its saved settings were read back. Prompt, kind, destination, status and notification settings were preserved.
 
-Draft ID: `46a535ab-c480-4e9c-b1ea-4b6a84c92380`. Saved revision: `2026-10-24T10:09:54.524472+00:00`. Draft-save publication ID: `ad84e38c-cabb-4c2f-8441-c82b8efe25aa`. Slug: `slip-vs-skid-base-to-final`. At publication, inspect the exact draft again and use its latest revision guard. Expected canonical URL: `https://zuluniner.com/blog/slip-vs-skid-base-to-final/`; preparation does not make it live.
+Draft ID: `46a535ab-c480-4e9c-b1ea-4b6a84c92380`. Saved revision: `2026-10-24T10:09:54.524472+00:00`. Draft-save publication ID: `ad84e38c-cabb-4c2f-8441-c82b8efe25aa`. Slug: `slip-vs-skid-base-to-final`. The exact draft was inspected again and published using its latest revision guard. Canonical URL: `https://zuluniner.com/blog/slip-vs-skid-base-to-final/`; the verified publication is recorded below.
 
 ## Reconciliation and evidence gates
 
@@ -10,7 +10,7 @@ The full connector inventory and live manifest both contained 15 published posts
 
 Topics 10, 12, 15 and 17–19 keep their recorded blockers. Topic 22 requires an instructor-reviewed departure briefing and topic 23 requires CFI review of a worked example; neither review has occurred. Their blockers are recorded separately. Published FAA guidance cannot establish that a review occurred. No third party was contacted on the owner's behalf.
 
-Topic 24 is the lowest eligible unpublished ID. Totals stay **15 published, 21 unpublished**, including eight blocked topics and this draft. No exhaustion alert is due.
+At preparation, topic 24 was the lowest eligible unpublished ID. Totals were **15 published, 21 unpublished**, including eight blocked topics and this draft. No exhaustion alert is due.
 
 ## Sources actually inspected
 
@@ -40,3 +40,13 @@ The signed prepared-family helper uploaded and byte-verified original and 480/96
 Node 24 `npm run verify` passed, including all 39 tests, Astro/TypeScript, lint, static build and Worker dry run. The production Markdown renderer passes 1,886 words, eight contents targets, one table with three body rows, three diagrams, a 157-character description and the literal banned-word scan. No hydrated article island is introduced.
 
 An explicitly unpublished preview used the actual article template and production Markdown renderer. Desktop 1280 × 900 and phone 390 × 844 cover/title/body layouts were inspected, with diagram legibility checked on both. Phone page width stays 390 pixels; diagrams fit at about 358 pixels and table overflow is contained by a 358-pixel parent. Keyboard contents navigation reached the ground-study heading. Temporary viewport settings were reset and the preview tab was closed. Repeat live article/card, metadata, image family, all three SVGs, contents, links and device checks at publication before marking topic 24 complete.
+
+## Verified publication — 24 October 2026 Eastern
+
+The publication wake arrived just before the reserved 9:25 a.m. target. Draft inspection, full inventory reconciliation and Node 24 `npm run verify` completed before submission at **9:27:19 a.m. EDT** (`2026-10-24T13:27:19.36218+00:00`). No post had already been published on that Eastern date. The full post inventory and live manifest were backed up under ignored `data/` before mutation. Exactly draft `46a535ab-c480-4e9c-b1ea-4b6a84c92380` was changed, with revision `2026-10-24T10:09:54.524472+00:00`; its title, slug, text, cover and permissions were preserved.
+
+Publication `2ec92e5c-cc5d-434e-8230-7e7ab756bda3` and [GitHub workflow 40098203212](https://github.com/discomedia/zuluniner/actions/runs/40098203212) reached successful deployment. [The live article](https://zuluniner.com/blog/slip-vs-skid-base-to-final/), its blog card, canonical/description/Open Graph metadata, cover alt text, original and all three responsive cover variants, eight contents targets, table, all three byte-matched SVG diagrams, related articles and aircraft browse links passed live checks. No hydrated article island was present. Desktop 1280 × 900 and phone 390 × 844 renderings were inspected; diagrams were legible, table overflow stayed inside its container, the page did not overflow and keyboard contents navigation reached its heading. Temporary browser viewport settings were reset.
+
+The same heartbeat was reset in a finally step to **25 October at 6 a.m. EDT**, or **25 October at 9 p.m. Australia/Melbourne**. A fresh uniformly selected minute reserved publication for **25 October at 8:05 a.m. EDT**, or **25 October at 11:05 p.m. Australia/Melbourne**. IANA conversion and saved-setting readback passed; prompt, kind, destination, status and notification settings were preserved.
+
+Totals are now **16 published, 20 unpublished**, including the eight recorded blocked IDs. Topic 25 is next, pending research and preparation. No exhaustion alert is due. Source and local verification records stay in ignored `data/`; no credentials are included in committed artifacts.
