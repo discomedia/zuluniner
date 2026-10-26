@@ -61,3 +61,5 @@ Article 20 was prepared as an unpublished draft and published after the preserve
 Article 21 was prepared as an unpublished draft and published after the preserved 9:42 a.m. Eastern target on 23 October. Its verified publication is included in the totals above.
 
 Article 24 was prepared as an unpublished draft on 24 October for the preserved 9:25 a.m. Eastern target. Topics 22 and 23 were deferred for their required instructor reviews. See the [preparation and evidence record](24-slip-vs-skid.notes.md). It was published at 9:27 a.m. EDT, passed live checks and is included in the published total.
+
+Article 25 was prepared as an unpublished draft on 26 October for the preserved 9:41 a.m. Eastern target. See the [research, calculations, diagram and preparation record](25-ias-tas-groundspeed.notes.md). It is not included in the published total.

@@ -1,0 +1,25 @@
+{
+  "plan_id": "25",
+  "file": "docs/blog/25-ias-tas-groundspeed.md",
+  "title": "IAS, TAS and groundspeed: which number answers which question?",
+  "slug": "ias-tas-groundspeed",
+  "blurb": "Separate IAS, CAS, TAS and groundspeed with three worked study cases, a crosswind diagram and aircraft-limit checks before comparing cruise claims.",
+  "meta_description": "Separate IAS, CAS, TAS and groundspeed with three worked study cases, a crosswind diagram and aircraft-limit checks before comparing cruise claims.",
+  "header_photo": "mcp/971b36ac-3bba-40fd-ac9f-3bd5e65bac71-ias-tas-groundspeed-cover.webp",
+  "cover_alt": "Illustration of a high-wing light airplane in level cruise above a winding river and countryside, with pale airflow bands in the sky.",
+  "image": "docs/blog/images/ias-tas-groundspeed-cover.webp",
+  "diagrams": [
+    "public/blog/diagrams/airspeed-crosswind-triangle.svg"
+  ],
+  "status": "draft",
+  "publication_date": null,
+  "url": null,
+  "reserved_publication_at": "2026-10-26T09:41:00-04:00",
+  "source_checked_date": "2026-10-26",
+  "cover_verified_at": "2026-10-26T10:06:21.945Z",
+  "cover_upload_method": "signed prepared WebP family",
+  "id": "4bcd2f04-1160-4712-b612-9db0c8ce155d",
+  "updated_at": "2026-10-26T10:08:16.436874+00:00",
+  "draft_save_publication_id": "f8d9dc2d-14db-471b-8159-4a4787f0ce78",
+  "preparation_complete": true
+}

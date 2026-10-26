@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" role="img" aria-labelledby="title desc">
+<title id="title">Crosswind velocity triangle</title>
+<desc id="desc">A 100-knot true-airspeed vector points west of north. A 20-knot wind vector points east from its tip. Their sum is a northward groundspeed vector of approximately 98 knots.</desc>
+<defs><marker id="blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#236384"/></marker><marker id="red" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#a24640"/></marker><marker id="green" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#39705a"/></marker></defs>
+<path fill="#fff" d="M0 0H600V420H0Z"/>
+<g fill="none" stroke-width="3.5"><path d="M240 350L188.969 100" stroke="#236384" marker-end="url(#blue)"/><path d="M188.969 100H240" stroke="#a24640" marker-end="url(#red)"/><path d="M240 350V100" stroke="#39705a" marker-end="url(#green)"/></g>
+<circle cx="240" cy="350" r="4" fill="#293c47"/>
+<g font-family="Arial, sans-serif" font-size="30"><text x="108" y="240" fill="#236384">TAS</text><text x="172" y="63" fill="#a24640">Wind</text><text x="265" y="240" fill="#39705a">GS</text></g>
+</svg>
