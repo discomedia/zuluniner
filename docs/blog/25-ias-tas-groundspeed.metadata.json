@@ -11,15 +11,20 @@
   "diagrams": [
     "public/blog/diagrams/airspeed-crosswind-triangle.svg"
   ],
-  "status": "draft",
-  "publication_date": null,
-  "url": null,
+  "status": "published",
+  "publication_date": "2026-10-26",
+  "url": "https://zuluniner.com/blog/ias-tas-groundspeed/",
   "reserved_publication_at": "2026-10-26T09:41:00-04:00",
   "source_checked_date": "2026-10-26",
   "cover_verified_at": "2026-10-26T10:06:21.945Z",
   "cover_upload_method": "signed prepared WebP family",
   "id": "4bcd2f04-1160-4712-b612-9db0c8ce155d",
-  "updated_at": "2026-10-26T10:08:16.436874+00:00",
+  "updated_at": "2026-10-26T13:41:23.372087+00:00",
   "draft_save_publication_id": "f8d9dc2d-14db-471b-8159-4a4787f0ce78",
-  "preparation_complete": true
+  "preparation_complete": true,
+  "published_at": "2026-10-26T13:41:23.372087+00:00",
+  "publication_id": "ca956246-8a34-42ec-a859-b0fe36ea277f",
+  "publication_workflow_id": 40332792261,
+  "publication_workflow_conclusion": "success",
+  "live_verified_at": "2026-10-26T13:43:29.418Z"
 }

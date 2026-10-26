@@ -1,14 +1,14 @@
-# Article 25 preparation record
+# Article 25 preparation and publication record
 
-Prepared on 26 October 2026 Eastern as an **unpublished draft**. Reserved publication is **26 October at 9:41 a.m. EDT**, or **27 October at 12:41 a.m. Australia/Melbourne**, converted with IANA timezone data. Before drafting, the same heartbeat was moved to that stored publication clock; its settings were read back, preserving prompt, kind, destination, status and notification settings. Preparation never authorizes early publication.
+Prepared on 26 October 2026 Eastern initially as an **unpublished draft**; verified publication is recorded below. Reserved publication is **26 October at 9:41 a.m. EDT**, or **27 October at 12:41 a.m. Australia/Melbourne**, converted with IANA timezone data. Before drafting, the same heartbeat was moved to that stored publication clock; its settings were read back, preserving prompt, kind, destination, status and notification settings. Preparation never authorizes early publication.
 
-Draft ID: `4bcd2f04-1160-4712-b612-9db0c8ce155d`. Revision: `2026-10-26T10:08:16.436874+00:00`. Draft-save publication: `f8d9dc2d-14db-471b-8159-4a4787f0ce78`. Expected canonical URL: `https://zuluniner.com/blog/ias-tas-groundspeed/`. Read the exact draft again and use its latest revision guard at publication. A draft save does not make this article public.
+Draft ID: `4bcd2f04-1160-4712-b612-9db0c8ce155d`. Revision: `2026-10-26T10:08:16.436874+00:00`. Draft-save publication: `f8d9dc2d-14db-471b-8159-4a4787f0ce78`. Canonical URL: `https://zuluniner.com/blog/ias-tas-groundspeed/`. The exact draft was read again and published with its latest revision guard; verified publication is recorded below.
 
 ## Reconciliation
 
 The full connector inventory contained 16 published posts and no drafts; the live manifest matched all 16 slugs. Existing titles, slugs and content were checked for overlap before selecting topic 25. No matching airspeed article existed. A complete post-inventory backup was saved under ignored `data/backups/blog-before-draft-25-oct26.json` before production mutation. The draft readback contained 17 records: those 16 published posts and this exact unpublished draft. All supplied content and metadata fields matched the saved record. Existing IDs, slugs, images, content and ownership were preserved.
 
-Topics 10, 12, 15, 17–19, 22 and 23 keep their recorded evidence blockers. They still count among **20 unpublished planned IDs**; the published total stays **16**. No exhaustion alert is due. The late 25 October wake was recorded in ignored state without publishing outside the window; its unused article 25 slot did not become a catch-up post.
+Topics 10, 12, 15, 17–19, 22 and 23 keep their recorded evidence blockers. At preparation they counted among **20 unpublished planned IDs**; the published total was **16**. No exhaustion alert is due. The late 25 October wake was recorded in ignored state without publishing outside the window; its unused article 25 slot did not become a catch-up post.
 
 ## Sources actually inspected
 
@@ -40,4 +40,14 @@ Node 24 `npm run verify` passed, including Astro/TypeScript, lint, all 39 tests,
 
 The unpublished local preview used the actual article template and production renderer. Desktop 1280 × 900 and phone 390 × 844 cover/title/body/table layouts were inspected. Phone page width stayed 390 pixels, both table containers were 358 pixels with contained overflow, and the diagram fit at about 358 pixels with legible labels. Keyboard contents navigation reached `#case-2-time-the-round-trip` with its heading at the viewport top. Temporary viewport settings were reset and the preview tab closed.
 
-Before marking this article published, repeat live article/card/metadata/cover-family/diagram/contents/links and desktop/phone checks after terminal deployment success. No flight test, independent instructor review or interview was obtained. The draft is still excluded from published totals.
+Before marking this article published, repeat live article/card/metadata/cover-family/diagram/contents/links and desktop/phone checks after terminal deployment success. No flight test, independent instructor review or interview was obtained. It was excluded from published totals until the live checks below passed.
+
+## Verified publication — 26 October 2026 Eastern
+
+The publication wake arrived about two minutes before its stored 9:41 a.m. target. Draft inspection, full inventory/manifest reconciliation, calculation and Markdown checks, and Node 24 `npm run verify` passed; the run waited in interruptible intervals until the target. Exactly one post was submitted at **9:41:23 a.m. EDT** (`2026-10-26T13:41:23.372087+00:00`), using draft `4bcd2f04-1160-4712-b612-9db0c8ce155d` and revision `2026-10-26T10:08:16.436874+00:00`. No post was already published on that Eastern date. Full inventory and manifest backups preceded the mutation. Other content, IDs and ownership were preserved.
+
+Publication `ca956246-8a34-42ec-a859-b0fe36ea277f` and [GitHub workflow 40332792261](https://github.com/discomedia/zuluniner/actions/runs/40332792261) reached successful deployment. [The live article](https://zuluniner.com/blog/ias-tas-groundspeed/), blog card, canonical/description/Open Graph metadata, cover alt text, original and all three responsive cover variants, eight contents targets, both tables, byte-matched crosswind SVG, related articles and aircraft browse links passed. There was no hydrated article island. Desktop 1280 × 900 and phone 390 × 844 renderings were inspected; title, body, tables and diagram labels were readable, page overflow was absent and keyboard contents navigation reached its heading. The browser viewport was reset and the temporary tab closed. The previously recorded forum direct-client HTTP 403 limitation is unchanged; primary and related/browse sources were verified during preparation.
+
+The same heartbeat was reset in a finally step to **27 October at 6 a.m. EDT**, or **27 October at 9 p.m. Australia/Melbourne**. Its fresh uniformly selected publication minute is **27 October at 9:37 a.m. EDT**, or **28 October at 12:37 a.m. Australia/Melbourne**. IANA conversion and saved-settings readback passed; prompt, kind, destination, status and notification settings were preserved.
+
+Totals are **17 published, 19 unpublished**, including eight recorded blocked IDs. Topic 26 is next, pending research and preparation. No exhaustion alert is due. No flight test, interview or independent instructor review is claimed.
