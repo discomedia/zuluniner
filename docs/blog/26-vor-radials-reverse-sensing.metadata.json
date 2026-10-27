@@ -1,0 +1,27 @@
+{
+  "plan_id": "26",
+  "file": "docs/blog/26-vor-radials-reverse-sensing.md",
+  "title": "VOR radials and reverse sensing without memorizing the picture",
+  "slug": "vor-radials-reverse-sensing",
+  "blurb": "Read VOR radials, OBS settings and TO/FROM flags with original diagrams, then compare conventional CDI, HSI and electronic display behavior.",
+  "meta_description": "Read VOR radials, OBS settings and TO/FROM flags with original diagrams, then compare conventional CDI, HSI and electronic display behavior.",
+  "header_photo": "mcp/b62a36f5-516b-4000-90d4-f402f7ae0f1c-vor-radials-reverse-sensing-cover.webp",
+  "cover_alt": "Illustration of a low-wing light airplane parked on a rural apron, with a simplified radio-navigation beacon and hangar behind it.",
+  "image": "docs/blog/images/vor-radials-reverse-sensing-cover.webp",
+  "diagrams": [
+    "public/blog/diagrams/vor-radial-position.svg",
+    "public/blog/diagrams/vor-cdi-270-to.svg",
+    "public/blog/diagrams/vor-cdi-090-from.svg"
+  ],
+  "status": "draft",
+  "publication_date": null,
+  "url": null,
+  "reserved_publication_at": "2026-10-27T09:37:00-04:00",
+  "source_checked_date": "2026-10-27",
+  "cover_verified_at": "2026-10-27T10:03:02.801Z",
+  "cover_upload_method": "signed prepared WebP family",
+  "id": "faf90171-4873-46a8-8550-e18d09d458ed",
+  "updated_at": "2026-10-27T10:08:53.396736+00:00",
+  "draft_save_publication_id": "2d7d7c3a-57a5-43d3-9c4b-ae2f21399c4b",
+  "preparation_complete": true
+}

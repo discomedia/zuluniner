@@ -1,4 +1,5 @@
 const descriptions: Record<string, string> = {
+  'vor-radials-reverse-sensing': 'Illustration of a low-wing light airplane parked on a rural apron, with a simplified radio-navigation beacon and hangar behind it.',
   'ias-tas-groundspeed': 'Illustration of a high-wing light airplane in level cruise above a winding river and countryside, with pale airflow bands in the sky.',
   'slip-vs-skid-base-to-final': 'Illustration of a light low-wing airplane in a gentle bank over countryside, with a small runway and hangars below.',
   'vfr-personal-minimums': 'Illustration of a high-wing airplane parked beside a rural hangar, with low hills and layered clouds in the distance.',
