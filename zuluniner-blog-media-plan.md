@@ -8,7 +8,7 @@ This plan contains 36 proposed posts: 12 launch briefs and 24 follow-on topics. 
 
 ## Publication progress
 
-**Current totals:** 17 of 36 published; **19 unpublished**. Next eligible: **26 — VOR radials and reverse sensing without memorizing the picture**, prepared as an unpublished draft for 27 October at 9:37 a.m. EDT. Inventory and live manifest reconciled on 27 October 2026 Eastern; articles 01–09, 11, 13, 14, 16, 20, 21, 24 and 25 are live. Topics 10, 12, 15, 17–19, 22 and 23 have recorded evidence blockers and still count among the 19 unpublished IDs.
+**Current totals:** 17 of 36 published; **19 unpublished**. Next eligible: **26 — VOR radials and reverse sensing without memorizing the picture**, prepared as an unpublished draft, now reserved for 28 October at 8:58 a.m. EDT. Inventory and live manifest reconciled on 27 October 2026 Eastern; articles 01–09, 11, 13, 14, 16, 20, 21, 24 and 25 are live. Topics 10, 12, 15, 17–19, 22 and 23 have recorded evidence blockers and still count among the 19 unpublished IDs.
 
 Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03**, followed by final source, calculation and style review. The originals were backed up and deleted; the replacement posts are live. Covers, contents links, tables and classifieds links were checked on desktop and phone layouts after successful deployment.
 
@@ -37,7 +37,7 @@ Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03
 - [ ] **23 — The 70/50 takeoff rule** — deferred pending required CFI review of a worked example; [blocker](docs/blog/23-takeoff-70-50-rule.blocker.md).
 - [x] **24 — [Slip vs skid in the base-to-final turn: what the rudder is doing](https://zuluniner.com/blog/slip-vs-skid-base-to-final/)** — published on 24 October 2026 Eastern at 9:27 a.m. EDT; three original plan-view diagrams and ground-study cases. Deployment, article/card, metadata, cover family, eight contents targets, table, diagrams, classifieds links and desktop/phone layouts verified. [Publication record](docs/blog/24-slip-vs-skid.notes.md).
 - [x] **25 — [IAS, TAS and groundspeed: which number answers which question?](https://zuluniner.com/blog/ias-tas-groundspeed/)** — published on 26 October 2026 Eastern at 9:41 a.m. EDT; three original study cases and a crosswind velocity diagram. Deployment, article/card, metadata, cover family, eight contents targets, both tables, diagram, classifieds links and desktop/phone layouts verified. [Publication record](docs/blog/25-ias-tas-groundspeed.notes.md).
-- [ ] **26 — VOR radials and reverse sensing without memorizing the picture** — prepared as an unpublished draft on 27 October for 9:37 a.m. EDT; original conventional-CDI diagrams, equipment assumptions and study cases. [Preparation record](docs/blog/26-vor-radials-reverse-sensing.notes.md).
+- [ ] **26 — VOR radials and reverse sensing without memorizing the picture** — prepared on 27 October; still unpublished after a missed window, with a new target of 28 October at 8:58 a.m. EDT; original conventional-CDI diagrams, equipment assumptions and study cases. [Preparation record](docs/blog/26-vor-radials-reverse-sensing.notes.md).
 - [ ] **27–36** — not yet written or published.
 
 The published editions use primary-source research and clearly identified fictional examples. No independent CFI/A&P/IA review or specialist interview has occurred; those proposed enhancements are still outstanding and are not counted as completed. Article sources, metadata, cover prompts and validation details are retained in [docs/blog/publication-notes.md](docs/blog/publication-notes.md).
@@ -321,9 +321,11 @@ Effort estimates are editorial planning assumptions: **medium** means about 1–
 | 35 / P3 | **Can your friends pay for the flight? Private-pilot cost sharing in real scenarios** — FAA private pilot expense sharing | Direct forum signal with conflicting informal advice. [F20] Use current §61.113 and FAA AC 61-142 to discuss common purpose, permitted expenses and solicitation. [A2] [A12] Build reviewed scenarios, not a paid-flight business model. | Partnership/cost content first; no suggestion that ownership enables charter. |
 | 36 / P2 | **Good compressions, bad news: what engine health numbers cannot prove** — aircraft compression vs borescope | Direct maintenance-video theme. [V3] Explain how multiple diagnostic sources complement each other, measurement context and manufacturer criteria. Use reviewed, permission-cleared images; obtain engine-model maintenance data. | Engine-history and prebuy articles; 03 and 02. |
 
+**27 October missed window:** the publication wake began at 9:45 a.m. EDT. The full-inventory connector request failed on its first attempt; its retry completed after 10 a.m. No publication was attempted. Article 26 remains an unpublished draft, with its existing ID, revision and assets retained. The same automation is reserved for 28 October at 6 a.m. EDT preparation and 8:58 a.m. EDT publication. Totals stay 17 published and 19 unpublished.
+
 ## Next publication sequence
 
-Articles 01–09, 11, 13, 14, 16, 20, 21, 24 and 25 are published. Topic 26 is prepared as an unpublished draft for 27 October at 9:37 a.m. EDT; topics 10, 12, 15, 17–19, 22 and 23 have recorded evidence blockers. Continue in numeric ID order among eligible unpublished topics, one article per day. Defer a topic if its required evidence or specialist input is unavailable; record the reason and choose the next eligible ID. The automated cadence supersedes the original weekly launch calendar.
+Articles 01–09, 11, 13, 14, 16, 20, 21, 24 and 25 are published. Topic 26 is prepared as an unpublished draft, now reserved for 28 October at 8:58 a.m. EDT; topics 10, 12, 15, 17–19, 22 and 23 have recorded evidence blockers. Continue in numeric ID order among eligible unpublished topics, one article per day. Defer a topic if its required evidence or specialist input is unavailable; record the reason and choose the next eligible ID. The automated cadence supersedes the original weekly launch calendar.
 
 | Next ID | Article | Companion material | Purpose |
 | --- | --- | --- | --- |
