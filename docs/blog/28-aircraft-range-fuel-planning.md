@@ -72,7 +72,7 @@ The litre values sum to 160. Independently rounded US-gallon values won't necess
 
 The cruise calculation is **100 L ÷ 40 L/h = 2.5 hours**. If the assumed still-air groundspeed is **200 km/h (108 kt)**, that allocates **500 km (270 NM)** to the cruise segment. It does **not** establish the total trip distance: climb and descent have their own time, fuel and distance, which must be included in a complete route calculation.
 
-Why not divide 160 by 40 and claim four hours of travel? That spends fuel allocated to other phases, the separate allowance and the reserve. Why not multiply a brochure's maximum speed by those four hours? The power setting and consumption might not match, even before wind is considered.
+Dividing 160 by 40 and claiming four hours of travel counts the other phases, separate allowance and reserve as cruise fuel. Multiplying a brochure's maximum speed by those hours can also combine a speed and consumption from different power settings. Check that the performance inputs describe the same operating point before accounting for wind.
 
 A real calculation needs applicable aircraft performance data for each phase and the planned altitude, temperature, weight, mixture and power setting. Include the actual route, expected arrival or departure procedures, and fuel for applicable alternatives. This schematic exercise does not demonstrate compliance with the IFR fuel rule; it has no destination-to-alternate segment.
 

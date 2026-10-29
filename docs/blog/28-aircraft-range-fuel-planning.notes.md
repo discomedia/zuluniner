@@ -2,7 +2,7 @@
 
 Prepared on 29 October 2026 Eastern as an **unpublished draft**, reserved for **8:56 a.m. EDT that day** (11:56 p.m. Australia/Melbourne). The 5:58 a.m. preparation wake started within the early allowance. Before drafting, the same automation was moved to the preserved publication time using IANA conversion; a saved-settings readback confirmed preservation of prompt, kind, destination, status and notification settings. Preparation does not authorize early publication.
 
-Draft ID: `a1bc0513-6c50-45ef-8745-e40e13ec2b7c`. Revision: `2026-10-29T10:06:24.906278+00:00`. Draft-save publication ID: `402a4225-844a-405b-b415-4587ad6b6939`. Expected canonical URL: `https://zuluniner.com/blog/aircraft-range-fuel-planning/`. Use the current revision guard on this exact draft at the publication wake.
+Draft ID: `a1bc0513-6c50-45ef-8745-e40e13ec2b7c`. Revision: `2026-10-29T10:09:50.870403+00:00`. Draft-save publication ID: `d588c0c3-e579-4eb4-b6e3-5a04a8b8c065`. Expected canonical URL: `https://zuluniner.com/blog/aircraft-range-fuel-planning/`. Use the current revision guard on this exact draft at the publication wake.
 
 ## Reconciliation and evidence gates
 
@@ -36,8 +36,10 @@ The original downloadable `aircraft-range-fuel-worksheet.md` has matching docume
 
 The built-in image tool generated an original 3:2 illustration of a fictional high-wing piston airplane by a rural fuel pump and hangar, with no text or people. The generated output and final WebP were inspected. It is an editorial illustration, not an image of an aircraft for sale. The exact prompt and original path are in `images/28-generation-prompt.json`. The prepared-family helper uploaded and byte-verified the original and 480/960/1600 variants without Cloudflare Images transformations: 1536 × 1024 original/1600, 120,280 bytes; 480 × 320, 18,662 bytes; 960 × 640, 51,424 bytes. Signed credentials remain ignored under `data/`. Only the verified storage path was attached; descriptive cover alt text uses the existing static mapping.
 
-Node 24 `npm run verify` passed: Astro/TypeScript, lint, all 39 tests, static build and Worker dry run. The production Markdown renderer passed eight contents targets, three tables with 12 body rows, a literal banned-word scan, a 155-character description and matching worksheet copies. The article has 2,046 whitespace-delimited words; it contains no article island or script.
+Node 24 `npm run verify` passed: Astro/TypeScript, lint, all 39 tests, static build and Worker dry run. The production Markdown renderer passed eight contents targets, three tables with 12 body rows, a literal banned-word scan, a 155-character description and matching worksheet copies. The article has 2,050 whitespace-delimited words; it contains no article island or script.
 
 An explicitly unpublished preview used the production template/renderer. Desktop 1280 × 900 and phone 390 × 844 cover/title/body/table layouts were inspected. Phone page width stayed 390 pixels; all three tables fit 358-pixel containers with overflow auto. Keyboard contents navigation reached the budget heading at the viewport top. Temporary viewport settings were reset, and the preview tab and server closed. Results are retained under ignored `data/blog-28-device-preview.json`.
 
 A draft save isn't a public publication. At the reserved wake, inspect the exact saved draft again, reconcile dates/inventory, publish with the current revision guard only inside the Eastern window, wait for terminal deployment success, and repeat live article/card, metadata, cover family, contents, worksheet, related/classifieds links and desktop/phone checks before marking the plan published.
+
+Final editorial review replaced two rhetorical questions with direct explanations. The exact saved draft revision above includes that wording; tables, assumptions and calculations are unchanged.
