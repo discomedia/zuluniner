@@ -11,11 +11,11 @@ test('JPEG, PNG and WebP prepare complete, correctly sized families without a tr
     const bytes = await sharp({create:{width:1800,height:1200,channels:3,background:'#8899aa'}}).toFormat(format).toBuffer();
     const family = await readPreparedImages(await prepareImageFamily(bytes));
     assert.equal((await sharp(family.original).metadata()).width,1600);
-    assert.deepEqual(await Promise.all([...family.variants.values()].map(async bytes => (await sharp(bytes).metadata()).width)),[480,960,1600]);
+    assert.deepEqual(await Promise.all([...family.variants.values()].map(async bytes => (await sharp(bytes).metadata()).width)),[480,960]);
   }
   const small = await sharp({create:{width:120,height:80,channels:4,background:'#8899aa88'}}).png().toBuffer();
   const family = await readPreparedImages(await prepareImageFamily(small));
-  assert.deepEqual(await Promise.all([...family.variants.values()].map(async bytes => (await sharp(bytes).metadata()).width)),[120,120,120]);
+  assert.deepEqual(await Promise.all([...family.variants.values()].map(async bytes => (await sharp(bytes).metadata()).width)),[]);
 });
 
 test('prepared validation rejects missing, duplicate, non-WebP, truncated and mismatched images', async () => {
@@ -37,8 +37,17 @@ test('prepared validation rejects missing, duplicate, non-WebP, truncated and mi
   }
 });
 
+test('legacy four-file uploads validate redundant copies but store only smaller variants', async () => {
+  const source = await sharp({create:{width:700,height:500,channels:3,background:'#667788'}}).png().toBuffer();
+  const form = await prepareImageFamily(source);
+  const original = form.get('original') as File;
+  form.set('960',original);
+  form.set('1600',original);
+  assert.deepEqual([...(await readPreparedImages(form)).variants.keys()],[480]);
+});
+
 test('prepared storage writes variants before original, bypasses Images, and removes a failed new family', async () => {
-  const source = await sharp({create:{width:120,height:80,channels:3,background:'#667788'}}).png().toBuffer();
+  const source = await sharp({create:{width:1200,height:800,channels:3,background:'#667788'}}).png().toBuffer();
   const family = await readPreparedImages(await prepareImageFamily(source));
   for (const fail of [false,true]) {
     const written: string[] = [], deleted: string[][] = [];
@@ -47,7 +56,7 @@ test('prepared storage writes variants before original, bypasses Images, and rem
       if (fail) await assert.rejects(storeImageFamily('blog-images','mcp/new.webp',family),/R2 unavailable/);
       else assert.equal((await storeImageFamily('blog-images','mcp/new.webp',family)).storage_path,'mcp/new.webp');
     });
-    if(fail)assert.deepEqual(deleted,[['variants/480/blog-images/mcp/new.webp','variants/960/blog-images/mcp/new.webp','variants/1600/blog-images/mcp/new.webp','blog-images/mcp/new.webp']]);
+    if(fail)assert.deepEqual(deleted,[['variants/480/blog-images/mcp/new.webp','variants/960/blog-images/mcp/new.webp','blog-images/mcp/new.webp']]);
     else assert.equal(written.at(-1),'blog-images/mcp/new.webp');
   }
 });
@@ -59,7 +68,7 @@ test('quota failure points to the prepared path; invalid signed uploads cannot w
     await assert.rejects(storeImage('blog-images','mcp/new.webp',source),/scripts\/upload-prepared-image.ts/);
     const signed = await beginImageUpload('post','cover.webp');
     const invalid = new FormData(); invalid.set('original',new Blob([new Uint8Array(source)]),'cover.png');
-    await assert.rejects(acceptSignedUpload(new Request(signed.signed_upload_url,{method:'PUT',body:invalid})),/Supply exactly one/);
+    await assert.rejects(acceptSignedUpload(new Request(signed.signed_upload_url,{method:'PUT',body:invalid})),/Invalid prepared WebP/);
     const bad = await acceptSignedUpload(new Request(signed.signed_upload_url.replace(/token=./,'token=x'),{method:'PUT',body:invalid}));
     assert.equal(bad.status,403);
   });
@@ -78,10 +87,10 @@ test('signed prepared uploads keep scope, expiry and single-use enforcement', as
       const response = await send();
       assert.equal(response.status,200);
       assert.deepEqual(await response.json(),{storage_path:signed.storage_path,public_url:signed.public_url,bytes:(await readPreparedImages(await prepareImageFamily(source))).original.byteLength});
-      assert.equal(writes.length,4);
+      assert.equal(writes.length,1);
       assert.ok(writes.every(key=>key.includes('blog-images/'+signed.storage_path)));
       assert.equal((await send()).status,409);
-      assert.equal(writes.length,4);
+      assert.equal(writes.length,1);
       const now = Date.now();
       const timeMock = mock.method(Date,'now',()=>now+7201000);
       try { assert.equal((await send()).status,403); } finally { timeMock.mock.restore(); }

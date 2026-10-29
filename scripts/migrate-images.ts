@@ -13,7 +13,7 @@ for(const bucket of ['aircraft-photos','blog-images'])for(const {path} of backup
   if(!response.ok)throw Error(`Image backup failed: ${response.status}`);await writeFile(sourceFile,new Uint8Array(await response.arrayBuffer()));
  }
  tasks.push({key:`${bucket}/${path}`,file:sourceFile});
- for(const width of [480,960,1600]){
+ for(const width of [480,960]){
   const file=`data/backups/variants/${width}/${bucket}/${path}.webp`;await mkdir(dirname(file),{recursive:true});await sharp(sourceFile).rotate().resize({width,height:1600,fit:'inside',withoutEnlargement:true}).webp({quality:85}).toFile(file);tasks.push({key:`variants/${width}/${bucket}/${path}`,file});
  }
 }

@@ -1,6 +1,6 @@
 import { imageSize } from 'image-size';
 
-export const IMAGE_WIDTHS = [480, 960, 1600] as const;
+export const IMAGE_WIDTHS = [480, 960] as const;
 export type ImageFamily = { original: Uint8Array; variants: Map<number, Uint8Array> };
 
 // Prepared uploads are owner-authorized, bounded multipart bodies. The operator
@@ -24,22 +24,30 @@ function preparedWebp(bytes: Uint8Array) {
 }
 
 export async function readPreparedImages(form: FormData): Promise<ImageFamily> {
-  const fields = ['original', ...IMAGE_WIDTHS.map(String)];
+  // Accept the old multipart contract during operator upgrades, but never store
+  // its redundant 1600 copy or variants that cannot shrink the main image.
+  const fields = ['original', ...IMAGE_WIDTHS.map(String), '1600'];
   if ([...form.keys()].some(key => !fields.includes(key))) throw Error('Unknown prepared image field.');
   const images = new Map<string, Uint8Array>();
   for (const name of fields) {
     const values = form.getAll(name);
-    if (values.length !== 1 || typeof values[0] === 'string') throw Error('Supply exactly one WebP file for original, 480, 960 and 1600.');
+    if (!values.length && name !== 'original') continue;
+    if (values.length !== 1 || typeof values[0] === 'string') throw Error('Supply exactly one WebP file per image size, including original.');
     images.set(name, new Uint8Array(await values[0].arrayBuffer()));
   }
   const original = images.get('original')!, info = preparedWebp(original);
   const variants = new Map<number, Uint8Array>();
-  for (const width of IMAGE_WIDTHS) {
-    const bytes = images.get(String(width))!, size = preparedWebp(bytes);
+  for (const width of [...IMAGE_WIDTHS, 1600]) {
+    const bytes = images.get(String(width));
+    if (!bytes) {
+      if (width < info.width) throw Error(`Supply exactly one WebP file for the ${width} variant.`);
+      continue;
+    }
+    const size = preparedWebp(bytes);
     const expectedWidth = Math.min(width, info.width);
     if (size.width !== expectedWidth || Math.abs(size.height - Math.round(info.height * expectedWidth / info.width)) > 1) throw Error(`Prepared ${width} variant has incorrect dimensions or aspect ratio.`);
     if (width === 1600 && !Buffer.from(bytes).equals(Buffer.from(original))) throw Error('The 1600 variant must match the prepared original.');
-    variants.set(width, bytes);
+    if (width < info.width) variants.set(width, bytes);
   }
   return { original, variants };
 }

@@ -4,7 +4,22 @@ import assert from 'node:assert/strict';
 import {mkdtemp,writeFile,readFile,rm,appendFile} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
-import {uploadObjects,sha256} from './media.mjs';
+import {uploadObjects,sha256,prepareFamily,storageObjects} from './media.mjs';
+import sharp from 'sharp';
+
+test('preparation stores only real reductions and old plans cannot recreate 1600 copies',async()=>{
+ const directory=await mkdtemp(join(tmpdir(),'zuluniner-family-'));
+ try {
+  for(const width of [120,700,1600]) {
+   const file=join(directory,'source.png');await sharp({create:{width,height:100,channels:3,background:'#8899aa'}}).png().toFile(file);
+   const family=await prepareFamily({file,source:'controller',sourceId:'123',index:0,directory});
+   assert.equal(family.objects.length,width===120?1:width===700?2:3);
+   assert.ok(family.objects.every(o=>!o.key.startsWith('variants/1600/')));
+   const old=[...family.objects,{...family.objects[0],key:'variants/1600/'+family.objects[0].key}];
+   assert.deepEqual(storageObjects(old),family.objects);
+  }
+ } finally {await rm(directory,{recursive:true,force:true});}
+});
 import {receiptStore} from './receipts.mjs';
 
 test('3636-object media run uses bounded S3 lanes, one snapshot, exact verification and a zero-request repeat',async()=>{

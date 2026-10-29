@@ -43,7 +43,8 @@ export function validateRaster(original: Uint8Array) {
 }
 export async function storeImageFamily(bucket: string, path: string, family: ImageFamily) {
   const media = environment().MEDIA;
-  const objects = [...family.variants].map(([width, bytes]) => ({key:`variants/${width}/${bucket}/${path}`,bytes}));
+  const mainWidth = imageSize(family.original).width!;
+  const objects = [...family.variants].filter(([width]) => width < mainWidth && width < 1600).map(([width, bytes]) => ({key:`variants/${width}/${bucket}/${path}`,bytes}));
   // Publish the original last: a returned path always has every responsive size.
   objects.push({key:`${bucket}/${path}`,bytes:family.original});
   try {
@@ -61,7 +62,8 @@ export async function storeImage(bucket: string, path: string, original: Uint8Ar
     const optimized = await env.IMAGES.input(new Blob([new Uint8Array(original)]).stream()).transform({width:1600,height:1600,fit:'scale-down'}).output({format:'image/webp',quality:85});
     const bytes = await optimized.response().arrayBuffer();
     const variants = new Map<number, Uint8Array>();
-    for (const width of IMAGE_WIDTHS) {
+    const mainWidth = imageSize(new Uint8Array(bytes)).width!;
+    for (const width of IMAGE_WIDTHS.filter(width => width < mainWidth)) {
       const variant = await env.IMAGES.input(new Blob([bytes]).stream()).transform({width,fit:'scale-down'}).output({format:'image/webp',quality:85});
       variants.set(width, new Uint8Array(await variant.response().arrayBuffer()));
     }
@@ -87,7 +89,7 @@ export async function beginImageUpload(kind:'post'|'aircraft', filename:string) 
   if (!/\.(jpe?g|png|webp)$/i.test(filename)) throw new Error('Use a .jpg, .jpeg, .png or .webp filename.');
   const path = `mcp/${randomUUID()}-${filename.replace(/\.[^.]+$/,'').toLowerCase().replace(/[^a-z0-9-]/g,'-')}.webp`;
   const payload=Buffer.from(JSON.stringify({kind,path,exp:Math.floor(Date.now()/1000)+7200})).toString('base64url');
-  return {storage_path:path,signed_upload_url:`${siteOrigin()}/api/images/upload?token=${payload}.${sign(payload)}`,public_url:`${siteOrigin()}/images/${imageBucket(kind)}/${path}`,expires_in_seconds:7200,instructions:'PUT a binary JPEG/PNG/WebP for Cloudflare optimization, or multipart/form-data with locally optimized WebP files named original, 480, 960 and 1600 to bypass transformation quotas. Use scripts/upload-prepared-image.ts with the saved receipt JSON and local source file. Prepared original: at most 1600x1600; variants preserve aspect ratio without enlargement; 1600 matches original. Total body <=10 MiB. Attach storage_path only after success. Never publish or log the signed URL.'};
+  return {storage_path:path,signed_upload_url:`${siteOrigin()}/api/images/upload?token=${payload}.${sign(payload)}`,public_url:`${siteOrigin()}/images/${imageBucket(kind)}/${path}`,expires_in_seconds:7200,instructions:'PUT a binary JPEG/PNG/WebP for Cloudflare optimization, or multipart/form-data with locally optimized WebP files named original plus 480 and 960 only when smaller than the original to bypass transformation quotas. Use scripts/upload-prepared-image.ts with the saved receipt JSON and local source file. Prepared original: at most 1600x1600; variants preserve aspect ratio without enlargement; ?w=1600 serves original. Total body <=10 MiB. Attach storage_path only after success. Never publish or log the signed URL.'};
 }
 export async function acceptSignedUpload(request:Request) {
   const token = new URL(request.url).searchParams.get('token') || ''; const [payload,signature] = token.split('.');

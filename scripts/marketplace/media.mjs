@@ -15,9 +15,9 @@ export async function prepareFamily({file, source, sourceId, index, directory, s
   const path = storagePath || `mcp/archive-${source}-${sourceId}-${index+1}-${digest.slice(0,16)}-native-v2.webp`;
   if (!/^mcp\/[a-z0-9-]+\.webp$/.test(path)) throw Error('Invalid immutable media path');
   const original = await sharp(input).rotate().resize({width:1600,height:1600,fit:'inside',withoutEnlargement:true}).webp({quality:85}).toBuffer();
-  const objects = [];
-  for (const width of [0,480,960,1600]) {
-    const bytes = width && width !== 1600 ? await sharp(original).resize({width,withoutEnlargement:true}).webp({quality:85}).toBuffer() : original;
+  const objects = [], mainWidth = (await sharp(original).metadata()).width;
+  for (const width of [0,480,960].filter(width => width < mainWidth)) {
+    const bytes = width ? await sharp(original).resize({width,withoutEnlargement:true}).webp({quality:85}).toBuffer() : original;
     const meta = await sharp(bytes).metadata();
     if (meta.format !== 'webp' || meta.width > (width || 1600)) throw Error('Invalid prepared image dimensions');
     await sharp(bytes).stats();
@@ -30,11 +30,21 @@ export async function prepareFamily({file, source, sourceId, index, directory, s
   return {source_sha256:digest,storage_path:path,public_url:'https://zuluniner.com/images/aircraft-photos/'+path,objects};
 }
 export function missingObjects(objects, receipts) {
-  return objects.filter(object => !(receipts[object.key]?.sha256 === object.sha256 && receipts[object.key]?.verified_at));
+  return storageObjects(objects).filter(object => !(receipts[object.key]?.sha256 === object.sha256 && receipts[object.key]?.verified_at));
+}
+// Normalize saved four-object plans as well as new families. Old receipt entries
+// remain historical evidence; a replay must never recreate removed 1600 copies.
+export function storageObjects(objects) {
+  const mains = new Map(objects.filter(o => !o.key.startsWith('variants/')).map(o => [o.key,o]));
+  return objects.filter(object => {
+    const match = object.key.match(/^variants\/(\d+)\/(.+)$/);
+    return !match || (Number(match[1]) < 1600 && !(mains.get(match[2])?.width <= Number(match[1])));
+  });
 }
 export async function uploadObjects({objects, receiptsPath, accountId, token, source, lockToken, minimumIntervalMs=500, concurrency=6, transport='s3', accessKeyId, request=fetch, lockFile='data/marketplace-sync/release.lock/owner.json'}) {
   if (!token || !accountId || !lockToken) throw Error('Existing operator authorization and release lock are required');
   if (!/^[a-f0-9]{32}$/.test(accountId) || !['barnstormers','controller','trade-a-plane'].includes(source) || concurrency < 1 || concurrency > 8 || (transport==='rest' && minimumIntervalMs < 500) || !['s3','rest'].includes(transport)) throw Error('Invalid operator account, source or pacing');
+  objects = storageObjects(objects);
   const checkLock = async () => {
     const lock = JSON.parse(await readFile(lockFile,'utf8'));
     if (lock.source !== source || lock.token !== lockToken) throw Error('Source release lock no longer held');
@@ -73,7 +83,7 @@ export async function uploadObjects({objects, receiptsPath, accountId, token, so
   const settled=await Promise.allSettled(Array.from({length:Math.min(concurrency,pending.length)},async()=>{
    try {while(!failed){const object=pending.shift();if(!object)break;
     await checkLock();
-    if (!/^(?:variants\/(?:480|960|1600)\/)?aircraft-photos\/mcp\/(?:archive-(?:barnstormers|controller|trade-a-plane)-|sync-experiment-)[a-z0-9-]+\.webp$/.test(object.key)) throw Error('Object key outside marketplace operator scope');
+    if (!/^(?:variants\/(?:480|960)\/)?aircraft-photos\/mcp\/(?:archive-(?:barnstormers|controller|trade-a-plane)-|sync-experiment-)[a-z0-9-]+\.webp$/.test(object.key)) throw Error('Object key outside marketplace operator scope');
     if (!object.key.includes('/mcp/archive-'+source+'-') && !object.key.includes('/mcp/sync-experiment-')) throw Error('Object belongs to another source');
     const bytes = await readFile(object.file);
     if (sha256(bytes) !== object.sha256) throw Error('Prepared image checksum mismatch');

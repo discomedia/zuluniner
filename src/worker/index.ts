@@ -19,7 +19,8 @@ async function serveImage(request:Request) {
   const width=url.searchParams.get('w'); if(width && !['480','960','1600'].includes(width)) return new Response('Invalid image size.',{status:400});
   const cache=await caches.open('zuluniner-images');const cached=await cache.match(request);if(cached)return cached;
   const bucket=environment().MEDIA;
-  const object=await bucket.get(width?`variants/${width}/${key}`:key) || (width?await bucket.get(key):null);
+  const smaller=width && width !== '1600';
+  const object=await bucket.get(smaller?`variants/${width}/${key}`:key) || (smaller?await bucket.get(key):null);
   if(!object)return new Response('Not found.',{status:404});
   const headers=new Headers({'Cache-Control':'public,max-age=31536000,immutable','X-Content-Type-Options':'nosniff'});object.writeHttpMetadata(headers);headers.set('ETag',object.httpEtag);
   return new Response(request.method==='HEAD'?null:object.body,{headers});
