@@ -9,15 +9,18 @@
   "cover_alt": "Illustration of a blue-and-white high-wing light airplane parked beside a rural airport fuel pump and hangar.",
   "image": "docs/blog/images/aircraft-range-fuel-planning-cover.webp",
   "worksheet": "public/blog/aircraft-range-fuel-worksheet.md",
-  "status": "draft",
-  "publication_date": null,
-  "url": null,
+  "status": "published",
+  "publication_date": "2026-10-29",
+  "url": "https://zuluniner.com/blog/aircraft-range-fuel-planning/",
   "reserved_publication_at": "2026-10-29T08:56:00-04:00",
   "source_checked_date": "2026-10-29",
   "cover_verified_at": "2026-10-29T10:03:43.340Z",
   "cover_upload_method": "signed prepared WebP family",
   "id": "a1bc0513-6c50-45ef-8745-e40e13ec2b7c",
-  "updated_at": "2026-10-29T10:09:50.870403+00:00",
+  "updated_at": "2026-10-29T12:58:04.564508+00:00",
   "draft_save_publication_id": "d588c0c3-e579-4eb4-b6e3-5a04a8b8c065",
-  "preparation_complete": true
+  "preparation_complete": true,
+  "published_at": "2026-10-29T12:58:04.564508+00:00",
+  "publication_id": "da281850-f384-4805-9bb8-abda875ea9fb",
+  "workflow_id": 40877697306
 }

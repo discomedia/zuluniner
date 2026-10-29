@@ -8,7 +8,7 @@ This plan contains 36 proposed posts: 12 launch briefs and 24 follow-on topics. 
 
 ## Publication progress
 
-**Current totals:** 18 of 36 published; **18 unpublished**. Next eligible: **28 — Fuel range in an aircraft ad vs fuel you can plan to use**, prepared as an unpublished draft for 29 October at 8:56 a.m. EDT. Inventory and live manifest reconciled on 29 October 2026 Eastern; articles 01–09, 11, 13, 14, 16, 20, 21 and 24–26 are live. Topics 10, 12, 15, 17–19, 22, 23 and 27 have recorded evidence blockers and still count among the 18 unpublished IDs.
+**Current totals:** 19 of 36 published; **17 unpublished**. Next eligible: **29 — A good destination METAR, a bad route: the VFR weather trap**, pending research and a dated US weather-briefing case. Inventory and live manifest reconciled on 29 October 2026 Eastern; articles 01–09, 11, 13, 14, 16, 20, 21, 24–26 and 28 are live. Topics 10, 12, 15, 17–19, 22, 23 and 27 have recorded evidence blockers and still count among the 17 unpublished IDs.
 
 Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03**, followed by final source, calculation and style review. The originals were backed up and deleted; the replacement posts are live. Covers, contents links, tables and classifieds links were checked on desktop and phone layouts after successful deployment.
 
@@ -39,7 +39,7 @@ Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03
 - [x] **25 — [IAS, TAS and groundspeed: which number answers which question?](https://zuluniner.com/blog/ias-tas-groundspeed/)** — published on 26 October 2026 Eastern at 9:41 a.m. EDT; three original study cases and a crosswind velocity diagram. Deployment, article/card, metadata, cover family, eight contents targets, both tables, diagram, classifieds links and desktop/phone layouts verified. [Publication record](docs/blog/25-ias-tas-groundspeed.notes.md).
 - [x] **26 — [VOR radials and reverse sensing without memorizing the picture](https://zuluniner.com/blog/vor-radials-reverse-sensing/)** — published on 28 October 2026 Eastern at 8:58 a.m. EDT; three original conventional-CDI diagrams, stated equipment assumptions and study cases. Deployment, article/card, metadata, cover family, eight contents targets, both tables, diagrams, classifieds links and desktop/phone layouts verified. [Publication record](docs/blog/26-vor-radials-reverse-sensing.notes.md).
 - [ ] **27 — One-in-sixty navigation approximation** — deferred pending its required CFI units/geometry check; [blocker](docs/blog/27-one-in-sixty.blocker.md).
-- [ ] **28 — Fuel range in an aircraft ad vs fuel you can plan to use** — prepared as an unpublished draft on 29 October for 8:56 a.m. EDT; current Skyhawk brochure conditions, US reserve provisions, original fuel ledger and mission worksheet. [Preparation record](docs/blog/28-aircraft-range-fuel-planning.notes.md).
+- [x] **28 — [Fuel range in an aircraft ad vs fuel you can plan to use](https://zuluniner.com/blog/aircraft-range-fuel-planning/)** — published on 29 October 2026 Eastern at 8:58 a.m. EDT; current Skyhawk brochure conditions, US reserve provisions, original fuel ledger and mission worksheet. Deployment, article/card, metadata, cover family, eight contents targets, all three tables, worksheet, classifieds links and desktop/phone layouts verified. [Publication record](docs/blog/28-aircraft-range-fuel-planning.notes.md).
 - [ ] **29–36** — not yet written or published.
 
 The published editions use primary-source research and clearly identified fictional examples. No independent CFI/A&P/IA review or specialist interview has occurred; those proposed enhancements are still outstanding and are not counted as completed. Article sources, metadata, cover prompts and validation details are retained in [docs/blog/publication-notes.md](docs/blog/publication-notes.md).
@@ -64,12 +64,13 @@ The published editions use primary-source research and clearly identified fictio
 | 24 October 2026 | 24 | Published at 9:27 a.m. EDT after the reserved 9:25 a.m. target. [Article](https://zuluniner.com/blog/slip-vs-skid-base-to-final/) and [content deployment](https://github.com/discomedia/zuluniner/actions/runs/40098203212) verified; metadata, original and responsive covers, eight contents targets, three diagrams, table, classifieds links and desktop/phone layouts passed. Eight blocked topics remain counted. |
 | 26 October 2026 | 25 | Published at 9:41 a.m. EDT after the reserved 9:41 a.m. target. [Article](https://zuluniner.com/blog/ias-tas-groundspeed/) and [content deployment](https://github.com/discomedia/zuluniner/actions/runs/40332792261) verified; metadata, original and responsive covers, eight contents targets, crosswind diagram, both tables, classifieds links and desktop/phone layouts passed. Eight blocked topics remain counted. |
 | 28 October 2026 | 26 | Published at 8:58 a.m. EDT after the reserved 8:58 a.m. target. [Article](https://zuluniner.com/blog/vor-radials-reverse-sensing/) and [content deployment](https://github.com/discomedia/zuluniner/actions/runs/40692272584) verified; metadata, original and responsive covers, eight contents targets, three VOR diagrams, both tables, classifieds links and desktop/phone layouts passed. Eight blocked topics remain counted. |
+| 29 October 2026 | 28 | Published at 8:58 a.m. EDT after the reserved 8:56 a.m. target. [Article](https://zuluniner.com/blog/aircraft-range-fuel-planning/) and [content deployment](https://github.com/discomedia/zuluniner/actions/runs/40877697306) verified; metadata, original and responsive covers, eight contents targets, all three tables, worksheet, classifieds links and desktop/phone layouts passed. Nine blocked topics remain counted. |
 
 ## Scheduled publication
 
 **ZuluNiner daily blog publishing** is active in this chat. It prepares the next eligible article at 6 a.m. Eastern, starting immediately if that preparation wake arrives up to ten minutes early, and publishes at a newly randomized time within the **8–10 a.m. America/New_York** window. Random target minutes run from 8:00 through 9:45, leaving deployment time before the window closes. Eastern daylight saving changes are included. The first target was **10 October 2026 at 8:16 a.m. EDT**; article 04 was published and verified that morning.
 
-The automation updates the specific completed ID, publication date, canonical URL and totals only after live deployment checks pass. It reconciles existing posts and drafts to avoid duplicates and preserves a limit of one new planned post per Eastern date. Published articles 01–09, 11, 13, 14, 16, 20, 21 and 24–26 remain live. The owner approved individual immediate-publication exceptions for articles 05 and 07; subsequent automated articles keep the morning window.
+The automation updates the specific completed ID, publication date, canonical URL and totals only after live deployment checks pass. It reconciles existing posts and drafts to avoid duplicates and preserves a limit of one new planned post per Eastern date. Published articles 01–09, 11, 13, 14, 16, 20, 21, 24–26 and 28 remain live. The owner approved individual immediate-publication exceptions for articles 05 and 07; subsequent automated articles keep the morning window.
 
 **Nearly exhausted:** alert when **five or fewer unpublished IDs remain**, including blocked topics. Record the alert once per threshold/queue state. At zero remaining, report completion and pause the schedule. Instructions and recovery state are described in [docs/blog/scheduled-publishing.md](docs/blog/scheduled-publishing.md).
 
@@ -328,7 +329,7 @@ Effort estimates are editorial planning assumptions: **medium** means about 1–
 
 ## Next publication sequence
 
-Articles 01–09, 11, 13, 14, 16, 20, 21 and 24–26 are published. Topic 28 is prepared unpublished for 29 October at 8:56 a.m. EDT; topics 10, 12, 15, 17–19, 22, 23 and 27 have recorded evidence blockers. Continue in numeric ID order among eligible unpublished topics, one article per day. Defer a topic if its required evidence or specialist input is unavailable; record the reason and choose the next eligible ID. The automated cadence supersedes the original weekly launch calendar.
+Articles 01–09, 11, 13, 14, 16, 20, 21, 24–26 and 28 are published. Topic 29 is next, pending research and a dated US weather-briefing case; topics 10, 12, 15, 17–19, 22, 23 and 27 have recorded evidence blockers. Continue in numeric ID order among eligible unpublished topics, one article per day. Defer a topic if its required evidence or specialist input is unavailable; record the reason and choose the next eligible ID. The automated cadence supersedes the original weekly launch calendar.
 
 | Next ID | Article | Companion material | Purpose |
 | --- | --- | --- | --- |
@@ -337,10 +338,10 @@ Articles 01–09, 11, 13, 14, 16, 20, 21 and 24–26 are published. Topic 28 is 
 | 17–19 | Airframe records, propeller ownership and Rotax buying — blocked | Recorded evidence requirements | Obtain the evidence in each blocker record before drafting. |
 | 22–23 | Turnback and takeoff heuristic — blocked | Required instructor reviews | Obtain the reviews recorded in their blocker files. |
 | 27 | One-in-sixty navigation approximation — blocked | Original course-error examples | Obtain the required CFI units/geometry check before publication. |
-| 28 | Aircraft range and fuel planning — prepared | Original fuel ledger and mission worksheet | Inspect the saved draft again at its reserved publication wake. |
+| 29 | Destination METAR vs route weather | Dated US briefing case | Verify primary weather products and their observation/forecast times. |
 | 12 | Comanche 250 — blocked | Specialist/owner interview | Obtain the evidence in its blocker record before drafting. |
 
-Continue with eligible follow-on IDs 28–36; reconsider blocked IDs 10, 12, 15, 17–19, 22, 23 and 27 when their missing evidence becomes available. Cost illustrations must label teaching assumptions explicitly; never present invented figures as current quotations or typical market costs.
+Continue with eligible follow-on IDs 29–36; reconsider blocked IDs 10, 12, 15, 17–19, 22, 23 and 27 when their missing evidence becomes available. Cost illustrations must label teaching assumptions explicitly; never present invented figures as current quotations or typical market costs.
 
 ## How readers should reach the classifieds
 
