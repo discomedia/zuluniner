@@ -8,7 +8,7 @@ This plan contains 36 proposed posts: 12 launch briefs and 24 follow-on topics. 
 
 ## Publication progress
 
-**Current totals:** 18 of 36 published; **18 unpublished**. Next in order: **27 — The one-in-sixty rule: when it helps and when the approximation breaks**, pending research and its required CFI units/geometry check. Inventory and live manifest reconciled on 28 October 2026 Eastern; articles 01–09, 11, 13, 14, 16, 20, 21 and 24–26 are live. Topics 10, 12, 15, 17–19, 22 and 23 have recorded evidence blockers and still count among the 18 unpublished IDs.
+**Current totals:** 18 of 36 published; **18 unpublished**. Next eligible: **28 — Fuel range in an aircraft ad vs fuel you can plan to use**, prepared as an unpublished draft for 29 October at 8:56 a.m. EDT. Inventory and live manifest reconciled on 29 October 2026 Eastern; articles 01–09, 11, 13, 14, 16, 20, 21 and 24–26 are live. Topics 10, 12, 15, 17–19, 22, 23 and 27 have recorded evidence blockers and still count among the 18 unpublished IDs.
 
 Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03**, followed by final source, calculation and style review. The originals were backed up and deleted; the replacement posts are live. Covers, contents links, tables and classifieds links were checked on desktop and phone layouts after successful deployment.
 
@@ -38,7 +38,9 @@ Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03
 - [x] **24 — [Slip vs skid in the base-to-final turn: what the rudder is doing](https://zuluniner.com/blog/slip-vs-skid-base-to-final/)** — published on 24 October 2026 Eastern at 9:27 a.m. EDT; three original plan-view diagrams and ground-study cases. Deployment, article/card, metadata, cover family, eight contents targets, table, diagrams, classifieds links and desktop/phone layouts verified. [Publication record](docs/blog/24-slip-vs-skid.notes.md).
 - [x] **25 — [IAS, TAS and groundspeed: which number answers which question?](https://zuluniner.com/blog/ias-tas-groundspeed/)** — published on 26 October 2026 Eastern at 9:41 a.m. EDT; three original study cases and a crosswind velocity diagram. Deployment, article/card, metadata, cover family, eight contents targets, both tables, diagram, classifieds links and desktop/phone layouts verified. [Publication record](docs/blog/25-ias-tas-groundspeed.notes.md).
 - [x] **26 — [VOR radials and reverse sensing without memorizing the picture](https://zuluniner.com/blog/vor-radials-reverse-sensing/)** — published on 28 October 2026 Eastern at 8:58 a.m. EDT; three original conventional-CDI diagrams, stated equipment assumptions and study cases. Deployment, article/card, metadata, cover family, eight contents targets, both tables, diagrams, classifieds links and desktop/phone layouts verified. [Publication record](docs/blog/26-vor-radials-reverse-sensing.notes.md).
-- [ ] **27–36** — not yet written or published.
+- [ ] **27 — One-in-sixty navigation approximation** — deferred pending its required CFI units/geometry check; [blocker](docs/blog/27-one-in-sixty.blocker.md).
+- [ ] **28 — Fuel range in an aircraft ad vs fuel you can plan to use** — prepared as an unpublished draft on 29 October for 8:56 a.m. EDT; current Skyhawk brochure conditions, US reserve provisions, original fuel ledger and mission worksheet. [Preparation record](docs/blog/28-aircraft-range-fuel-planning.notes.md).
+- [ ] **29–36** — not yet written or published.
 
 The published editions use primary-source research and clearly identified fictional examples. No independent CFI/A&P/IA review or specialist interview has occurred; those proposed enhancements are still outstanding and are not counted as completed. Article sources, metadata, cover prompts and validation details are retained in [docs/blog/publication-notes.md](docs/blog/publication-notes.md).
 
@@ -326,7 +328,7 @@ Effort estimates are editorial planning assumptions: **medium** means about 1–
 
 ## Next publication sequence
 
-Articles 01–09, 11, 13, 14, 16, 20, 21 and 24–26 are published. Topic 27 is next in order, pending research and its required CFI units/geometry check; topics 10, 12, 15, 17–19, 22 and 23 have recorded evidence blockers. Continue in numeric ID order among eligible unpublished topics, one article per day. Defer a topic if its required evidence or specialist input is unavailable; record the reason and choose the next eligible ID. The automated cadence supersedes the original weekly launch calendar.
+Articles 01–09, 11, 13, 14, 16, 20, 21 and 24–26 are published. Topic 28 is prepared unpublished for 29 October at 8:56 a.m. EDT; topics 10, 12, 15, 17–19, 22, 23 and 27 have recorded evidence blockers. Continue in numeric ID order among eligible unpublished topics, one article per day. Defer a topic if its required evidence or specialist input is unavailable; record the reason and choose the next eligible ID. The automated cadence supersedes the original weekly launch calendar.
 
 | Next ID | Article | Companion material | Purpose |
 | --- | --- | --- | --- |
@@ -334,10 +336,11 @@ Articles 01–09, 11, 13, 14, 16, 20, 21 and 24–26 are published. Topic 27 is 
 | 15 | Two owners, one airplane — blocked | Partner interviews and legal review | Obtain the evidence in its blocker record before drafting. |
 | 17–19 | Airframe records, propeller ownership and Rotax buying — blocked | Recorded evidence requirements | Obtain the evidence in each blocker record before drafting. |
 | 22–23 | Turnback and takeoff heuristic — blocked | Required instructor reviews | Obtain the reviews recorded in their blocker files. |
-| 27 | One-in-sixty navigation approximation | Original course-error examples | Obtain the required CFI units/geometry check before publication. |
+| 27 | One-in-sixty navigation approximation — blocked | Original course-error examples | Obtain the required CFI units/geometry check before publication. |
+| 28 | Aircraft range and fuel planning — prepared | Original fuel ledger and mission worksheet | Inspect the saved draft again at its reserved publication wake. |
 | 12 | Comanche 250 — blocked | Specialist/owner interview | Obtain the evidence in its blocker record before drafting. |
 
-Continue with eligible follow-on IDs 27–36; reconsider blocked IDs 10, 12, 15, 17–19, 22 and 23 when their missing evidence becomes available. Cost illustrations must label teaching assumptions explicitly; never present invented figures as current quotations or typical market costs.
+Continue with eligible follow-on IDs 28–36; reconsider blocked IDs 10, 12, 15, 17–19, 22, 23 and 27 when their missing evidence becomes available. Cost illustrations must label teaching assumptions explicitly; never present invented figures as current quotations or typical market costs.
 
 ## How readers should reach the classifieds
 

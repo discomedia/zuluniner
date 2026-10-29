@@ -1,0 +1,23 @@
+{
+  "plan_id": "28",
+  "file": "docs/blog/28-aircraft-range-fuel-planning.md",
+  "title": "Fuel range in an aircraft ad vs fuel you can plan to use",
+  "slug": "aircraft-range-fuel-planning",
+  "blurb": "Read an advertised range footnote, separate usable fuel and reserves, and test a fictional fuel budget against wind and loading before comparing airplanes.",
+  "meta_description": "Read an advertised range footnote, separate usable fuel and reserves, and test a fictional fuel budget against wind and loading before comparing airplanes.",
+  "header_photo": "mcp/92dc3e3f-5581-4bc6-8ec1-eb4ca3c9ce7c-aircraft-range-fuel-planning-cover.webp",
+  "cover_alt": "Illustration of a blue-and-white high-wing light airplane parked beside a rural airport fuel pump and hangar.",
+  "image": "docs/blog/images/aircraft-range-fuel-planning-cover.webp",
+  "worksheet": "public/blog/aircraft-range-fuel-worksheet.md",
+  "status": "draft",
+  "publication_date": null,
+  "url": null,
+  "reserved_publication_at": "2026-10-29T08:56:00-04:00",
+  "source_checked_date": "2026-10-29",
+  "cover_verified_at": "2026-10-29T10:03:43.340Z",
+  "cover_upload_method": "signed prepared WebP family",
+  "id": "a1bc0513-6c50-45ef-8745-e40e13ec2b7c",
+  "updated_at": "2026-10-29T10:06:24.906278+00:00",
+  "draft_save_publication_id": "402a4225-844a-405b-b415-4587ad6b6939",
+  "preparation_complete": true
+}
