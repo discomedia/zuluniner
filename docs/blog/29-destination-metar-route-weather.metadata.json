@@ -10,8 +10,8 @@
   "image": "docs/blog/images/destination-metar-route-weather-cover.webp",
   "worksheet": "public/blog/route-weather-briefing-worksheet.md",
   "weather_archive": "public/blog/weather/2026-10-30-virginia-study.json",
-  "status": "prepared-unpublished",
-  "publication_date": null,
+  "status": "published",
+  "publication_date": "2026-10-30",
   "url": "https://zuluniner.com/blog/destination-metar-route-weather/",
   "reserved_publication_at": "2026-10-30T08:55:00-04:00",
   "source_checked_date": "2026-10-30",
@@ -19,8 +19,11 @@
   "cover_upload_method": "signed prepared WebP family; 1600 query serves original",
   "preparation_complete": true,
   "id": "5521b8e1-f5da-4a94-ac67-6a24589ff9bc",
-  "updated_at": "2026-10-30T10:11:43.646715+00:00",
+  "updated_at": "2026-10-30T13:01:28.382424+00:00",
   "draft_save_publication_id": "8fa464d0-5e3d-42ab-8070-b786402a1771",
   "draft_save_workflow_id": 41038942790,
-  "draft_save_workflow_conclusion": "success"
+  "draft_save_workflow_conclusion": "success",
+  "published_at": "2026-10-30T13:01:28.382424+00:00",
+  "publication_id": "02c5321c-66f5-4ce9-bb33-c5608b828b78",
+  "workflow_id": 41059823691
 }

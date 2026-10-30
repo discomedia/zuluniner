@@ -8,7 +8,7 @@ This plan contains 36 proposed posts: 12 launch briefs and 24 follow-on topics. 
 
 ## Publication progress
 
-**Current totals:** 19 of 36 published; **17 unpublished**. Next eligible: **29 — A good destination METAR, a bad route: the VFR weather trap**, prepared unpublished for 30 October at 8:55 a.m. EDT, with a dated NOAA study set, fictional training route and briefing worksheet. Inventory and live manifest reconciled on 30 October 2026 Eastern; articles 01–09, 11, 13, 14, 16, 20, 21, 24–26 and 28 are live. Topics 10, 12, 15, 17–19, 22, 23 and 27 have recorded evidence blockers and still count among the 17 unpublished IDs.
+**Current totals:** 20 of 36 published; **16 unpublished**. Article **29 — A good destination METAR, a bad route: the VFR weather trap** was published and verified on 30 October 2026 Eastern. Inventory and live manifest reconcile with 20 published articles: 01–09, 11, 13, 14, 16, 20, 21, 24–26 and 28–29. Next to assess: topic **30**, subject to its evidence requirements. Topics 10, 12, 15, 17–19, 22, 23 and 27 have recorded evidence blockers and still count among the 16 unpublished IDs.
 
 Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03**, followed by final source, calculation and style review. The originals were backed up and deleted; the replacement posts are live. Covers, contents links, tables and classifieds links were checked on desktop and phone layouts after successful deployment.
 
@@ -40,7 +40,7 @@ Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03
 - [x] **26 — [VOR radials and reverse sensing without memorizing the picture](https://zuluniner.com/blog/vor-radials-reverse-sensing/)** — published on 28 October 2026 Eastern at 8:58 a.m. EDT; three original conventional-CDI diagrams, stated equipment assumptions and study cases. Deployment, article/card, metadata, cover family, eight contents targets, both tables, diagrams, classifieds links and desktop/phone layouts verified. [Publication record](docs/blog/26-vor-radials-reverse-sensing.notes.md).
 - [ ] **27 — One-in-sixty navigation approximation** — deferred pending its required CFI units/geometry check; [blocker](docs/blog/27-one-in-sixty.blocker.md).
 - [x] **28 — [Fuel range in an aircraft ad vs fuel you can plan to use](https://zuluniner.com/blog/aircraft-range-fuel-planning/)** — published on 29 October 2026 Eastern at 8:58 a.m. EDT; current Skyhawk brochure conditions, US reserve provisions, original fuel ledger and mission worksheet. Deployment, article/card, metadata, cover family, eight contents targets, all three tables, worksheet, classifieds links and desktop/phone layouts verified. [Publication record](docs/blog/28-aircraft-range-fuel-planning.notes.md).
-- [ ] **29 — A good destination METAR, a bad route: the VFR weather trap** — prepared unpublished on 30 October 2026 Eastern for the preserved 8:55 a.m. EDT target. Dated NOAA observations/forecasts, fictional training route, briefing worksheet and original cover; [preparation record](docs/blog/29-destination-metar-route-weather.notes.md). Counts stay unchanged until verified publication.
+- [x] **29 — [A good destination METAR, a bad route: the VFR weather trap](https://zuluniner.com/blog/destination-metar-route-weather/)** — published on 30 October 2026 Eastern at 9:01 a.m. EDT, after the preserved 8:55 a.m. target. Dated NOAA observations/forecasts, fictional training route and briefing worksheet. Deployment, article/card, metadata, cover family, eight contents targets, three tables, worksheet/archive and classifieds links verified. Final desktop/phone checks completed after 10 a.m. EDT. [Publication record](docs/blog/29-destination-metar-route-weather.notes.md).
 - [ ] **30–36** — not yet written or published.
 
 The published editions use primary-source research and clearly identified fictional examples. No independent CFI/A&P/IA review or specialist interview has occurred; those proposed enhancements are still outstanding and are not counted as completed. Article sources, metadata, cover prompts and validation details are retained in [docs/blog/publication-notes.md](docs/blog/publication-notes.md).
@@ -66,12 +66,13 @@ The published editions use primary-source research and clearly identified fictio
 | 26 October 2026 | 25 | Published at 9:41 a.m. EDT after the reserved 9:41 a.m. target. [Article](https://zuluniner.com/blog/ias-tas-groundspeed/) and [content deployment](https://github.com/discomedia/zuluniner/actions/runs/40332792261) verified; metadata, original and responsive covers, eight contents targets, crosswind diagram, both tables, classifieds links and desktop/phone layouts passed. Eight blocked topics remain counted. |
 | 28 October 2026 | 26 | Published at 8:58 a.m. EDT after the reserved 8:58 a.m. target. [Article](https://zuluniner.com/blog/vor-radials-reverse-sensing/) and [content deployment](https://github.com/discomedia/zuluniner/actions/runs/40692272584) verified; metadata, original and responsive covers, eight contents targets, three VOR diagrams, both tables, classifieds links and desktop/phone layouts passed. Eight blocked topics remain counted. |
 | 29 October 2026 | 28 | Published at 8:58 a.m. EDT after the reserved 8:56 a.m. target. [Article](https://zuluniner.com/blog/aircraft-range-fuel-planning/) and [content deployment](https://github.com/discomedia/zuluniner/actions/runs/40877697306) verified; metadata, original and responsive covers, eight contents targets, all three tables, worksheet, classifieds links and desktop/phone layouts passed. Nine blocked topics remain counted. |
+| 30 October 2026 | 29 | Published at 9:01 a.m. EDT after the reserved 8:55 a.m. target. [Article](https://zuluniner.com/blog/destination-metar-route-weather/) and [content deployment](https://github.com/discomedia/zuluniner/actions/runs/41059823691) verified; metadata, original/responsive covers, eight contents targets, three tables, worksheet/archive and classifieds links passed. Automated checks passed at 9:19 a.m. EDT; final desktop/phone checks completed after 10 a.m. Nine blocked topics remain counted. |
 
 ## Scheduled publication
 
 **ZuluNiner daily blog publishing** is active in this chat. It prepares the next eligible article at 6 a.m. Eastern, starting immediately if that preparation wake arrives up to ten minutes early, and publishes at a newly randomized time within the **8–10 a.m. America/New_York** window. Random target minutes run from 8:00 through 9:45, leaving deployment time before the window closes. Eastern daylight saving changes are included. The first target was **10 October 2026 at 8:16 a.m. EDT**; article 04 was published and verified that morning.
 
-The automation updates the specific completed ID, publication date, canonical URL and totals only after live deployment checks pass. It reconciles existing posts and drafts to avoid duplicates and preserves a limit of one new planned post per Eastern date. Published articles 01–09, 11, 13, 14, 16, 20, 21, 24–26 and 28 remain live. The owner approved individual immediate-publication exceptions for articles 05 and 07; subsequent automated articles keep the morning window.
+The automation updates the specific completed ID, publication date, canonical URL and totals only after live deployment checks pass. It reconciles existing posts and drafts to avoid duplicates and preserves a limit of one new planned post per Eastern date. Published articles 01–09, 11, 13, 14, 16, 20, 21, 24–26 and 28–29 remain live. The owner approved individual immediate-publication exceptions for articles 05 and 07; subsequent automated articles keep the morning window.
 
 **Nearly exhausted:** alert when **five or fewer unpublished IDs remain**, including blocked topics. Record the alert once per threshold/queue state. At zero remaining, report completion and pause the schedule. Instructions and recovery state are described in [docs/blog/scheduled-publishing.md](docs/blog/scheduled-publishing.md).
 
@@ -330,7 +331,7 @@ Effort estimates are editorial planning assumptions: **medium** means about 1–
 
 ## Next publication sequence
 
-Articles 01–09, 11, 13, 14, 16, 20, 21, 24–26 and 28 are published. Topic 29 is prepared unpublished for 30 October at 8:55 a.m. EDT; topics 10, 12, 15, 17–19, 22, 23 and 27 have recorded evidence blockers. Continue in numeric ID order among eligible unpublished topics, one article per day. Defer a topic if its required evidence or specialist input is unavailable; record the reason and choose the next eligible ID. The automated cadence supersedes the original weekly launch calendar.
+Articles 01–09, 11, 13, 14, 16, 20, 21, 24–26 and 28–29 are published. Assess topic 30 next against its evidence requirements; topics 10, 12, 15, 17–19, 22, 23 and 27 have recorded evidence blockers. Continue in numeric ID order among eligible unpublished topics, one article per day. Defer a topic if its required evidence or specialist input is unavailable; record the reason and choose the next eligible ID. The automated cadence supersedes the original weekly launch calendar.
 
 | Next ID | Article | Companion material | Purpose |
 | --- | --- | --- | --- |
@@ -339,10 +340,10 @@ Articles 01–09, 11, 13, 14, 16, 20, 21, 24–26 and 28 are published. Topic 29
 | 17–19 | Airframe records, propeller ownership and Rotax buying — blocked | Recorded evidence requirements | Obtain the evidence in each blocker record before drafting. |
 | 22–23 | Turnback and takeoff heuristic — blocked | Required instructor reviews | Obtain the reviews recorded in their blocker files. |
 | 27 | One-in-sixty navigation approximation — blocked | Original course-error examples | Obtain the required CFI units/geometry check before publication. |
-| 29 | Destination METAR vs route weather | Dated US briefing case | Verify primary weather products and their observation/forecast times. |
+| 30 | Is an instrument rating worth it if most of your flying is VFR? | Owner/instructor interviews and mission comparison | Obtain the brief’s required interviews before drafting; otherwise record the blocker and assess ID 31. |
 | 12 | Comanche 250 — blocked | Specialist/owner interview | Obtain the evidence in its blocker record before drafting. |
 
-Continue with eligible follow-on IDs 29–36; reconsider blocked IDs 10, 12, 15, 17–19, 22, 23 and 27 when their missing evidence becomes available. Cost illustrations must label teaching assumptions explicitly; never present invented figures as current quotations or typical market costs.
+Continue with eligible follow-on IDs 30–36; reconsider blocked IDs 10, 12, 15, 17–19, 22, 23 and 27 when their missing evidence becomes available. Cost illustrations must label teaching assumptions explicitly; never present invented figures as current quotations or typical market costs.
 
 ## How readers should reach the classifieds
 
