@@ -1,0 +1,322 @@
+{
+  "title": "30 October 2026 Virginia terminal-weather study",
+  "purpose": "Historical educational data only. Not a weather briefing or flight authorization. The proposed KROA–KLYH–KBCB training route is fictional.",
+  "sources": [
+    {
+      "url": "https://aviationweather.gov/api/data/metar?ids=KROA,KLWB,KBCB,KCHO,KLYH&format=json",
+      "retrieved_at_utc": "2026-10-30T10:01:26.991Z",
+      "selection": "Only KROA, KLYH and KBCB retained, unchanged except for an added ISO observation-time field."
+    },
+    {
+      "url": "https://aviationweather.gov/api/data/taf?ids=KROA,KLYH&format=json",
+      "retrieved_at_utc": "2026-10-30T10:03:13.585Z",
+      "selection": "Full two-record response retained."
+    }
+  ],
+  "observations": [
+    {
+      "icaoId": "KBCB",
+      "receiptTime": "2026-10-30T09:54:04.291Z",
+      "obsTime": 1793354100,
+      "reportTime": "2026-10-30T10:00:00.000Z",
+      "temp": 7.2,
+      "dewp": 6,
+      "wdir": 100,
+      "wspd": 3,
+      "visib": "10+",
+      "altim": 1025.1,
+      "qcField": 6,
+      "metarType": "METAR",
+      "rawOb": "METAR KBCB 300955Z AUTO 10003KT 10SM CLR 07/06 A3027 RMK AO2 T00720060",
+      "lat": 37.208,
+      "lon": -80.4127,
+      "elev": 642,
+      "name": "Blacksburg/VA Tech Montgomery Exec, VA, US",
+      "cover": "CLR",
+      "clouds": [],
+      "fltCat": "VFR",
+      "observation_time_utc": "2026-10-30T09:55:00.000Z"
+    },
+    {
+      "icaoId": "KLYH",
+      "receiptTime": "2026-10-30T09:59:16.464Z",
+      "obsTime": 1793354280,
+      "reportTime": "2026-10-30T09:58:00.000Z",
+      "temp": 6.7,
+      "dewp": 6.7,
+      "wdir": 0,
+      "wspd": 0,
+      "visib": 1.75,
+      "altim": 1021.8,
+      "qcField": 6,
+      "wxString": "BR",
+      "metarType": "SPECI",
+      "rawOb": "SPECI KLYH 300958Z AUTO 00000KT 1 3/4SM R04/6000VP6000FT BR CLR 07/07 A3017 RMK AO2 VIS 3/4V5 T00670067 ",
+      "lat": 37.3213,
+      "lon": -79.2065,
+      "elev": 282,
+      "name": "Lynchburg/Glenn Fld, VA, US",
+      "cover": "CLR",
+      "clouds": [],
+      "fltCat": "IFR",
+      "observation_time_utc": "2026-10-30T09:58:00.000Z"
+    },
+    {
+      "icaoId": "KROA",
+      "receiptTime": "2026-10-30T09:58:14.308Z",
+      "obsTime": 1793354040,
+      "reportTime": "2026-10-30T10:00:00.000Z",
+      "temp": 13.3,
+      "dewp": 6.7,
+      "wdir": 300,
+      "wspd": 4,
+      "visib": "10+",
+      "altim": 1023.5,
+      "slp": 1022.7,
+      "qcField": 12,
+      "metarType": "METAR",
+      "rawOb": "METAR KROA 300954Z 30004KT 10SM CLR 13/07 A3022 RMK AO2 SLP227 T01330067 $",
+      "lat": 37.3172,
+      "lon": -79.9737,
+      "elev": 349,
+      "name": "Roanoke Rgnl, VA, US",
+      "cover": "CLR",
+      "clouds": [],
+      "fltCat": "VFR",
+      "observation_time_utc": "2026-10-30T09:54:00.000Z"
+    }
+  ],
+  "forecasts": [
+    {
+      "icaoId": "KLYH",
+      "dbPopTime": "2026-10-30T05:20:04.386Z",
+      "bulletinTime": "2026-10-30T05:20:00.000Z",
+      "issueTime": "2026-10-30T05:20:00.000Z",
+      "validTimeFrom": 1793340000,
+      "validTimeTo": 1793426400,
+      "rawTAF": "TAF KLYH 300520Z 3006/3106 20003KT P6SM SKC FM301500 28006KT P6SM SKC FM310300 03004KT P6SM SKC",
+      "mostRecent": 1,
+      "remarks": "",
+      "lat": 37.32126,
+      "lon": -79.20649,
+      "elev": 282,
+      "prior": 4,
+      "name": "Lynchburg/Glenn Fld",
+      "fcsts": [
+        {
+          "timeFrom": 1793340000,
+          "timeTo": 1793372400,
+          "timeBec": null,
+          "fcstChange": null,
+          "probability": null,
+          "wdir": 200,
+          "wspd": 3,
+          "wgst": null,
+          "wshearHgt": null,
+          "wshearDir": null,
+          "wshearSpd": null,
+          "visib": "6+",
+          "altim": null,
+          "vertVis": null,
+          "wxString": null,
+          "notDecoded": null,
+          "clouds": [
+            {
+              "cover": "SKC",
+              "base": null,
+              "type": null
+            }
+          ],
+          "icgTurb": [],
+          "temp": []
+        },
+        {
+          "timeFrom": 1793372400,
+          "timeTo": 1793415600,
+          "timeBec": null,
+          "fcstChange": "FM",
+          "probability": null,
+          "wdir": 280,
+          "wspd": 6,
+          "wgst": null,
+          "wshearHgt": null,
+          "wshearDir": null,
+          "wshearSpd": null,
+          "visib": "6+",
+          "altim": null,
+          "vertVis": null,
+          "wxString": null,
+          "notDecoded": null,
+          "clouds": [
+            {
+              "cover": "SKC",
+              "base": null,
+              "type": null
+            }
+          ],
+          "icgTurb": [],
+          "temp": []
+        },
+        {
+          "timeFrom": 1793415600,
+          "timeTo": 1793426400,
+          "timeBec": null,
+          "fcstChange": "FM",
+          "probability": null,
+          "wdir": 30,
+          "wspd": 4,
+          "wgst": null,
+          "wshearHgt": null,
+          "wshearDir": null,
+          "wshearSpd": null,
+          "visib": "6+",
+          "altim": null,
+          "vertVis": null,
+          "wxString": null,
+          "notDecoded": null,
+          "clouds": [
+            {
+              "cover": "SKC",
+              "base": null,
+              "type": null
+            }
+          ],
+          "icgTurb": [],
+          "temp": []
+        }
+      ]
+    },
+    {
+      "icaoId": "KROA",
+      "dbPopTime": "2026-10-30T05:20:04.430Z",
+      "bulletinTime": "2026-10-30T05:20:00.000Z",
+      "issueTime": "2026-10-30T05:20:00.000Z",
+      "validTimeFrom": 1793340000,
+      "validTimeTo": 1793426400,
+      "rawTAF": "TAF KROA 300520Z 3006/3106 23003KT P6SM SKC FM301500 30007KT P6SM SKC FM301700 31010G20KT P6SM SKC FM302100 34005KT P6SM SKC",
+      "mostRecent": 1,
+      "remarks": "",
+      "lat": 37.31719,
+      "lon": -79.97369,
+      "elev": 349,
+      "prior": 3,
+      "name": "Roanoke Rgnl",
+      "fcsts": [
+        {
+          "timeFrom": 1793340000,
+          "timeTo": 1793372400,
+          "timeBec": null,
+          "fcstChange": null,
+          "probability": null,
+          "wdir": 230,
+          "wspd": 3,
+          "wgst": null,
+          "wshearHgt": null,
+          "wshearDir": null,
+          "wshearSpd": null,
+          "visib": "6+",
+          "altim": null,
+          "vertVis": null,
+          "wxString": null,
+          "notDecoded": null,
+          "clouds": [
+            {
+              "cover": "SKC",
+              "base": null,
+              "type": null
+            }
+          ],
+          "icgTurb": [],
+          "temp": []
+        },
+        {
+          "timeFrom": 1793372400,
+          "timeTo": 1793379600,
+          "timeBec": null,
+          "fcstChange": "FM",
+          "probability": null,
+          "wdir": 300,
+          "wspd": 7,
+          "wgst": null,
+          "wshearHgt": null,
+          "wshearDir": null,
+          "wshearSpd": null,
+          "visib": "6+",
+          "altim": null,
+          "vertVis": null,
+          "wxString": null,
+          "notDecoded": null,
+          "clouds": [
+            {
+              "cover": "SKC",
+              "base": null,
+              "type": null
+            }
+          ],
+          "icgTurb": [],
+          "temp": []
+        },
+        {
+          "timeFrom": 1793379600,
+          "timeTo": 1793394000,
+          "timeBec": null,
+          "fcstChange": "FM",
+          "probability": null,
+          "wdir": 310,
+          "wspd": 10,
+          "wgst": 20,
+          "wshearHgt": null,
+          "wshearDir": null,
+          "wshearSpd": null,
+          "visib": "6+",
+          "altim": null,
+          "vertVis": null,
+          "wxString": null,
+          "notDecoded": null,
+          "clouds": [
+            {
+              "cover": "SKC",
+              "base": null,
+              "type": null
+            }
+          ],
+          "icgTurb": [],
+          "temp": []
+        },
+        {
+          "timeFrom": 1793394000,
+          "timeTo": 1793426400,
+          "timeBec": null,
+          "fcstChange": "FM",
+          "probability": null,
+          "wdir": 340,
+          "wspd": 5,
+          "wgst": null,
+          "wshearHgt": null,
+          "wshearDir": null,
+          "wshearSpd": null,
+          "visib": "6+",
+          "altim": null,
+          "vertVis": null,
+          "wxString": null,
+          "notDecoded": null,
+          "clouds": [
+            {
+              "cover": "SKC",
+              "base": null,
+              "type": null
+            }
+          ],
+          "icgTurb": [],
+          "temp": []
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "These terminal products do not establish route conditions.",
+    "Products were retrieved in separate requests; this is not a simultaneous full briefing.",
+    "No complete observation sequence, GFA, radar, satellite, PIREP, advisory, NOTAM or airspace briefing is supplied.",
+    "No flight was conducted and no actual pilot decision is attributed."
+  ]
+}

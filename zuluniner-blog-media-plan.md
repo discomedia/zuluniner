@@ -8,7 +8,7 @@ This plan contains 36 proposed posts: 12 launch briefs and 24 follow-on topics. 
 
 ## Publication progress
 
-**Current totals:** 19 of 36 published; **17 unpublished**. Next eligible: **29 — A good destination METAR, a bad route: the VFR weather trap**, pending research and a dated US weather-briefing case. Inventory and live manifest reconciled on 29 October 2026 Eastern; articles 01–09, 11, 13, 14, 16, 20, 21, 24–26 and 28 are live. Topics 10, 12, 15, 17–19, 22, 23 and 27 have recorded evidence blockers and still count among the 17 unpublished IDs.
+**Current totals:** 19 of 36 published; **17 unpublished**. Next eligible: **29 — A good destination METAR, a bad route: the VFR weather trap**, prepared unpublished for 30 October at 8:55 a.m. EDT, with a dated NOAA study set, fictional training route and briefing worksheet. Inventory and live manifest reconciled on 30 October 2026 Eastern; articles 01–09, 11, 13, 14, 16, 20, 21, 24–26 and 28 are live. Topics 10, 12, 15, 17–19, 22, 23 and 27 have recorded evidence blockers and still count among the 17 unpublished IDs.
 
 Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03**, followed by final source, calculation and style review. The originals were backed up and deleted; the replacement posts are live. Covers, contents links, tables and classifieds links were checked on desktop and phone layouts after successful deployment.
 
@@ -40,7 +40,8 @@ Completed on 9 October 2026. Three writing sub-agents drafted articles **01–03
 - [x] **26 — [VOR radials and reverse sensing without memorizing the picture](https://zuluniner.com/blog/vor-radials-reverse-sensing/)** — published on 28 October 2026 Eastern at 8:58 a.m. EDT; three original conventional-CDI diagrams, stated equipment assumptions and study cases. Deployment, article/card, metadata, cover family, eight contents targets, both tables, diagrams, classifieds links and desktop/phone layouts verified. [Publication record](docs/blog/26-vor-radials-reverse-sensing.notes.md).
 - [ ] **27 — One-in-sixty navigation approximation** — deferred pending its required CFI units/geometry check; [blocker](docs/blog/27-one-in-sixty.blocker.md).
 - [x] **28 — [Fuel range in an aircraft ad vs fuel you can plan to use](https://zuluniner.com/blog/aircraft-range-fuel-planning/)** — published on 29 October 2026 Eastern at 8:58 a.m. EDT; current Skyhawk brochure conditions, US reserve provisions, original fuel ledger and mission worksheet. Deployment, article/card, metadata, cover family, eight contents targets, all three tables, worksheet, classifieds links and desktop/phone layouts verified. [Publication record](docs/blog/28-aircraft-range-fuel-planning.notes.md).
-- [ ] **29–36** — not yet written or published.
+- [ ] **29 — A good destination METAR, a bad route: the VFR weather trap** — prepared unpublished on 30 October 2026 Eastern for the preserved 8:55 a.m. EDT target. Dated NOAA observations/forecasts, fictional training route, briefing worksheet and original cover; [preparation record](docs/blog/29-destination-metar-route-weather.notes.md). Counts stay unchanged until verified publication.
+- [ ] **30–36** — not yet written or published.
 
 The published editions use primary-source research and clearly identified fictional examples. No independent CFI/A&P/IA review or specialist interview has occurred; those proposed enhancements are still outstanding and are not counted as completed. Article sources, metadata, cover prompts and validation details are retained in [docs/blog/publication-notes.md](docs/blog/publication-notes.md).
 
@@ -329,7 +330,7 @@ Effort estimates are editorial planning assumptions: **medium** means about 1–
 
 ## Next publication sequence
 
-Articles 01–09, 11, 13, 14, 16, 20, 21, 24–26 and 28 are published. Topic 29 is next, pending research and a dated US weather-briefing case; topics 10, 12, 15, 17–19, 22, 23 and 27 have recorded evidence blockers. Continue in numeric ID order among eligible unpublished topics, one article per day. Defer a topic if its required evidence or specialist input is unavailable; record the reason and choose the next eligible ID. The automated cadence supersedes the original weekly launch calendar.
+Articles 01–09, 11, 13, 14, 16, 20, 21, 24–26 and 28 are published. Topic 29 is prepared unpublished for 30 October at 8:55 a.m. EDT; topics 10, 12, 15, 17–19, 22, 23 and 27 have recorded evidence blockers. Continue in numeric ID order among eligible unpublished topics, one article per day. Defer a topic if its required evidence or specialist input is unavailable; record the reason and choose the next eligible ID. The automated cadence supersedes the original weekly launch calendar.
 
 | Next ID | Article | Companion material | Purpose |
 | --- | --- | --- | --- |
