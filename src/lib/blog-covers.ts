@@ -1,4 +1,5 @@
 const descriptions: Record<string, string> = {
+  'passenger-currency-proficiency': 'Illustration of a navy-and-white low-wing light airplane parked beside an illuminated hangar at dusk, with airport lights in the distance.',
   'destination-metar-route-weather': 'Illustration of a green-and-white high-wing light airplane parked beside a hangar, with low cloud across distant wooded ridges.',
   'aircraft-range-fuel-planning': 'Illustration of a blue-and-white high-wing light airplane parked beside a rural airport fuel pump and hangar.',
   'vor-radials-reverse-sensing': 'Illustration of a low-wing light airplane parked on a rural apron, with a simplified radio-navigation beacon and hangar behind it.',
