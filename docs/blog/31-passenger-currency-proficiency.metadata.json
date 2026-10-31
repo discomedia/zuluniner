@@ -9,8 +9,8 @@
   "cover_alt": "Illustration of a navy-and-white low-wing light airplane parked beside an illuminated hangar at dusk, with airport lights in the distance.",
   "image": "docs/blog/images/passenger-currency-proficiency-cover.webp",
   "scenario_cards": "public/blog/passenger-currency-readiness-cards.md",
-  "status": "prepared-unpublished",
-  "publication_date": null,
+  "status": "published",
+  "publication_date": "2026-10-31",
   "url": "https://zuluniner.com/blog/passenger-currency-proficiency/",
   "reserved_publication_at": "2026-10-31T08:39:00-04:00",
   "source_checked_date": "2026-10-31",
@@ -18,8 +18,11 @@
   "cover_upload_method": "signed prepared WebP family; 1600 query serves original",
   "preparation_complete": true,
   "id": "143805be-79de-45f6-a84f-dd87243c700d",
-  "updated_at": "2026-10-31T10:05:38.114899+00:00",
+  "updated_at": "2026-10-31T12:39:29.304398+00:00",
   "draft_save_publication_id": "9746df87-1084-4b09-b13a-c374847de6ae",
   "draft_save_workflow_id": 41191332466,
-  "draft_save_workflow_conclusion": "success"
+  "draft_save_workflow_conclusion": "success",
+  "published_at": "2026-10-31T12:39:29.304398+00:00",
+  "publication_id": "91d996eb-7ab3-41ac-a7c2-693b1e56ec6f",
+  "workflow_id": 41202082430
 }
